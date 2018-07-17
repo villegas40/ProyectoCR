@@ -1,0 +1,297 @@
+﻿@model IEnumerable<CasasRed_Nuevo3_.Models.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Apellidopa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Apellidoma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Fechanac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Nss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Curp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Rfc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Lugarnac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Calle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Numero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Cp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Colonia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Municipio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Celular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Tel_casa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Estado_civil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Regimen_matrimonial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Ocupacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Teltrabajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Identificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_No_identificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Ref_nombre1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Ref_cel_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Ref_nombre2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Ref_cel_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Apellidopa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Apellidoma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gyg_Fechanac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Nss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Curp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Rfc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Lugarnac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Celular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Tel_casa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Ocupacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Tel_trabajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_Identificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cyg_No_identificacoion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gral_Fechaalta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Verificacion.Vfn_Tiempo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Apellidopa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Apellidoma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Fechanac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Nss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Curp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Rfc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Lugarnac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Calle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Numero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Cp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Colonia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Municipio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Celular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Tel_casa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Estado_civil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Regimen_matrimonial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Ocupacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Teltrabajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Correo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Identificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_No_identificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Ref_nombre1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Ref_cel_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Ref_nombre2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Ref_cel_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Apellidopa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Apellidoma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gyg_Fechanac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Nss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Curp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Rfc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Lugarnac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Celular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Tel_casa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Ocupacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Tel_trabajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Correo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_Identificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cyg_No_identificacoion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gral_Fechaalta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Corretaje.Crt_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Verificacion.Vfn_Tiempo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

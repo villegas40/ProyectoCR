@@ -1,0 +1,467 @@
+﻿@model CasasRed_Nuevo3_.Models.Corretaje
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@*<h2>Create</h2>*@
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Corretaje</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="container">
+
+        <div class="row">
+            <!-- Opciones menu izquierda-->
+            <div class="col-3">
+                <div class="list-group" id="lista" role="tablist">
+
+                    <a class="list-group-item list-group-item-action active list-group-item-danger" data-toggle="list" href="#elemento1" role="tab" aria-controls="elemento1">
+                        <i class="fas fa-user-circle fa-2x"></i>  Datos personales
+                    </a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" data-toggle="list" href="#elemento2" role="tab" aria-controls="elemento2">
+                        <i class="fas fa-home fa-2x"></i>  Datos de vivienda
+                    </a>
+                    <a class="list-group-item list-group-item-action list-group-item-danger" data-toggle="list" href="#elemento3" role="tab" aria-controls="elemento3">
+                        <i class="fas fa-dollar-sign fa-2x"></i> Adeudos
+                    </a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" data-toggle="list" href="#elemento4" role="tab" aria-controls="elemento4">
+                        <i class="fas fa-ticket-alt fa-2x"></i> Servicios
+                    </a>
+                    <a class="list-group-item list-group-item-action list-group-item-danger" data-toggle="list" href="#elemento5" role="tab" aria-controls="elemento5">
+                        <i class="fas fa-user-friends fa-2x"></i> Datos de referencia
+                    </a>
+                </div>
+            </div>
+            <!-- Formulario derecha-->
+            <div class="col-9">
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- Datos personales -->
+                    <div class="tab-pane fade show active" id="elemento1" role="tabpanel" aria-labelledby="elemento1">
+                        <h3>Datos personales</h3>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <!--Status -->
+                                    @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
+                                    <label>Estatus</label>
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model => model.Crt_Status, new { htmlAttributes = new { @class = "form-control col-12", @placeholder = "Estatus" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Status, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <!--Nombre del cliente -->
+                                    @*Html.LabelFor(model => model.Crt_Cliente_Nombre, htmlAttributes: new { @class = "control-label" })*@
+                                    <label>Nombre</label>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Cliente_Nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre del cliente" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Cliente_Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @*Html.LabelFor(model => model.Crt_Cliente_ApPat, htmlAttributes: new { @class = "control-label" })*@
+                                    <label>Apellido paterno</label>
+                                    <div class="col-md-10">
+                                        <!-- ap paterno -->
+                                        @Html.EditorFor(model => model.Crt_Cliente_ApPat, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Paterno" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Cliente_ApPat, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <!-- AP MATERNO-->
+                                    @*Html.LabelFor(model => model.Crt_Cliente_ApMat, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <label>Apellido materno</label>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Cliente_ApMat, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Materno" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Cliente_ApMat, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @*Html.LabelFor(model => model.Crt_Fec_Nac, htmlAttributes: new { @class = "control-label" })*@
+                                    <label>Fecha de nacimiento</label>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha de nacimiento", @id = "datepicker" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Fec_Nac, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @*Html.LabelFor(model => model.Crt_Estado_Civil, htmlAttributes: new { @class = "control-label" })*@
+                                    <label>Estado civil</label>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Estado_Civil, new { htmlAttributes = new { @class = "form-control", @placeholder = "Estado civil" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Estado_Civil, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @*Html.LabelFor(model => model.Crt_Tel_Celular, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <label>Numero de celular</label>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Tel_Celular, new { htmlAttributes = new { @class = "form-control", @placeholder = "Celular" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Tel_Celular, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @*Html.LabelFor(model => model.Crt_Tel_Casa, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <label>Telefono de casa</label>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Tel_Casa, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono de casa" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Tel_Casa, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @*Html.LabelFor(model => model.Crt_Tel_Trabajo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <label>Telefono de trabajo</label>
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Tel_Trabajo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono de trabajo" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Tel_Trabajo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div><!--Fianl  tap panel 1-->
+                    <!-- Datos de vivienda -->
+                    <div class="tab-pane fade show" id="elemento2" role="tabpanel" aria-labelledby="elemento2">
+                        <h3>Datos de vivienda</h3>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Direccion, new { htmlAttributes = new { @class = "form-control col-12", @placeholder = "Direccíon" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Direccion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Precio, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Precio, new { htmlAttributes = new { @class = "form-control", @placeholder = "Precio" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Precio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Gasto, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Gasto, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gasto" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Gasto, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Tipo_Vivienda, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Tipo_Vivienda, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tipo de vivienda" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Tipo_Vivienda, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Ano_compra, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Ano_compra, new { htmlAttributes = new { @class = "form-control", @placeholder = "Año comprada" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Ano_compra, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            @*<div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Clave_predial, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Clave_predial, new { htmlAttributes = new { @class = "form-control", @placeholder = "Clave predial" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Clave_predial, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Clave_Catastral, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Clave_Catastral, new { htmlAttributes = new { @class = "form-control", @placeholder = "Clave catastral" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Clave_Catastral, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- Fin tap 2-->
+                    <!-- Adeudos -->
+                    <div class="tab-pane fade show" id="elemento3" role="tabpanel" aria-labelledby="elemento3">
+                        <h3>Adeudos</h3>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Saldo_infonavit, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Saldo_infonavit, new { htmlAttributes = new { @class = "form-control", @placeholder = " Saldo Infonavit" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Saldo_infonavit, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Adeudo_predial, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Adeudo_predial, new { htmlAttributes = new { @class = "form-control", @placeholder = "Adeudo de predial" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Adeudo_predial, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Adeudo_luz, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Adeudo_luz, new { htmlAttributes = new { @class = "form-control", @placeholder = "Adeudo de servicio de luz" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Adeudo_luz, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Adeudo_agua, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Adeudo_agua, new { htmlAttributes = new { @class = "form-control", @placeholder = "Adeudo de agua" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Adeudo_agua, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- Fin tap 3-->
+
+                    <div class="tab-pane fade show" id="elemento4" role="tabpanel" aria-labelledby="elemento4">
+                        <h3>Servicios</h3>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Recibo_predial_digital, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @*Html.EditorFor(model => model.Crt_Recibo_predial_digital)*@
+                                            @Html.TextBoxFor(model => model.Crt_Recibo_predial_digital, new { @class = "", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.ValidationMessageFor(model => model.Crt_Recibo_predial_digital, "", new { @class = "text-danger" })
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Recibo_luz_digitalizar, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Crt_Recibo_luz_digitalizar)
+                                            @Html.ValidationMessageFor(model => model.Crt_Recibo_luz_digitalizar, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Recibo_agua_digital, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Crt_Recibo_agua_digital)
+                                            @Html.ValidationMessageFor(model => model.Crt_Recibo_agua_digital, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Acuerdo, htmlAttributes: new { @class = "control-label" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Crt_Acuerdo)
+                                            @Html.ValidationMessageFor(model => model.Crt_Acuerdo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Num_servicio_luz, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Num_servicio_luz, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de servicio de luz" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Num_servicio_luz, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_No_cuenta_agua, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_No_cuenta_agua, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de cuenta de agua" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_No_cuenta_agua, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!--Fin tap 4-->
+                    <!-- Datos de referencia -->
+                    <div class="tab-pane fade show" id="elemento5" role="tabpanel" aria-labelledby="elemento5">
+                        <h3>Datos de referencia</h3>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Tel_Ref1, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Tel_Ref1, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono referencia 1" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Tel_Ref1, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Tel_Ref2, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Tel_Ref2, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono referencia 2" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Tel_Ref2, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Tel_Ref, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Tel_Ref, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefono referencia" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Tel_Ref, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Status_Muestra, htmlAttributes: new { @class = "control-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Status_Muestra, new { htmlAttributes = new { @class = "form-control", @placeholder = "Estatus muestra" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Status_Muestra, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_GastosServicios, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_GastosServicios, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gastos" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_GastosServicios, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Crt_Obervaciones, htmlAttributes: new { @class = "control-label" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Crt_Obervaciones, new { htmlAttributes = new { @class = "form-control col-12", @placeholder = "Observaciones" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Obervaciones, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div><!-- Fin tap 5-->
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class=" d-flex justify-content-end">
+        <!--<input type="submit" value="Create" class="btn btn-primary btn-lg btn-block" />-->
+        <input type="submit" value="Create" class="btn btn-outline-danger btn-lg btn-block" />
+
+    </div>
+
+
+</div>
+
+
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

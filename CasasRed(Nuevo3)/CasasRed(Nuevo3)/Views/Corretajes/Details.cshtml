@@ -1,0 +1,306 @@
+﻿@model CasasRed_Nuevo3_.Models.Corretaje
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Corretaje</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Cliente_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Cliente_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Cliente_ApMat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Cliente_ApMat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Cliente_ApPat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Cliente_ApPat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Precio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Gasto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Gasto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Tipo_Vivienda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Tipo_Vivienda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Ano_compra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Ano_compra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Saldo_infonavit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Saldo_infonavit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Fec_Nac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Fec_Nac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Tel_Celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Tel_Celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Estado_Civil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Estado_Civil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Tel_Casa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Tel_Casa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Tel_Trabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Tel_Trabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Tel_Ref1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Tel_Ref1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Tel_Ref2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Tel_Ref2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Tel_Ref)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Tel_Ref)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Clave_predial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Clave_predial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Recibo_predial_digital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Recibo_predial_digital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Clave_Catastral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Clave_Catastral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Adeudo_predial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Adeudo_predial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Recibo_luz_digitalizar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Recibo_luz_digitalizar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Num_servicio_luz)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Num_servicio_luz)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Adeudo_luz)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Adeudo_luz)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Recibo_agua_digital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Recibo_agua_digital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_No_cuenta_agua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_No_cuenta_agua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Adeudo_agua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Adeudo_agua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Acuerdo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Acuerdo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Status_Muestra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Status_Muestra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Crt_Obervaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Crt_Obervaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gtn_Gastos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gtn_Gastos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Gral_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Gral_Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contaduria.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contaduria.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gestion.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gestion.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Habilitacion.Hbt_Calibre_cableado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Habilitacion.Hbt_Calibre_cableado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,224 @@
+﻿@model CasasRed_Nuevo3_.Models.Habilitacion
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Habilitacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Puertas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Puertas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Chapas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Chapas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Marcos_puertas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Marcos_puertas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Bisagras)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Bisagras)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Taza)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Taza)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Lavamanos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Lavamanos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Bastago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Bastago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Chapeton)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Chapeton)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Maneral)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Maneral)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Regadera_completa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Regadera_completa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Kit_lavamanos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Kit_lavamanos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Kit_taza)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Kit_taza)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Rosetas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Rosetas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Apagador_sencillo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Apagador_sencillo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Conector_sencillo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Conector_sencillo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Apagador_doble)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Apagador_doble)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Conector_apagador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Conector_apagador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Domo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Domo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Ventanas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Ventanas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Cableado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Cableado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Calibre_cableado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Calibre_cableado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Break_interior)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Break_interior)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Break_medidor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Break_medidor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hbt_Pinturas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hbt_Pinturas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,90 @@
+﻿@model CasasRed_Nuevo3_.Models.Verificacion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Verificacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Persona_fisica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Persona_fisica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Visto_persona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Visto_persona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Tiempo_estimado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Tiempo_estimado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Tiempo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Tiempo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Tiene_costo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Tiene_costo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Costo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Costo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Trato_asesor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Trato_asesor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vfn_Observaciones)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vfn_Observaciones)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.Gral_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.Gral_Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

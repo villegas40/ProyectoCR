@@ -1,0 +1,90 @@
+﻿@model CasasRed_Nuevo3_.Models.Usuario
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Usuario</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.usu_nombre, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2" for="usuarioNombre">Nombre</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.usu_nombre, new { htmlAttributes = new { @class = "form-control", @id = "usuarioNombre" } })
+                @Html.ValidationMessageFor(model => model.usu_nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.usu_apellidoPa, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2" for="apellidoMaterno">Apellido Paterno</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.usu_apellidoPa, new { htmlAttributes = new { @class = "form-control", @id = "Apellido Paterno" } })
+                @Html.ValidationMessageFor(model => model.usu_apellidoPa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.usu_apellidoMa, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2" for="apellidoMaterno">Apellido Materno</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.usu_apellidoMa, new { htmlAttributes = new { @class = "form-control", @id = "apellidoMaterno" } })
+                @Html.ValidationMessageFor(model => model.usu_apellidoMa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.usu_alta, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2" for="usuarioAlta">Usuario Alta</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.usu_alta, new { htmlAttributes = new { @class = "form-control", @id = "usuarioAlta" } })
+                @Html.ValidationMessageFor(model => model.usu_alta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.usu_tipo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class = "control-label col-md-2" for="usuarioTipo">Tipo de Usuario</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.usu_tipo, new { htmlAttributes = new { @class = "form-control", @id="usuarioTipo" } })
+                @Html.ValidationMessageFor(model => model.usu_tipo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.usu_activo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10">
+                <div class="custom-control custom-checkbox">
+                    @*@Html.EditorFor(model => model.usu_activo)*@
+                    @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked" })
+                    <label class="custom-control-label" for="customCheck1">Usuario Activo</label>
+                    @Html.ValidationMessageFor(model => model.usu_activo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+                <button type="submit" class="btn btn-outline-danger">Guardar</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CasasRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gral_Nombre" Type="varchar" MaxLength="80" />
+    <Property Name="Gral_Apellidopa" Type="varchar" MaxLength="40" />
+    <Property Name="Gral_Apellidoma" Type="varchar" MaxLength="40" />
+    <Property Name="Gral_Fechanac" Type="date" />
+    <Property Name="Gral_Nss" Type="varchar" MaxLength="11" />
+    <Property Name="Gral_Curp" Type="varchar" MaxLength="18" />
+    <Property Name="Gral_Rfc" Type="varchar" MaxLength="13" />
+    <Property Name="Gral_Lugarnac" Type="varchar" MaxLength="70" />
+    <Property Name="Gral_Calle" Type="varchar" MaxLength="30" />
+    <Property Name="Gral_Numero" Type="varchar" MaxLength="20" />
+    <Property Name="Gral_Cp" Type="varchar" MaxLength="8" />
+    <Property Name="Gral_Colonia" Type="varchar" MaxLength="40" />
+    <Property Name="Gral_Municipio" Type="varchar" MaxLength="40" />
+    <Property Name="Gral_Estado" Type="varchar" MaxLength="40" />
+    <Property Name="Gral_Celular" Type="varchar" MaxLength="10" />
+    <Property Name="Gral_Tel_casa" Type="varchar" MaxLength="10" />
+    <Property Name="Gral_Estado_civil" Type="varchar" MaxLength="20" />
+    <Property Name="Gral_Regimen_matrimonial" Type="varchar" MaxLength="25" />
+    <Property Name="Gral_Ocupacion" Type="varchar" MaxLength="30" />
+    <Property Name="Gral_Teltrabajo" Type="varchar" MaxLength="15" />
+    <Property Name="Gral_Correo" Type="varchar" MaxLength="320" />
+    <Property Name="Gral_Identificacion" Type="varchar" MaxLength="40" />
+    <Property Name="Gral_No_identificacion" Type="int" />
+    <Property Name="Gral_Ref_nombre1" Type="varchar" MaxLength="160" />
+    <Property Name="Gral_Ref_cel_1" Type="varchar" MaxLength="10" />
+    <Property Name="Gral_Ref_nombre2" Type="varchar" MaxLength="160" />
+    <Property Name="Gral_Ref_cel_2" Type="varchar" MaxLength="10" />
+    <Property Name="Cyg_Nombre" Type="varchar" MaxLength="80" />
+    <Property Name="Cyg_Apellidopa" Type="varchar" MaxLength="40" />
+    <Property Name="Cyg_Apellidoma" Type="varchar" MaxLength="40" />
+    <Property Name="Gyg_Fechanac" Type="date" />
+    <Property Name="Cyg_Nss" Type="varchar" MaxLength="11" />
+    <Property Name="Cyg_Curp" Type="varchar" MaxLength="18" />
+    <Property Name="Cyg_Rfc" Type="varchar" MaxLength="13" />
+    <Property Name="Cyg_Lugarnac" Type="varchar" MaxLength="70" />
+    <Property Name="Cyg_Celular" Type="varchar" MaxLength="10" />
+    <Property Name="Cyg_Tel_casa" Type="varchar" MaxLength="10" />
+    <Property Name="Cyg_Ocupacion" Type="varchar" MaxLength="30" />
+    <Property Name="Cyg_Tel_trabajo" Type="varchar" MaxLength="15" />
+    <Property Name="Cyg_Correo" Type="varchar" MaxLength="320" />
+    <Property Name="Cyg_Identificacion" Type="varchar" MaxLength="40" />
+    <Property Name="Cyg_No_identificacoion" Type="int" />
+    <Property Name="Gral_Fechaalta" Type="date" />
+  </EntityType>
+  <EntityType Name="Contaduria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cnt_Presupuesto_gestion" Type="money" />
+    <Property Name="Cnt_Presupuesto_corretaje" Type="money" />
+    <Property Name="Cnt_Presupuesto_habilitacion" Type="money" />
+    <Property Name="Cnt_Mensualidad" Type="money" />
+    <Property Name="Cnt_Vigilancia" Type="money" />
+  </EntityType>
+  <EntityType Name="Corretaje">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Crt_Status" Type="varchar" MaxLength="20" />
+    <Property Name="Crt_Cliente_Nombre" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Cliente_ApMat" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Cliente_ApPat" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Direccion" Type="varchar" MaxLength="100" />
+    <Property Name="Crt_Precio" Type="varchar" MaxLength="20" />
+    <Property Name="Crt_Gasto" Type="varchar" MaxLength="10" />
+    <Property Name="Crt_Tipo_Vivienda" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Ano_compra" Type="date" />
+    <Property Name="Crt_Saldo_infonavit" Type="money" />
+    <Property Name="Crt_Fec_Nac" Type="date" />
+    <Property Name="Crt_Tel_Celular" Type="int" />
+    <Property Name="Crt_Estado_Civil" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Tel_Casa" Type="int" />
+    <Property Name="Crt_Tel_Trabajo" Type="int" />
+    <Property Name="Crt_Tel_Ref1" Type="int" />
+    <Property Name="Crt_Tel_Ref2" Type="int" />
+    <Property Name="Crt_Tel_Ref" Type="int" />
+    <Property Name="Crt_Recibo_predial_digital" Type="bit" />
+    <Property Name="Crt_Clave_Catastral" Type="varchar" MaxLength="10" />
+    <Property Name="Crt_Adeudo_predial" Type="money" />
+    <Property Name="Crt_Recibo_luz_digitalizar" Type="bit" />
+    <Property Name="Crt_Num_servicio_luz" Type="varchar" MaxLength="12" />
+    <Property Name="Crt_Adeudo_luz" Type="money" />
+    <Property Name="Crt_Recibo_agua_digital" Type="bit" />
+    <Property Name="Crt_No_cuenta_agua" Type="varchar" MaxLength="7" />
+    <Property Name="Crt_Adeudo_agua" Type="money" />
+    <Property Name="Crt_Acuerdo" Type="bit" />
+    <Property Name="Crt_ActaNacTitu" Type="bit" />
+    <Property Name="Crt_ActaNacConyu" Type="bit" />
+    <Property Name="Crt_ActaMatr" Type="bit" />
+    <Property Name="Crt_EscrCert" Type="bit" />
+    <Property Name="Crt_CartaDesPre" Type="bit" />
+    <Property Name="Crt_ReciboLuz" Type="bit" />
+    <Property Name="Crt_ReciboAgua" Type="bit" />
+    <Property Name="Crt_Status_Muestra" Type="varchar" MaxLength="30" />
+    <Property Name="Crt_Obervaciones" Type="varchar" MaxLength="300" />
+    <Property Name="Crt_GastosServicios" Type="money" />
+  </EntityType>
+  <EntityType Name="Gestion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gtn_Escrituras" Type="bit" />
+    <Property Name="Gtn_Planta_Cartografica" Type="bit" />
+    <Property Name="Gtn_Predial" Type="bit" />
+    <Property Name="Gtn_Recibo_Luz" Type="bit" />
+    <Property Name="Gtn_Recibo_Agua" Type="bit" />
+    <Property Name="Gtn_Acta_Nacimiento" Type="bit" />
+    <Property Name="Gtn_IFE_Copia" Type="bit" />
+    <Property Name="Gtn_Sol_Ret_Ifo" Type="bit" />
+    <Property Name="Gtn_Cert_Hip" Type="bit" />
+    <Property Name="Gtn_Cert_Fiscal" Type="bit" />
+    <Property Name="Gtn_Sol_Estado" Type="bit" />
+    <Property Name="Gtn_Junta_URBI" Type="bit" />
+    <Property Name="Gtn_Agua_Pago_Inf" Type="bit" />
+    <Property Name="Gtn_Cert_Cartogr" Type="bit" />
+    <Property Name="Gtn_No_Oficial" Type="bit" />
+    <Property Name="Gtn_Avaluo" Type="bit" />
+    <Property Name="Gtn_CT_Banco" Type="bit" />
+    <Property Name="Gtn_Aviso_Suspension" Type="bit" />
+    <Property Name="Gtn_Formato_Infonavit" Type="bit" />
+    <Property Name="Gtn_Fotos_Propiedad" Type="bit" />
+    <Property Name="Gtn_Evaluo_Contacto" Type="bit" />
+    <Property Name="Gtn_Planeacion_Fianza" Type="bit" />
+    <Property Name="Gtn_Urbanizacion" Type="bit" />
+    <Property Name="Gtn_Credito_INFONAVIT" Type="bit" />
+    <Property Name="Gtn_Notaria" Type="bit" />
+    <Property Name="Gtn_Firma_Escrituras" Type="bit" />
+    <Property Name="Gtn_Gastos" Type="money" />
+  </EntityType>
+  <EntityType Name="Habilitacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hbt_Puertas" Type="bit" />
+    <Property Name="Hbt_Chapas" Type="bit" />
+    <Property Name="Hbt_Marcos_puertas" Type="bit" />
+    <Property Name="Hbt_Bisagras" Type="bit" />
+    <Property Name="Hbt_Taza" Type="bit" />
+    <Property Name="Hbt_Lavamanos" Type="bit" />
+    <Property Name="Hbt_Bastago" Type="bit" />
+    <Property Name="Hbt_Chapeton" Type="bit" />
+    <Property Name="Hbt_Maneral" Type="bit" />
+    <Property Name="Hbt_Regadera_completa" Type="bit" />
+    <Property Name="Hbt_Kit_lavamanos" Type="bit" />
+    <Property Name="Hbt_Kit_taza" Type="bit" />
+    <Property Name="Hbt_Rosetas" Type="bit" />
+    <Property Name="Hbt_Apagador_sencillo" Type="bit" />
+    <Property Name="Hbt_Conector_sencillo" Type="bit" />
+    <Property Name="Hbt_Apagador_doble" Type="bit" />
+    <Property Name="Hbt_Conector_apagador" Type="bit" />
+    <Property Name="Hbt_Domo" Type="bit" />
+    <Property Name="Hbt_Ventanas" Type="bit" />
+    <Property Name="Hbt_Cableado" Type="bit" />
+    <Property Name="Hbt_Calibre_cableado" Type="varchar" MaxLength="10" />
+    <Property Name="Hbt_Break_interior" Type="bit" />
+    <Property Name="Hbt_Break_medidor" Type="bit" />
+    <Property Name="Hbt_Pinturas" Type="bit" />
+    <Property Name="Hbt_AvisoSusp" Type="bit" />
+  </EntityType>
+  <EntityType Name="TipoUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipusu_descricion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usu_nombre" Type="varchar" MaxLength="80" />
+    <Property Name="usu_apellidoPa" Type="varchar" MaxLength="40" />
+    <Property Name="usu_apellidoMa" Type="varchar" MaxLength="40" />
+    <Property Name="usu_alta" Type="date" />
+    <Property Name="usu_tipo" Type="varchar" MaxLength="15" />
+    <Property Name="usu_activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="Verificacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vfn_Persona_fisica" Type="bit" />
+    <Property Name="Vfn_Visto_persona" Type="bit" />
+    <Property Name="Vfn_Tiempo_estimado" Type="bit" />
+    <Property Name="Vfn_Tiempo" Type="varchar" MaxLength="20" />
+    <Property Name="Vfn_Tiene_costo" Type="bit" />
+    <Property Name="Vfn_Costo" Type="money" />
+    <Property Name="Vfn_Trato_asesor" Type="varchar" MaxLength="2" />
+    <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <Association Name="FK_Cliente_Id">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Gestion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Crt_Id">
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Corretaje">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Gestion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrtCon_Id">
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
+    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Corretaje">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contaduria">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrtHab_Id">
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
+    <End Role="Habilitacion" Type="Self.Habilitacion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Corretaje">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Habilitacion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GralVer_Id">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Verificacion" Type="Self.Verificacion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Verificacion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GtnCon_Id">
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="1" />
+    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Gestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contaduria">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TipoUsuario_Id">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CasasRedModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contaduria" EntityType="Self.Contaduria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Corretaje" EntityType="Self.Corretaje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gestion" EntityType="Self.Gestion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Habilitacion" EntityType="Self.Habilitacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cliente_Id" Association="Self.FK_Cliente_Id">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Gestion" EntitySet="Gestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Crt_Id" Association="Self.FK_Crt_Id">
+      <End Role="Corretaje" EntitySet="Corretaje" />
+      <End Role="Gestion" EntitySet="Gestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrtCon_Id" Association="Self.FK_CrtCon_Id">
+      <End Role="Corretaje" EntitySet="Corretaje" />
+      <End Role="Contaduria" EntitySet="Contaduria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrtHab_Id" Association="Self.FK_CrtHab_Id">
+      <End Role="Corretaje" EntitySet="Corretaje" />
+      <End Role="Habilitacion" EntitySet="Habilitacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GralVer_Id" Association="Self.FK_GralVer_Id">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Verificacion" EntitySet="Verificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GtnCon_Id" Association="Self.FK_GtnCon_Id">
+      <End Role="Gestion" EntitySet="Gestion" />
+      <End Role="Contaduria" EntitySet="Contaduria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TipoUsuario_Id" Association="Self.FK_TipoUsuario_Id">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

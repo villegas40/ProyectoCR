@@ -1,0 +1,243 @@
+﻿@model IEnumerable<CasasRed_Nuevo3_.Models.Gestion>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br>
+<h2>Gestion Index</h2>
+
+<p>
+    @Html.ActionLink("+ Dar de Alta Cliente Create New", "Create")
+</p>
+
+<table class="table table-striped table-responsive-lg">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Casa</th>
+            <th scope="col">Porcentaje</th>
+            <th scope="col">Status</th>
+            <th scope="col">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Gral_Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Corretaje.Crt_Direccion)
+        </td>
+        <td>
+            <p>Porcentaje</p>
+        </td>
+        <td>
+            <p>Poner estatus</p>
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+    </tbody>
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Escrituras)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Planta_Cartografica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Predial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Recibo_Luz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Recibo_Agua)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Acta_Nacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_IFE_Copia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Sol_Ret_Ifo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Cert_Hip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Cert_Fiscal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Sol_Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Junta_URBI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Agua_Pago_Inf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Cert_Cartogr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_No_Oficial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Avaluo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_CT_Banco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Aviso_Suspension)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Formato_Infonavit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Fotos_Propiedad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Evaluo_Contacto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Planeacion_Fianza)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Urbanizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Credito_INFONAVIT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Notaria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Firma_Escrituras)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gtn_Gastos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contaduria.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Escrituras)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Planta_Cartografica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Predial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Recibo_Luz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Recibo_Agua)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Acta_Nacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_IFE_Copia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Sol_Ret_Ifo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Cert_Hip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Cert_Fiscal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Sol_Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Junta_URBI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Agua_Pago_Inf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Cert_Cartogr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_No_Oficial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Avaluo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_CT_Banco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Aviso_Suspension)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Formato_Infonavit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Fotos_Propiedad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Evaluo_Contacto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Planeacion_Fianza)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Urbanizacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Credito_INFONAVIT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Notaria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Firma_Escrituras)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gtn_Gastos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contaduria.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Corretaje.Crt_Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
