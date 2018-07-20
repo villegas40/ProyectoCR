@@ -17,7 +17,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes
         public ActionResult Index()
         {
-            var corretaje = db.Corretaje.Include(c => c.Cliente).Include(c => c.Contaduria).Include(c => c.Gestion).Include(c => c.Habilitacion);
+            var corretaje = db.Corretaje.Include(c => c.Contaduria).Include(c => c.Gestion).Include(c => c.Habilitacion);
             return View(corretaje.ToList());
         }
 
@@ -51,7 +51,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Crt_Status,Crt_Cliente_Nombre,Crt_Cliente_ApMat,Crt_Cliente_ApPat,Crt_Direccion,Crt_Precio,Crt_Gasto,Crt_Tipo_Vivienda,Crt_Ano_compra,Crt_Saldo_infonavit,Crt_Fec_Nac,Crt_Tel_Celular,Crt_Estado_Civil,Crt_Tel_Casa,Crt_Tel_Trabajo,Crt_Tel_Ref1,Crt_Tel_Ref2,Crt_Tel_Ref,Crt_Clave_predial,Crt_Recibo_predial_digital,Crt_Clave_Catastral,Crt_Adeudo_predial,Crt_Recibo_luz_digitalizar,Crt_Num_servicio_luz,Crt_Adeudo_luz,Crt_Recibo_agua_digital,Crt_No_cuenta_agua,Crt_Adeudo_agua,Crt_Acuerdo,Crt_Status_Muestra,Crt_Obervaciones,Gtn_Gastos")] Corretaje corretaje)
+        public ActionResult Create([Bind(Include = "Id,Crt_Status,Crt_Cliente_Nombre,Crt_Cliente_ApMat,Crt_Cliente_ApPat,Crt_Direccion,Crt_Precio,Crt_Gasto,Crt_Tipo_Vivienda,Crt_Ano_compra,Crt_Saldo_infonavit,Crt_Fec_Nac,Crt_Tel_Celular,Crt_Estado_Civil,Crt_Tel_Casa,Crt_Tel_Trabajo,Crt_Tel_Ref1,Crt_Tel_Ref2,Crt_Tel_Ref,Crt_Recibo_predial_digital,Crt_Clave_Catastral,Crt_Adeudo_predial,Crt_Recibo_luz_digitalizar,Crt_Num_servicio_luz,Crt_Adeudo_luz,Crt_Recibo_agua_digital,Crt_No_cuenta_agua,Crt_Adeudo_agua,Crt_Acuerdo,Crt_Status_Muestra,Crt_Obervaciones,Crt_ActaNacTitu,Crt_ActNacConyu,Crt_ActaMatr,Crt_EscrCert,Crt_CartaDesPre,Crt_ReciboLuz,Crt_ReciboAgua,Crt_GastosServicios")] Corretaje corretaje)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Crt_Status,Crt_Cliente_Nombre,Crt_Cliente_ApMat,Crt_Cliente_ApPat,Crt_Direccion,Crt_Precio,Crt_Gasto,Crt_Tipo_Vivienda,Crt_Ano_compra,Crt_Saldo_infonavit,Crt_Fec_Nac,Crt_Tel_Celular,Crt_Estado_Civil,Crt_Tel_Casa,Crt_Tel_Trabajo,Crt_Tel_Ref1,Crt_Tel_Ref2,Crt_Tel_Ref,Crt_Clave_predial,Crt_Recibo_predial_digital,Crt_Clave_Catastral,Crt_Adeudo_predial,Crt_Recibo_luz_digitalizar,Crt_Num_servicio_luz,Crt_Adeudo_luz,Crt_Recibo_agua_digital,Crt_No_cuenta_agua,Crt_Adeudo_agua,Crt_Acuerdo,Crt_Status_Muestra,Crt_Obervaciones,Gtn_Gastos")] Corretaje corretaje)
+        public ActionResult Edit([Bind(Include = "Id,Crt_Status,Crt_Cliente_Nombre,Crt_Cliente_ApMat,Crt_Cliente_ApPat,Crt_Direccion,Crt_Precio,Crt_Gasto,Crt_Tipo_Vivienda,Crt_Ano_compra,Crt_Saldo_infonavit,Crt_Fec_Nac,Crt_Tel_Celular,Crt_Estado_Civil,Crt_Tel_Casa,Crt_Tel_Trabajo,Crt_Tel_Ref1,Crt_Tel_Ref2,Crt_Tel_Ref,Crt_Recibo_predial_digital,Crt_Clave_Catastral,Crt_Adeudo_predial,Crt_Recibo_luz_digitalizar,Crt_Num_servicio_luz,Crt_Adeudo_luz,Crt_Recibo_agua_digital,Crt_No_cuenta_agua,Crt_Adeudo_agua,Crt_Acuerdo,Crt_Status_Muestra,Crt_Obervaciones,Crt_ActaNacTitu,Crt_ActNacConyu,Crt_ActaMatr,Crt_EscrCert,Crt_CartaDesPre,Crt_ReciboLuz,Crt_ReciboAgua,Crt_GastosServicios")] Corretaje corretaje)
         {
             if (ModelState.IsValid)
             {

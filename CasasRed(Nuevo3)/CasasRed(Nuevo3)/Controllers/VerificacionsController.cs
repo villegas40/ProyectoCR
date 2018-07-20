@@ -17,7 +17,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions
         public ActionResult Index()
         {
-            var verificacion = db.Verificacion.Include(v => v.Cliente);
+            var verificacion = db.Verificacion.Include(v => v.Gestion);
             return View(verificacion.ToList());
         }
 
@@ -52,6 +52,15 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             if (ModelState.IsValid)
             {
+                verificacion.Vfn_Costo = ((verificacion.Vfn_Costo == null) ? 0 : verificacion.Vfn_Costo);
+                verificacion.Vfn_Observaciones = ((verificacion.Vfn_Observaciones == null) ? "" : verificacion.Vfn_Observaciones);
+                verificacion.Vfn_Persona_fisica = ((verificacion.Vfn_Persona_fisica == null) ? false : verificacion.Vfn_Persona_fisica);
+                verificacion.Vfn_Tiempo = ((verificacion.Vfn_Tiempo == null) ? "" : verificacion.Vfn_Tiempo);
+                verificacion.Vfn_Tiempo_estimado = ((verificacion.Vfn_Tiempo_estimado == null) ? false : verificacion.Vfn_Tiempo_estimado);
+                verificacion.Vfn_Tiene_costo = ((verificacion.Vfn_Tiene_costo == null) ? false : verificacion.Vfn_Tiene_costo);
+                verificacion.Vfn_Trato_asesor = ((verificacion.Vfn_Trato_asesor == null) ? "" : verificacion.Vfn_Trato_asesor);
+                verificacion.Vfn_Visto_persona = ((verificacion.Vfn_Visto_persona == null) ? false : verificacion.Vfn_Visto_persona);
+
                 db.Verificacion.Add(verificacion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
