@@ -225,18 +225,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CrtCon_Id">
-    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
-    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Corretaje">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Contaduria">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CrtHab_Id">
     <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
     <End Role="Habilitacion" Type="Self.Habilitacion" Multiplicity="0..1" />
@@ -249,18 +237,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GralVer_Id">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-    <End Role="Verificacion" Type="Self.Verificacion" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Verificacion">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_GtnCon_Id">
     <End Role="Gestion" Type="Self.Gestion" Multiplicity="1" />
     <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
@@ -269,6 +245,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Contaduria">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GtnVer_Id">
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="1" />
+    <End Role="Verificacion" Type="Self.Verificacion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Gestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Verificacion">
         <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -302,21 +290,17 @@
       <End Role="Corretaje" EntitySet="Corretaje" />
       <End Role="Gestion" EntitySet="Gestion" />
     </AssociationSet>
-    <AssociationSet Name="FK_CrtCon_Id" Association="Self.FK_CrtCon_Id">
-      <End Role="Corretaje" EntitySet="Corretaje" />
-      <End Role="Contaduria" EntitySet="Contaduria" />
-    </AssociationSet>
     <AssociationSet Name="FK_CrtHab_Id" Association="Self.FK_CrtHab_Id">
       <End Role="Corretaje" EntitySet="Corretaje" />
       <End Role="Habilitacion" EntitySet="Habilitacion" />
     </AssociationSet>
-    <AssociationSet Name="FK_GralVer_Id" Association="Self.FK_GralVer_Id">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="Verificacion" EntitySet="Verificacion" />
-    </AssociationSet>
     <AssociationSet Name="FK_GtnCon_Id" Association="Self.FK_GtnCon_Id">
       <End Role="Gestion" EntitySet="Gestion" />
       <End Role="Contaduria" EntitySet="Contaduria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GtnVer_Id" Association="Self.FK_GtnVer_Id">
+      <End Role="Gestion" EntitySet="Gestion" />
+      <End Role="Verificacion" EntitySet="Verificacion" />
     </AssociationSet>
     <AssociationSet Name="FK_TipoUsuario_Id" Association="Self.FK_TipoUsuario_Id">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />

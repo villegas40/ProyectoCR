@@ -48,8 +48,6 @@
     <Property Name="Cyg_Identificacion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
     <Property Name="Cyg_No_identificacoion" Type="Int32" />
     <Property Name="Gral_Fechaalta" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Corretaje" Relationship="Self.FK_Gral_Id" FromRole="Cliente" ToRole="Corretaje" />
-    <NavigationProperty Name="Verificacion" Relationship="Self.FK_GralVer_Id" FromRole="Cliente" ToRole="Verificacion" />
     <NavigationProperty Name="Gestion" Relationship="CasasRedModel.FK_Cliente_Id" FromRole="Cliente" ToRole="Gestion" />
   </EntityType>
   <EntityType Name="Contaduria">
@@ -64,6 +62,7 @@
     <Property Name="Cnt_Vigilancia" Type="Decimal" Precision="19" Scale="4" />
     <NavigationProperty Name="Corretaje" Relationship="Self.FK_CrtCon_Id" FromRole="Contaduria" ToRole="Corretaje" />
     <NavigationProperty Name="Gestion" Relationship="Self.FK_GtnCon_Id" FromRole="Contaduria" ToRole="Gestion" />
+    <NavigationProperty Name="Habilitacion" Relationship="CasasRedModel.FK_CntHab_Id" FromRole="Contaduria" ToRole="Habilitacion" />
   </EntityType>
   <EntityType Name="Corretaje">
     <Key>
@@ -100,7 +99,6 @@
     <Property Name="Crt_Acuerdo" Type="Boolean" />
     <Property Name="Crt_Status_Muestra" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Name="Crt_Obervaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Cliente" Relationship="Self.FK_Gral_Id" FromRole="Corretaje" ToRole="Cliente" />
     <NavigationProperty Name="Contaduria" Relationship="Self.FK_CrtCon_Id" FromRole="Corretaje" ToRole="Contaduria" />
     <NavigationProperty Name="Gestion" Relationship="Self.FK_Crt_Id" FromRole="Corretaje" ToRole="Gestion" />
     <NavigationProperty Name="Habilitacion" Relationship="Self.FK_CrtHab_Id" FromRole="Corretaje" ToRole="Habilitacion" />
@@ -148,6 +146,7 @@
     <NavigationProperty Name="Contaduria" Relationship="Self.FK_GtnCon_Id" FromRole="Gestion" ToRole="Contaduria" />
     <NavigationProperty Name="Corretaje" Relationship="Self.FK_Crt_Id" FromRole="Gestion" ToRole="Corretaje" />
     <NavigationProperty Name="Cliente" Relationship="CasasRedModel.FK_Cliente_Id" FromRole="Gestion" ToRole="Cliente" />
+    <NavigationProperty Name="Verificacion" Relationship="CasasRedModel.FK_GtnVer_Id" FromRole="Gestion" ToRole="Verificacion" />
   </EntityType>
   <EntityType Name="Habilitacion">
     <Key>
@@ -180,6 +179,7 @@
     <Property Name="Hbt_Pinturas" Type="Boolean" />
     <NavigationProperty Name="Corretaje" Relationship="Self.FK_CrtHab_Id" FromRole="Habilitacion" ToRole="Corretaje" />
     <Property Name="Hbt_AvisoSusp" Type="Boolean" />
+    <NavigationProperty Name="Contaduria" Relationship="CasasRedModel.FK_CntHab_Id" FromRole="Habilitacion" ToRole="Contaduria" />
   </EntityType>
   <EntityType Name="TipoUsuario">
     <Key>
@@ -215,32 +215,8 @@
     <Property Name="Vfn_Costo" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="Vfn_Trato_asesor" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
     <Property Name="Vfn_Observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Cliente" Relationship="Self.FK_GralVer_Id" FromRole="Verificacion" ToRole="Cliente" />
+    <NavigationProperty Name="Gestion" Relationship="CasasRedModel.FK_GtnVer_Id" FromRole="Verificacion" ToRole="Gestion" />
   </EntityType>
-  <Association Name="FK_Gral_Id">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Corretaje">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_GralVer_Id">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-    <End Role="Verificacion" Type="Self.Verificacion" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Verificacion">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CrtCon_Id">
     <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
     <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
@@ -310,14 +286,6 @@
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <EntitySet Name="Verificacion" EntityType="Self.Verificacion" />
-    <AssociationSet Name="FK_Gral_Id" Association="Self.FK_Gral_Id">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="Corretaje" EntitySet="Corretaje" />
-    </AssociationSet>
-    <AssociationSet Name="FK_GralVer_Id" Association="Self.FK_GralVer_Id">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="Verificacion" EntitySet="Verificacion" />
-    </AssociationSet>
     <AssociationSet Name="FK_CrtCon_Id" Association="Self.FK_CrtCon_Id">
       <End Role="Corretaje" EntitySet="Corretaje" />
       <End Role="Contaduria" EntitySet="Contaduria" />
@@ -342,6 +310,14 @@
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Gestion" EntitySet="Gestion" />
     </AssociationSet>
+    <AssociationSet Name="FK_CntHab_Id" Association="CasasRedModel.FK_CntHab_Id">
+      <End Role="Contaduria" EntitySet="Contaduria" />
+      <End Role="Habilitacion" EntitySet="Habilitacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GtnVer_Id" Association="CasasRedModel.FK_GtnVer_Id">
+      <End Role="Gestion" EntitySet="Gestion" />
+      <End Role="Verificacion" EntitySet="Verificacion" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK_Cliente_Id">
     <End Type="CasasRedModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -351,6 +327,30 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Gestion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CntHab_Id">
+    <End Type="CasasRedModel.Contaduria" Role="Contaduria" Multiplicity="1" />
+    <End Type="CasasRedModel.Habilitacion" Role="Habilitacion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Contaduria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Habilitacion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GtnVer_Id">
+    <End Type="CasasRedModel.Gestion" Role="Gestion" Multiplicity="1" />
+    <End Type="CasasRedModel.Verificacion" Role="Verificacion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Gestion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Verificacion">
         <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>

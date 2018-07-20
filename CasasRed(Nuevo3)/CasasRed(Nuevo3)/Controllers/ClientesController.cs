@@ -17,9 +17,10 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Clientes
         public ActionResult Index()
         {
-            var cliente = db.Cliente.Include(c => c.Corretaje).Include(c => c.Verificacion);
-            return View(cliente.ToList());
-        }
+            var cliente = db.Cliente.Include(c => c.Gestion);
+                  return View(cliente.ToList());
+          
+       }
 
         // GET: Clientes/Details/5
         public ActionResult Details(int? id)
