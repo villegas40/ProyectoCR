@@ -17,7 +17,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions
         public ActionResult Index()
         {
-            var verificacion = db.Verificacion.Include(v => v.Cliente);
+            var verificacion = db.Verificacion.Include(v => v.Gestion);
             return View(verificacion.ToList());
         }
 

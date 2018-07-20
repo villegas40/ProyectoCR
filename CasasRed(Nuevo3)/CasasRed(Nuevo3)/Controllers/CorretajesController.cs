@@ -17,7 +17,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes
         public ActionResult Index()
         {
-            var corretaje = db.Corretaje.Include(c => c.Cliente).Include(c => c.Contaduria).Include(c => c.Gestion).Include(c => c.Habilitacion);
+            var corretaje = db.Corretaje.Include(c => c.Contaduria).Include(c => c.Gestion).Include(c => c.Habilitacion);
             return View(corretaje.ToList());
         }
 
