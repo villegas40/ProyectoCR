@@ -24,6 +24,6 @@ namespace CasasRed_Nuevo3_.Models
         public string Vfn_Trato_asesor { get; set; }
         public string Vfn_Observaciones { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
+        public virtual Gestion Gestion { get; set; }
     }
 }

@@ -54,7 +54,6 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<bool> Crt_ReciboAgua { get; set; }
         public Nullable<decimal> Crt_GastosServicios { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
         public virtual Contaduria Contaduria { get; set; }
         public virtual Gestion Gestion { get; set; }
         public virtual Habilitacion Habilitacion { get; set; }

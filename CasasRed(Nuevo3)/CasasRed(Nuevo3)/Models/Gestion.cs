@@ -46,5 +46,6 @@ namespace CasasRed_Nuevo3_.Models
         public virtual Contaduria Contaduria { get; set; }
         public virtual Corretaje Corretaje { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual Verificacion Verificacion { get; set; }
     }
 }

@@ -23,5 +23,6 @@ namespace CasasRed_Nuevo3_.Models
     
         public virtual Corretaje Corretaje { get; set; }
         public virtual Gestion Gestion { get; set; }
+        public virtual Habilitacion Habilitacion { get; set; }
     }
 }

@@ -42,5 +42,6 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<bool> Hbt_AvisoSusp { get; set; }
     
         public virtual Corretaje Corretaje { get; set; }
+        public virtual Contaduria Contaduria { get; set; }
     }
 }

@@ -173,6 +173,7 @@ CREATE TABLE Corretaje(
 );
 
 /*Departamento de Verificacion*/
+Drop table Verificacion
 CREATE TABLE Verificacion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Vfn_Persona_fisica BIT, /*CONOCE A LA PERSONA FISICAMENTE?*/
@@ -186,12 +187,13 @@ CREATE TABLE Verificacion(
 	/*LLAVE FORANEA DE CASA QUE ES LA DE CORRETAJE*/
 	--Casa_id int FOREIGN KEY REFERENCES Casa(Casa_id), Esto creo que no porque se le puede asignar o no una casa
 	/*LLAVE FORANEA DE CLIENTE*/
-	CONSTRAINT FK_GralVer_Id
+	CONSTRAINT FK_GtnVer_Id
 		FOREIGN KEY (Id)
-		REFERENCES Cliente(Id)
+		REFERENCES Gestion(Id)
 		--ON DELETE CASCADE
 );
 
+Drop Table Habilitacion
 /*Departamento Habilitacion*/
 CREATE TABLE Habilitacion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -228,6 +230,7 @@ CREATE TABLE Habilitacion(
 		--ON DELETE CASCADE
 );
 
+Drop table Contaduria
 /*Departamento de Contaduria*/
 CREATE TABLE Contaduria(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -237,9 +240,9 @@ CREATE TABLE Contaduria(
 	Cnt_Mensualidad MONEY,
 	Cnt_Vigilancia MONEY,
 	/*LLAVE FORANEA DE CASA QUE SERIA LA DE CORRETAJE (Tambien para saber el gasto)*/
-	CONSTRAINT FK_CrtCon_Id
-		FOREIGN KEY (Id)
-		REFERENCES Corretaje(Id),
+	--CONSTRAINT FK_CrtCon_Id
+	--	FOREIGN KEY (Id)
+	--	REFERENCES Corretaje(Id),
 		--ON DELETE CASCADE,
 	/*LLAVES FORANEAS DE GESTION PARA SABER CUANTO GASTARON*/
 	CONSTRAINT FK_GtnCon_Id

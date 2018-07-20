@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="121">
         <EntityTypeShape EntityType="CasasRedModel.Cliente" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CasasRedModel.Contaduria" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Corretaje" Width="1.5" PointX="12" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Gestion" Width="1.5" PointX="5.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Habilitacion" Width="1.5" PointX="7.375" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CasasRedModel.Corretaje" Width="1.5" PointX="11.625" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CasasRedModel.Gestion" Width="1.5" PointX="3.375" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CasasRedModel.Habilitacion" Width="1.5" PointX="8.125" PointY="15.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CasasRedModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CasasRedModel.Usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Verificacion" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
-        <AssociationConnector Association="CasasRedModel.FK_Gral_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="CasasRedModel.FK_GralVer_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CasasRedModel.Verificacion" Width="1.5" PointX="4.625" PointY="15.5" IsExpanded="true" />
         <AssociationConnector Association="CasasRedModel.FK_CrtCon_Id" ManuallyRouted="false" />
         <AssociationConnector Association="CasasRedModel.FK_GtnCon_Id" ManuallyRouted="false" />
         <AssociationConnector Association="CasasRedModel.FK_Crt_Id" ManuallyRouted="false" />
         <AssociationConnector Association="CasasRedModel.FK_CrtHab_Id" ManuallyRouted="false" />
         <AssociationConnector Association="CasasRedModel.FK_TipoUsuario_Id" ManuallyRouted="false" />
         <AssociationConnector Association="CasasRedModel.FK_Cliente_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_CntHab_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_GtnVer_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

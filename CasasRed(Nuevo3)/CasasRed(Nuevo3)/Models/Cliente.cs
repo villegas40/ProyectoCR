@@ -59,8 +59,6 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<int> Cyg_No_identificacoion { get; set; }
         public Nullable<System.DateTime> Gral_Fechaalta { get; set; }
     
-        public virtual Corretaje Corretaje { get; set; }
-        public virtual Verificacion Verificacion { get; set; }
         public virtual Gestion Gestion { get; set; }
     }
 }
