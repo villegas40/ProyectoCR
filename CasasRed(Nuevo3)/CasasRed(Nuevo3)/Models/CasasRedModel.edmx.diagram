@@ -21,6 +21,7 @@
         <AssociationConnector Association="CasasRedModel.FK_Cliente_Id" />
         <AssociationConnector Association="CasasRedModel.FK_CntHab_Id" />
         <AssociationConnector Association="CasasRedModel.FK_GtnVer_Id" />
+        <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

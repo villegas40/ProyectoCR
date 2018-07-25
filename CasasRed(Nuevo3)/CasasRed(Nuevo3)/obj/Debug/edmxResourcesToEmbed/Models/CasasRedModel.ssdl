@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CasasRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Articulos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="art_nombre" Type="varchar" MaxLength="150" />
+    <Property Name="art_descripcion" Type="varchar" MaxLength="250" />
+    <Property Name="art_fechaIngreso" Type="datetime" />
+    <Property Name="art_cantidadMinima" Type="decimal" Precision="18" Scale="6" />
+  </EntityType>
   <EntityType Name="Cliente">
     <Key>
       <PropertyRef Name="Id" />
@@ -274,6 +284,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="CasasRedModelStoreContainer">
+    <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contaduria" EntityType="Self.Contaduria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Corretaje" EntityType="Self.Corretaje" Schema="dbo" store:Type="Tables" />

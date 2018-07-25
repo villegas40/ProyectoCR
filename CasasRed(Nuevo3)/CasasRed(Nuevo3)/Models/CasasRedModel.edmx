@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CasasRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="art_nombre" Type="varchar" MaxLength="150" />
+          <Property Name="art_descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="art_fechaIngreso" Type="datetime" />
+          <Property Name="art_cantidadMinima" Type="decimal" Precision="18" Scale="6" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="Id" />
@@ -279,6 +289,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CasasRedModelStoreContainer">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contaduria" EntityType="Self.Contaduria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Corretaje" EntityType="Self.Corretaje" Schema="dbo" store:Type="Tables" />
@@ -634,6 +645,7 @@
             <End Role="Gestion" EntitySet="Gestion" />
             <End Role="Verificacion" EntitySet="Verificacion" />
           </AssociationSet>
+          <EntitySet Name="Articulos" EntityType="CasasRedModel.Articulos" />
         </EntityContainer>
         <Association Name="FK_Cliente_Id">
           <End Type="CasasRedModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -671,6 +683,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="art_nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="art_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="art_fechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="art_cantidadMinima" Type="Decimal" Precision="18" Scale="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -883,6 +905,17 @@
                 <ScalarProperty Name="Vfn_Costo" ColumnName="Vfn_Costo" />
                 <ScalarProperty Name="Vfn_Trato_asesor" ColumnName="Vfn_Trato_asesor" />
                 <ScalarProperty Name="Vfn_Observaciones" ColumnName="Vfn_Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="CasasRedModel.Articulos">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="art_cantidadMinima" ColumnName="art_cantidadMinima" />
+                <ScalarProperty Name="art_fechaIngreso" ColumnName="art_fechaIngreso" />
+                <ScalarProperty Name="art_descripcion" ColumnName="art_descripcion" />
+                <ScalarProperty Name="art_nombre" ColumnName="art_nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
