@@ -275,7 +275,7 @@ art_cantidadMinima DECIMAL(18,6)
 )
 
 CREATE TABLE Existencias(
-Id INT identity(1,1) PRIMARY KEY
+Id INT identity(1,1) PRIMARY KEY,
 ext_art_id VARCHAR(50) FOREIGN KEY REFERENCES Articulos(Id),
 ext_cantidad decimal(18,6),
 ext_cantidadActual decimal(18,6),
