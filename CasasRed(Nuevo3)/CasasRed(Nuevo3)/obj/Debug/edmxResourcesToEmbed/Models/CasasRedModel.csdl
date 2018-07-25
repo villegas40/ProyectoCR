@@ -318,6 +318,7 @@
       <End Role="Gestion" EntitySet="Gestion" />
       <End Role="Verificacion" EntitySet="Verificacion" />
     </AssociationSet>
+    <EntitySet Name="Articulos" EntityType="CasasRedModel.Articulos" />
   </EntityContainer>
   <Association Name="FK_Cliente_Id">
     <End Type="CasasRedModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -355,4 +356,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Articulos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="art_nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="art_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="art_fechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="art_cantidadMinima" Type="Decimal" Precision="18" Scale="6" />
+  </EntityType>
 </Schema>

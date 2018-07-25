@@ -123,7 +123,6 @@ CREATE TABLE Gestion(
 
 /*Departamento de Corretaje*/
 --También llevara el nombre del asesor de la venta
-drop table Corretaje
 CREATE TABLE Corretaje(
 	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
 	Crt_Status VARCHAR(20),
@@ -173,7 +172,6 @@ CREATE TABLE Corretaje(
 );
 
 /*Departamento de Verificacion*/
-Drop table Verificacion
 CREATE TABLE Verificacion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Vfn_Persona_fisica BIT, /*CONOCE A LA PERSONA FISICAMENTE?*/
@@ -193,7 +191,6 @@ CREATE TABLE Verificacion(
 		--ON DELETE CASCADE
 );
 
-Drop Table Habilitacion
 /*Departamento Habilitacion*/
 CREATE TABLE Habilitacion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -230,7 +227,6 @@ CREATE TABLE Habilitacion(
 		--ON DELETE CASCADE
 );
 
-Drop table Contaduria
 /*Departamento de Contaduria*/
 CREATE TABLE Contaduria(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -268,4 +264,22 @@ CREATE TABLE Usuario (
 CREATE TABLE TipoUsuario(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	tipusu_descricion VARCHAR(50)
+)
+
+CREATE TABLE Articulos(
+Id VARCHAR(50) PRIMARY KEY,
+art_nombre VARCHAR(150),
+art_descripcion VARCHAR(250),
+art_fechaIngreso DATETIME,
+art_cantidadMinima DECIMAL(18,6)
+)
+
+CREATE TABLE Existencias(
+Id INT identity(1,1) PRIMARY KEY
+ext_art_id VARCHAR(50) FOREIGN KEY REFERENCES Articulos(Id),
+ext_cantidad decimal(18,6),
+ext_cantidadActual decimal(18,6),
+ext_precioUnitario decimal(18,6),
+ext_fechaAgregado decimal(18,6),
+ext_usuarioAgrego INT FOREIGN KEY REFERENCES Usuario(Id)
 )

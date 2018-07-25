@@ -6,10 +6,12 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
     <!--Footer-->
     <link href="~/Content/customcss/sticky-footer.css" rel="stylesheet" />
     <!--Iconos-->
-    <link href="~/Content/fontawsome/css/fontawesome-all.css" rel="stylesheet" />
+    <link href="~/Content/fontawsome/css/fontawesome-all.css" rel="stylesheet" />   
+
 </head>
 <body>
     @*<div class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -47,7 +49,7 @@
                     @Html.ActionLink("Acerca de Nosotros", "About", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Contacto", "Contact", "Home", null , new { @class = "nav-link" })
+                    @Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })
                 </li>
             </ul>
 
@@ -75,24 +77,24 @@
         <div class="col-sm-4">
             <p>&copy; @DateTime.Now.Year - Casas Red</p>
         </div>*@
-        @*<div class="col-sm-4">
-                <h6>5 y 10</h6>
-                <p class="text-justify">
-                    Blvd. Lázaro Cárdenas No. 405, Local 16 y 17 dentro de Soriana Hiper a un costado de Coppel y Famsa
-                </p>
-                <p class="text-justify">
-                    Télefonos:
-                </p>
-                <p class="text-justify">
-                    Télefonos:
-                    WhatsApp: (664) 439 2448
-                    Oficina: (664) 250 0747
-                    Radio: 32*988455*
-                </p>
-            </div>
-            <div class="col-sm-4">
-                <p>&copy; @DateTime.Now.Year - Casas Red</p>
-            </div>*@
+    @*<div class="col-sm-4">
+            <h6>5 y 10</h6>
+            <p class="text-justify">
+                Blvd. Lázaro Cárdenas No. 405, Local 16 y 17 dentro de Soriana Hiper a un costado de Coppel y Famsa
+            </p>
+            <p class="text-justify">
+                Télefonos:
+            </p>
+            <p class="text-justify">
+                Télefonos:
+                WhatsApp: (664) 439 2448
+                Oficina: (664) 250 0747
+                Radio: 32*988455*
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <p>&copy; @DateTime.Now.Year - Casas Red</p>
+        </div>*@
     @*</footer>*@
 
     <footer class="fixed-bottom">
@@ -121,6 +123,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
     @RenderSection("scripts", required: false)
 </body>
 </html>
