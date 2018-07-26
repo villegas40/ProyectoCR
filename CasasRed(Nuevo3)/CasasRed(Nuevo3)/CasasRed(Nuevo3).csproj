@@ -416,6 +416,7 @@
     <Content Include="Views\Verificacions\Details.cshtml" />
     <Content Include="Views\Verificacions\Edit.cshtml" />
     <Content Include="Views\Verificacions\Index.cshtml" />
+    <Content Include="Views\Home\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,38 +2,89 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1 class="text-center">Bienvenido a nuestro portal web</h1>
-    <p class="lead text-center">¡Gracias por visitarnos!</p>
-    <p class="lead text-md-center">Si eres cliente puedes consultar información</p>
-    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
-</div>
+@{
+    Layout = "/Views/Home/_Layout.cshtml"; <!-- especifica la plantilla a utilizar , crear una para el index general -->
+}
 
-<div class="row">
+<br> <br />
+<br> <br />
+
+<h3 class="text-center" style="color: rgb(255, 255, 255)">Empresa lider en la administracion</h3>
+<h3 class="text-center" style="color: rgb(255, 255, 255)">y comercializacion de inmuebles </h3>
+<p class="lead text-center" style="color: rgb(255, 255, 255); font-size: 15px;">Compra,venta,renta casa o propiedad en la region</p>
+
+<style>
+
+    .button1 {
+        background-color: transparent;
+        color: white;
+        padding: 8px 150px;
+        border: 1px solid #FF0000; /* red */
+        display: inline-block;
+        text-align: center;
+        margin: 4px 2px;
+        opacity: 1;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+        .button1:hover {
+            opacity: 0.6
+        }
+</style>
+<center>
+    <button type="button" class="btn button1">Entrar</button>
+</center>
+
+<br> <br />
+<br> <br />
+<br> <br />
+<br> <br />
+
+@*<div class="row">
     <div class="col-12">
         <h2 class="text-center">Identifícate </h2>
     </div>
-</div>
+</div>*@
+<style>
+    .p {
+        color: red;
+        text-align: justify;
+        font-size: 13px;
+    }
+</style>
+    <center>
+     <div class="container">
+         <div class="row">
+             <div class="col-sm">
+                 <img src="~/Media/VentaRenta.png" class="img-fluid" alt="Responsive image">
 
-<div class="row">
-    <div class="col-md-6">
-        <h2 class="text-center">Cliente</h2>
-        <p class="text-center"><i class="fas fa-user fa-10x"></i></p>
-        <p class="text-justify">
-            Si ya eres cliente y estás a la espera te recibir tu vivienda ingresa con tú folio para
-            observar el avance de tú futura casa.
-        </p>
-        <p><a class="btn btn-default" href="#">Ingresar Folio &raquo;</a></p>
-    </div>
-    <div class="col-md-6">
-        <h2 class="text-center">Equipo Casas Red</h2>
-        <p class="text-center"><i class="far fa-user fa-10x"></i></p>
-        <p>Conoce a nuestro equipo de trabajo que le asesoraran y ayudarán a conocer su nueva casa.</p>
-        <p><a class="btn btn-default" href="#">Conoce más &raquo;</a></p>
-    </div>
-    @*<div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>*@
-</div>
+                 @*<img src="~/Media/logo-casas-red.png">*@
+                 <div class="container">
+                     <p class="p">Si pretendes vender o rentar un departamento,casa o propiedad somos tu mejor opcion en la gestion inmobiliaria de la region.</p>
+                 </div>
+             </div>
+             <div class="col-sm">
+                 <img src="~/Media/CompraRenta.png" class="img-fluid" alt="Responsive image">
+                 <div class="container">
+                     <p class="p">Somos tu mejor guia inmobiliaria para la compra,venta y renta de casas y departamentos que conseguimos la mejor opcion de vivienda, en las zonas mas exclusivas y al mejor precio.</p>
+                 </div>
+             </div>
+             <div class="col-sm">
+                 <img src="~/Media/Traspasos.png" class="img-fluid" alt="Responsive image">
+                 <div class="container">
+                     <p class="p">Una propiedad implica un acto juridico denominado CESION respecto de un credito hipotecarios, de un proceso legal o de una compraventa que no ha sido protocolizada, es decir escriturrada.</p>
+                 </div>
+             </div>
+             <div class="col-sm">
+                 <img src="~/Media/Avaluos.png" class="img-fluid" alt="Responsive image">
+                 <div class="container">
+                     <p class="p">Estimacion del valor comercial de un inmueble a traves de un dictamen tecnico imparcial mediante las caracteristicas de uso y el analisis de mercado.</p>
+                 </div>
+             </div>
+         </div>
+     </div>
+</center>
+
