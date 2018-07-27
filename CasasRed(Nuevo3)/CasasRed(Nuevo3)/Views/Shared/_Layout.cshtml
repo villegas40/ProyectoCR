@@ -14,28 +14,16 @@
 
 </head>
 <body>
-    @*<div class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>*@
+    
+    <style>
+        .navbar {
+            background-image: url('/Media/background2.jpg');
+        }
+    </style>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
-        @Html.ActionLink("Casas Red", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        @*@Html.ActionLink("Casas Red", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+        <a class="navbar-brand" href="#"><img src="~/Media/logo-casas-red.png" height="55" width="70"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -60,65 +48,12 @@
         <main role="main">
             @RenderBody()
         </main>
-        @*<hr />*@
-        @*<footer>
-                <p>&copy; @DateTime.Now.Year - Casas Red El Bueno</p>
-            </footer>*@
-        @*<footer class="container-fluid bg-danger d-flex foot fixed-bottom">
-            <div class="row align-items-center">
-                <div class="col ">
-                <p>&copy; @DateTime.Now.Year - Casas Red El Bueno</p>
-                    </div>
-                </div>
-            </footer>*@
     </div>
 
-    @*<footer class="footer">
-        <div class="col-sm-4">
-            <p>&copy; @DateTime.Now.Year - Casas Red</p>
-        </div>*@
-    @*<div class="col-sm-4">
-            <h6>5 y 10</h6>
-            <p class="text-justify">
-                Blvd. Lázaro Cárdenas No. 405, Local 16 y 17 dentro de Soriana Hiper a un costado de Coppel y Famsa
-            </p>
-            <p class="text-justify">
-                Télefonos:
-            </p>
-            <p class="text-justify">
-                Télefonos:
-                WhatsApp: (664) 439 2448
-                Oficina: (664) 250 0747
-                Radio: 32*988455*
-            </p>
-        </div>
-        <div class="col-sm-4">
-            <p>&copy; @DateTime.Now.Year - Casas Red</p>
-        </div>*@
-    @*</footer>*@
-
-    <footer class="fixed-bottom">
+    <footer class="footer content-info">
         <div class="col-sm-4">
             <p>&copy; @DateTime.Now.Year - Casas Red</p>
         </div>
-        @*<div class="col-sm-4">
-                <h6>5 y 10</h6>
-                <p class="text-justify">
-                    Blvd. Lázaro Cárdenas No. 405, Local 16 y 17 dentro de Soriana Hiper a un costado de Coppel y Famsa
-                </p>
-                <p class="text-justify">
-                    Télefonos:
-                </p>
-                <p class="text-justify">
-                    Télefonos:
-                    WhatsApp: (664) 439 2448
-                    Oficina: (664) 250 0747
-                    Radio: 32*988455*
-                </p>
-            </div>
-            <div class="col-sm-4">
-                <p>&copy; @DateTime.Now.Year - Casas Red</p>
-            </div>*@
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

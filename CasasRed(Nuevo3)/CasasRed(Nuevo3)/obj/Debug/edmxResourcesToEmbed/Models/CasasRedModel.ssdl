@@ -2,9 +2,9 @@
 <Schema Namespace="CasasRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Articulos">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="art_id" />
     </Key>
-    <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="art_id" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="art_nombre" Type="varchar" MaxLength="150" />
     <Property Name="art_descripcion" Type="varchar" MaxLength="250" />
     <Property Name="art_fechaIngreso" Type="datetime" />
@@ -114,6 +114,19 @@
     <Property Name="Crt_Obervaciones" Type="varchar" MaxLength="300" />
     <Property Name="Crt_GastosServicios" Type="money" />
   </EntityType>
+  <EntityType Name="Existencias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ext_art_id" Type="varchar" MaxLength="15" />
+    <Property Name="ext_cantidad" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="ext_cantidadActual" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="ext_precioUnitario" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="ext_fechaAgregado" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="ext_usuarioAgrego" Type="int" />
+    <Property Name="ext_ubicacion" Type="int" />
+  </EntityType>
   <EntityType Name="Gestion">
     <Key>
       <PropertyRef Name="Id" />
@@ -185,12 +198,23 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tipusu_descricion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Ubicaciones">
+    <Key>
+      <PropertyRef Name="ubi_id" />
+    </Key>
+    <Property Name="ubi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ubi_codigo" Type="varchar" MaxLength="10" />
+    <Property Name="ubi_descripcion" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usu_username" Type="varchar" MaxLength="20" />
+    <Property Name="usu_correo" Type="varchar" MaxLength="150" />
     <Property Name="usu_nombre" Type="varchar" MaxLength="80" />
+    <Property Name="usu_password" Type="varchar" MaxLength="18" />
     <Property Name="usu_apellidoPa" Type="varchar" MaxLength="40" />
     <Property Name="usu_apellidoMa" Type="varchar" MaxLength="40" />
     <Property Name="usu_alta" Type="date" />
@@ -211,6 +235,42 @@
     <Property Name="Vfn_Trato_asesor" Type="varchar" MaxLength="2" />
     <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
   </EntityType>
+  <Association Name="FK__Existenci__ext_a__236943A5">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
+    <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="art_id" />
+      </Principal>
+      <Dependent Role="Existencias">
+        <PropertyRef Name="ext_art_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Existenci__ext_u__245D67DE">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Existencias">
+        <PropertyRef Name="ext_usuarioAgrego" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Existenci__ext_u__25518C17">
+    <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
+    <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicaciones">
+        <PropertyRef Name="ubi_id" />
+      </Principal>
+      <Dependent Role="Existencias">
+        <PropertyRef Name="ext_ubicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Cliente_Id">
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
     <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1" />
@@ -288,11 +348,25 @@
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contaduria" EntityType="Self.Contaduria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Corretaje" EntityType="Self.Corretaje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Existencias" EntityType="Self.Existencias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gestion" EntityType="Self.Gestion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Habilitacion" EntityType="Self.Habilitacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Existenci__ext_a__236943A5" Association="Self.FK__Existenci__ext_a__236943A5">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="Existencias" EntitySet="Existencias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Existenci__ext_u__245D67DE" Association="Self.FK__Existenci__ext_u__245D67DE">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Existencias" EntitySet="Existencias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Existenci__ext_u__25518C17" Association="Self.FK__Existenci__ext_u__25518C17">
+      <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+      <End Role="Existencias" EntitySet="Existencias" />
+    </AssociationSet>
     <AssociationSet Name="FK_Cliente_Id" Association="Self.FK_Cliente_Id">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Gestion" EntitySet="Gestion" />

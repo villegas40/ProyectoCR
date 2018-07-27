@@ -185,6 +185,9 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="CasasRedModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="usu_password" ColumnName="usu_password" />
+          <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+          <ScalarProperty Name="usu_username" ColumnName="usu_username" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="usu_nombre" ColumnName="usu_nombre" />
           <ScalarProperty Name="usu_apellidoPa" ColumnName="usu_apellidoPa" />
@@ -213,11 +216,34 @@
     <EntitySetMapping Name="Articulos">
       <EntityTypeMapping TypeName="CasasRedModel.Articulos">
         <MappingFragment StoreEntitySet="Articulos">
+          <ScalarProperty Name="art_id" ColumnName="art_id" />
           <ScalarProperty Name="art_cantidadMinima" ColumnName="art_cantidadMinima" />
           <ScalarProperty Name="art_fechaIngreso" ColumnName="art_fechaIngreso" />
           <ScalarProperty Name="art_descripcion" ColumnName="art_descripcion" />
           <ScalarProperty Name="art_nombre" ColumnName="art_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Existencias">
+      <EntityTypeMapping TypeName="CasasRedModel.Existencias">
+        <MappingFragment StoreEntitySet="Existencias">
+          <ScalarProperty Name="ext_ubicacion" ColumnName="ext_ubicacion" />
+          <ScalarProperty Name="ext_usuarioAgrego" ColumnName="ext_usuarioAgrego" />
+          <ScalarProperty Name="ext_fechaAgregado" ColumnName="ext_fechaAgregado" />
+          <ScalarProperty Name="ext_precioUnitario" ColumnName="ext_precioUnitario" />
+          <ScalarProperty Name="ext_cantidadActual" ColumnName="ext_cantidadActual" />
+          <ScalarProperty Name="ext_cantidad" ColumnName="ext_cantidad" />
+          <ScalarProperty Name="ext_art_id" ColumnName="ext_art_id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ubicaciones">
+      <EntityTypeMapping TypeName="CasasRedModel.Ubicaciones">
+        <MappingFragment StoreEntitySet="Ubicaciones">
+          <ScalarProperty Name="ubi_descripcion" ColumnName="ubi_descripcion" />
+          <ScalarProperty Name="ubi_codigo" ColumnName="ubi_codigo" />
+          <ScalarProperty Name="ubi_id" ColumnName="ubi_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

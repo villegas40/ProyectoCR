@@ -1,7 +1,9 @@
 CREATE DATABASE CasasRed;
 
 USE CasasRed;
-DROP DATABASE CasasRed;
+
+Drop database CasasRed;
+
 /*Datos Generales del Cliente (Llenado por Gestion)*/
 CREATE TABLE Cliente(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -51,31 +53,50 @@ CREATE TABLE Cliente(
     Gral_Fechaalta DATE DEFAULT GETDATE()
 );
 
-
-/*Que solo sea una tabla de Registro*/
---CREATE TABLE Conyugue(
---	Cyg_Nombre VARCHAR(80),
---	Cyg_Apellidopa VARCHAR(40),
---	Cyg_Apellidoma VARCHAR(40),
---	Gyg_Fechanac DATE,
---	Cyg_Nss VARCHAR(11),
---	Cyg_Curp VARCHAR(18),
---	Cyg_Rfc VARCHAR(13),
---	Cyg_Lugarnac VARCHAR(70),
---	Cyg_Celular VARCHAR(10),
---	Cyg_Tel_casa VARCHAR(10),
---	Cyg_Ocupacion VARCHAR(30),
---	Cyg_Tel_trabajo VARCHAR(15),
---	Cyg_Correo VARCHAR(320),
---	Cyg_Identificacion VARCHAR(40),
---	Cyg_No_identificacoion INT,
---	/*ID DE CLIENTE PARA RELACIONARLO COM CONYUGUE*/
---	--Gral_IDCLIENTE int FOREIGN KEY REFERENCES GENERAL(Gral_IDCLIENTE)
---	CONSTRAINT fk_Gral_Id
---		FOREIGN KEY (Id)
---		REFERENCES Cliente(Id)
---		ON DELETE CASCADE
---);
+/*Departamento de Corretaje*/
+--También llevara el nombre del asesor de la venta
+CREATE TABLE Corretaje(
+	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
+	Crt_Status VARCHAR(20),
+	Crt_Cliente_Nombre VARCHAR(15),
+	Crt_Cliente_ApMat VARCHAR(15),
+	Crt_Cliente_ApPat VARCHAR(15),
+	Crt_Direccion VARCHAR(100),
+	Crt_Precio VARCHAR(20), /*SUPONGO QUE DE LA CASA, NO SE*/ /*<<< Yo tampoco pero me imagino que es el precio de la casa y el gasto para ponerla al corriente y rehabilitacion*/
+	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
+	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
+	planta baja, segundaplanta. Si es Departamento que nivel (nivel 1, nivel 2, nivel 3, nivel 4)*/
+	Crt_Ano_compra DATE,
+	Crt_Saldo_infonavit MONEY,
+	Crt_Fec_Nac DATE,
+	Crt_Tel_Celular INT,
+	Crt_Estado_Civil VARCHAR(15),
+	Crt_Tel_Casa VARCHAR(15),
+	Crt_Tel_Trabajo VARCHAR(15),
+	Crt_Tel_Ref1 VARCHAR(15),
+	Crt_Tel_Ref2 VARCHAR(15),
+	Crt_Tel_Ref VARCHAR(15),
+	Crt_Recibo_predial_digital BIT, 
+	Crt_Clave_Catastral VARCHAR(15), 
+	Crt_Adeudo_predial MONEY,
+	Crt_Recibo_luz_digitalizar BIT,
+	Crt_Num_servicio_luz VARCHAR(12),
+	Crt_Adeudo_luz MONEY,
+	Crt_Recibo_agua_digital BIT,
+	Crt_No_cuenta_agua VARCHAR(7), /*EN EL CASO DE CESPT SON 7 NUMEROS*/
+	Crt_Adeudo_agua MONEY,
+	Crt_Acuerdo BIT, /*CREO QUE SE REFIERE SI TIENE ACUERDO EN LA CESPT*/ /*Asi es*/
+	Crt_ActaNacTitu BIT,
+	Crt_ActaNacConyu BIT,
+	Crt_ActaMatr BIT,
+	Crt_EscrCert BIT,
+	Crt_CartaDesPre BIT,
+	Crt_ReciboLuz BIT, -- Físico
+	Crt_ReciboAgua BIT, -- Físico
+	Crt_Status_Muestra VARCHAR(30),
+	Crt_Obervaciones VARCHAR(300),
+	Crt_GastosServicios MONEY
+);
 
 /*Departamento de Gestion*/
 CREATE TABLE Gestion(
@@ -121,56 +142,6 @@ CREATE TABLE Gestion(
 
 );
 
-/*Departamento de Corretaje*/
---También llevara el nombre del asesor de la venta
-CREATE TABLE Corretaje(
-	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
-	Crt_Status VARCHAR(20),
-	Crt_Cliente_Nombre VARCHAR(15),
-	Crt_Cliente_ApMat VARCHAR(15),
-	Crt_Cliente_ApPat VARCHAR(15),
-	Crt_Direccion VARCHAR(100),
-	Crt_Precio VARCHAR(20), /*SUPONGO QUE DE LA CASA, NO SE*/ /*<<< Yo tampoco pero me imagino que es el precio de la casa y el gasto para ponerla al corriente y rehabilitacion*/
-	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
-	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
-	planta baja, segundaplanta. Si es Departamento que nivel (nivel 1, nivel 2, nivel 3, nivel 4)*/
-	Crt_Ano_compra DATE,
-	Crt_Saldo_infonavit MONEY,
-	Crt_Fec_Nac DATE,
-	Crt_Tel_Celular INT,
-	Crt_Estado_Civil VARCHAR(15),
-	Crt_Tel_Casa INT,
-	Crt_Tel_Trabajo INT,
-	Crt_Tel_Ref1 INT,
-	Crt_Tel_Ref2 INT,
-	Crt_Tel_Ref INT,
-	--Crt_Clave_predial VARCHAR(8), Esta es la clave catastral
-	Crt_Recibo_predial_digital BIT, 
-	Crt_Clave_Catastral VARCHAR(10), 
-	Crt_Adeudo_predial MONEY,
-	Crt_Recibo_luz_digitalizar BIT,
-	Crt_Num_servicio_luz VARCHAR(12),
-	Crt_Adeudo_luz MONEY,
-	Crt_Recibo_agua_digital BIT,
-	Crt_No_cuenta_agua VARCHAR(7), /*EN EL CASO DE CESPT SON 7 NUMEROS*/
-	Crt_Adeudo_agua MONEY,
-	Crt_Acuerdo BIT, /*CREO QUE SE REFIERE SI TIENE ACUERDO EN LA CESPT*/ /*Asi es*/
-	Crt_ActaNacTitu BIT,
-	Crt_ActaNacConyu BIT,
-	Crt_ActaMatr BIT,
-	Crt_EscrCert BIT,
-	Crt_CartaDesPre BIT,
-	Crt_ReciboLuz BIT, -- Físico
-	Crt_ReciboAgua BIT, -- Físico
-	Crt_Status_Muestra VARCHAR(30),
-	Crt_Obervaciones VARCHAR(300),
-	Crt_GastosServicios MONEY
-	--CONSTRAINT FK_Gral_Id
-	--	FOREIGN KEY (Id)
-	--	REFERENCES Cliente(Id)
-		--ON DELETE CASCADE
-);
-
 /*Departamento de Verificacion*/
 CREATE TABLE Verificacion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -190,6 +161,31 @@ CREATE TABLE Verificacion(
 		REFERENCES Gestion(Id)
 		--ON DELETE CASCADE
 );
+
+/*Que solo sea una tabla de Registro*/
+--CREATE TABLE Conyugue(
+--	Cyg_Nombre VARCHAR(80),
+--	Cyg_Apellidopa VARCHAR(40),
+--	Cyg_Apellidoma VARCHAR(40),
+--	Gyg_Fechanac DATE,
+--	Cyg_Nss VARCHAR(11),
+--	Cyg_Curp VARCHAR(18),
+--	Cyg_Rfc VARCHAR(13),
+--	Cyg_Lugarnac VARCHAR(70),
+--	Cyg_Celular VARCHAR(10),
+--	Cyg_Tel_casa VARCHAR(10),
+--	Cyg_Ocupacion VARCHAR(30),
+--	Cyg_Tel_trabajo VARCHAR(15),
+--	Cyg_Correo VARCHAR(320),
+--	Cyg_Identificacion VARCHAR(40),
+--	Cyg_No_identificacoion INT,
+--	/*ID DE CLIENTE PARA RELACIONARLO COM CONYUGUE*/
+--	--Gral_IDCLIENTE int FOREIGN KEY REFERENCES GENERAL(Gral_IDCLIENTE)
+--	CONSTRAINT fk_Gral_Id
+--		FOREIGN KEY (Id)
+--		REFERENCES Cliente(Id)
+--		ON DELETE CASCADE
+--);
 
 /*Departamento Habilitacion*/
 CREATE TABLE Habilitacion(
@@ -247,10 +243,20 @@ CREATE TABLE Contaduria(
 		--ON DELETE CASCADE
 );
 
+
+CREATE TABLE TipoUsuario(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	tipusu_descricion VARCHAR(50)
+)
+
+
 /*Para manejo de usuarios*/
 CREATE TABLE Usuario (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
+    usu_username VARCHAR(20),
+    usu_correo VARCHAR(150),
     usu_nombre VARCHAR(80),
+    usu_password VARCHAR(18),
     usu_apellidoPa VARCHAR(40),    
     usu_apellidoMa VARCHAR(40),
     usu_alta DATE DEFAULT GETDATE(),
@@ -261,25 +267,28 @@ CREATE TABLE Usuario (
 		REFERENCES TipoUsuario(Id)
 );
 
-CREATE TABLE TipoUsuario(
-	Id INT IDENTITY(1,1) PRIMARY KEY,
-	tipusu_descricion VARCHAR(50)
-)
 
 CREATE TABLE Articulos(
-Id VARCHAR(50) PRIMARY KEY,
+art_id VARCHAR(15) PRIMARY KEY,
 art_nombre VARCHAR(150),
 art_descripcion VARCHAR(250),
 art_fechaIngreso DATETIME,
 art_cantidadMinima DECIMAL(18,6)
 )
 
+CREATE TABLE Ubicaciones(
+    ubi_id INT IDENTITY(1,1) PRIMARY KEY,
+    ubi_codigo VARCHAR(10),
+    ubi_descripcion varchar(50) 
+)
+
 CREATE TABLE Existencias(
-Id INT identity(1,1) PRIMARY KEY
-ext_art_id VARCHAR(50) FOREIGN KEY REFERENCES Articulos(Id),
+Id INT identity(1,1) PRIMARY KEY,
+ext_art_id VARCHAR(15) FOREIGN KEY REFERENCES Articulos(art_id),
 ext_cantidad decimal(18,6),
 ext_cantidadActual decimal(18,6),
 ext_precioUnitario decimal(18,6),
 ext_fechaAgregado decimal(18,6),
-ext_usuarioAgrego INT FOREIGN KEY REFERENCES Usuario(Id)
+ext_usuarioAgrego INT FOREIGN KEY REFERENCES Usuario(Id),
+    ext_ubicacion INT FOREIGN KEY REFERENCES Ubicaciones(ubi_id)
 )

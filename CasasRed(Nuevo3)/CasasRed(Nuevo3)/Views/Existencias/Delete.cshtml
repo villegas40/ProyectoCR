@@ -1,0 +1,80 @@
+﻿@model CasasRed_Nuevo3_.Models.Existencias
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Existencias</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ext_cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ext_cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ext_cantidadActual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ext_cantidadActual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ext_precioUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ext_precioUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ext_fechaAgregado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ext_fechaAgregado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articulos.art_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articulos.art_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.usu_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.usu_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ubicaciones.ubi_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ubicaciones.ubi_codigo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

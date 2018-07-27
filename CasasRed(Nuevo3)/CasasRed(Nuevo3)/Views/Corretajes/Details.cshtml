@@ -155,14 +155,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Crt_Clave_predial)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Crt_Clave_predial)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Crt_Recibo_predial_digital)
         </dt>
 
@@ -259,22 +251,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Gastos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Gastos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cliente.Gral_Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cliente.Gral_Nombre)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Contaduria.Id)
         </dt>
 
@@ -304,3 +280,9 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts {
+    <script>
+        $(document.body).css('padding-top', '70px');
+    </script>
+}

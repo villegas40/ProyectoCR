@@ -22,6 +22,11 @@
         <AssociationConnector Association="CasasRedModel.FK_CntHab_Id" />
         <AssociationConnector Association="CasasRedModel.FK_GtnVer_Id" />
         <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CasasRedModel.Existencias" Width="1.5" PointX="7.625" PointY="1" />
+        <EntityTypeShape EntityType="CasasRedModel.Ubicaciones" Width="1.5" PointX="5.375" PointY="19.625" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_a__236943A5" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__245D67DE" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__25518C17" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

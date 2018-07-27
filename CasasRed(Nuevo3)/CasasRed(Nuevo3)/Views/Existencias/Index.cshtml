@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CasasRed_Nuevo3_.Models.Existencias>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ext_cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ext_cantidadActual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ext_precioUnitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ext_fechaAgregado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Articulos.art_nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.usu_nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ubicaciones.ubi_codigo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ext_cantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ext_cantidadActual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ext_precioUnitario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ext_fechaAgregado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Articulos.art_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.usu_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ubicaciones.ubi_codigo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
