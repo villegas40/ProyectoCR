@@ -91,6 +91,9 @@ CREATE TABLE Corretaje(
 	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
 	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
 	planta baja, segundaplanta. Si es Departamento que nivel (nivel 1, nivel 2, nivel 3, nivel 4)*/
+	Crt_Num_Habitaciones INT,
+	Crt_Nivel INT,
+	Crt_Planta INT,
 	Crt_Ano_compra DATE,
 	Crt_Saldo_infonavit MONEY,
 	Crt_Fec_Nac DATE,
@@ -98,16 +101,18 @@ CREATE TABLE Corretaje(
 	Crt_Estado_Civil VARCHAR(15),
 	Crt_Tel_Casa INT,
 	Crt_Tel_Trabajo INT,
-	Crt_Tel_Ref1 INT,
-	Crt_Tel_Ref2 INT,
-	Crt_Tel_Ref INT,
+	Crt_Tel_Ref1 VARCHAR(10),
+	Crt_Tel_Ref2  VARCHAR(10),
+	Crt_Tel_Ref VARCHAR(10),
 	--Crt_Clave_predial VARCHAR(8), Esta es la clave catastral
 	Crt_Recibo_predial_digital BIT, 
+	Crt_Num_Credito_Infonavit VARCHAR(10),
 	Crt_Clave_Catastral VARCHAR(10), 
 	Crt_Adeudo_predial MONEY,
 	Crt_Recibo_luz_digitalizar BIT,
 	Crt_Num_servicio_luz VARCHAR(12),
 	Crt_Adeudo_luz MONEY,
+	Crt_NombreC_Titular_luz VARCHAR(100),
 	Crt_Recibo_agua_digital BIT,
 	Crt_No_cuenta_agua VARCHAR(7), /*EN EL CASO DE CESPT SON 7 NUMEROS*/
 	Crt_Adeudo_agua MONEY,
@@ -117,11 +122,16 @@ CREATE TABLE Corretaje(
 	Crt_ActaMatr BIT,
 	Crt_EscrCert BIT,
 	Crt_CartaDesPre BIT,
+	Crt_Ine_Titu BIT,
+	Crt_Ine_Conyu BIT,
+	Crt_Escritura_Simple BIT,
+	Crt_Otros BIT,
 	Crt_ReciboLuz BIT, -- Físico
 	Crt_ReciboAgua BIT, -- Físico
 	Crt_Status_Muestra VARCHAR(30),
 	Crt_Obervaciones VARCHAR(300),
 	Crt_GastosServicios MONEY
+
 	--CONSTRAINT FK_Gral_Id
 	--	FOREIGN KEY (Id)
 	--	REFERENCES Cliente(Id)
