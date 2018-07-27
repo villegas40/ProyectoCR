@@ -1,7 +1,8 @@
-CREATE DATABASE CasasRed;
+CREATE DATABASE [CasasRed]
+GO
 
 USE CasasRed;
-DROP DATABASE CasasRed;
+
 /*Datos Generales del Cliente (Llenado por Gestion)*/
 CREATE TABLE Cliente(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -77,50 +78,6 @@ CREATE TABLE Cliente(
 --		ON DELETE CASCADE
 --);
 
-/*Departamento de Gestion*/
-CREATE TABLE Gestion(
-	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Gtn_Escrituras BIT,
-	Gtn_Planta_Cartografica BIT,
-	Gtn_Predial BIT,
-	Gtn_Recibo_Luz BIT, /*ESTOS NO DEBERIAN SER CAMPOS DE FOTO?*/
-	Gtn_Recibo_Agua BIT,
-	Gtn_Acta_Nacimiento BIT,
-	Gtn_IFE_Copia BIT,
-	Gtn_Sol_Ret_Ifo BIT, /*SOLICITUD DE RETENCION DE INFORMACION*/
-	Gtn_Cert_Hip BIT, /*CERTIFICADO DE HIPOTECA*/
-	Gtn_Cert_Fiscal BIT, /*CERTIFICADO FISCAL*/
-	Gtn_Sol_Estado BIT, /*SOLICITUD DE ESTADO*/
-	Gtn_Junta_URBI BIT,
-	Gtn_Agua_Pago_Inf BIT,
-	Gtn_Cert_Cartogr BIT,
-	Gtn_No_Oficial BIT, /*INVESTIGAR*/
-	Gtn_Avaluo BIT,
-	Gtn_CT_Banco BIT, /*INVESTIGAR*/
-	Gtn_Aviso_Suspension BIT, /*ENTREGA AVISO DE SUSPENSION*/
-	Gtn_Formato_Infonavit BIT,
-	Gtn_Fotos_Propiedad BIT,
-	Gtn_Evaluo_Contacto BIT,
-	Gtn_Planeacion_Fianza BIT,
-	Gtn_Urbanizacion BIT,
-	Gtn_Credito_INFONAVIT BIT,
-	Gtn_Notaria BIT,
-	Gtn_Firma_Escrituras BIT,
-	Gtn_Gastos MONEY,
-	/*AGEREGAR FK CASA QUE ES LA DE CORRETAJE*/ /*<<<<<<<<<<ESTO ES DEL VENDEDOR?*/
-	--La casa asignada
-	CONSTRAINT FK_Crt_Id
-		FOREIGN KEY (Id)
-		REFERENCES Corretaje(Id),
-	--El comprador de la casa
-	CONSTRAINT FK_Cliente_Id
-		FOREIGN KEY (Id)
-		REFERENCES Cliente(Id)
-	--	ON DELETE CASCADE
-	--FOREIGN KEY (Id) REFERENCES Corretaje(Id) ON DELETE CASCADE
-
-);
-
 /*Departamento de Corretaje*/
 --También llevara el nombre del asesor de la venta
 CREATE TABLE Corretaje(
@@ -169,6 +126,50 @@ CREATE TABLE Corretaje(
 	--	FOREIGN KEY (Id)
 	--	REFERENCES Cliente(Id)
 		--ON DELETE CASCADE
+);
+
+/*Departamento de Gestion*/
+CREATE TABLE Gestion(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Gtn_Escrituras BIT,
+	Gtn_Planta_Cartografica BIT,
+	Gtn_Predial BIT,
+	Gtn_Recibo_Luz BIT, /*ESTOS NO DEBERIAN SER CAMPOS DE FOTO?*/
+	Gtn_Recibo_Agua BIT,
+	Gtn_Acta_Nacimiento BIT,
+	Gtn_IFE_Copia BIT,
+	Gtn_Sol_Ret_Ifo BIT, /*SOLICITUD DE RETENCION DE INFORMACION*/
+	Gtn_Cert_Hip BIT, /*CERTIFICADO DE HIPOTECA*/
+	Gtn_Cert_Fiscal BIT, /*CERTIFICADO FISCAL*/
+	Gtn_Sol_Estado BIT, /*SOLICITUD DE ESTADO*/
+	Gtn_Junta_URBI BIT,
+	Gtn_Agua_Pago_Inf BIT,
+	Gtn_Cert_Cartogr BIT,
+	Gtn_No_Oficial BIT, /*INVESTIGAR*/
+	Gtn_Avaluo BIT,
+	Gtn_CT_Banco BIT, /*INVESTIGAR*/
+	Gtn_Aviso_Suspension BIT, /*ENTREGA AVISO DE SUSPENSION*/
+	Gtn_Formato_Infonavit BIT,
+	Gtn_Fotos_Propiedad BIT,
+	Gtn_Evaluo_Contacto BIT,
+	Gtn_Planeacion_Fianza BIT,
+	Gtn_Urbanizacion BIT,
+	Gtn_Credito_INFONAVIT BIT,
+	Gtn_Notaria BIT,
+	Gtn_Firma_Escrituras BIT,
+	Gtn_Gastos MONEY,
+	/*AGEREGAR FK CASA QUE ES LA DE CORRETAJE*/ /*<<<<<<<<<<ESTO ES DEL VENDEDOR?*/
+	--La casa asignada
+	CONSTRAINT FK_Crt_Id
+		FOREIGN KEY (Id)
+		REFERENCES Corretaje(Id),
+	--El comprador de la casa
+	CONSTRAINT FK_Cliente_Id
+		FOREIGN KEY (Id)
+		REFERENCES Cliente(Id)
+	--	ON DELETE CASCADE
+	--FOREIGN KEY (Id) REFERENCES Corretaje(Id) ON DELETE CASCADE
+
 );
 
 /*Departamento de Verificacion*/
@@ -247,6 +248,11 @@ CREATE TABLE Contaduria(
 		--ON DELETE CASCADE
 );
 
+CREATE TABLE TipoUsuario(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	tipusu_descricion VARCHAR(50)
+)
+
 /*Para manejo de usuarios*/
 CREATE TABLE Usuario (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -261,10 +267,6 @@ CREATE TABLE Usuario (
 		REFERENCES TipoUsuario(Id)
 );
 
-CREATE TABLE TipoUsuario(
-	Id INT IDENTITY(1,1) PRIMARY KEY,
-	tipusu_descricion VARCHAR(50)
-)
 
 CREATE TABLE Articulos(
 Id VARCHAR(50) PRIMARY KEY,
