@@ -23,28 +23,34 @@ namespace CasasRed_Nuevo3_.Models
         public string Crt_Precio { get; set; }
         public string Crt_Gasto { get; set; }
         public string Crt_Tipo_Vivienda { get; set; }
+        public Nullable<int> Crt_Nivel { get; set; }
+        public Nullable<int> Crt_Num_Habitaciones { get; set; }
+        public Nullable<int> Crt_Planta { get; set; }
         public Nullable<System.DateTime> Crt_Ano_compra { get; set; }
+        public string Crt_Num_Credito_Infonavit { get; set; }
         public Nullable<decimal> Crt_Saldo_infonavit { get; set; }
         public Nullable<System.DateTime> Crt_Fec_Nac { get; set; }
         public Nullable<int> Crt_Tel_Celular { get; set; }
         public string Crt_Estado_Civil { get; set; }
-        public Nullable<int> Crt_Tel_Casa { get; set; }
-        public Nullable<int> Crt_Tel_Trabajo { get; set; }
-        public Nullable<int> Crt_Tel_Ref1 { get; set; }
-        public Nullable<int> Crt_Tel_Ref2 { get; set; }
-        public Nullable<int> Crt_Tel_Ref { get; set; }
+        public string Crt_Tel_Casa { get; set; }
+        public string Crt_Tel_Trabajo { get; set; }
+        public string Crt_Tel_Ref1 { get; set; }
+        public string Crt_Tel_Ref2 { get; set; }
+        public string Crt_Tel_Ref { get; set; }
         public Nullable<bool> Crt_Recibo_predial_digital { get; set; }
         public string Crt_Clave_Catastral { get; set; }
         public Nullable<decimal> Crt_Adeudo_predial { get; set; }
         public Nullable<bool> Crt_Recibo_luz_digitalizar { get; set; }
         public string Crt_Num_servicio_luz { get; set; }
         public Nullable<decimal> Crt_Adeudo_luz { get; set; }
+        public string Crt_NombreC_Titular_luz { get; set; }
         public Nullable<bool> Crt_Recibo_agua_digital { get; set; }
         public string Crt_No_cuenta_agua { get; set; }
         public Nullable<decimal> Crt_Adeudo_agua { get; set; }
+        public Nullable<bool> Crt_Ine_Titu { get; set; }
+        public Nullable<bool> Crt_Ine_Conyu { get; set; }
+        public Nullable<bool> Crt_Escritura_Simple { get; set; }
         public Nullable<bool> Crt_Acuerdo { get; set; }
-        public string Crt_Status_Muestra { get; set; }
-        public string Crt_Obervaciones { get; set; }
         public Nullable<bool> Crt_ActaNacTitu { get; set; }
         public Nullable<bool> Crt_ActaNacConyu { get; set; }
         public Nullable<bool> Crt_ActaMatr { get; set; }
@@ -52,10 +58,13 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<bool> Crt_CartaDesPre { get; set; }
         public Nullable<bool> Crt_ReciboLuz { get; set; }
         public Nullable<bool> Crt_ReciboAgua { get; set; }
+        public Nullable<bool> Crt_Otros { get; set; }
+        public string Crt_Status_Muestra { get; set; }
+        public string Crt_Obervaciones { get; set; }
         public Nullable<decimal> Crt_GastosServicios { get; set; }
     
-        public virtual Contaduria Contaduria { get; set; }
         public virtual Gestion Gestion { get; set; }
         public virtual Habilitacion Habilitacion { get; set; }
+        public virtual Contaduria Contaduria { get; set; }
     }
 }

@@ -2,8 +2,6 @@ CREATE DATABASE CasasRed;
 
 USE CasasRed;
 
-Drop database CasasRed;
-
 /*Datos Generales del Cliente (Llenado por Gestion)*/
 CREATE TABLE Cliente(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -66,7 +64,11 @@ CREATE TABLE Corretaje(
 	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
 	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
 	planta baja, segundaplanta. Si es Departamento que nivel (nivel 1, nivel 2, nivel 3, nivel 4)*/
+	Crt_Nivel INT,
+	Crt_Num_Habitaciones INT,
+	Crt_Planta INT,
 	Crt_Ano_compra DATE,
+	Crt_Num_Credito_Infonavit VARCHAR(10),
 	Crt_Saldo_infonavit MONEY,
 	Crt_Fec_Nac DATE,
 	Crt_Tel_Celular INT,
@@ -82,9 +84,13 @@ CREATE TABLE Corretaje(
 	Crt_Recibo_luz_digitalizar BIT,
 	Crt_Num_servicio_luz VARCHAR(12),
 	Crt_Adeudo_luz MONEY,
+	Crt_NombreC_Titular_luz VARCHAR(100),
 	Crt_Recibo_agua_digital BIT,
 	Crt_No_cuenta_agua VARCHAR(7), /*EN EL CASO DE CESPT SON 7 NUMEROS*/
 	Crt_Adeudo_agua MONEY,
+	Crt_Ine_Titu BIT,
+	Crt_Ine_Conyu BIT,
+	Crt_Escritura_Simple BIT,
 	Crt_Acuerdo BIT, /*CREO QUE SE REFIERE SI TIENE ACUERDO EN LA CESPT*/ /*Asi es*/
 	Crt_ActaNacTitu BIT,
 	Crt_ActaNacConyu BIT,
@@ -93,6 +99,7 @@ CREATE TABLE Corretaje(
 	Crt_CartaDesPre BIT,
 	Crt_ReciboLuz BIT, -- Físico
 	Crt_ReciboAgua BIT, -- Físico
+	Crt_Otros BIT, --Físico
 	Crt_Status_Muestra VARCHAR(30),
 	Crt_Obervaciones VARCHAR(300),
 	Crt_GastosServicios MONEY
@@ -153,9 +160,6 @@ CREATE TABLE Verificacion(
 	Vfn_Costo MONEY, /*QUE COSTO LE DIJO?*/
 	Vfn_Trato_asesor VARCHAR(2), /*DEL 1 AL 10 QUE CALIFICACIN LE DA*/
 	Vfn_Observaciones VARCHAR(150),
-	/*LLAVE FORANEA DE CASA QUE ES LA DE CORRETAJE*/
-	--Casa_id int FOREIGN KEY REFERENCES Casa(Casa_id), Esto creo que no porque se le puede asignar o no una casa
-	/*LLAVE FORANEA DE CLIENTE*/
 	CONSTRAINT FK_GtnVer_Id
 		FOREIGN KEY (Id)
 		REFERENCES Gestion(Id)
@@ -224,6 +228,7 @@ CREATE TABLE Habilitacion(
 );
 
 /*Departamento de Contaduria*/
+
 CREATE TABLE Contaduria(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Cnt_Presupuesto_gestion MONEY,
@@ -232,9 +237,9 @@ CREATE TABLE Contaduria(
 	Cnt_Mensualidad MONEY,
 	Cnt_Vigilancia MONEY,
 	/*LLAVE FORANEA DE CASA QUE SERIA LA DE CORRETAJE (Tambien para saber el gasto)*/
-	--CONSTRAINT FK_CrtCon_Id
-	--	FOREIGN KEY (Id)
-	--	REFERENCES Corretaje(Id),
+	CONSTRAINT FK_CrtCon_Id
+		FOREIGN KEY (Id)
+		REFERENCES Corretaje(Id),
 		--ON DELETE CASCADE,
 	/*LLAVES FORANEAS DE GESTION PARA SABER CUANTO GASTARON*/
 	CONSTRAINT FK_GtnCon_Id

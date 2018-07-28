@@ -83,25 +83,33 @@
     <Property Name="Crt_Precio" Type="varchar" MaxLength="20" />
     <Property Name="Crt_Gasto" Type="varchar" MaxLength="10" />
     <Property Name="Crt_Tipo_Vivienda" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Nivel" Type="int" />
+    <Property Name="Crt_Num_Habitaciones" Type="int" />
+    <Property Name="Crt_Planta" Type="int" />
     <Property Name="Crt_Ano_compra" Type="date" />
+    <Property Name="Crt_Num_Credito_Infonavit" Type="varchar" MaxLength="10" />
     <Property Name="Crt_Saldo_infonavit" Type="money" />
     <Property Name="Crt_Fec_Nac" Type="date" />
     <Property Name="Crt_Tel_Celular" Type="int" />
     <Property Name="Crt_Estado_Civil" Type="varchar" MaxLength="15" />
-    <Property Name="Crt_Tel_Casa" Type="int" />
-    <Property Name="Crt_Tel_Trabajo" Type="int" />
-    <Property Name="Crt_Tel_Ref1" Type="int" />
-    <Property Name="Crt_Tel_Ref2" Type="int" />
-    <Property Name="Crt_Tel_Ref" Type="int" />
+    <Property Name="Crt_Tel_Casa" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Tel_Trabajo" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Tel_Ref1" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Tel_Ref2" Type="varchar" MaxLength="15" />
+    <Property Name="Crt_Tel_Ref" Type="varchar" MaxLength="15" />
     <Property Name="Crt_Recibo_predial_digital" Type="bit" />
-    <Property Name="Crt_Clave_Catastral" Type="varchar" MaxLength="10" />
+    <Property Name="Crt_Clave_Catastral" Type="varchar" MaxLength="15" />
     <Property Name="Crt_Adeudo_predial" Type="money" />
     <Property Name="Crt_Recibo_luz_digitalizar" Type="bit" />
     <Property Name="Crt_Num_servicio_luz" Type="varchar" MaxLength="12" />
     <Property Name="Crt_Adeudo_luz" Type="money" />
+    <Property Name="Crt_NombreC_Titular_luz" Type="varchar" MaxLength="100" />
     <Property Name="Crt_Recibo_agua_digital" Type="bit" />
     <Property Name="Crt_No_cuenta_agua" Type="varchar" MaxLength="7" />
     <Property Name="Crt_Adeudo_agua" Type="money" />
+    <Property Name="Crt_Ine_Titu" Type="bit" />
+    <Property Name="Crt_Ine_Conyu" Type="bit" />
+    <Property Name="Crt_Escritura_Simple" Type="bit" />
     <Property Name="Crt_Acuerdo" Type="bit" />
     <Property Name="Crt_ActaNacTitu" Type="bit" />
     <Property Name="Crt_ActaNacConyu" Type="bit" />
@@ -110,6 +118,7 @@
     <Property Name="Crt_CartaDesPre" Type="bit" />
     <Property Name="Crt_ReciboLuz" Type="bit" />
     <Property Name="Crt_ReciboAgua" Type="bit" />
+    <Property Name="Crt_Otros" Type="bit" />
     <Property Name="Crt_Status_Muestra" Type="varchar" MaxLength="30" />
     <Property Name="Crt_Obervaciones" Type="varchar" MaxLength="300" />
     <Property Name="Crt_GastosServicios" Type="money" />
@@ -235,7 +244,7 @@
     <Property Name="Vfn_Trato_asesor" Type="varchar" MaxLength="2" />
     <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
   </EntityType>
-  <Association Name="FK__Existenci__ext_a__236943A5">
+  <Association Name="FK__Existenci__ext_a__656C112C">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -247,7 +256,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__245D67DE">
+  <Association Name="FK__Existenci__ext_u__66603565">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -259,7 +268,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__25518C17">
+  <Association Name="FK__Existenci__ext_u__6754599E">
     <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -291,6 +300,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Gestion">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrtCon_Id">
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
+    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Corretaje">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contaduria">
         <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -355,15 +376,15 @@
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Existenci__ext_a__236943A5" Association="Self.FK__Existenci__ext_a__236943A5">
+    <AssociationSet Name="FK__Existenci__ext_a__656C112C" Association="Self.FK__Existenci__ext_a__656C112C">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__245D67DE" Association="Self.FK__Existenci__ext_u__245D67DE">
+    <AssociationSet Name="FK__Existenci__ext_u__66603565" Association="Self.FK__Existenci__ext_u__66603565">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__25518C17" Association="Self.FK__Existenci__ext_u__25518C17">
+    <AssociationSet Name="FK__Existenci__ext_u__6754599E" Association="Self.FK__Existenci__ext_u__6754599E">
       <End Role="Ubicaciones" EntitySet="Ubicaciones" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
@@ -374,6 +395,10 @@
     <AssociationSet Name="FK_Crt_Id" Association="Self.FK_Crt_Id">
       <End Role="Corretaje" EntitySet="Corretaje" />
       <End Role="Gestion" EntitySet="Gestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrtCon_Id" Association="Self.FK_CrtCon_Id">
+      <End Role="Corretaje" EntitySet="Corretaje" />
+      <End Role="Contaduria" EntitySet="Contaduria" />
     </AssociationSet>
     <AssociationSet Name="FK_CrtHab_Id" Association="Self.FK_CrtHab_Id">
       <End Role="Corretaje" EntitySet="Corretaje" />

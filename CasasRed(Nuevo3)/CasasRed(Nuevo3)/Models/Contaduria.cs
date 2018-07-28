@@ -21,8 +21,8 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<decimal> Cnt_Mensualidad { get; set; }
         public Nullable<decimal> Cnt_Vigilancia { get; set; }
     
-        public virtual Corretaje Corretaje { get; set; }
         public virtual Gestion Gestion { get; set; }
         public virtual Habilitacion Habilitacion { get; set; }
+        public virtual Corretaje Corretaje { get; set; }
     }
 }

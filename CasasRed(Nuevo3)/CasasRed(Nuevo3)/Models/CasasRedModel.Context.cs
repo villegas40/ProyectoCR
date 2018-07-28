@@ -27,7 +27,6 @@ namespace CasasRed_Nuevo3_.Models
     
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Contaduria> Contaduria { get; set; }
-        public virtual DbSet<Corretaje> Corretaje { get; set; }
         public virtual DbSet<Gestion> Gestion { get; set; }
         public virtual DbSet<Habilitacion> Habilitacion { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
@@ -36,5 +35,6 @@ namespace CasasRed_Nuevo3_.Models
         public virtual DbSet<Articulos> Articulos { get; set; }
         public virtual DbSet<Existencias> Existencias { get; set; }
         public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
+        public virtual DbSet<Corretaje> Corretaje { get; set; }
     }
 }

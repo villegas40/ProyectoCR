@@ -88,25 +88,33 @@
           <Property Name="Crt_Precio" Type="varchar" MaxLength="20" />
           <Property Name="Crt_Gasto" Type="varchar" MaxLength="10" />
           <Property Name="Crt_Tipo_Vivienda" Type="varchar" MaxLength="15" />
+          <Property Name="Crt_Nivel" Type="int" />
+          <Property Name="Crt_Num_Habitaciones" Type="int" />
+          <Property Name="Crt_Planta" Type="int" />
           <Property Name="Crt_Ano_compra" Type="date" />
+          <Property Name="Crt_Num_Credito_Infonavit" Type="varchar" MaxLength="10" />
           <Property Name="Crt_Saldo_infonavit" Type="money" />
           <Property Name="Crt_Fec_Nac" Type="date" />
           <Property Name="Crt_Tel_Celular" Type="int" />
           <Property Name="Crt_Estado_Civil" Type="varchar" MaxLength="15" />
-          <Property Name="Crt_Tel_Casa" Type="int" />
-          <Property Name="Crt_Tel_Trabajo" Type="int" />
-          <Property Name="Crt_Tel_Ref1" Type="int" />
-          <Property Name="Crt_Tel_Ref2" Type="int" />
-          <Property Name="Crt_Tel_Ref" Type="int" />
+          <Property Name="Crt_Tel_Casa" Type="varchar" MaxLength="15" />
+          <Property Name="Crt_Tel_Trabajo" Type="varchar" MaxLength="15" />
+          <Property Name="Crt_Tel_Ref1" Type="varchar" MaxLength="15" />
+          <Property Name="Crt_Tel_Ref2" Type="varchar" MaxLength="15" />
+          <Property Name="Crt_Tel_Ref" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Recibo_predial_digital" Type="bit" />
-          <Property Name="Crt_Clave_Catastral" Type="varchar" MaxLength="10" />
+          <Property Name="Crt_Clave_Catastral" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Adeudo_predial" Type="money" />
           <Property Name="Crt_Recibo_luz_digitalizar" Type="bit" />
           <Property Name="Crt_Num_servicio_luz" Type="varchar" MaxLength="12" />
           <Property Name="Crt_Adeudo_luz" Type="money" />
+          <Property Name="Crt_NombreC_Titular_luz" Type="varchar" MaxLength="100" />
           <Property Name="Crt_Recibo_agua_digital" Type="bit" />
           <Property Name="Crt_No_cuenta_agua" Type="varchar" MaxLength="7" />
           <Property Name="Crt_Adeudo_agua" Type="money" />
+          <Property Name="Crt_Ine_Titu" Type="bit" />
+          <Property Name="Crt_Ine_Conyu" Type="bit" />
+          <Property Name="Crt_Escritura_Simple" Type="bit" />
           <Property Name="Crt_Acuerdo" Type="bit" />
           <Property Name="Crt_ActaNacTitu" Type="bit" />
           <Property Name="Crt_ActaNacConyu" Type="bit" />
@@ -115,6 +123,7 @@
           <Property Name="Crt_CartaDesPre" Type="bit" />
           <Property Name="Crt_ReciboLuz" Type="bit" />
           <Property Name="Crt_ReciboAgua" Type="bit" />
+          <Property Name="Crt_Otros" Type="bit" />
           <Property Name="Crt_Status_Muestra" Type="varchar" MaxLength="30" />
           <Property Name="Crt_Obervaciones" Type="varchar" MaxLength="300" />
           <Property Name="Crt_GastosServicios" Type="money" />
@@ -240,7 +249,7 @@
           <Property Name="Vfn_Trato_asesor" Type="varchar" MaxLength="2" />
           <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
         </EntityType>
-        <Association Name="FK__Existenci__ext_a__236943A5">
+        <Association Name="FK__Existenci__ext_a__656C112C">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -252,7 +261,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Existenci__ext_u__245D67DE">
+        <Association Name="FK__Existenci__ext_u__66603565">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -264,7 +273,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Existenci__ext_u__25518C17">
+        <Association Name="FK__Existenci__ext_u__6754599E">
           <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -296,6 +305,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Gestion">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrtCon_Id">
+          <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
+          <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Corretaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contaduria">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -360,15 +381,15 @@
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Existenci__ext_a__236943A5" Association="Self.FK__Existenci__ext_a__236943A5">
+          <AssociationSet Name="FK__Existenci__ext_a__656C112C" Association="Self.FK__Existenci__ext_a__656C112C">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
-          <AssociationSet Name="FK__Existenci__ext_u__245D67DE" Association="Self.FK__Existenci__ext_u__245D67DE">
+          <AssociationSet Name="FK__Existenci__ext_u__66603565" Association="Self.FK__Existenci__ext_u__66603565">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
-          <AssociationSet Name="FK__Existenci__ext_u__25518C17" Association="Self.FK__Existenci__ext_u__25518C17">
+          <AssociationSet Name="FK__Existenci__ext_u__6754599E" Association="Self.FK__Existenci__ext_u__6754599E">
             <End Role="Ubicaciones" EntitySet="Ubicaciones" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
@@ -379,6 +400,10 @@
           <AssociationSet Name="FK_Crt_Id" Association="Self.FK_Crt_Id">
             <End Role="Corretaje" EntitySet="Corretaje" />
             <End Role="Gestion" EntitySet="Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrtCon_Id" Association="Self.FK_CrtCon_Id">
+            <End Role="Corretaje" EntitySet="Corretaje" />
+            <End Role="Contaduria" EntitySet="Contaduria" />
           </AssociationSet>
           <AssociationSet Name="FK_CrtHab_Id" Association="Self.FK_CrtHab_Id">
             <End Role="Corretaje" EntitySet="Corretaje" />
@@ -461,56 +486,9 @@
           <Property Name="Cnt_Presupuesto_habilitacion" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Cnt_Mensualidad" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Cnt_Vigilancia" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Corretaje" Relationship="Self.FK_CrtCon_Id" FromRole="Contaduria" ToRole="Corretaje" />
           <NavigationProperty Name="Gestion" Relationship="Self.FK_GtnCon_Id" FromRole="Contaduria" ToRole="Gestion" />
           <NavigationProperty Name="Habilitacion" Relationship="CasasRedModel.FK_CntHab_Id" FromRole="Contaduria" ToRole="Habilitacion" />
-        </EntityType>
-        <EntityType Name="Corretaje">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Crt_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Cliente_Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Cliente_ApMat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Cliente_ApPat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Precio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Gasto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Tipo_Vivienda" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Ano_compra" Type="DateTime" Precision="0" />
-          <Property Name="Crt_Saldo_infonavit" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Crt_Fec_Nac" Type="DateTime" Precision="0" />
-          <Property Name="Crt_Tel_Celular" Type="Int32" />
-          <Property Name="Crt_Estado_Civil" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Tel_Casa" Type="Int32" />
-          <Property Name="Crt_Tel_Trabajo" Type="Int32" />
-          <Property Name="Crt_Tel_Ref1" Type="Int32" />
-          <Property Name="Crt_Tel_Ref2" Type="Int32" />
-          <Property Name="Crt_Tel_Ref" Type="Int32" />
-          <Property Name="Crt_Recibo_predial_digital" Type="Boolean" />
-          <Property Name="Crt_Clave_Catastral" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Adeudo_predial" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Crt_Recibo_luz_digitalizar" Type="Boolean" />
-          <Property Name="Crt_Num_servicio_luz" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Adeudo_luz" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Crt_Recibo_agua_digital" Type="Boolean" />
-          <Property Name="Crt_No_cuenta_agua" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Adeudo_agua" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Crt_Acuerdo" Type="Boolean" />
-          <Property Name="Crt_Status_Muestra" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Obervaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Contaduria" Relationship="Self.FK_CrtCon_Id" FromRole="Corretaje" ToRole="Contaduria" />
-          <NavigationProperty Name="Gestion" Relationship="Self.FK_Crt_Id" FromRole="Corretaje" ToRole="Gestion" />
-          <NavigationProperty Name="Habilitacion" Relationship="Self.FK_CrtHab_Id" FromRole="Corretaje" ToRole="Habilitacion" />
-          <Property Name="Crt_ActaNacTitu" Type="Boolean" />
-          <Property Name="Crt_ActaNacConyu" Type="Boolean" />
-          <Property Name="Crt_ActaMatr" Type="Boolean" />
-          <Property Name="Crt_EscrCert" Type="Boolean" />
-          <Property Name="Crt_CartaDesPre" Type="Boolean" />
-          <Property Name="Crt_ReciboLuz" Type="Boolean" />
-          <Property Name="Crt_ReciboAgua" Type="Boolean" />
-          <Property Name="Crt_GastosServicios" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_CrtCon_Id" FromRole="Contaduria" ToRole="Corretaje" />
         </EntityType>
         <EntityType Name="Gestion">
           <Key>
@@ -545,9 +523,9 @@
           <Property Name="Gtn_Firma_Escrituras" Type="Boolean" />
           <Property Name="Gtn_Gastos" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="Contaduria" Relationship="Self.FK_GtnCon_Id" FromRole="Gestion" ToRole="Contaduria" />
-          <NavigationProperty Name="Corretaje" Relationship="Self.FK_Crt_Id" FromRole="Gestion" ToRole="Corretaje" />
           <NavigationProperty Name="Cliente" Relationship="CasasRedModel.FK_Cliente_Id" FromRole="Gestion" ToRole="Cliente" />
           <NavigationProperty Name="Verificacion" Relationship="CasasRedModel.FK_GtnVer_Id" FromRole="Gestion" ToRole="Verificacion" />
+          <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_Crt_Id" FromRole="Gestion" ToRole="Corretaje" />
         </EntityType>
         <EntityType Name="Habilitacion">
           <Key>
@@ -578,9 +556,9 @@
           <Property Name="Hbt_Break_interior" Type="Boolean" />
           <Property Name="Hbt_Break_medidor" Type="Boolean" />
           <Property Name="Hbt_Pinturas" Type="Boolean" />
-          <NavigationProperty Name="Corretaje" Relationship="Self.FK_CrtHab_Id" FromRole="Habilitacion" ToRole="Corretaje" />
           <Property Name="Hbt_AvisoSusp" Type="Boolean" />
           <NavigationProperty Name="Contaduria" Relationship="CasasRedModel.FK_CntHab_Id" FromRole="Habilitacion" ToRole="Contaduria" />
+          <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_CrtHab_Id" FromRole="Habilitacion" ToRole="Corretaje" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -622,18 +600,6 @@
           <Property Name="Vfn_Observaciones" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Gestion" Relationship="CasasRedModel.FK_GtnVer_Id" FromRole="Verificacion" ToRole="Gestion" />
         </EntityType>
-        <Association Name="FK_CrtCon_Id">
-          <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
-          <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Corretaje">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contaduria">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GtnCon_Id">
           <End Role="Gestion" Type="Self.Gestion" Multiplicity="1" />
           <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
@@ -642,30 +608,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Contaduria">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Crt_Id">
-          <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
-          <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Corretaje">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Gestion">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CrtHab_Id">
-          <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
-          <End Role="Habilitacion" Type="Self.Habilitacion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Corretaje">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Habilitacion">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -685,27 +627,14 @@
         <EntityContainer Name="CasasRedEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="Contaduria" EntityType="Self.Contaduria" />
-          <EntitySet Name="Corretaje" EntityType="Self.Corretaje" />
           <EntitySet Name="Gestion" EntityType="Self.Gestion" />
           <EntitySet Name="Habilitacion" EntityType="Self.Habilitacion" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Verificacion" EntityType="Self.Verificacion" />
-          <AssociationSet Name="FK_CrtCon_Id" Association="Self.FK_CrtCon_Id">
-            <End Role="Corretaje" EntitySet="Corretaje" />
-            <End Role="Contaduria" EntitySet="Contaduria" />
-          </AssociationSet>
           <AssociationSet Name="FK_GtnCon_Id" Association="Self.FK_GtnCon_Id">
             <End Role="Gestion" EntitySet="Gestion" />
             <End Role="Contaduria" EntitySet="Contaduria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Crt_Id" Association="Self.FK_Crt_Id">
-            <End Role="Corretaje" EntitySet="Corretaje" />
-            <End Role="Gestion" EntitySet="Gestion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CrtHab_Id" Association="Self.FK_CrtHab_Id">
-            <End Role="Corretaje" EntitySet="Corretaje" />
-            <End Role="Habilitacion" EntitySet="Habilitacion" />
           </AssociationSet>
           <AssociationSet Name="FK_TipoUsuario_Id" Association="Self.FK_TipoUsuario_Id">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -737,6 +666,19 @@
           <AssociationSet Name="FK__Existenci__ext_u__25518C17" Association="CasasRedModel.FK__Existenci__ext_u__25518C17">
             <End Role="Ubicaciones" EntitySet="Ubicaciones" />
             <End Role="Existencias" EntitySet="Existencias" />
+          </AssociationSet>
+          <EntitySet Name="Corretaje" EntityType="CasasRedModel.Corretaje" />
+          <AssociationSet Name="FK_Crt_Id" Association="CasasRedModel.FK_Crt_Id">
+            <End Role="Corretaje" EntitySet="Corretaje" />
+            <End Role="Gestion" EntitySet="Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrtHab_Id" Association="CasasRedModel.FK_CrtHab_Id">
+            <End Role="Corretaje" EntitySet="Corretaje" />
+            <End Role="Habilitacion" EntitySet="Habilitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CrtCon_Id" Association="CasasRedModel.FK_CrtCon_Id">
+            <End Role="Corretaje" EntitySet="Corretaje" />
+            <End Role="Contaduria" EntitySet="Contaduria" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Cliente_Id">
@@ -847,6 +789,98 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Corretaje">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Crt_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Cliente_Nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Cliente_ApMat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Cliente_ApPat" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Precio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Gasto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Tipo_Vivienda" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Nivel" Type="Int32" />
+          <Property Name="Crt_Num_Habitaciones" Type="Int32" />
+          <Property Name="Crt_Planta" Type="Int32" />
+          <Property Name="Crt_Ano_compra" Type="DateTime" Precision="0" />
+          <Property Name="Crt_Num_Credito_Infonavit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Saldo_infonavit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Crt_Fec_Nac" Type="DateTime" Precision="0" />
+          <Property Name="Crt_Tel_Celular" Type="Int32" />
+          <Property Name="Crt_Estado_Civil" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Tel_Casa" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Tel_Trabajo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Tel_Ref1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Tel_Ref2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Tel_Ref" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Recibo_predial_digital" Type="Boolean" />
+          <Property Name="Crt_Clave_Catastral" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Adeudo_predial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Crt_Recibo_luz_digitalizar" Type="Boolean" />
+          <Property Name="Crt_Num_servicio_luz" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Adeudo_luz" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Crt_NombreC_Titular_luz" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Recibo_agua_digital" Type="Boolean" />
+          <Property Name="Crt_No_cuenta_agua" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Adeudo_agua" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Crt_Ine_Titu" Type="Boolean" />
+          <Property Name="Crt_Ine_Conyu" Type="Boolean" />
+          <Property Name="Crt_Escritura_Simple" Type="Boolean" />
+          <Property Name="Crt_Acuerdo" Type="Boolean" />
+          <Property Name="Crt_ActaNacTitu" Type="Boolean" />
+          <Property Name="Crt_ActaNacConyu" Type="Boolean" />
+          <Property Name="Crt_ActaMatr" Type="Boolean" />
+          <Property Name="Crt_EscrCert" Type="Boolean" />
+          <Property Name="Crt_CartaDesPre" Type="Boolean" />
+          <Property Name="Crt_ReciboLuz" Type="Boolean" />
+          <Property Name="Crt_ReciboAgua" Type="Boolean" />
+          <Property Name="Crt_Otros" Type="Boolean" />
+          <Property Name="Crt_Status_Muestra" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Obervaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_GastosServicios" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Gestion" Relationship="CasasRedModel.FK_Crt_Id" FromRole="Corretaje" ToRole="Gestion" />
+          <NavigationProperty Name="Habilitacion" Relationship="CasasRedModel.FK_CrtHab_Id" FromRole="Corretaje" ToRole="Habilitacion" />
+          <NavigationProperty Name="Contaduria" Relationship="CasasRedModel.FK_CrtCon_Id" FromRole="Corretaje" ToRole="Contaduria" />
+        </EntityType>
+        <Association Name="FK_Crt_Id">
+          <End Type="CasasRedModel.Corretaje" Role="Corretaje" Multiplicity="1" />
+          <End Type="CasasRedModel.Gestion" Role="Gestion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Corretaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gestion">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrtHab_Id">
+          <End Type="CasasRedModel.Corretaje" Role="Corretaje" Multiplicity="1" />
+          <End Type="CasasRedModel.Habilitacion" Role="Habilitacion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Corretaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Habilitacion">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CrtCon_Id">
+          <End Type="CasasRedModel.Corretaje" Role="Corretaje" Multiplicity="1" />
+          <End Type="CasasRedModel.Contaduria" Role="Contaduria" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Corretaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contaduria">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -912,51 +946,6 @@
                 <ScalarProperty Name="Cnt_Presupuesto_habilitacion" ColumnName="Cnt_Presupuesto_habilitacion" />
                 <ScalarProperty Name="Cnt_Mensualidad" ColumnName="Cnt_Mensualidad" />
                 <ScalarProperty Name="Cnt_Vigilancia" ColumnName="Cnt_Vigilancia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Corretaje">
-            <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
-              <MappingFragment StoreEntitySet="Corretaje">
-                <ScalarProperty Name="Crt_GastosServicios" ColumnName="Crt_GastosServicios" />
-                <ScalarProperty Name="Crt_ReciboAgua" ColumnName="Crt_ReciboAgua" />
-                <ScalarProperty Name="Crt_ReciboLuz" ColumnName="Crt_ReciboLuz" />
-                <ScalarProperty Name="Crt_CartaDesPre" ColumnName="Crt_CartaDesPre" />
-                <ScalarProperty Name="Crt_EscrCert" ColumnName="Crt_EscrCert" />
-                <ScalarProperty Name="Crt_ActaMatr" ColumnName="Crt_ActaMatr" />
-                <ScalarProperty Name="Crt_ActaNacConyu" ColumnName="Crt_ActaNacConyu" />
-                <ScalarProperty Name="Crt_ActaNacTitu" ColumnName="Crt_ActaNacTitu" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Crt_Status" ColumnName="Crt_Status" />
-                <ScalarProperty Name="Crt_Cliente_Nombre" ColumnName="Crt_Cliente_Nombre" />
-                <ScalarProperty Name="Crt_Cliente_ApMat" ColumnName="Crt_Cliente_ApMat" />
-                <ScalarProperty Name="Crt_Cliente_ApPat" ColumnName="Crt_Cliente_ApPat" />
-                <ScalarProperty Name="Crt_Direccion" ColumnName="Crt_Direccion" />
-                <ScalarProperty Name="Crt_Precio" ColumnName="Crt_Precio" />
-                <ScalarProperty Name="Crt_Gasto" ColumnName="Crt_Gasto" />
-                <ScalarProperty Name="Crt_Tipo_Vivienda" ColumnName="Crt_Tipo_Vivienda" />
-                <ScalarProperty Name="Crt_Ano_compra" ColumnName="Crt_Ano_compra" />
-                <ScalarProperty Name="Crt_Saldo_infonavit" ColumnName="Crt_Saldo_infonavit" />
-                <ScalarProperty Name="Crt_Fec_Nac" ColumnName="Crt_Fec_Nac" />
-                <ScalarProperty Name="Crt_Tel_Celular" ColumnName="Crt_Tel_Celular" />
-                <ScalarProperty Name="Crt_Estado_Civil" ColumnName="Crt_Estado_Civil" />
-                <ScalarProperty Name="Crt_Tel_Casa" ColumnName="Crt_Tel_Casa" />
-                <ScalarProperty Name="Crt_Tel_Trabajo" ColumnName="Crt_Tel_Trabajo" />
-                <ScalarProperty Name="Crt_Tel_Ref1" ColumnName="Crt_Tel_Ref1" />
-                <ScalarProperty Name="Crt_Tel_Ref2" ColumnName="Crt_Tel_Ref2" />
-                <ScalarProperty Name="Crt_Tel_Ref" ColumnName="Crt_Tel_Ref" />
-                <ScalarProperty Name="Crt_Recibo_predial_digital" ColumnName="Crt_Recibo_predial_digital" />
-                <ScalarProperty Name="Crt_Clave_Catastral" ColumnName="Crt_Clave_Catastral" />
-                <ScalarProperty Name="Crt_Adeudo_predial" ColumnName="Crt_Adeudo_predial" />
-                <ScalarProperty Name="Crt_Recibo_luz_digitalizar" ColumnName="Crt_Recibo_luz_digitalizar" />
-                <ScalarProperty Name="Crt_Num_servicio_luz" ColumnName="Crt_Num_servicio_luz" />
-                <ScalarProperty Name="Crt_Adeudo_luz" ColumnName="Crt_Adeudo_luz" />
-                <ScalarProperty Name="Crt_Recibo_agua_digital" ColumnName="Crt_Recibo_agua_digital" />
-                <ScalarProperty Name="Crt_No_cuenta_agua" ColumnName="Crt_No_cuenta_agua" />
-                <ScalarProperty Name="Crt_Adeudo_agua" ColumnName="Crt_Adeudo_agua" />
-                <ScalarProperty Name="Crt_Acuerdo" ColumnName="Crt_Acuerdo" />
-                <ScalarProperty Name="Crt_Status_Muestra" ColumnName="Crt_Status_Muestra" />
-                <ScalarProperty Name="Crt_Obervaciones" ColumnName="Crt_Obervaciones" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1096,6 +1085,60 @@
                 <ScalarProperty Name="ubi_descripcion" ColumnName="ubi_descripcion" />
                 <ScalarProperty Name="ubi_codigo" ColumnName="ubi_codigo" />
                 <ScalarProperty Name="ubi_id" ColumnName="ubi_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Corretaje">
+            <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
+              <MappingFragment StoreEntitySet="Corretaje">
+                <ScalarProperty Name="Crt_GastosServicios" ColumnName="Crt_GastosServicios" />
+                <ScalarProperty Name="Crt_Obervaciones" ColumnName="Crt_Obervaciones" />
+                <ScalarProperty Name="Crt_Status_Muestra" ColumnName="Crt_Status_Muestra" />
+                <ScalarProperty Name="Crt_Otros" ColumnName="Crt_Otros" />
+                <ScalarProperty Name="Crt_ReciboAgua" ColumnName="Crt_ReciboAgua" />
+                <ScalarProperty Name="Crt_ReciboLuz" ColumnName="Crt_ReciboLuz" />
+                <ScalarProperty Name="Crt_CartaDesPre" ColumnName="Crt_CartaDesPre" />
+                <ScalarProperty Name="Crt_EscrCert" ColumnName="Crt_EscrCert" />
+                <ScalarProperty Name="Crt_ActaMatr" ColumnName="Crt_ActaMatr" />
+                <ScalarProperty Name="Crt_ActaNacConyu" ColumnName="Crt_ActaNacConyu" />
+                <ScalarProperty Name="Crt_ActaNacTitu" ColumnName="Crt_ActaNacTitu" />
+                <ScalarProperty Name="Crt_Acuerdo" ColumnName="Crt_Acuerdo" />
+                <ScalarProperty Name="Crt_Escritura_Simple" ColumnName="Crt_Escritura_Simple" />
+                <ScalarProperty Name="Crt_Ine_Conyu" ColumnName="Crt_Ine_Conyu" />
+                <ScalarProperty Name="Crt_Ine_Titu" ColumnName="Crt_Ine_Titu" />
+                <ScalarProperty Name="Crt_Adeudo_agua" ColumnName="Crt_Adeudo_agua" />
+                <ScalarProperty Name="Crt_No_cuenta_agua" ColumnName="Crt_No_cuenta_agua" />
+                <ScalarProperty Name="Crt_Recibo_agua_digital" ColumnName="Crt_Recibo_agua_digital" />
+                <ScalarProperty Name="Crt_NombreC_Titular_luz" ColumnName="Crt_NombreC_Titular_luz" />
+                <ScalarProperty Name="Crt_Adeudo_luz" ColumnName="Crt_Adeudo_luz" />
+                <ScalarProperty Name="Crt_Num_servicio_luz" ColumnName="Crt_Num_servicio_luz" />
+                <ScalarProperty Name="Crt_Recibo_luz_digitalizar" ColumnName="Crt_Recibo_luz_digitalizar" />
+                <ScalarProperty Name="Crt_Adeudo_predial" ColumnName="Crt_Adeudo_predial" />
+                <ScalarProperty Name="Crt_Clave_Catastral" ColumnName="Crt_Clave_Catastral" />
+                <ScalarProperty Name="Crt_Recibo_predial_digital" ColumnName="Crt_Recibo_predial_digital" />
+                <ScalarProperty Name="Crt_Tel_Ref" ColumnName="Crt_Tel_Ref" />
+                <ScalarProperty Name="Crt_Tel_Ref2" ColumnName="Crt_Tel_Ref2" />
+                <ScalarProperty Name="Crt_Tel_Ref1" ColumnName="Crt_Tel_Ref1" />
+                <ScalarProperty Name="Crt_Tel_Trabajo" ColumnName="Crt_Tel_Trabajo" />
+                <ScalarProperty Name="Crt_Tel_Casa" ColumnName="Crt_Tel_Casa" />
+                <ScalarProperty Name="Crt_Estado_Civil" ColumnName="Crt_Estado_Civil" />
+                <ScalarProperty Name="Crt_Tel_Celular" ColumnName="Crt_Tel_Celular" />
+                <ScalarProperty Name="Crt_Fec_Nac" ColumnName="Crt_Fec_Nac" />
+                <ScalarProperty Name="Crt_Saldo_infonavit" ColumnName="Crt_Saldo_infonavit" />
+                <ScalarProperty Name="Crt_Num_Credito_Infonavit" ColumnName="Crt_Num_Credito_Infonavit" />
+                <ScalarProperty Name="Crt_Ano_compra" ColumnName="Crt_Ano_compra" />
+                <ScalarProperty Name="Crt_Planta" ColumnName="Crt_Planta" />
+                <ScalarProperty Name="Crt_Num_Habitaciones" ColumnName="Crt_Num_Habitaciones" />
+                <ScalarProperty Name="Crt_Nivel" ColumnName="Crt_Nivel" />
+                <ScalarProperty Name="Crt_Tipo_Vivienda" ColumnName="Crt_Tipo_Vivienda" />
+                <ScalarProperty Name="Crt_Gasto" ColumnName="Crt_Gasto" />
+                <ScalarProperty Name="Crt_Precio" ColumnName="Crt_Precio" />
+                <ScalarProperty Name="Crt_Direccion" ColumnName="Crt_Direccion" />
+                <ScalarProperty Name="Crt_Cliente_ApPat" ColumnName="Crt_Cliente_ApPat" />
+                <ScalarProperty Name="Crt_Cliente_ApMat" ColumnName="Crt_Cliente_ApMat" />
+                <ScalarProperty Name="Crt_Cliente_Nombre" ColumnName="Crt_Cliente_Nombre" />
+                <ScalarProperty Name="Crt_Status" ColumnName="Crt_Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
