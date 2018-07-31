@@ -28,9 +28,10 @@
      }
 
     .p {
-        color: red;
+        color: black;
         text-align: justify;
         font-size: 13px;
+        opacity: .5;
     }
     
     .navbar-yellow {
@@ -45,6 +46,19 @@
         background-color: gray !important;
     }
 
+    .s-icon {
+        font-size: 60px;
+        color: #bf0411;
+        opacity: 0.8;
+    }
+
+    .h2 {
+        text-align: center;
+        color: #bf0411 !important;
+        font-size: 22px;
+        line-height: 26px;
+        padding: 10px 0 5px 0;
+    }
 </style>
 
 <div class="container container-margin">
@@ -56,33 +70,37 @@
         <button type="button" class="btn button1">Entrar</button>
     </center>
 </div>
-
-
+ 
+<br />
+<br />
 <center>
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <img src="~/Media/VentaRenta.png" class="img-fluid" alt="Responsive image">
-                @*<img src="~/Media/logo-casas-red.png">*@
+                <span class="icon-home s-icon"></span>
                 <div class="container">
-                    <p class="p">Si pretendes vender o rentar un departamento,casa o propiedad somos tu mejor opcion en la gestion inmobiliaria de la region.</p>
-                </div>
-            </div>
-            <div class="col-sm">
-                <img src="~/Media/CompraRenta.png" class="img-fluid" alt="Responsive image">
-                <div class="container">
+                       <h2 class="h2">Compra y Renta</h2>
                     <p class="p">Somos tu mejor guia inmobiliaria para la compra,venta y renta de casas y departamentos que conseguimos la mejor opcion de vivienda, en las zonas mas exclusivas y al mejor precio.</p>
                 </div>
             </div>
             <div class="col-sm">
-                <img src="~/Media/Traspasos.png" class="img-fluid" alt="Responsive image">
+                <span class="icon-logout s-icon"></span>
                 <div class="container">
+                    <h2 class="h2">Venta y Renta</h2>
+                    <p class="p">Si pretendes vender o rentar un departamento,casa o propiedad somos tu mejor opcion en la gestion inmobiliaria de la region.</p>
+                </div>
+            </div>
+            <div class="col-sm">
+                <span class="icon-refresh s-icon"></span>   
+                <div class="container">
+                    <h2 class="h2">Traspasos</h2>
                     <p class="p">Una propiedad implica un acto juridico denominado CESION respecto de un credito hipotecarios, de un proceso legal o de una compraventa que no ha sido protocolizada, es decir escriturrada.</p>
                 </div>
             </div>
             <div class="col-sm">
-                <img src="~/Media/Avaluos.png" class="img-fluid" alt="Responsive image">
+                <span class="icon-info s-icon"></span>
                 <div class="container">
+                    <h2 class="h2">Avalúos</h2>
                     <p class="p">Estimacion del valor comercial de un inmueble a traves de un dictamen tecnico imparcial mediante las caracteristicas de uso y el analisis de mercado.</p>
                 </div>
             </div>
