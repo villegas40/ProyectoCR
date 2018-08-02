@@ -10,6 +10,7 @@
 namespace CasasRed_Nuevo3_.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class Verificacion
@@ -18,10 +19,16 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<bool> Vfn_Persona_fisica { get; set; }
         public Nullable<bool> Vfn_Visto_persona { get; set; }
         public Nullable<bool> Vfn_Tiempo_estimado { get; set; }
+
+        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Vfn_Tiempo { get; set; }
+
         public Nullable<bool> Vfn_Tiene_costo { get; set; }
         public Nullable<decimal> Vfn_Costo { get; set; }
+        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Vfn_Trato_asesor { get; set; }
+
+        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Vfn_Observaciones { get; set; }
     
         public virtual Gestion Gestion { get; set; }

@@ -11,6 +11,11 @@
 {
     @Html.AntiForgeryToken()
 
+    <style>
+        .field-validation-error {
+            color: blue;
+        }
+    </style>
 
 <div class="form-horizontal" data-offset="0">
     <h4>Cliente</h4>
@@ -39,6 +44,7 @@
                                 <label for="Gral_Fechaalta">Fecha de Alta</label>
                                 @Html.EditorFor(model => model.Gral_Fechaalta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
                                 @Html.ValidationMessageFor(model => model.Gral_Fechaalta, "", new { @class = "text-danger" })
+                                
                             </div>
                         </div>
                         <div class="row justify-content-around py-3">
@@ -56,6 +62,7 @@
                                 <label for="Gral_Apellidoma">Apellido Materno</label>
                                 @Html.EditorFor(model => model.Gral_Apellidoma, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Gral_Apellidoma, "", new { @class = "text-danger" })
+                                
                             </div>
 
                             <div class="col-lg-4">
@@ -70,8 +77,11 @@
                             </div>
                             <div class="col-lg-3">
                                 <label for="Gral_Nss">No. Seguro Social</label>
+
                                 @Html.EditorFor(model => model.Gral_Nss, new { htmlAttributes = new { @class = "form-control" } })
+
                                 @Html.ValidationMessageFor(model => model.Gral_Nss, "", new { @class = "text-danger" })
+
                             </div>
 
                             <div class="col-lg-4">
