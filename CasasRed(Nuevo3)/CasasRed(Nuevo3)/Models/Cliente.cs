@@ -33,7 +33,7 @@ namespace CasasRed_Nuevo3_.Models
 
         public Nullable<System.DateTime> Gral_Fechanac { get; set; }
 
-        [RegularExpression("\\d{10}", ErrorMessage = "Deben ser 10 numeros")]
+        [RegularExpression("\\d{10}", ErrorMessage = "Deben ser 10 números")]
         public string Gral_Nss { get; set; }
 
         [RegularExpression("^[a-zA-Z]{4}\\d{6}[a-zA-Z]{6}\\d{2}$", ErrorMessage = "CURP incompleta")]
@@ -45,7 +45,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Lugar de nacimiento")]
         public string Gral_Lugarnac { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
+        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar calle")]
         public string Gral_Calle { get; set; }
 
         [RegularExpression("^\\d+$", ErrorMessage = "Revisar")]
@@ -63,10 +63,10 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Estado")]
         public string Gral_Estado { get; set; }
 
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d{10}", ErrorMessage = "Verificar número")]
         public string Gral_Celular { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Gral_Tel_casa { get; set; }
 
         [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Verificar estado civil")] //verificar si es soltero,casado ,divorciado solamente?
@@ -77,7 +77,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupacion")]
         public string Gral_Ocupacion { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Gral_Teltrabajo { get; set; }
 
         [RegularExpression("^([a-zA-Z0-9]+\\S*)[@][a-zA-Z0-9]+[.][a-zA-Z]+$", ErrorMessage = "Verificar estructura correo")]
@@ -86,19 +86,19 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Gral_Identificacion { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Solo numeros")]
+        [RegularExpression("\\d+", ErrorMessage = "Solo números")]
         public Nullable<int> Gral_No_identificacion { get; set; }
 
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string Gral_Ref_nombre1 { get; set; }
 
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d{10}", ErrorMessage = "Verificar números")]
         public string Gral_Ref_cel_1 { get; set; }
 
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string Gral_Ref_nombre2 { get; set; }
 
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d{10}", ErrorMessage = "Verificar números")]
         public string Gral_Ref_cel_2 { get; set; }
 
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
@@ -113,7 +113,7 @@ namespace CasasRed_Nuevo3_.Models
 
         public Nullable<System.DateTime> Gyg_Fechanac { get; set; }
 
-        [RegularExpression("\\d{10}", ErrorMessage = "Deben ser 10 numeros")]
+        [RegularExpression("\\d{10}", ErrorMessage = "Deben ser 10 números")]
         public string Cyg_Nss { get; set; }
 
         [RegularExpression("^[a-zA-Z]{4}\\d{6}[a-zA-Z]{6}\\d{2}$", ErrorMessage = "CURP incompleta")]
@@ -125,16 +125,16 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Lugar de nacimiento")]
         public string Cyg_Lugarnac { get; set; }
 
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d{10}", ErrorMessage = "Verificar número")]
         public string Cyg_Celular { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Cyg_Tel_casa { get; set; }
 
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupacion")]
         public string Cyg_Ocupacion { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Verificar numero")]
+        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Cyg_Tel_trabajo { get; set; }
 
         [RegularExpression("^([a-zA-Z0-9]+\\S*)[@][a-zA-Z0-9]+[.][a-zA-Z]+$", ErrorMessage = "Verificar estructura correo")]
@@ -143,7 +143,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Cyg_Identificacion { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Solo numeros")]
+        [RegularExpression("\\d+", ErrorMessage = "Solo números")]
         public Nullable<int> Cyg_No_identificacoion { get; set; }
 
         public Nullable<System.DateTime> Gral_Fechaalta { get; set; }
