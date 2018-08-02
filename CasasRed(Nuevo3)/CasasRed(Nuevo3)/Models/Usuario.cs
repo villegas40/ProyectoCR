@@ -11,7 +11,8 @@ namespace CasasRed_Nuevo3_.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +22,24 @@ namespace CasasRed_Nuevo3_.Models
         }
     
         public int Id { get; set; }
+
+        
         public string usu_username { get; set; }
+
+        [RegularExpression("^([a-zA-Z0-9]+\\S*)[@][a-zA-Z0-9]+[.][a-zA-Z]+$", ErrorMessage = "Verificar estructura correo")]
         public string usu_correo { get; set; }
+
+        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string usu_nombre { get; set; }
+
         public string usu_password { get; set; }
+
+        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Apellido")]
         public string usu_apellidoPa { get; set; }
+
+        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Apellido")]
         public string usu_apellidoMa { get; set; }
+
         public Nullable<System.DateTime> usu_alta { get; set; }
         public string usu_tipo { get; set; }
         public Nullable<bool> usu_activo { get; set; }

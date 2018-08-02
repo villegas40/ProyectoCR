@@ -252,7 +252,7 @@
     <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
     <Property Name="Id_Gestion" Type="int" />
   </EntityType>
-  <Association Name="FK__Existenci__ext_a__0B91BA14">
+  <Association Name="FK__Existenci__ext_a__6754599E">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -264,7 +264,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__0C85DE4D">
+  <Association Name="FK__Existenci__ext_u__68487DD7">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -276,7 +276,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__0D7A0286">
+  <Association Name="FK__Existenci__ext_u__693CA210">
     <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -406,15 +406,15 @@
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Existenci__ext_a__0B91BA14" Association="Self.FK__Existenci__ext_a__0B91BA14">
+    <AssociationSet Name="FK__Existenci__ext_a__6754599E" Association="Self.FK__Existenci__ext_a__6754599E">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__0C85DE4D" Association="Self.FK__Existenci__ext_u__0C85DE4D">
+    <AssociationSet Name="FK__Existenci__ext_u__68487DD7" Association="Self.FK__Existenci__ext_u__68487DD7">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__0D7A0286" Association="Self.FK__Existenci__ext_u__0D7A0286">
+    <AssociationSet Name="FK__Existenci__ext_u__693CA210" Association="Self.FK__Existenci__ext_u__693CA210">
       <End Role="Ubicaciones" EntitySet="Ubicaciones" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
