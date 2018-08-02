@@ -17,6 +17,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions
         public ActionResult Index()
         {
+            //var verificacion = db.Verificacion.Include(v => v.Gestion);
+            //return View(verificacion.ToList());
             var verificacion = db.Verificacion.Include(v => v.Gestion);
             return View(verificacion.ToList());
         }
@@ -39,7 +41,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre");
+            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre");
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id");
             return View();
         }
 
@@ -48,7 +51,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones")] Verificacion verificacion)
+        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Gestion")] Verificacion verificacion)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +69,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
+            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", verificacion.Id_Gestion);
             return View(verificacion);
         }
 
@@ -82,7 +86,8 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
+            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", verificacion.Id_Gestion);
             return View(verificacion);
         }
 
@@ -91,7 +96,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones")] Verificacion verificacion)
+        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Gestion")] Verificacion verificacion)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +104,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
+            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", verificacion.Id_Gestion);
             return View(verificacion);
         }
 

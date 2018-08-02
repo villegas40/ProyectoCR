@@ -46,7 +46,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,art_nombre,art_descripcion,art_fechaIngreso,art_cantidadMinima")] Articulos articulos)
+        public ActionResult Create([Bind(Include = "art_id,art_nombre,art_descripcion,art_fechaIngreso,art_cantidadMinima")] Articulos articulos)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,art_nombre,art_descripcion,art_fechaIngreso,art_cantidadMinima")] Articulos articulos)
+        public ActionResult Edit([Bind(Include = "art_id,art_nombre,art_descripcion,art_fechaIngreso,art_cantidadMinima")] Articulos articulos)
         {
             if (ModelState.IsValid)
             {

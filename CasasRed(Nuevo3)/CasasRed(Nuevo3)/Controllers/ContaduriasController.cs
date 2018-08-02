@@ -17,7 +17,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Contadurias
         public ActionResult Index()
         {
-            var contaduria = db.Contaduria.Include(c => c.Corretaje).Include(c => c.Gestion);
+            //var contaduria = db.Contaduria.Include(c => c.Corretaje).Include(c => c.Gestion);
+            var contaduria = db.Contaduria.Include(c => c.Corretaje).Include(c => c.Gestion).Include(c => c.Habilitacion);
             return View(contaduria.ToList());
         }
 
@@ -39,8 +40,11 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Contadurias/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status");
-            ViewBag.Id = new SelectList(db.Gestion, "Id", "Id");
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status");
+            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id");
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status");
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id");
+            ViewBag.Id_Habilitacion = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado");
             return View();
         }
 
@@ -49,7 +53,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Mensualidad,Cnt_Vigilancia")] Contaduria contaduria)
+        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Mensualidad,Cnt_Vigilancia,Id_Corretaje,Id_Gestion,Id_Habilitacion")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +62,11 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id);
-            ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", contaduria.Id);
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id);
+            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", contaduria.Id);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id_Corretaje);
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", contaduria.Id_Gestion);
+            ViewBag.Id_Habilitacion = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado", contaduria.Id_Habilitacion);
             return View(contaduria);
         }
 
@@ -75,8 +82,11 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id);
-            ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", contaduria.Id);
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id);
+            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", contaduria.Id);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id_Corretaje);
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", contaduria.Id_Gestion);
+            ViewBag.Id_Habilitacion = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado", contaduria.Id_Habilitacion);
             return View(contaduria);
         }
 
@@ -85,7 +95,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Mensualidad,Cnt_Vigilancia")] Contaduria contaduria)
+        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Mensualidad,Cnt_Vigilancia,Id_Corretaje,Id_Gestion,Id_Habilitacion")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +103,11 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id);
-            ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", contaduria.Id);
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id);
+            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", contaduria.Id);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", contaduria.Id_Corretaje);
+            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", contaduria.Id_Gestion);
+            ViewBag.Id_Habilitacion = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado", contaduria.Id_Habilitacion);
             return View(contaduria);
         }
 

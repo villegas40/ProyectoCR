@@ -14,6 +14,14 @@ namespace CasasRed_Nuevo3_.Models
     
     public partial class Corretaje
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Corretaje()
+        {
+            this.Contaduria = new HashSet<Contaduria>();
+            this.Gestion = new HashSet<Gestion>();
+            this.Habilitacion = new HashSet<Habilitacion>();
+        }
+    
         public int Id { get; set; }
         public string Crt_Status { get; set; }
         public string Crt_Cliente_Nombre { get; set; }
@@ -63,8 +71,11 @@ namespace CasasRed_Nuevo3_.Models
         public string Crt_Obervaciones { get; set; }
         public Nullable<decimal> Crt_GastosServicios { get; set; }
     
-        public virtual Gestion Gestion { get; set; }
-        public virtual Habilitacion Habilitacion { get; set; }
-        public virtual Contaduria Contaduria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contaduria> Contaduria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Gestion> Gestion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Habilitacion> Habilitacion { get; set; }
     }
 }

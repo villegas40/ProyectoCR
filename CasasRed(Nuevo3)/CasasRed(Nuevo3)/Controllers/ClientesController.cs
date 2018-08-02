@@ -17,8 +17,9 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Clientes
         public ActionResult Index()
         {
-            var cliente = db.Cliente.Include(c => c.Gestion);
-            return View(cliente.ToList());
+            //var cliente = db.Cliente.Include(c => c.Gestion);
+            //return View(cliente.ToList());
+            return View(db.Cliente.ToList());
         }
 
         // GET: Clientes/Details/5
@@ -39,8 +40,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status");
-            ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo");
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status");
+            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo");
             return View();
         }
 
@@ -58,8 +59,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
-            ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
+            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
             return View(cliente);
         }
 
@@ -75,8 +76,8 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
-            ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
+            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
             return View(cliente);
         }
 
@@ -93,8 +94,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
-            ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
+            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
+            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
             return View(cliente);
         }
 

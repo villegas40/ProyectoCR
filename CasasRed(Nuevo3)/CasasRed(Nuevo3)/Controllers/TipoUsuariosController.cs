@@ -17,8 +17,9 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: TipoUsuarios
         public ActionResult Index()
         {
-            var tipoUsuario = db.TipoUsuario.Include(t => t.Usuario);
-            return View(tipoUsuario.ToList());
+            //var tipoUsuario = db.TipoUsuario.Include(t => t.Usuario);
+            //return View(tipoUsuario.ToList());
+            return View(db.TipoUsuario.ToList());
         }
 
         // GET: TipoUsuarios/Details/5
@@ -39,7 +40,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: TipoUsuarios/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre");
+            //ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre");
             return View();
         }
 
@@ -57,7 +58,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre", tipoUsuario.Id);
+            //ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre", tipoUsuario.Id);
             return View(tipoUsuario);
         }
 
@@ -73,7 +74,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre", tipoUsuario.Id);
+            //ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre", tipoUsuario.Id);
             return View(tipoUsuario);
         }
 
@@ -90,7 +91,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre", tipoUsuario.Id);
+            //ViewBag.Id = new SelectList(db.Usuario, "Id", "usu_nombre", tipoUsuario.Id);
             return View(tipoUsuario);
         }
 

@@ -14,6 +14,12 @@ namespace CasasRed_Nuevo3_.Models
     
     public partial class Cliente
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cliente()
+        {
+            this.Gestion = new HashSet<Gestion>();
+        }
+    
         public int Id { get; set; }
         public string Gral_Nombre { get; set; }
         public string Gral_Apellidopa { get; set; }
@@ -59,6 +65,7 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<int> Cyg_No_identificacoion { get; set; }
         public Nullable<System.DateTime> Gral_Fechaalta { get; set; }
     
-        public virtual Gestion Gestion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Gestion> Gestion { get; set; }
     }
 }

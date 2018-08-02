@@ -1,6 +1,8 @@
 CREATE DATABASE CasasRed;
 
 USE CasasRed;
+USE model
+DROP DATABASE CasasRed
 
 /*Datos Generales del Cliente (Llenado por Gestion)*/
 CREATE TABLE Cliente(
@@ -135,20 +137,21 @@ CREATE TABLE Gestion(
 	Gtn_Notaria BIT,
 	Gtn_Firma_Escrituras BIT,
 	Gtn_Gastos MONEY,
+	Id_Corretaje int, -- Llave Foranea a corretaje
+	Id_Cliente int, -- Llave Foranea a Cliente
 	/*AGEREGAR FK CASA QUE ES LA DE CORRETAJE*/ /*<<<<<<<<<<ESTO ES DEL VENDEDOR?*/
 	--La casa asignada
 	CONSTRAINT FK_Crt_Id
-		FOREIGN KEY (Id)
-		REFERENCES Corretaje(Id),
-	--El comprador de la casa
-	CONSTRAINT FK_Cliente_Id
-		FOREIGN KEY (Id)
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
+		ON DELETE CASCADE,
+	--El comprador de la casa 
+	CONSTRAINT FK_Cliente_Id --Quitar (Pensar mas)
+		FOREIGN KEY (Id_Cliente)
 		REFERENCES Cliente(Id)
-	--	ON DELETE CASCADE
-	--FOREIGN KEY (Id) REFERENCES Corretaje(Id) ON DELETE CASCADE
-
+		ON DELETE CASCADE
 );
-
+ 
 /*Departamento de Verificacion*/
 CREATE TABLE Verificacion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -160,36 +163,13 @@ CREATE TABLE Verificacion(
 	Vfn_Costo MONEY, /*QUE COSTO LE DIJO?*/
 	Vfn_Trato_asesor VARCHAR(2), /*DEL 1 AL 10 QUE CALIFICACIN LE DA*/
 	Vfn_Observaciones VARCHAR(150),
-	CONSTRAINT FK_GtnVer_Id
-		FOREIGN KEY (Id)
+	Id_Gestion int,
+	CONSTRAINT FK_GtnVer_Id -- (Cambiar a cliente)
+		FOREIGN KEY (Id_Gestion)
 		REFERENCES Gestion(Id)
-		--ON DELETE CASCADE
+		ON DELETE CASCADE
 );
 
-/*Que solo sea una tabla de Registro*/
---CREATE TABLE Conyugue(
---	Cyg_Nombre VARCHAR(80),
---	Cyg_Apellidopa VARCHAR(40),
---	Cyg_Apellidoma VARCHAR(40),
---	Gyg_Fechanac DATE,
---	Cyg_Nss VARCHAR(11),
---	Cyg_Curp VARCHAR(18),
---	Cyg_Rfc VARCHAR(13),
---	Cyg_Lugarnac VARCHAR(70),
---	Cyg_Celular VARCHAR(10),
---	Cyg_Tel_casa VARCHAR(10),
---	Cyg_Ocupacion VARCHAR(30),
---	Cyg_Tel_trabajo VARCHAR(15),
---	Cyg_Correo VARCHAR(320),
---	Cyg_Identificacion VARCHAR(40),
---	Cyg_No_identificacoion INT,
---	/*ID DE CLIENTE PARA RELACIONARLO COM CONYUGUE*/
---	--Gral_IDCLIENTE int FOREIGN KEY REFERENCES GENERAL(Gral_IDCLIENTE)
---	CONSTRAINT fk_Gral_Id
---		FOREIGN KEY (Id)
---		REFERENCES Cliente(Id)
---		ON DELETE CASCADE
---);
 
 /*Departamento Habilitacion*/
 CREATE TABLE Habilitacion(
@@ -219,16 +199,16 @@ CREATE TABLE Habilitacion(
 	Hbt_Break_medidor BIT,
 	Hbt_Pinturas BIT,
 	Hbt_AvisoSusp BIT,
+	Id_Corretaje int,
 	--Agregar campos para foto y vídeo
 	/*LLAVE FORANEA DE LA CASA QUE ES LA DE CORRETAJE*/
 	CONSTRAINT FK_CrtHab_Id
-		FOREIGN KEY (Id)
+		FOREIGN KEY (Id_Corretaje)
 		REFERENCES Corretaje(Id)
-		--ON DELETE CASCADE
+		ON DELETE CASCADE
 );
 
-/*Departamento de Contaduria*/
-
+/*Departamento de Contaduria*/ --No permite crear en cascada
 CREATE TABLE Contaduria(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Cnt_Presupuesto_gestion MONEY,
@@ -236,15 +216,24 @@ CREATE TABLE Contaduria(
 	Cnt_Presupuesto_habilitacion MONEY,
 	Cnt_Mensualidad MONEY,
 	Cnt_Vigilancia MONEY,
+	Id_Corretaje int,
+	Id_Gestion int,
+	Id_Habilitacion int,
 	/*LLAVE FORANEA DE CASA QUE SERIA LA DE CORRETAJE (Tambien para saber el gasto)*/
 	CONSTRAINT FK_CrtCon_Id
-		FOREIGN KEY (Id)
+		FOREIGN KEY (Id_Corretaje)
 		REFERENCES Corretaje(Id),
-		--ON DELETE CASCADE,
+	--	ON DELETE CASCADE,
+
 	/*LLAVES FORANEAS DE GESTION PARA SABER CUANTO GASTARON*/
 	CONSTRAINT FK_GtnCon_Id
-		FOREIGN KEY (Id)
-		REFERENCES Gestion(Id)
+		FOREIGN KEY (Id_Gestion)
+		REFERENCES Gestion(Id),
+	--	ON DELETE CASCADE,
+	/*LLAVES FORANEAS DE HABILITACION PARA SABER CUANTO GASTARON*/
+	CONSTRAINT FK_HabCon_Id
+		FOREIGN KEY (Id_Habilitacion)
+		REFERENCES Habilitacion(Id)
 		--ON DELETE CASCADE
 );
 
@@ -267,18 +256,20 @@ CREATE TABLE Usuario (
     usu_alta DATE DEFAULT GETDATE(),
     usu_tipo VARCHAR(15), --Puede ser referenciado a la tabla tipo Usuario, es opcional, podemos definir los tipos de usuarios en las vistas
     usu_activo BIT DEFAULT 1,
+	Id_TipoUsiario int,
 	CONSTRAINT FK_TipoUsuario_Id
-		FOREIGN KEY (Id)
+		FOREIGN KEY (Id_TipoUsiario)
 		REFERENCES TipoUsuario(Id)
+		ON DELETE CASCADE
 );
 
 
 CREATE TABLE Articulos(
-art_id VARCHAR(15) PRIMARY KEY,
-art_nombre VARCHAR(150),
-art_descripcion VARCHAR(250),
-art_fechaIngreso DATETIME,
-art_cantidadMinima DECIMAL(18,6)
+	art_id VARCHAR(15) PRIMARY KEY,
+	art_nombre VARCHAR(150),
+	art_descripcion VARCHAR(250),
+	art_fechaIngreso DATE, --Cambio de DATETIME a DATE
+	art_cantidadMinima DECIMAL(18,6)
 )
 
 CREATE TABLE Ubicaciones(
@@ -288,12 +279,12 @@ CREATE TABLE Ubicaciones(
 )
 
 CREATE TABLE Existencias(
-Id INT identity(1,1) PRIMARY KEY,
-ext_art_id VARCHAR(15) FOREIGN KEY REFERENCES Articulos(art_id),
-ext_cantidad decimal(18,6),
-ext_cantidadActual decimal(18,6),
-ext_precioUnitario decimal(18,6),
-ext_fechaAgregado decimal(18,6),
-ext_usuarioAgrego INT FOREIGN KEY REFERENCES Usuario(Id),
-    ext_ubicacion INT FOREIGN KEY REFERENCES Ubicaciones(ubi_id)
+	Id INT identity(1,1) PRIMARY KEY,
+	ext_art_id VARCHAR(15) FOREIGN KEY REFERENCES Articulos(art_id),
+	ext_cantidad decimal(18,6),
+	ext_cantidadActual decimal(18,6),
+	ext_precioUnitario decimal(18,6),
+	ext_fechaAgregado date, --Cambio de Decimal a Date
+	ext_usuarioAgrego INT FOREIGN KEY REFERENCES Usuario(Id),
+	ext_ubicacion INT FOREIGN KEY REFERENCES Ubicaciones(ubi_id)
 )

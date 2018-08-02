@@ -12,299 +12,299 @@
     @Html.AntiForgeryToken()
 
 
-<div class="form-horizontal" data-offset="0">
-    <h4>Cliente</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal" data-offset="0">
+        <h4>Cliente</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <div id="list-example" class="list-group">
-                    <a class="list-group-item list-group-item-action active" id="list-DG-list" data-toggle="list" href="#list-DG" role="tab" aria-controls="DG">Datos Generales</a>
-                    <a class="list-group-item list-group-item-action" id="list-dir-list" data-toggle="list" href="#list-dir" role="tab" aria-controls="dir">Dirección</a>
-                    <a class="list-group-item list-group-item-action" id="list-contac-list" data-toggle="list" href="#list-contac" role="tab" aria-controls="contac">Contacto</a>
-                    <a class="list-group-item list-group-item-action" id="list-DR-list" data-toggle="list" href="#list-DR" role="tab" aria-controls="DR">Datos de Referencia</a>
-                    <a class="list-group-item list-group-item-action" id="list-DC-list" data-toggle="list" href="#list-DC" role="tab" aria-controls="DC">Datos de Cónyuge</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <div id="list-example" class="list-group">
+                        <a class="list-group-item list-group-item-action active" id="list-DG-list" data-toggle="list" href="#list-DG" role="tab" aria-controls="DG">Datos Generales</a>
+                        <a class="list-group-item list-group-item-action" id="list-dir-list" data-toggle="list" href="#list-dir" role="tab" aria-controls="dir">Dirección</a>
+                        <a class="list-group-item list-group-item-action" id="list-contac-list" data-toggle="list" href="#list-contac" role="tab" aria-controls="contac">Contacto</a>
+                        <a class="list-group-item list-group-item-action" id="list-DR-list" data-toggle="list" href="#list-DR" role="tab" aria-controls="DR">Datos de Referencia</a>
+                        <a class="list-group-item list-group-item-action" id="list-DC-list" data-toggle="list" href="#list-DC" role="tab" aria-controls="DC">Datos de Cónyuge</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-8">
-                <div class="tab-content" id="nav-tabContent">
-                    @*DATOS GENERALES*@
-                    <div class="tab-pane fade show active" id="list-DG" role="tabpanel" aria-labelledby="list-DG-list">
-                        <h5>Datos Generales</h5>
+                <div class="col-8">
+                    <div class="tab-content" id="nav-tabContent">
+                        @*DATOS GENERALES*@
+                        <div class="tab-pane fade show active" id="list-DG" role="tabpanel" aria-labelledby="list-DG-list">
+                            <h5>Datos Generales</h5>
 
-                        <div class="row justify-content-around">
-                            <div class="col">
-                                <label for="Gral_Fechaalta">Fecha de Alta</label>
-                                @Html.EditorFor(model => model.Gral_Fechaalta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Fechaalta, "", new { @class = "text-danger" })
+                            <div class="row justify-content-around">
+                                <div class="col">
+                                    <label for="Gral_Fechaalta">Fecha de Alta</label>
+                                    @Html.EditorFor(model => model.Gral_Fechaalta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Fechaalta, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row justify-content-around py-3">
+                                <div class="col-lg-4">
+                                    <label for="Gral_Nombre">Nombre</label>
+                                    @Html.EditorFor(model => model.Gral_Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Nombre, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Apellidopa">Apellido Paterno</label>
+                                    @Html.EditorFor(model => model.Gral_Apellidopa, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Apellidopa, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Apellidoma">Apellido Materno</label>
+                                    @Html.EditorFor(model => model.Gral_Apellidoma, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Apellidoma, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="Gral_Fechanac">Fecha de Nacimiento</label>
+                                    @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Fechanac, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-5">
+                                    <label for="Gral_Lugarnac">Lugar de Nacimiento</label>
+                                    @Html.EditorFor(model => model.Gral_Lugarnac, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Lugarnac, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="Gral_Nss">No. Seguro Social</label>
+                                    @Html.EditorFor(model => model.Gral_Nss, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Nss, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="Gral_Curp">CURP</label>
+                                    @Html.EditorFor(model => model.Gral_Curp, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Curp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Rfc">RFC</label>
+                                    @Html.EditorFor(model => model.Gral_Rfc, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Rfc, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Estado_civil">Estado civil</label>
+                                    @Html.EditorFor(model => model.Gral_Estado_civil, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Estado_civil, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="Gral_Regimen_matrimonial">Régimen Matrimonial</label>
+                                    @Html.EditorFor(model => model.Gral_Regimen_matrimonial, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Regimen_matrimonial, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="Gral_Ocupacion">Ocupación</label>
+                                    @Html.EditorFor(model => model.Gral_Ocupacion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Ocupacion, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="Gral_Identificacion">Identificación</label>
+                                    @Html.EditorFor(model => model.Gral_Identificacion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Identificacion, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="Gral_No_identificacion">Número de Identificación</label>
+                                    @Html.EditorFor(model => model.Gral_No_identificacion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_No_identificacion, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
-                        <div class="row justify-content-around py-3">
-                            <div class="col-lg-4">
-                                <label for="Gral_Nombre">Nombre</label>
-                                @Html.EditorFor(model => model.Gral_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Nombre, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Apellidopa">Apellido Paterno</label>
-                                @Html.EditorFor(model => model.Gral_Apellidopa, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Apellidopa, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Apellidoma">Apellido Materno</label>
-                                @Html.EditorFor(model => model.Gral_Apellidoma, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Apellidoma, "", new { @class = "text-danger" })
-                            </div>
 
-                            <div class="col-lg-4">
-                                <label for="Gral_Fechanac">Fecha de Nacimiento</label>
-                                @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Fechanac, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-5">
-                                <label for="Gral_Lugarnac">Lugar de Nacimiento</label>
-                                @Html.EditorFor(model => model.Gral_Lugarnac, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Lugarnac, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="Gral_Nss">No. Seguro Social</label>
-                                @Html.EditorFor(model => model.Gral_Nss, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Nss, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-4">
-                                <label for="Gral_Curp">CURP</label>
-                                @Html.EditorFor(model => model.Gral_Curp, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Curp, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Rfc">RFC</label>
-                                @Html.EditorFor(model => model.Gral_Rfc, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Rfc, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Estado_civil">Estado civil</label>
-                                @Html.EditorFor(model => model.Gral_Estado_civil, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Estado_civil, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-6">
-                                <label for="Gral_Regimen_matrimonial">Régimen Matrimonial</label>
-                                @Html.EditorFor(model => model.Gral_Regimen_matrimonial, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Regimen_matrimonial, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="Gral_Ocupacion">Ocupación</label>
-                                @Html.EditorFor(model => model.Gral_Ocupacion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Ocupacion, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-6">
-                                <label for="Gral_Identificacion">Identificación</label>
-                                @Html.EditorFor(model => model.Gral_Identificacion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Identificacion, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="Gral_No_identificacion">Número de Identificación</label>
-                                @Html.EditorFor(model => model.Gral_No_identificacion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_No_identificacion, "", new { @class = "text-danger" })
+                        @*DIRECCION*@
+                        <div class="tab-pane fade" id="list-dir" role="tabpanel" aria-labelledby="list-dir-list">
+                            <h5>Dirección</h5>
+                            <div class="row justify-content-around py-3">
+                                <div class="col-lg-4">
+                                    <label for="Gral_Calle">Calle</label>
+                                    @Html.EditorFor(model => model.Gral_Calle, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Calle, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Numero">Número</label>
+                                    @Html.EditorFor(model => model.Gral_Numero, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Numero, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Cp">Código Postal</label>
+                                    @Html.EditorFor(model => model.Gral_Cp, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Cp, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Colonia">Colonia</label>
+                                    @Html.EditorFor(model => model.Gral_Colonia, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Colonia, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Municipio">Municipio</label>
+                                    @Html.EditorFor(model => model.Gral_Municipio, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Municipio, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Estado">Estado</label>
+                                    @Html.EditorFor(model => model.Gral_Estado, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Estado, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    @*DIRECCION*@
-                    <div class="tab-pane fade" id="list-dir" role="tabpanel" aria-labelledby="list-dir-list">
-                        <h5>Dirección</h5>
-                        <div class="row justify-content-around py-3">
-                            <div class="col-lg-4">
-                                <label for="Gral_Calle">Calle</label>
-                                @Html.EditorFor(model => model.Gral_Calle, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Calle, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Numero">Número</label>
-                                @Html.EditorFor(model => model.Gral_Numero, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Numero, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Cp">Código Postal</label>
-                                @Html.EditorFor(model => model.Gral_Cp, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Cp, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Colonia">Colonia</label>
-                                @Html.EditorFor(model => model.Gral_Colonia, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Colonia, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Municipio">Municipio</label>
-                                @Html.EditorFor(model => model.Gral_Municipio, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Municipio, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Estado">Estado</label>
-                                @Html.EditorFor(model => model.Gral_Estado, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Estado, "", new { @class = "text-danger" })
+                        @*CONTACTO*@
+                        <div class="tab-pane fade" id="list-contac" role="tabpanel" aria-labelledby="list-contac-list">
+                            <h5>Contacto</h5>
+                            <div class="row justify-content-around py-3">
+                                <div class="col-lg-4">
+                                    <label for="Gral_Celular">Celular</label>
+                                    @Html.EditorFor(model => model.Gral_Celular, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Celular, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Tel_casa">Teléfono de Casa</label>
+                                    @Html.EditorFor(model => model.Gral_Tel_casa, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Tel_casa, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Teltrabajo">Teléfono de Trabajo</label>
+                                    @Html.EditorFor(model => model.Gral_Teltrabajo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Teltrabajo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    <label for="Gral_Correo">Correo Electrónico</label>
+                                    @Html.EditorFor(model => model.Gral_Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Correo, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    @*CONTACTO*@
-                    <div class="tab-pane fade" id="list-contac" role="tabpanel" aria-labelledby="list-contac-list">
-                        <h5>Contacto</h5>
-                        <div class="row justify-content-around py-3">
-                            <div class="col-lg-4">
-                                <label for="Gral_Celular">Celular</label>
-                                @Html.EditorFor(model => model.Gral_Celular, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Celular, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Tel_casa">Teléfono de Casa</label>
-                                @Html.EditorFor(model => model.Gral_Tel_casa, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Tel_casa, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Teltrabajo">Teléfono de Trabajo</label>
-                                @Html.EditorFor(model => model.Gral_Teltrabajo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Teltrabajo, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col">
-                                <label for="Gral_Correo">Correo Electrónico</label>
-                                @Html.EditorFor(model => model.Gral_Correo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Correo, "", new { @class = "text-danger" })
+                        @*DATOS DE REFERENCIA*@
+                        <div class="tab-pane fade" id="list-DR" role="tabpanel" aria-labelledby="list-DR-list">
+                            <h5>Datos de Referencia</h5>
+                            <div class="row justify-content-around py-3">
+                                <div class="col-lg-6">
+                                    <label for="Gral_Ref_nombre1">Nombre de Referencia</label>
+                                    @Html.EditorFor(model => model.Gral_Ref_nombre1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Ref_nombre1, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="Gral_Ref_cel_1">Celular de Referencia</label>
+                                    @Html.EditorFor(model => model.Gral_Ref_cel_1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Ref_cel_1, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="Gral_Ref_nombre2">Nombre Referencia 2</label>
+                                    @Html.EditorFor(model => model.Gral_Ref_nombre2, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Ref_nombre2, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="Gral_Ref_cel_2">Celular Referencia 2</label>
+                                    @Html.EditorFor(model => model.Gral_Ref_cel_2, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gral_Ref_cel_2, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    @*DATOS DE REFERENCIA*@
-                    <div class="tab-pane fade" id="list-DR" role="tabpanel" aria-labelledby="list-DR-list">
-                        <h5>Datos de Referencia</h5>
-                        <div class="row justify-content-around py-3">
-                            <div class="col-lg-6">
-                                <label for="Gral_Ref_nombre1">Nombre de Referencia</label>
-                                @Html.EditorFor(model => model.Gral_Ref_nombre1, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Ref_nombre1, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="Gral_Ref_cel_1">Celular de Referencia</label>
-                                @Html.EditorFor(model => model.Gral_Ref_cel_1, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Ref_cel_1, "", new { @class = "text-danger" })
-                            </div>
+                        @*DATOS DE CONYUGE*@
+                        <div class="tab-pane fade" id="list-DC" role="tabpanel" aria-labelledby="list-DC-list">
+                            <h5>Datos de Cónyuge</h5>
+                            <div class="row justify-content-around py-3">
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Nombre">Nombre</label>
+                                    @Html.EditorFor(model => model.Cyg_Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Nombre, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Apellidopa">Apellido Paterno</label>
+                                    @Html.EditorFor(model => model.Cyg_Apellidopa, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Apellidopa, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Gral_Ref_cel_2">Apellido Materno</label>
+                                    @Html.EditorFor(model => model.Cyg_Apellidoma, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Apellidoma, "", new { @class = "text-danger" })
+                                </div>
 
-                            <div class="col-lg-6">
-                                <label for="Gral_Ref_nombre2">Nombre Referencia 2</label>
-                                @Html.EditorFor(model => model.Gral_Ref_nombre2, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Ref_nombre2, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="Gral_Ref_cel_2">Celular Referencia 2</label>
-                                @Html.EditorFor(model => model.Gral_Ref_cel_2, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gral_Ref_cel_2, "", new { @class = "text-danger" })
+                                @*FECHA DE NAC*@
+                                <div class="col-lg-4">
+                                    <label for="Gyg_Fechanac">Fecha de nacimiento</label>
+                                    @Html.EditorFor(model => model.Gyg_Fechanac, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Gyg_Fechanac, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Nss">No. de Seguro Social</label>
+                                    @Html.EditorFor(model => model.Cyg_Nss, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Nss, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Curp">CURP</label>
+                                    @Html.EditorFor(model => model.Cyg_Curp, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Curp, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Rfc">RFC</label>
+                                    @Html.EditorFor(model => model.Cyg_Rfc, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Rfc, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Lugarnac">Lugar Nacimiento</label>
+                                    @Html.EditorFor(model => model.Cyg_Lugarnac, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Lugarnac, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Celular">Celular</label>
+                                    @Html.EditorFor(model => model.Cyg_Celular, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Celular, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Tel_casa">Teléfono de Casa</label>
+                                    @Html.EditorFor(model => model.Cyg_Tel_casa, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Tel_casa, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Ocupacion">Ocupación</label>
+                                    @Html.EditorFor(model => model.Cyg_Ocupacion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Ocupacion, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Tel_trabajo">Teléfono de Trabajo</label>
+                                    @Html.EditorFor(model => model.Cyg_Tel_trabajo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Tel_trabajo, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Correo">Correo Electrónico</label>
+                                    @Html.EditorFor(model => model.Cyg_Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Correo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_Identificacion">Identificación</label>
+                                    @Html.EditorFor(model => model.Cyg_Identificacion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_Identificacion, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="Cyg_No_identificacoion">Número de Identificación</label>
+                                    @Html.EditorFor(model => model.Cyg_No_identificacoion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cyg_No_identificacoion, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    @*DATOS DE CONYUGE*@
-                    <div class="tab-pane fade" id="list-DC" role="tabpanel" aria-labelledby="list-DC-list">
-                        <h5>Datos de Cónyuge</h5>
-                        <div class="row justify-content-around py-3">
-                            <div class="col-lg-4">
-                                <label for="Cyg_Nombre">Nombre</label>
-                                @Html.EditorFor(model => model.Cyg_Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Nombre, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @*<input type="submit" value="Create" class="btn btn-default" />*@
+                                <button type="submit" class="btn btn-outline-danger">Guardar</button>
                             </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Apellidopa">Apellido Paterno</label>
-                                @Html.EditorFor(model => model.Cyg_Apellidopa, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Apellidopa, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Gral_Ref_cel_2">Apellido Materno</label>
-                                @Html.EditorFor(model => model.Cyg_Apellidoma, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Apellidoma, "", new { @class = "text-danger" })
-                            </div>
-
-                            @*FECHA DE NAC*@
-                            <div class="col-lg-4">
-                                <label for="Gyg_Fechanac">Fecha de nacimiento</label>
-                                @Html.EditorFor(model => model.Gyg_Fechanac, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Gyg_Fechanac, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Nss">No. de Seguro Social</label>
-                                @Html.EditorFor(model => model.Cyg_Nss, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Nss, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Curp">CURP</label>
-                                @Html.EditorFor(model => model.Cyg_Curp, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Curp, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-4">
-                                <label for="Cyg_Rfc">RFC</label>
-                                @Html.EditorFor(model => model.Cyg_Rfc, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Rfc, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Lugarnac">Lugar Nacimiento</label>
-                                @Html.EditorFor(model => model.Cyg_Lugarnac, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Lugarnac, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Celular">Celular</label>
-                                @Html.EditorFor(model => model.Cyg_Celular, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Celular, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-4">
-                                <label for="Cyg_Tel_casa">Teléfono de Casa</label>
-                                @Html.EditorFor(model => model.Cyg_Tel_casa, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Tel_casa, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Ocupacion">Ocupación</label>
-                                @Html.EditorFor(model => model.Cyg_Ocupacion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Ocupacion, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Tel_trabajo">Teléfono de Trabajo</label>
-                                @Html.EditorFor(model => model.Cyg_Tel_trabajo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Tel_trabajo, "", new { @class = "text-danger" })
-                            </div>
-
-                            <div class="col-lg-4">
-                                <label for="Cyg_Correo">Correo Electrónico</label>
-                                @Html.EditorFor(model => model.Cyg_Correo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Correo, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_Identificacion">Identificación</label>
-                                @Html.EditorFor(model => model.Cyg_Identificacion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_Identificacion, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="Cyg_No_identificacoion">Número de Identificación</label>
-                                @Html.EditorFor(model => model.Cyg_No_identificacoion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cyg_No_identificacoion, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            @*<input type="submit" value="Create" class="btn btn-default" />*@
-                            <button type="submit" class="btn btn-outline-danger">Guardar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 }
 
 <div>
@@ -314,8 +314,11 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(function(){
+        $(function () {
             $("#datepicker").datepicker();
         });
+    </script>
+    <script>
+        $(document.body).css('padding-top', '70px');
     </script>
 }

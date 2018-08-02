@@ -23,6 +23,7 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<decimal> Vfn_Costo { get; set; }
         public string Vfn_Trato_asesor { get; set; }
         public string Vfn_Observaciones { get; set; }
+        public Nullable<int> Id_Gestion { get; set; }
     
         public virtual Gestion Gestion { get; set; }
     }

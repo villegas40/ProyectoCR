@@ -17,6 +17,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
+            //var usuario = db.Usuario.Include(u => u.TipoUsuario);
+            //return View(usuario.ToList());
             var usuario = db.Usuario.Include(u => u.TipoUsuario);
             return View(usuario.ToList());
         }
@@ -39,7 +41,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion");
+            //ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion");
+            ViewBag.Id_TipoUsiario = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion");
             return View();
         }
 
@@ -48,7 +51,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,usu_nombre,usu_apellidoPa,usu_apellidoMa,usu_alta,usu_tipo,usu_activo")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "Id,usu_username,usu_correo,usu_nombre,usu_password,usu_apellidoPa,usu_apellidoMa,usu_alta,usu_tipo,usu_activo,Id_TipoUsiario")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +60,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id);
+            //ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id);
+            ViewBag.Id_TipoUsiario = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id_TipoUsiario);
             return View(usuario);
         }
 
@@ -73,7 +77,8 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id);
+            //ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id);
+            ViewBag.Id_TipoUsiario = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id_TipoUsiario);
             return View(usuario);
         }
 
@@ -82,7 +87,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,usu_nombre,usu_apellidoPa,usu_apellidoMa,usu_alta,usu_tipo,usu_activo")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "Id,usu_username,usu_correo,usu_nombre,usu_password,usu_apellidoPa,usu_apellidoMa,usu_alta,usu_tipo,usu_activo,Id_TipoUsiario")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +95,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id);
+            //ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id);
+            ViewBag.Id_TipoUsiario = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id_TipoUsiario);
             return View(usuario);
         }
 

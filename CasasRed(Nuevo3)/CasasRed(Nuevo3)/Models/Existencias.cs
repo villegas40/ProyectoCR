@@ -19,7 +19,7 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<decimal> ext_cantidad { get; set; }
         public Nullable<decimal> ext_cantidadActual { get; set; }
         public Nullable<decimal> ext_precioUnitario { get; set; }
-        public Nullable<decimal> ext_fechaAgregado { get; set; }
+        public Nullable<System.DateTime> ext_fechaAgregado { get; set; }
         public Nullable<int> ext_usuarioAgrego { get; set; }
         public Nullable<int> ext_ubicacion { get; set; }
     

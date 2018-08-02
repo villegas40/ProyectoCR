@@ -1,204 +1,79 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CasasRedModelStoreContainer" CdmEntityContainer="CasasRedEntities">
+    <EntitySetMapping Name="Articulos">
+      <EntityTypeMapping TypeName="CasasRedModel.Articulos">
+        <MappingFragment StoreEntitySet="Articulos">
+          <ScalarProperty Name="art_cantidadMinima" ColumnName="art_cantidadMinima" />
+          <ScalarProperty Name="art_fechaIngreso" ColumnName="art_fechaIngreso" />
+          <ScalarProperty Name="art_descripcion" ColumnName="art_descripcion" />
+          <ScalarProperty Name="art_nombre" ColumnName="art_nombre" />
+          <ScalarProperty Name="art_id" ColumnName="art_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Cliente">
       <EntityTypeMapping TypeName="CasasRedModel.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Gral_Nombre" ColumnName="Gral_Nombre" />
-          <ScalarProperty Name="Gral_Apellidopa" ColumnName="Gral_Apellidopa" />
-          <ScalarProperty Name="Gral_Apellidoma" ColumnName="Gral_Apellidoma" />
-          <ScalarProperty Name="Gral_Fechanac" ColumnName="Gral_Fechanac" />
-          <ScalarProperty Name="Gral_Nss" ColumnName="Gral_Nss" />
-          <ScalarProperty Name="Gral_Curp" ColumnName="Gral_Curp" />
-          <ScalarProperty Name="Gral_Rfc" ColumnName="Gral_Rfc" />
-          <ScalarProperty Name="Gral_Lugarnac" ColumnName="Gral_Lugarnac" />
-          <ScalarProperty Name="Gral_Calle" ColumnName="Gral_Calle" />
-          <ScalarProperty Name="Gral_Numero" ColumnName="Gral_Numero" />
-          <ScalarProperty Name="Gral_Cp" ColumnName="Gral_Cp" />
-          <ScalarProperty Name="Gral_Colonia" ColumnName="Gral_Colonia" />
-          <ScalarProperty Name="Gral_Municipio" ColumnName="Gral_Municipio" />
-          <ScalarProperty Name="Gral_Estado" ColumnName="Gral_Estado" />
-          <ScalarProperty Name="Gral_Celular" ColumnName="Gral_Celular" />
-          <ScalarProperty Name="Gral_Tel_casa" ColumnName="Gral_Tel_casa" />
-          <ScalarProperty Name="Gral_Estado_civil" ColumnName="Gral_Estado_civil" />
-          <ScalarProperty Name="Gral_Regimen_matrimonial" ColumnName="Gral_Regimen_matrimonial" />
-          <ScalarProperty Name="Gral_Ocupacion" ColumnName="Gral_Ocupacion" />
-          <ScalarProperty Name="Gral_Teltrabajo" ColumnName="Gral_Teltrabajo" />
-          <ScalarProperty Name="Gral_Correo" ColumnName="Gral_Correo" />
-          <ScalarProperty Name="Gral_Identificacion" ColumnName="Gral_Identificacion" />
-          <ScalarProperty Name="Gral_No_identificacion" ColumnName="Gral_No_identificacion" />
-          <ScalarProperty Name="Gral_Ref_nombre1" ColumnName="Gral_Ref_nombre1" />
-          <ScalarProperty Name="Gral_Ref_cel_1" ColumnName="Gral_Ref_cel_1" />
-          <ScalarProperty Name="Gral_Ref_nombre2" ColumnName="Gral_Ref_nombre2" />
-          <ScalarProperty Name="Gral_Ref_cel_2" ColumnName="Gral_Ref_cel_2" />
-          <ScalarProperty Name="Cyg_Nombre" ColumnName="Cyg_Nombre" />
-          <ScalarProperty Name="Cyg_Apellidopa" ColumnName="Cyg_Apellidopa" />
-          <ScalarProperty Name="Cyg_Apellidoma" ColumnName="Cyg_Apellidoma" />
-          <ScalarProperty Name="Gyg_Fechanac" ColumnName="Gyg_Fechanac" />
-          <ScalarProperty Name="Cyg_Nss" ColumnName="Cyg_Nss" />
-          <ScalarProperty Name="Cyg_Curp" ColumnName="Cyg_Curp" />
-          <ScalarProperty Name="Cyg_Rfc" ColumnName="Cyg_Rfc" />
-          <ScalarProperty Name="Cyg_Lugarnac" ColumnName="Cyg_Lugarnac" />
-          <ScalarProperty Name="Cyg_Celular" ColumnName="Cyg_Celular" />
-          <ScalarProperty Name="Cyg_Tel_casa" ColumnName="Cyg_Tel_casa" />
-          <ScalarProperty Name="Cyg_Ocupacion" ColumnName="Cyg_Ocupacion" />
-          <ScalarProperty Name="Cyg_Tel_trabajo" ColumnName="Cyg_Tel_trabajo" />
-          <ScalarProperty Name="Cyg_Correo" ColumnName="Cyg_Correo" />
-          <ScalarProperty Name="Cyg_Identificacion" ColumnName="Cyg_Identificacion" />
-          <ScalarProperty Name="Cyg_No_identificacoion" ColumnName="Cyg_No_identificacoion" />
           <ScalarProperty Name="Gral_Fechaalta" ColumnName="Gral_Fechaalta" />
+          <ScalarProperty Name="Cyg_No_identificacoion" ColumnName="Cyg_No_identificacoion" />
+          <ScalarProperty Name="Cyg_Identificacion" ColumnName="Cyg_Identificacion" />
+          <ScalarProperty Name="Cyg_Correo" ColumnName="Cyg_Correo" />
+          <ScalarProperty Name="Cyg_Tel_trabajo" ColumnName="Cyg_Tel_trabajo" />
+          <ScalarProperty Name="Cyg_Ocupacion" ColumnName="Cyg_Ocupacion" />
+          <ScalarProperty Name="Cyg_Tel_casa" ColumnName="Cyg_Tel_casa" />
+          <ScalarProperty Name="Cyg_Celular" ColumnName="Cyg_Celular" />
+          <ScalarProperty Name="Cyg_Lugarnac" ColumnName="Cyg_Lugarnac" />
+          <ScalarProperty Name="Cyg_Rfc" ColumnName="Cyg_Rfc" />
+          <ScalarProperty Name="Cyg_Curp" ColumnName="Cyg_Curp" />
+          <ScalarProperty Name="Cyg_Nss" ColumnName="Cyg_Nss" />
+          <ScalarProperty Name="Gyg_Fechanac" ColumnName="Gyg_Fechanac" />
+          <ScalarProperty Name="Cyg_Apellidoma" ColumnName="Cyg_Apellidoma" />
+          <ScalarProperty Name="Cyg_Apellidopa" ColumnName="Cyg_Apellidopa" />
+          <ScalarProperty Name="Cyg_Nombre" ColumnName="Cyg_Nombre" />
+          <ScalarProperty Name="Gral_Ref_cel_2" ColumnName="Gral_Ref_cel_2" />
+          <ScalarProperty Name="Gral_Ref_nombre2" ColumnName="Gral_Ref_nombre2" />
+          <ScalarProperty Name="Gral_Ref_cel_1" ColumnName="Gral_Ref_cel_1" />
+          <ScalarProperty Name="Gral_Ref_nombre1" ColumnName="Gral_Ref_nombre1" />
+          <ScalarProperty Name="Gral_No_identificacion" ColumnName="Gral_No_identificacion" />
+          <ScalarProperty Name="Gral_Identificacion" ColumnName="Gral_Identificacion" />
+          <ScalarProperty Name="Gral_Correo" ColumnName="Gral_Correo" />
+          <ScalarProperty Name="Gral_Teltrabajo" ColumnName="Gral_Teltrabajo" />
+          <ScalarProperty Name="Gral_Ocupacion" ColumnName="Gral_Ocupacion" />
+          <ScalarProperty Name="Gral_Regimen_matrimonial" ColumnName="Gral_Regimen_matrimonial" />
+          <ScalarProperty Name="Gral_Estado_civil" ColumnName="Gral_Estado_civil" />
+          <ScalarProperty Name="Gral_Tel_casa" ColumnName="Gral_Tel_casa" />
+          <ScalarProperty Name="Gral_Celular" ColumnName="Gral_Celular" />
+          <ScalarProperty Name="Gral_Estado" ColumnName="Gral_Estado" />
+          <ScalarProperty Name="Gral_Municipio" ColumnName="Gral_Municipio" />
+          <ScalarProperty Name="Gral_Colonia" ColumnName="Gral_Colonia" />
+          <ScalarProperty Name="Gral_Cp" ColumnName="Gral_Cp" />
+          <ScalarProperty Name="Gral_Numero" ColumnName="Gral_Numero" />
+          <ScalarProperty Name="Gral_Calle" ColumnName="Gral_Calle" />
+          <ScalarProperty Name="Gral_Lugarnac" ColumnName="Gral_Lugarnac" />
+          <ScalarProperty Name="Gral_Rfc" ColumnName="Gral_Rfc" />
+          <ScalarProperty Name="Gral_Curp" ColumnName="Gral_Curp" />
+          <ScalarProperty Name="Gral_Nss" ColumnName="Gral_Nss" />
+          <ScalarProperty Name="Gral_Fechanac" ColumnName="Gral_Fechanac" />
+          <ScalarProperty Name="Gral_Apellidoma" ColumnName="Gral_Apellidoma" />
+          <ScalarProperty Name="Gral_Apellidopa" ColumnName="Gral_Apellidopa" />
+          <ScalarProperty Name="Gral_Nombre" ColumnName="Gral_Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Contaduria">
       <EntityTypeMapping TypeName="CasasRedModel.Contaduria">
         <MappingFragment StoreEntitySet="Contaduria">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Cnt_Presupuesto_gestion" ColumnName="Cnt_Presupuesto_gestion" />
-          <ScalarProperty Name="Cnt_Presupuesto_corretaje" ColumnName="Cnt_Presupuesto_corretaje" />
-          <ScalarProperty Name="Cnt_Presupuesto_habilitacion" ColumnName="Cnt_Presupuesto_habilitacion" />
-          <ScalarProperty Name="Cnt_Mensualidad" ColumnName="Cnt_Mensualidad" />
+          <ScalarProperty Name="Id_Habilitacion" ColumnName="Id_Habilitacion" />
+          <ScalarProperty Name="Id_Gestion" ColumnName="Id_Gestion" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
           <ScalarProperty Name="Cnt_Vigilancia" ColumnName="Cnt_Vigilancia" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Gestion">
-      <EntityTypeMapping TypeName="CasasRedModel.Gestion">
-        <MappingFragment StoreEntitySet="Gestion">
+          <ScalarProperty Name="Cnt_Mensualidad" ColumnName="Cnt_Mensualidad" />
+          <ScalarProperty Name="Cnt_Presupuesto_habilitacion" ColumnName="Cnt_Presupuesto_habilitacion" />
+          <ScalarProperty Name="Cnt_Presupuesto_corretaje" ColumnName="Cnt_Presupuesto_corretaje" />
+          <ScalarProperty Name="Cnt_Presupuesto_gestion" ColumnName="Cnt_Presupuesto_gestion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Gtn_Escrituras" ColumnName="Gtn_Escrituras" />
-          <ScalarProperty Name="Gtn_Planta_Cartografica" ColumnName="Gtn_Planta_Cartografica" />
-          <ScalarProperty Name="Gtn_Predial" ColumnName="Gtn_Predial" />
-          <ScalarProperty Name="Gtn_Recibo_Luz" ColumnName="Gtn_Recibo_Luz" />
-          <ScalarProperty Name="Gtn_Recibo_Agua" ColumnName="Gtn_Recibo_Agua" />
-          <ScalarProperty Name="Gtn_Acta_Nacimiento" ColumnName="Gtn_Acta_Nacimiento" />
-          <ScalarProperty Name="Gtn_IFE_Copia" ColumnName="Gtn_IFE_Copia" />
-          <ScalarProperty Name="Gtn_Sol_Ret_Ifo" ColumnName="Gtn_Sol_Ret_Ifo" />
-          <ScalarProperty Name="Gtn_Cert_Hip" ColumnName="Gtn_Cert_Hip" />
-          <ScalarProperty Name="Gtn_Cert_Fiscal" ColumnName="Gtn_Cert_Fiscal" />
-          <ScalarProperty Name="Gtn_Sol_Estado" ColumnName="Gtn_Sol_Estado" />
-          <ScalarProperty Name="Gtn_Junta_URBI" ColumnName="Gtn_Junta_URBI" />
-          <ScalarProperty Name="Gtn_Agua_Pago_Inf" ColumnName="Gtn_Agua_Pago_Inf" />
-          <ScalarProperty Name="Gtn_Cert_Cartogr" ColumnName="Gtn_Cert_Cartogr" />
-          <ScalarProperty Name="Gtn_No_Oficial" ColumnName="Gtn_No_Oficial" />
-          <ScalarProperty Name="Gtn_Avaluo" ColumnName="Gtn_Avaluo" />
-          <ScalarProperty Name="Gtn_CT_Banco" ColumnName="Gtn_CT_Banco" />
-          <ScalarProperty Name="Gtn_Aviso_Suspension" ColumnName="Gtn_Aviso_Suspension" />
-          <ScalarProperty Name="Gtn_Formato_Infonavit" ColumnName="Gtn_Formato_Infonavit" />
-          <ScalarProperty Name="Gtn_Fotos_Propiedad" ColumnName="Gtn_Fotos_Propiedad" />
-          <ScalarProperty Name="Gtn_Evaluo_Contacto" ColumnName="Gtn_Evaluo_Contacto" />
-          <ScalarProperty Name="Gtn_Planeacion_Fianza" ColumnName="Gtn_Planeacion_Fianza" />
-          <ScalarProperty Name="Gtn_Urbanizacion" ColumnName="Gtn_Urbanizacion" />
-          <ScalarProperty Name="Gtn_Credito_INFONAVIT" ColumnName="Gtn_Credito_INFONAVIT" />
-          <ScalarProperty Name="Gtn_Notaria" ColumnName="Gtn_Notaria" />
-          <ScalarProperty Name="Gtn_Firma_Escrituras" ColumnName="Gtn_Firma_Escrituras" />
-          <ScalarProperty Name="Gtn_Gastos" ColumnName="Gtn_Gastos" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Habilitacion">
-      <EntityTypeMapping TypeName="CasasRedModel.Habilitacion">
-        <MappingFragment StoreEntitySet="Habilitacion">
-          <ScalarProperty Name="Hbt_AvisoSusp" ColumnName="Hbt_AvisoSusp" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Hbt_Puertas" ColumnName="Hbt_Puertas" />
-          <ScalarProperty Name="Hbt_Chapas" ColumnName="Hbt_Chapas" />
-          <ScalarProperty Name="Hbt_Marcos_puertas" ColumnName="Hbt_Marcos_puertas" />
-          <ScalarProperty Name="Hbt_Bisagras" ColumnName="Hbt_Bisagras" />
-          <ScalarProperty Name="Hbt_Taza" ColumnName="Hbt_Taza" />
-          <ScalarProperty Name="Hbt_Lavamanos" ColumnName="Hbt_Lavamanos" />
-          <ScalarProperty Name="Hbt_Bastago" ColumnName="Hbt_Bastago" />
-          <ScalarProperty Name="Hbt_Chapeton" ColumnName="Hbt_Chapeton" />
-          <ScalarProperty Name="Hbt_Maneral" ColumnName="Hbt_Maneral" />
-          <ScalarProperty Name="Hbt_Regadera_completa" ColumnName="Hbt_Regadera_completa" />
-          <ScalarProperty Name="Hbt_Kit_lavamanos" ColumnName="Hbt_Kit_lavamanos" />
-          <ScalarProperty Name="Hbt_Kit_taza" ColumnName="Hbt_Kit_taza" />
-          <ScalarProperty Name="Hbt_Rosetas" ColumnName="Hbt_Rosetas" />
-          <ScalarProperty Name="Hbt_Apagador_sencillo" ColumnName="Hbt_Apagador_sencillo" />
-          <ScalarProperty Name="Hbt_Conector_sencillo" ColumnName="Hbt_Conector_sencillo" />
-          <ScalarProperty Name="Hbt_Apagador_doble" ColumnName="Hbt_Apagador_doble" />
-          <ScalarProperty Name="Hbt_Conector_apagador" ColumnName="Hbt_Conector_apagador" />
-          <ScalarProperty Name="Hbt_Domo" ColumnName="Hbt_Domo" />
-          <ScalarProperty Name="Hbt_Ventanas" ColumnName="Hbt_Ventanas" />
-          <ScalarProperty Name="Hbt_Cableado" ColumnName="Hbt_Cableado" />
-          <ScalarProperty Name="Hbt_Calibre_cableado" ColumnName="Hbt_Calibre_cableado" />
-          <ScalarProperty Name="Hbt_Break_interior" ColumnName="Hbt_Break_interior" />
-          <ScalarProperty Name="Hbt_Break_medidor" ColumnName="Hbt_Break_medidor" />
-          <ScalarProperty Name="Hbt_Pinturas" ColumnName="Hbt_Pinturas" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoUsuario">
-      <EntityTypeMapping TypeName="CasasRedModel.TipoUsuario">
-        <MappingFragment StoreEntitySet="TipoUsuario">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="tipusu_descricion" ColumnName="tipusu_descricion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Usuario">
-      <EntityTypeMapping TypeName="CasasRedModel.Usuario">
-        <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="usu_password" ColumnName="usu_password" />
-          <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
-          <ScalarProperty Name="usu_username" ColumnName="usu_username" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="usu_nombre" ColumnName="usu_nombre" />
-          <ScalarProperty Name="usu_apellidoPa" ColumnName="usu_apellidoPa" />
-          <ScalarProperty Name="usu_apellidoMa" ColumnName="usu_apellidoMa" />
-          <ScalarProperty Name="usu_alta" ColumnName="usu_alta" />
-          <ScalarProperty Name="usu_tipo" ColumnName="usu_tipo" />
-          <ScalarProperty Name="usu_activo" ColumnName="usu_activo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Verificacion">
-      <EntityTypeMapping TypeName="CasasRedModel.Verificacion">
-        <MappingFragment StoreEntitySet="Verificacion">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Vfn_Persona_fisica" ColumnName="Vfn_Persona_fisica" />
-          <ScalarProperty Name="Vfn_Visto_persona" ColumnName="Vfn_Visto_persona" />
-          <ScalarProperty Name="Vfn_Tiempo_estimado" ColumnName="Vfn_Tiempo_estimado" />
-          <ScalarProperty Name="Vfn_Tiempo" ColumnName="Vfn_Tiempo" />
-          <ScalarProperty Name="Vfn_Tiene_costo" ColumnName="Vfn_Tiene_costo" />
-          <ScalarProperty Name="Vfn_Costo" ColumnName="Vfn_Costo" />
-          <ScalarProperty Name="Vfn_Trato_asesor" ColumnName="Vfn_Trato_asesor" />
-          <ScalarProperty Name="Vfn_Observaciones" ColumnName="Vfn_Observaciones" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Articulos">
-      <EntityTypeMapping TypeName="CasasRedModel.Articulos">
-        <MappingFragment StoreEntitySet="Articulos">
-          <ScalarProperty Name="art_id" ColumnName="art_id" />
-          <ScalarProperty Name="art_cantidadMinima" ColumnName="art_cantidadMinima" />
-          <ScalarProperty Name="art_fechaIngreso" ColumnName="art_fechaIngreso" />
-          <ScalarProperty Name="art_descripcion" ColumnName="art_descripcion" />
-          <ScalarProperty Name="art_nombre" ColumnName="art_nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Existencias">
-      <EntityTypeMapping TypeName="CasasRedModel.Existencias">
-        <MappingFragment StoreEntitySet="Existencias">
-          <ScalarProperty Name="ext_ubicacion" ColumnName="ext_ubicacion" />
-          <ScalarProperty Name="ext_usuarioAgrego" ColumnName="ext_usuarioAgrego" />
-          <ScalarProperty Name="ext_fechaAgregado" ColumnName="ext_fechaAgregado" />
-          <ScalarProperty Name="ext_precioUnitario" ColumnName="ext_precioUnitario" />
-          <ScalarProperty Name="ext_cantidadActual" ColumnName="ext_cantidadActual" />
-          <ScalarProperty Name="ext_cantidad" ColumnName="ext_cantidad" />
-          <ScalarProperty Name="ext_art_id" ColumnName="ext_art_id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Ubicaciones">
-      <EntityTypeMapping TypeName="CasasRedModel.Ubicaciones">
-        <MappingFragment StoreEntitySet="Ubicaciones">
-          <ScalarProperty Name="ubi_descripcion" ColumnName="ubi_descripcion" />
-          <ScalarProperty Name="ubi_codigo" ColumnName="ubi_codigo" />
-          <ScalarProperty Name="ubi_id" ColumnName="ubi_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -252,6 +127,139 @@
           <ScalarProperty Name="Crt_Cliente_ApMat" ColumnName="Crt_Cliente_ApMat" />
           <ScalarProperty Name="Crt_Cliente_Nombre" ColumnName="Crt_Cliente_Nombre" />
           <ScalarProperty Name="Crt_Status" ColumnName="Crt_Status" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Existencias">
+      <EntityTypeMapping TypeName="CasasRedModel.Existencias">
+        <MappingFragment StoreEntitySet="Existencias">
+          <ScalarProperty Name="ext_ubicacion" ColumnName="ext_ubicacion" />
+          <ScalarProperty Name="ext_usuarioAgrego" ColumnName="ext_usuarioAgrego" />
+          <ScalarProperty Name="ext_fechaAgregado" ColumnName="ext_fechaAgregado" />
+          <ScalarProperty Name="ext_precioUnitario" ColumnName="ext_precioUnitario" />
+          <ScalarProperty Name="ext_cantidadActual" ColumnName="ext_cantidadActual" />
+          <ScalarProperty Name="ext_cantidad" ColumnName="ext_cantidad" />
+          <ScalarProperty Name="ext_art_id" ColumnName="ext_art_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gestion">
+      <EntityTypeMapping TypeName="CasasRedModel.Gestion">
+        <MappingFragment StoreEntitySet="Gestion">
+          <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Gtn_Gastos" ColumnName="Gtn_Gastos" />
+          <ScalarProperty Name="Gtn_Firma_Escrituras" ColumnName="Gtn_Firma_Escrituras" />
+          <ScalarProperty Name="Gtn_Notaria" ColumnName="Gtn_Notaria" />
+          <ScalarProperty Name="Gtn_Credito_INFONAVIT" ColumnName="Gtn_Credito_INFONAVIT" />
+          <ScalarProperty Name="Gtn_Urbanizacion" ColumnName="Gtn_Urbanizacion" />
+          <ScalarProperty Name="Gtn_Planeacion_Fianza" ColumnName="Gtn_Planeacion_Fianza" />
+          <ScalarProperty Name="Gtn_Evaluo_Contacto" ColumnName="Gtn_Evaluo_Contacto" />
+          <ScalarProperty Name="Gtn_Fotos_Propiedad" ColumnName="Gtn_Fotos_Propiedad" />
+          <ScalarProperty Name="Gtn_Formato_Infonavit" ColumnName="Gtn_Formato_Infonavit" />
+          <ScalarProperty Name="Gtn_Aviso_Suspension" ColumnName="Gtn_Aviso_Suspension" />
+          <ScalarProperty Name="Gtn_CT_Banco" ColumnName="Gtn_CT_Banco" />
+          <ScalarProperty Name="Gtn_Avaluo" ColumnName="Gtn_Avaluo" />
+          <ScalarProperty Name="Gtn_No_Oficial" ColumnName="Gtn_No_Oficial" />
+          <ScalarProperty Name="Gtn_Cert_Cartogr" ColumnName="Gtn_Cert_Cartogr" />
+          <ScalarProperty Name="Gtn_Agua_Pago_Inf" ColumnName="Gtn_Agua_Pago_Inf" />
+          <ScalarProperty Name="Gtn_Junta_URBI" ColumnName="Gtn_Junta_URBI" />
+          <ScalarProperty Name="Gtn_Sol_Estado" ColumnName="Gtn_Sol_Estado" />
+          <ScalarProperty Name="Gtn_Cert_Fiscal" ColumnName="Gtn_Cert_Fiscal" />
+          <ScalarProperty Name="Gtn_Cert_Hip" ColumnName="Gtn_Cert_Hip" />
+          <ScalarProperty Name="Gtn_Sol_Ret_Ifo" ColumnName="Gtn_Sol_Ret_Ifo" />
+          <ScalarProperty Name="Gtn_IFE_Copia" ColumnName="Gtn_IFE_Copia" />
+          <ScalarProperty Name="Gtn_Acta_Nacimiento" ColumnName="Gtn_Acta_Nacimiento" />
+          <ScalarProperty Name="Gtn_Recibo_Agua" ColumnName="Gtn_Recibo_Agua" />
+          <ScalarProperty Name="Gtn_Recibo_Luz" ColumnName="Gtn_Recibo_Luz" />
+          <ScalarProperty Name="Gtn_Predial" ColumnName="Gtn_Predial" />
+          <ScalarProperty Name="Gtn_Planta_Cartografica" ColumnName="Gtn_Planta_Cartografica" />
+          <ScalarProperty Name="Gtn_Escrituras" ColumnName="Gtn_Escrituras" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Habilitacion">
+      <EntityTypeMapping TypeName="CasasRedModel.Habilitacion">
+        <MappingFragment StoreEntitySet="Habilitacion">
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Hbt_AvisoSusp" ColumnName="Hbt_AvisoSusp" />
+          <ScalarProperty Name="Hbt_Pinturas" ColumnName="Hbt_Pinturas" />
+          <ScalarProperty Name="Hbt_Break_medidor" ColumnName="Hbt_Break_medidor" />
+          <ScalarProperty Name="Hbt_Break_interior" ColumnName="Hbt_Break_interior" />
+          <ScalarProperty Name="Hbt_Calibre_cableado" ColumnName="Hbt_Calibre_cableado" />
+          <ScalarProperty Name="Hbt_Cableado" ColumnName="Hbt_Cableado" />
+          <ScalarProperty Name="Hbt_Ventanas" ColumnName="Hbt_Ventanas" />
+          <ScalarProperty Name="Hbt_Domo" ColumnName="Hbt_Domo" />
+          <ScalarProperty Name="Hbt_Conector_apagador" ColumnName="Hbt_Conector_apagador" />
+          <ScalarProperty Name="Hbt_Apagador_doble" ColumnName="Hbt_Apagador_doble" />
+          <ScalarProperty Name="Hbt_Conector_sencillo" ColumnName="Hbt_Conector_sencillo" />
+          <ScalarProperty Name="Hbt_Apagador_sencillo" ColumnName="Hbt_Apagador_sencillo" />
+          <ScalarProperty Name="Hbt_Rosetas" ColumnName="Hbt_Rosetas" />
+          <ScalarProperty Name="Hbt_Kit_taza" ColumnName="Hbt_Kit_taza" />
+          <ScalarProperty Name="Hbt_Kit_lavamanos" ColumnName="Hbt_Kit_lavamanos" />
+          <ScalarProperty Name="Hbt_Regadera_completa" ColumnName="Hbt_Regadera_completa" />
+          <ScalarProperty Name="Hbt_Maneral" ColumnName="Hbt_Maneral" />
+          <ScalarProperty Name="Hbt_Chapeton" ColumnName="Hbt_Chapeton" />
+          <ScalarProperty Name="Hbt_Bastago" ColumnName="Hbt_Bastago" />
+          <ScalarProperty Name="Hbt_Lavamanos" ColumnName="Hbt_Lavamanos" />
+          <ScalarProperty Name="Hbt_Taza" ColumnName="Hbt_Taza" />
+          <ScalarProperty Name="Hbt_Bisagras" ColumnName="Hbt_Bisagras" />
+          <ScalarProperty Name="Hbt_Marcos_puertas" ColumnName="Hbt_Marcos_puertas" />
+          <ScalarProperty Name="Hbt_Chapas" ColumnName="Hbt_Chapas" />
+          <ScalarProperty Name="Hbt_Puertas" ColumnName="Hbt_Puertas" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoUsuario">
+      <EntityTypeMapping TypeName="CasasRedModel.TipoUsuario">
+        <MappingFragment StoreEntitySet="TipoUsuario">
+          <ScalarProperty Name="tipusu_descricion" ColumnName="tipusu_descricion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ubicaciones">
+      <EntityTypeMapping TypeName="CasasRedModel.Ubicaciones">
+        <MappingFragment StoreEntitySet="Ubicaciones">
+          <ScalarProperty Name="ubi_descripcion" ColumnName="ubi_descripcion" />
+          <ScalarProperty Name="ubi_codigo" ColumnName="ubi_codigo" />
+          <ScalarProperty Name="ubi_id" ColumnName="ubi_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="CasasRedModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Id_TipoUsiario" ColumnName="Id_TipoUsiario" />
+          <ScalarProperty Name="usu_activo" ColumnName="usu_activo" />
+          <ScalarProperty Name="usu_tipo" ColumnName="usu_tipo" />
+          <ScalarProperty Name="usu_alta" ColumnName="usu_alta" />
+          <ScalarProperty Name="usu_apellidoMa" ColumnName="usu_apellidoMa" />
+          <ScalarProperty Name="usu_apellidoPa" ColumnName="usu_apellidoPa" />
+          <ScalarProperty Name="usu_password" ColumnName="usu_password" />
+          <ScalarProperty Name="usu_nombre" ColumnName="usu_nombre" />
+          <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+          <ScalarProperty Name="usu_username" ColumnName="usu_username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Verificacion">
+      <EntityTypeMapping TypeName="CasasRedModel.Verificacion">
+        <MappingFragment StoreEntitySet="Verificacion">
+          <ScalarProperty Name="Id_Gestion" ColumnName="Id_Gestion" />
+          <ScalarProperty Name="Vfn_Observaciones" ColumnName="Vfn_Observaciones" />
+          <ScalarProperty Name="Vfn_Trato_asesor" ColumnName="Vfn_Trato_asesor" />
+          <ScalarProperty Name="Vfn_Costo" ColumnName="Vfn_Costo" />
+          <ScalarProperty Name="Vfn_Tiene_costo" ColumnName="Vfn_Tiene_costo" />
+          <ScalarProperty Name="Vfn_Tiempo" ColumnName="Vfn_Tiempo" />
+          <ScalarProperty Name="Vfn_Tiempo_estimado" ColumnName="Vfn_Tiempo_estimado" />
+          <ScalarProperty Name="Vfn_Visto_persona" ColumnName="Vfn_Visto_persona" />
+          <ScalarProperty Name="Vfn_Persona_fisica" ColumnName="Vfn_Persona_fisica" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

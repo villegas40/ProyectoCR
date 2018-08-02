@@ -39,8 +39,11 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Existencias/Create
         public ActionResult Create()
         {
+            //ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre");
+            //ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre");
+            //ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo");
             ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre");
-            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre");
+            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_username");
             ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo");
             return View();
         }
@@ -59,8 +62,11 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
+            //ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
+            //ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre", existencias.ext_usuarioAgrego);
+            //ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
             ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
-            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre", existencias.ext_usuarioAgrego);
+            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_username", existencias.ext_usuarioAgrego);
             ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
             return View(existencias);
         }
@@ -77,8 +83,11 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
+            //ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
+            //ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre", existencias.ext_usuarioAgrego);
+            //ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
             ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
-            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre", existencias.ext_usuarioAgrego);
+            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_username", existencias.ext_usuarioAgrego);
             ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
             return View(existencias);
         }
@@ -96,8 +105,11 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            //ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
+            //ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre", existencias.ext_usuarioAgrego);
+            //ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
             ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
-            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre", existencias.ext_usuarioAgrego);
+            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_username", existencias.ext_usuarioAgrego);
             ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
             return View(existencias);
         }

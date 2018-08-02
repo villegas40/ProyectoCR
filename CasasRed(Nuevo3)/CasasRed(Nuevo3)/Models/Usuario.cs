@@ -21,18 +21,19 @@ namespace CasasRed_Nuevo3_.Models
         }
     
         public int Id { get; set; }
+        public string usu_username { get; set; }
+        public string usu_correo { get; set; }
         public string usu_nombre { get; set; }
+        public string usu_password { get; set; }
         public string usu_apellidoPa { get; set; }
         public string usu_apellidoMa { get; set; }
         public Nullable<System.DateTime> usu_alta { get; set; }
         public string usu_tipo { get; set; }
         public Nullable<bool> usu_activo { get; set; }
-        public string usu_username { get; set; }
-        public string usu_correo { get; set; }
-        public string usu_password { get; set; }
+        public Nullable<int> Id_TipoUsiario { get; set; }
     
-        public virtual TipoUsuario TipoUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Existencias> Existencias { get; set; }
+        public virtual TipoUsuario TipoUsuario { get; set; }
     }
 }

@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="CasasRedModel.Cliente" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Contaduria" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Gestion" Width="1.5" PointX="3.375" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Habilitacion" Width="1.5" PointX="8.125" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CasasRedModel.Verificacion" Width="1.5" PointX="4.625" PointY="15.5" IsExpanded="true" />
-        <AssociationConnector Association="CasasRedModel.FK_GtnCon_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="CasasRedModel.FK_TipoUsuario_Id" ManuallyRouted="false" />
+      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="18.5" PointY="8.5" />
+        <EntityTypeShape EntityType="CasasRedModel.Cliente" Width="1.5" PointX="4.125" PointY="3.75" />
+        <EntityTypeShape EntityType="CasasRedModel.Contaduria" Width="1.5" PointX="10" PointY="10.125" />
+        <EntityTypeShape EntityType="CasasRedModel.Corretaje" Width="1.5" PointX="6.5" PointY="0.5" />
+        <EntityTypeShape EntityType="CasasRedModel.Existencias" Width="1.5" PointX="18.5" PointY="4.25" />
+        <EntityTypeShape EntityType="CasasRedModel.Gestion" Width="1.5" PointX="1.25" PointY="0.5" />
+        <EntityTypeShape EntityType="CasasRedModel.Habilitacion" Width="1.5" PointX="10" PointY="0.5" />
+        <EntityTypeShape EntityType="CasasRedModel.TipoUsuario" Width="1.5" PointX="14.25" PointY="8.125" />
+        <EntityTypeShape EntityType="CasasRedModel.Ubicaciones" Width="1.5" PointX="17.875" PointY="1.5" />
+        <EntityTypeShape EntityType="CasasRedModel.Usuario" Width="1.5" PointX="14.25" PointY="3.375" />
+        <EntityTypeShape EntityType="CasasRedModel.Verificacion" Width="1.5" PointX="1.25" PointY="9.625" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_a__60A75C0F" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__619B8048" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__628FA481" />
         <AssociationConnector Association="CasasRedModel.FK_Cliente_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_CntHab_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_GtnVer_Id" />
-        <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="CasasRedModel.Existencias" Width="1.5" PointX="7.625" PointY="1" />
-        <EntityTypeShape EntityType="CasasRedModel.Ubicaciones" Width="1.5" PointX="6.125" PointY="4.625" />
-        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_a__236943A5" />
-        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__245D67DE" />
-        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__25518C17" />
-        <EntityTypeShape EntityType="CasasRedModel.Corretaje" Width="1.5" PointX="12.875" PointY="7.625" />
+        <AssociationConnector Association="CasasRedModel.FK_CrtCon_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_GtnCon_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_HabCon_Id" />
         <AssociationConnector Association="CasasRedModel.FK_Crt_Id" />
         <AssociationConnector Association="CasasRedModel.FK_CrtHab_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_CrtCon_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_GtnVer_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_TipoUsuario_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

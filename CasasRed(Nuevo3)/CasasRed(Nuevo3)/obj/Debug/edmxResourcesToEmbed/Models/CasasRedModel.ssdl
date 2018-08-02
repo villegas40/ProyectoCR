@@ -7,7 +7,7 @@
     <Property Name="art_id" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="art_nombre" Type="varchar" MaxLength="150" />
     <Property Name="art_descripcion" Type="varchar" MaxLength="250" />
-    <Property Name="art_fechaIngreso" Type="datetime" />
+    <Property Name="art_fechaIngreso" Type="date" />
     <Property Name="art_cantidadMinima" Type="decimal" Precision="18" Scale="6" />
   </EntityType>
   <EntityType Name="Cliente">
@@ -69,6 +69,9 @@
     <Property Name="Cnt_Presupuesto_habilitacion" Type="money" />
     <Property Name="Cnt_Mensualidad" Type="money" />
     <Property Name="Cnt_Vigilancia" Type="money" />
+    <Property Name="Id_Corretaje" Type="int" />
+    <Property Name="Id_Gestion" Type="int" />
+    <Property Name="Id_Habilitacion" Type="int" />
   </EntityType>
   <EntityType Name="Corretaje">
     <Key>
@@ -132,7 +135,7 @@
     <Property Name="ext_cantidad" Type="decimal" Precision="18" Scale="6" />
     <Property Name="ext_cantidadActual" Type="decimal" Precision="18" Scale="6" />
     <Property Name="ext_precioUnitario" Type="decimal" Precision="18" Scale="6" />
-    <Property Name="ext_fechaAgregado" Type="decimal" Precision="18" Scale="6" />
+    <Property Name="ext_fechaAgregado" Type="date" />
     <Property Name="ext_usuarioAgrego" Type="int" />
     <Property Name="ext_ubicacion" Type="int" />
   </EntityType>
@@ -168,6 +171,8 @@
     <Property Name="Gtn_Notaria" Type="bit" />
     <Property Name="Gtn_Firma_Escrituras" Type="bit" />
     <Property Name="Gtn_Gastos" Type="money" />
+    <Property Name="Id_Corretaje" Type="int" />
+    <Property Name="Id_Cliente" Type="int" />
   </EntityType>
   <EntityType Name="Habilitacion">
     <Key>
@@ -199,6 +204,7 @@
     <Property Name="Hbt_Break_medidor" Type="bit" />
     <Property Name="Hbt_Pinturas" Type="bit" />
     <Property Name="Hbt_AvisoSusp" Type="bit" />
+    <Property Name="Id_Corretaje" Type="int" />
   </EntityType>
   <EntityType Name="TipoUsuario">
     <Key>
@@ -229,6 +235,7 @@
     <Property Name="usu_alta" Type="date" />
     <Property Name="usu_tipo" Type="varchar" MaxLength="15" />
     <Property Name="usu_activo" Type="bit" />
+    <Property Name="Id_TipoUsiario" Type="int" />
   </EntityType>
   <EntityType Name="Verificacion">
     <Key>
@@ -243,8 +250,9 @@
     <Property Name="Vfn_Costo" Type="money" />
     <Property Name="Vfn_Trato_asesor" Type="varchar" MaxLength="2" />
     <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
+    <Property Name="Id_Gestion" Type="int" />
   </EntityType>
-  <Association Name="FK__Existenci__ext_a__656C112C">
+  <Association Name="FK__Existenci__ext_a__0B91BA14">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -256,7 +264,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__66603565">
+  <Association Name="FK__Existenci__ext_u__0C85DE4D">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -268,7 +276,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__6754599E">
+  <Association Name="FK__Existenci__ext_u__0D7A0286">
     <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -281,86 +289,108 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Cliente_Id">
-    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-    <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cliente">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Gestion">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Id_Cliente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Crt_Id">
-    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
-    <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1" />
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Corretaje">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Gestion">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Id_Corretaje" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CrtCon_Id">
-    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
-    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1" />
+    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Corretaje">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Contaduria">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Id_Corretaje" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CrtHab_Id">
-    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
-    <End Role="Habilitacion" Type="Self.Habilitacion" Multiplicity="0..1" />
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Habilitacion" Type="Self.Habilitacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Corretaje">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Habilitacion">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Id_Corretaje" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_GtnCon_Id">
-    <End Role="Gestion" Type="Self.Gestion" Multiplicity="1" />
-    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1" />
+    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Gestion">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Contaduria">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Id_Gestion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_GtnVer_Id">
-    <End Role="Gestion" Type="Self.Gestion" Multiplicity="1" />
-    <End Role="Verificacion" Type="Self.Verificacion" Multiplicity="0..1" />
+    <End Role="Gestion" Type="Self.Gestion" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Verificacion" Type="Self.Verificacion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Gestion">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Verificacion">
+        <PropertyRef Name="Id_Gestion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HabCon_Id">
+    <End Role="Habilitacion" Type="Self.Habilitacion" Multiplicity="0..1" />
+    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Habilitacion">
         <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contaduria">
+        <PropertyRef Name="Id_Habilitacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TipoUsuario_Id">
-    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TipoUsuario">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Usuario">
-        <PropertyRef Name="Id" />
+        <PropertyRef Name="Id_TipoUsiario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -376,15 +406,15 @@
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Existenci__ext_a__656C112C" Association="Self.FK__Existenci__ext_a__656C112C">
+    <AssociationSet Name="FK__Existenci__ext_a__0B91BA14" Association="Self.FK__Existenci__ext_a__0B91BA14">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__66603565" Association="Self.FK__Existenci__ext_u__66603565">
+    <AssociationSet Name="FK__Existenci__ext_u__0C85DE4D" Association="Self.FK__Existenci__ext_u__0C85DE4D">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__6754599E" Association="Self.FK__Existenci__ext_u__6754599E">
+    <AssociationSet Name="FK__Existenci__ext_u__0D7A0286" Association="Self.FK__Existenci__ext_u__0D7A0286">
       <End Role="Ubicaciones" EntitySet="Ubicaciones" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
@@ -411,6 +441,10 @@
     <AssociationSet Name="FK_GtnVer_Id" Association="Self.FK_GtnVer_Id">
       <End Role="Gestion" EntitySet="Gestion" />
       <End Role="Verificacion" EntitySet="Verificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HabCon_Id" Association="Self.FK_HabCon_Id">
+      <End Role="Habilitacion" EntitySet="Habilitacion" />
+      <End Role="Contaduria" EntitySet="Contaduria" />
     </AssociationSet>
     <AssociationSet Name="FK_TipoUsuario_Id" Association="Self.FK_TipoUsuario_Id">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
