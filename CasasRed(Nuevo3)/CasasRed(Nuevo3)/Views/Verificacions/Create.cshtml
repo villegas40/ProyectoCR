@@ -14,13 +14,18 @@
     <h4 style="margin-top:0px;">Verificación</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    
+
+    <h3>@Html.DisplayFor(modelItem => modelItem.Gestion.Cliente.Gral_Nombre)</h3>
+
     <div class="form-group">
         @*@Html.LabelFor(model => model.Vfn_Persona_fisica, htmlAttributes: new { @class = "control-label col-md-2" })*@
         @*<label>¿Conoce la ubicación físicamente del inmueble?6649710940</label>*@
         <div class="col-md-10">
             <div class="custom-control custom-checkbox">
                 @*@Html.EditorFor(model => model.Vfn_Persona_fisica)*@
-                @Html.TextBoxFor(model => model.Vfn_Persona_fisica, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked" })
+                @Html.TextBoxFor(model => model.Vfn_Persona_fisica, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked" })
                 <label class="custom-control-label" for="customCheck1">Conoce la ubicación físicamente del inmueble</label>
                 @Html.ValidationMessageFor(model => model.Vfn_Persona_fisica, "", new { @class = "text-danger" })
             </div>
@@ -32,7 +37,7 @@
         <div class="col-md-10">
             <div class="custom-control custom-checkbox">
                 @*@Html.EditorFor(model => model.Vfn_Visto_persona)*@
-                @Html.TextBoxFor(model => model.Vfn_Visto_persona, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck2", @oninput = "this.value = this.checked" })
+                @Html.TextBoxFor(model => model.Vfn_Visto_persona, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck2", @oninput = "this.value = this.checked" })
                 <label class="custom-control-label" for="customCheck2">La ha visto por dentro personalmente</label>
                 @Html.ValidationMessageFor(model => model.Vfn_Visto_persona, "", new { @class = "text-danger" })
             </div>
@@ -44,7 +49,7 @@
         <div class="col-md-10">
             <div class="custom-control custom-checkbox">
                 @*@Html.EditorFor(model => model.Vfn_Tiempo_estimado)*@
-                @Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked" })
+                @Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked" })
                 <label class="custom-control-label" for="customCheck3">Le dijo el tiempo estimado de entrega y firma</label>
                 @Html.ValidationMessageFor(model => model.Vfn_Tiempo_estimado, "", new { @class = "text-danger" })
             </div>
@@ -68,7 +73,7 @@
         @*@Html.LabelFor(model => model.Vfn_Tiempo, htmlAttributes: new { @class = "control-label col-md-2" })*@
         <label class="control-label col-md-4" for="tiempo">¿Qué tiempo le dijo el vendedor?</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Vfn_Tiempo, new { htmlAttributes = new { @class = "form-control", @id = "tiempo" } })
+            @Html.EditorFor(model => model.Vfn_Tiempo, new { htmlAttributes = new { @class = "form-control data", @id = "tiempo" } })
             @Html.ValidationMessageFor(model => model.Vfn_Tiempo, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -78,7 +83,7 @@
         <div class="col-md-10">
             <div class="custom-control custom-checkbox">
                 @*@Html.EditorFor(model => model.Vfn_Tiene_costo)*@
-                @Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck4", @oninput = "this.value = this.checked" })
+                @Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck4", @oninput = "this.value = this.checked" })
                 <label class="custom-control-label" for="customCheck4">Le comentó el asesor que el proceso de trámite tiene un costo</label>
                 @Html.ValidationMessageFor(model => model.Vfn_Tiene_costo, "", new { @class = "text-danger" })
             </div>
@@ -89,7 +94,7 @@
         @*@Html.LabelFor(model => model.Vfn_Costo, htmlAttributes: new { @class = "control-label col-md-2" })*@
         <label class="control-label col-md-4" for="campoPrecio">¿Cuál es el precio que le comentó el asesor?</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Vfn_Costo, new { htmlAttributes = new { @class = "form-control", @id = "campoPrecio", @placeholder = "$0.00" } })
+            @Html.EditorFor(model => model.Vfn_Costo, new { htmlAttributes = new { @class = "form-control data", @id = "campoPrecio", @placeholder = "$0.00" } })
             @Html.ValidationMessageFor(model => model.Vfn_Costo, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -98,7 +103,7 @@
         @*@Html.LabelFor(model => model.Vfn_Trato_asesor, htmlAttributes: new { @class = "control-label col-md-2" })*@
         <label class="control-label col-md-4" for="tratoAsesor">¿Cómo considera que fue el trato del asesor?</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control", @id = "tratoAsesor" } })
+            @Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })
             @Html.ValidationMessageFor(model => model.Vfn_Trato_asesor, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -134,6 +139,19 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-            $(document.body).css('padding-top', '70px');
+        $(document.body).css('padding-top', '70px');
+
+        $(document).ready(function () {
+            $(".data").on('change paste', function () {
+                var dataCount = $('input.data').length;
+                var myFilledDataCount = $('input.data').filter(function () {
+                    return $(this).val() === "";
+                }).length;
+                var width = ((1 / dataCount) * (dataCount - myFilledDataCount)) * 100;
+                var mydataPercent = width + "%";
+                $(".progress-bar").css("width", mydataPercent);
+                $("#bar").text(mydataPercent + " Completado");
+            });
+        });
     </script>
 }
