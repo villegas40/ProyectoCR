@@ -141,5 +141,55 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Crear registro vacio al dar de alta cliente
+        public string GestionCrear(Gestion gestion, int cliente_id)
+        {
+            int gestion_id;
+            var verificacion_controller = new VerificacionsController();
+            var verificacion = new Verificacion();
+
+            CasasRedEntities CS = new CasasRedEntities();
+
+            Gestion gestion_obj = new Gestion
+            {
+                Gtn_Escrituras = false,
+                Gtn_Planta_Cartografica = false,
+                Gtn_Predial = false,
+                Gtn_Recibo_Luz = false,
+                Gtn_Recibo_Agua = false,
+                Gtn_Acta_Nacimiento = false,
+                Gtn_IFE_Copia = false,
+                Gtn_Sol_Ret_Ifo = false,
+                Gtn_Cert_Hip = false,
+                Gtn_Cert_Fiscal = false,
+                Gtn_Sol_Estado = false,
+                Gtn_Junta_URBI = false,
+                Gtn_Agua_Pago_Inf = false,
+                Gtn_Cert_Cartogr = false,
+                Gtn_No_Oficial = false,
+                Gtn_Avaluo = false,
+                Gtn_CT_Banco = false,
+                Gtn_Aviso_Suspension = false,
+                Gtn_Formato_Infonavit = false,
+                Gtn_Fotos_Propiedad = false,
+                Gtn_Evaluo_Contacto = false,
+                Gtn_Planeacion_Fianza = false,
+                Gtn_Urbanizacion = false,
+                Gtn_Credito_INFONAVIT = false,
+                Gtn_Notaria = false,
+                Gtn_Firma_Escrituras = false,
+                Id_Cliente = cliente_id
+            };
+
+            CS.Gestion.Add(gestion_obj);
+            CS.SaveChanges();
+
+            gestion_id = gestion_obj.Id;
+
+            verificacion_controller.VerfificacionCreate(verificacion, gestion_id);
+
+            return "String que funciona...";
+        }
     }
 }

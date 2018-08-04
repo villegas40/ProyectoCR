@@ -54,10 +54,20 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Crt_Status,Crt_Cliente_Nombre,Crt_Cliente_ApMat,Crt_Cliente_ApPat,Crt_Direccion,Crt_Precio,Crt_Gasto,Crt_Tipo_Vivienda,Crt_Nivel,Crt_Num_Habitaciones,Crt_Planta,Crt_Ano_compra,Crt_Num_Credito_Infonavit,Crt_Saldo_infonavit,Crt_Fec_Nac,Crt_Tel_Celular,Crt_Estado_Civil,Crt_Tel_Casa,Crt_Tel_Trabajo,Crt_Tel_Ref1,Crt_Tel_Ref2,Crt_Tel_Ref,Crt_Recibo_predial_digital,Crt_Clave_Catastral,Crt_Adeudo_predial,Crt_Recibo_luz_digitalizar,Crt_Num_servicio_luz,Crt_Adeudo_luz,Crt_NombreC_Titular_luz,Crt_Recibo_agua_digital,Crt_No_cuenta_agua,Crt_Adeudo_agua,Crt_Ine_Titu,Crt_Ine_Conyu,Crt_Escritura_Simple,Crt_Acuerdo,Crt_ActaNacTitu,Crt_ActaNacConyu,Crt_ActaMatr,Crt_EscrCert,Crt_CartaDesPre,Crt_ReciboLuz,Crt_ReciboAgua,Crt_Otros,Crt_Status_Muestra,Crt_Obervaciones,Crt_GastosServicios")] Corretaje corretaje)
         {
+            var habilitacion = new Habilitacion();
+            int corretaje_id;
+            var habilitacion_controller = new HabilitacionsController();
+
             if (ModelState.IsValid)
             {
                 db.Corretaje.Add(corretaje);
                 db.SaveChanges();
+
+                //Borrar si no sirve
+                corretaje_id = corretaje.Id;
+                //Borrar si no sirve
+                habilitacion_controller.CrearHabilitacion(habilitacion, corretaje_id);
+
                 return RedirectToAction("Index");
             }
 

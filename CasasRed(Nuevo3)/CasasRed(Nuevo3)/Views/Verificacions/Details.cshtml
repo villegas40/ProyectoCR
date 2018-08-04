@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="margin-top:20px;">Details</h2>
 
 <div>
-    <h4>Verificacion</h4>
+    <h4>Verificación</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -80,3 +80,9 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts {
+    <script>
+        $(document.body).css('padding-top', '70px');
+    </script>
+}

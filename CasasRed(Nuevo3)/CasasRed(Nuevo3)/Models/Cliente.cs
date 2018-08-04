@@ -74,7 +74,7 @@ namespace CasasRed_Nuevo3_.Models
 
         public string Gral_Regimen_matrimonial { get; set; }
 
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupacion")]
+        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupación")]
         public string Gral_Ocupacion { get; set; }
 
         [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
@@ -86,7 +86,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Gral_Identificacion { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Solo números")]
+        [RegularExpression("\\d+", ErrorMessage = "Sólo números")]
         public Nullable<int> Gral_No_identificacion { get; set; }
 
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
@@ -131,7 +131,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Cyg_Tel_casa { get; set; }
 
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupacion")]
+        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupación")]
         public string Cyg_Ocupacion { get; set; }
 
         [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
@@ -143,7 +143,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Cyg_Identificacion { get; set; }
 
-        [RegularExpression("\\d+", ErrorMessage = "Solo números")]
+        [RegularExpression("\\d+", ErrorMessage = "Sólo números")]
         public Nullable<int> Cyg_No_identificacoion { get; set; }
 
         public Nullable<System.DateTime> Gral_Fechaalta { get; set; }

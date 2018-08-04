@@ -67,6 +67,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^\\d+[.]*\\d*$", ErrorMessage = "solo números")]
         public Nullable<decimal> Crt_Saldo_infonavit { get; set; }
 
+
         public Nullable<System.DateTime> Crt_Fec_Nac { get; set; }
 
         [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
@@ -90,6 +91,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Crt_Tel_Ref { get; set; }
 
+
         public Nullable<bool> Crt_Recibo_predial_digital { get; set; }
 
         [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar clave")]
@@ -97,6 +99,7 @@ namespace CasasRed_Nuevo3_.Models
 
         [RegularExpression("^\\d+[.]*\\d*$", ErrorMessage = "solo números")]
         public Nullable<decimal> Crt_Adeudo_predial { get; set; }
+
 
         public Nullable<bool> Crt_Recibo_luz_digitalizar { get; set; }
 
@@ -109,6 +112,7 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string Crt_NombreC_Titular_luz { get; set; }
 
+
         public Nullable<bool> Crt_Recibo_agua_digital { get; set; }
 
         [RegularExpression("^\\d+$", ErrorMessage = "solo números")]
@@ -116,7 +120,6 @@ namespace CasasRed_Nuevo3_.Models
 
         [RegularExpression("^\\d+[.]*\\d*$", ErrorMessage = "solo números")]
         public Nullable<decimal> Crt_Adeudo_agua { get; set; }
-
         public Nullable<bool> Crt_Ine_Titu { get; set; }
         public Nullable<bool> Crt_Ine_Conyu { get; set; }
         public Nullable<bool> Crt_Escritura_Simple { get; set; }
@@ -133,12 +136,14 @@ namespace CasasRed_Nuevo3_.Models
         [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Crt_Status_Muestra { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
+
         public string Crt_Obervaciones { get; set; }
 
         [RegularExpression("^\\d+[.]*\\d*$", ErrorMessage = "solo números")]
         public Nullable<decimal> Crt_GastosServicios { get; set; }
     
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contaduria> Contaduria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

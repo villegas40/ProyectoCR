@@ -145,5 +145,26 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Funcion para crear un registro vacio cuando se de de alta una nueva casa BUSCAR COMO HACER UPDATE PARA QUE CUANDO SE DE DE ALTA EN GESTION PONER EL NUMERO EN LA CASA QUE CORRESPONDE
+        [HttpPost]
+        public string CrearContaduria(Contaduria contaduria, int corretaje_id, int habilitacion_id)
+        {
+            CasasRedEntities CS = new CasasRedEntities();
+            Contaduria contaduria_obj = new Contaduria();
+
+            contaduria_obj.Cnt_Mensualidad = 0;
+            contaduria_obj.Cnt_Presupuesto_corretaje = 0;
+            contaduria_obj.Cnt_Presupuesto_gestion = 0;
+            contaduria_obj.Cnt_Presupuesto_habilitacion = 0;
+            contaduria_obj.Cnt_Vigilancia = 0;
+            contaduria_obj.Id_Corretaje = corretaje_id;
+            contaduria_obj.Id_Habilitacion = habilitacion_id;
+
+            CS.Contaduria.Add(contaduria_obj);
+            CS.SaveChanges();
+
+            return "Si funciona!...";
+        }
     }
 }

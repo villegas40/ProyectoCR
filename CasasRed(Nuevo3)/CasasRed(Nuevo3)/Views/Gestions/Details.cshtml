@@ -4,247 +4,253 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="margin-top:20px;">Detalles</h2>
 
-<div>
-    <h4>Gestion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Escrituras)
-        </dt>
+@*<div>
+        <h4>Gestión</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Escrituras)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Escrituras)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Escrituras)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Planta_Cartografica)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Planta_Cartografica)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Planta_Cartografica)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Planta_Cartografica)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Predial)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Predial)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Predial)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Predial)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Recibo_Luz)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Recibo_Luz)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Recibo_Luz)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Recibo_Luz)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Recibo_Agua)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Recibo_Agua)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Recibo_Agua)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Recibo_Agua)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Acta_Nacimiento)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Acta_Nacimiento)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Acta_Nacimiento)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Acta_Nacimiento)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_IFE_Copia)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_IFE_Copia)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_IFE_Copia)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_IFE_Copia)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Sol_Ret_Ifo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Sol_Ret_Ifo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Sol_Ret_Ifo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Sol_Ret_Ifo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Cert_Hip)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Cert_Hip)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Cert_Hip)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Cert_Hip)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Cert_Fiscal)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Cert_Fiscal)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Cert_Fiscal)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Cert_Fiscal)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Sol_Estado)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Sol_Estado)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Sol_Estado)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Sol_Estado)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Junta_URBI)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Junta_URBI)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Junta_URBI)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Junta_URBI)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Agua_Pago_Inf)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Agua_Pago_Inf)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Agua_Pago_Inf)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Agua_Pago_Inf)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Cert_Cartogr)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Cert_Cartogr)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Cert_Cartogr)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Cert_Cartogr)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_No_Oficial)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_No_Oficial)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_No_Oficial)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_No_Oficial)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Avaluo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Avaluo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Avaluo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Avaluo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_CT_Banco)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_CT_Banco)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_CT_Banco)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_CT_Banco)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Aviso_Suspension)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Aviso_Suspension)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Aviso_Suspension)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Aviso_Suspension)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Formato_Infonavit)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Formato_Infonavit)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Formato_Infonavit)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Formato_Infonavit)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Fotos_Propiedad)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Fotos_Propiedad)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Fotos_Propiedad)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Fotos_Propiedad)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Evaluo_Contacto)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Evaluo_Contacto)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Evaluo_Contacto)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Evaluo_Contacto)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Planeacion_Fianza)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Planeacion_Fianza)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Planeacion_Fianza)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Planeacion_Fianza)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Urbanizacion)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Urbanizacion)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Urbanizacion)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Urbanizacion)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Credito_INFONAVIT)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Credito_INFONAVIT)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Credito_INFONAVIT)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Credito_INFONAVIT)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Notaria)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Notaria)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Notaria)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Notaria)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Firma_Escrituras)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Firma_Escrituras)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Firma_Escrituras)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Firma_Escrituras)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gtn_Gastos)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Gtn_Gastos)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gtn_Gastos)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Gtn_Gastos)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Contaduria.Id)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Contaduria.Id)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Contaduria.Id)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Contaduria.Id)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Corretaje.Crt_Status)
+            </dd>
 
-    </dl>
-</div>
+        </dl>
+    </div>*@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts {
+    <script>
+        $(document.body).css('padding-top', '70px');
+    </script>
+}
