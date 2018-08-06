@@ -1,8 +1,8 @@
+DROP DATABASE CasasRed
+
 CREATE DATABASE CasasRed;
 
 USE CasasRed;
-USE model
-DROP DATABASE CasasRed
 
 /*Datos Generales del Cliente (Llenado por Gestion)*/
 CREATE TABLE Cliente(

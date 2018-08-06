@@ -1,95 +1,86 @@
 ﻿@model CasasRed_Nuevo3_.Models.Usuario
 @{
-    Layout = null;
     string msg = (ViewBag.MensajeError != null) ? ViewBag.MensajeError : "";
     string usr = ViewBag.usuario;
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - Casas Red</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <h2>Usuarios</h2>
-        <br>
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#login">Iniciar sesión</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#cliente">cliente</a>
-            </li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div id="login" class="container tab-pane active">
-                <br>
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    <div>
-                        <label>@msg</label>
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <label>Usuario</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
-                                @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Contraseña</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "" } })
-                                @Html.ValidationMessageFor(model => model.usu_password, " ", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Iniciar sesion" class="btn btn-default" />
-                            </div>
+<div class="container">
+    <h2 style="margin-top: 20px;">Usuarios</h2>
+    <br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#login">Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#cliente">cliente</a>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="login" class="container tab-pane active">
+            <br>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    <label>@msg</label>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
+                            @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                }
-            </div>
-            <div id="cliente" class="container tab-pane fade">
-                <br>
-                @using (Html.BeginForm("Cliente", "Login"))
-                {
-                    @Html.AntiForgeryToken()
-                    <div>
-                        <label>@msg</label>
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <label>Folio</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.usu_contrasena, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
-                                @Html.ValidationMessageFor(model => model.usu_nombreusuario, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Consultar" class="btn btn-default" />
-                            </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "" } })
+                            @Html.ValidationMessageFor(model => model.usu_password, " ", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Iniciar sesion" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="cliente" class="container tab-pane fade">
+            <br>
+            @using (Html.BeginForm("Cliente", "Login"))
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    <label>@msg</label>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label>Folio</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
+                            @Html.ValidationMessageFor(model => model.usu_password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Consultar" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
 
 
-                }
-            </div>
+            }
         </div>
     </div>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-</body>
-</html>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+
+        $(document.body).css('padding-top', '70px');
+    </script>
+}

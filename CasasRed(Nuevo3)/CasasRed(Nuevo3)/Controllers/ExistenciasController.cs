@@ -39,12 +39,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Existencias/Create
         public ActionResult Create()
         {
-            //ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre");
-            //ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre");
-            //ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo");
-            ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre");
-            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_username");
-            ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo");
+            ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_id");
             return View();
         }
 
@@ -53,21 +48,33 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ext_art_id,ext_cantidad,ext_cantidadActual,ext_precioUnitario,ext_fechaAgregado,ext_usuarioAgrego,ext_ubicacion")] Existencias existencias)
+        public ActionResult Create([Bind(Include = "ext_art_id,ext_cantidad,ext_precioUnitario,ext_ubicacion")] Existencias existencias)
         {
-            if (ModelState.IsValid)
+            bool correcto = true;
+            try
             {
-                db.Existencias.Add(existencias);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    existencias.ext_cantidadActual = existencias.ext_cantidad;
+                    existencias.ext_fechaAgregado = DateTime.Now;
+                    //Falta usuario
+                    db.Existencias.Add(existencias);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                }
+                else
+                {
+                    correcto = false;
+                }
 
-            //ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
-            //ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_nombre", existencias.ext_usuarioAgrego);
-            //ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
-            ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_nombre", existencias.ext_art_id);
-            ViewBag.ext_usuarioAgrego = new SelectList(db.Usuario, "Id", "usu_username", existencias.ext_usuarioAgrego);
-            ViewBag.ext_ubicacion = new SelectList(db.Ubicaciones, "ubi_id", "ubi_codigo", existencias.ext_ubicacion);
+            }
+            catch (Exception ex)
+            {
+                correcto = false;
+                
+            }
+            ViewBag.ext_art_id = new SelectList(db.Articulos, "art_id", "art_id", existencias.ext_art_id);
+            ViewBag.Correcto = correcto;
             return View(existencias);
         }
 
