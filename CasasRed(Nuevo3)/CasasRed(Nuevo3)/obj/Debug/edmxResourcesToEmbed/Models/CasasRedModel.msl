@@ -15,6 +15,10 @@
     <EntitySetMapping Name="Cliente">
       <EntityTypeMapping TypeName="CasasRedModel.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Vndr_Apellidoma" ColumnName="Vndr_Apellidoma" />
+          <ScalarProperty Name="Vndr_Apellidopa" ColumnName="Vndr_Apellidopa" />
+          <ScalarProperty Name="Vndr_Nombre" ColumnName="Vndr_Nombre" />
           <ScalarProperty Name="Gral_Fechaalta" ColumnName="Gral_Fechaalta" />
           <ScalarProperty Name="Cyg_No_identificacoion" ColumnName="Cyg_No_identificacoion" />
           <ScalarProperty Name="Cyg_Identificacion" ColumnName="Cyg_Identificacion" />
@@ -65,11 +69,9 @@
     <EntitySetMapping Name="Contaduria">
       <EntityTypeMapping TypeName="CasasRedModel.Contaduria">
         <MappingFragment StoreEntitySet="Contaduria">
-          <ScalarProperty Name="Id_Habilitacion" ColumnName="Id_Habilitacion" />
-          <ScalarProperty Name="Id_Gestion" ColumnName="Id_Gestion" />
-          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
-          <ScalarProperty Name="Cnt_Vigilancia" ColumnName="Cnt_Vigilancia" />
-          <ScalarProperty Name="Cnt_Mensualidad" ColumnName="Cnt_Mensualidad" />
+          <ScalarProperty Name="Id_GastosContaduria" ColumnName="Id_GastosContaduria" />
+          <ScalarProperty Name="Id_Gastos" ColumnName="Id_Gastos" />
+          <ScalarProperty Name="Cnt_Presupuesto" ColumnName="Cnt_Presupuesto" />
           <ScalarProperty Name="Cnt_Presupuesto_habilitacion" ColumnName="Cnt_Presupuesto_habilitacion" />
           <ScalarProperty Name="Cnt_Presupuesto_corretaje" ColumnName="Cnt_Presupuesto_corretaje" />
           <ScalarProperty Name="Cnt_Presupuesto_gestion" ColumnName="Cnt_Presupuesto_gestion" />
@@ -80,7 +82,6 @@
     <EntitySetMapping Name="Corretaje">
       <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
         <MappingFragment StoreEntitySet="Corretaje">
-          <ScalarProperty Name="Crt_GastosServicios" ColumnName="Crt_GastosServicios" />
           <ScalarProperty Name="Crt_Obervaciones" ColumnName="Crt_Obervaciones" />
           <ScalarProperty Name="Crt_Status_Muestra" ColumnName="Crt_Status_Muestra" />
           <ScalarProperty Name="Crt_Otros" ColumnName="Crt_Otros" />
@@ -145,12 +146,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Gastos">
+      <EntityTypeMapping TypeName="CasasRedModel.Gastos">
+        <MappingFragment StoreEntitySet="Gastos">
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Gst_Coment" ColumnName="Gst_Coment" />
+          <ScalarProperty Name="Gst_Fecha" ColumnName="Gst_Fecha" />
+          <ScalarProperty Name="Gst_Monto" ColumnName="Gst_Monto" />
+          <ScalarProperty Name="Gst_Concepto" ColumnName="Gst_Concepto" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GastosContaduria">
+      <EntityTypeMapping TypeName="CasasRedModel.GastosContaduria">
+        <MappingFragment StoreEntitySet="GastosContaduria">
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="GstCon_Otros" ColumnName="GstCon_Otros" />
+          <ScalarProperty Name="GstCon_Vigilancia" ColumnName="GstCon_Vigilancia" />
+          <ScalarProperty Name="GstCon_Mensualidad" ColumnName="GstCon_Mensualidad" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Gestion">
       <EntityTypeMapping TypeName="CasasRedModel.Gestion">
         <MappingFragment StoreEntitySet="Gestion">
           <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
           <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
-          <ScalarProperty Name="Gtn_Gastos" ColumnName="Gtn_Gastos" />
+          <ScalarProperty Name="Gtm_Aviso_Susp" ColumnName="Gtm_Aviso_Susp" />
           <ScalarProperty Name="Gtn_Firma_Escrituras" ColumnName="Gtn_Firma_Escrituras" />
           <ScalarProperty Name="Gtn_Notaria" ColumnName="Gtn_Notaria" />
           <ScalarProperty Name="Gtn_Credito_INFONAVIT" ColumnName="Gtn_Credito_INFONAVIT" />
@@ -251,7 +276,7 @@
     <EntitySetMapping Name="Verificacion">
       <EntityTypeMapping TypeName="CasasRedModel.Verificacion">
         <MappingFragment StoreEntitySet="Verificacion">
-          <ScalarProperty Name="Id_Gestion" ColumnName="Id_Gestion" />
+          <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
           <ScalarProperty Name="Vfn_Observaciones" ColumnName="Vfn_Observaciones" />
           <ScalarProperty Name="Vfn_Trato_asesor" ColumnName="Vfn_Trato_asesor" />
           <ScalarProperty Name="Vfn_Costo" ColumnName="Vfn_Costo" />

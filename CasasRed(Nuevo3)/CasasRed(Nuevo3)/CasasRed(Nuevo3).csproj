@@ -217,6 +217,7 @@
     <Compile Include="Controllers\CorreoController.cs" />
     <Compile Include="Controllers\CorretajesController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
+    <Compile Include="Controllers\GerenteController.cs" />
     <Compile Include="Controllers\GestionsController.cs" />
     <Compile Include="Controllers\HabilitacionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -513,6 +514,7 @@
     <Content Include="Views\Ubicaciones\Edit.cshtml" />
     <Content Include="Views\Ubicaciones\Index.cshtml" />
     <Content Include="Views\Shared\_Layout Home.cshtml" />
+    <Content Include="Views\Gerente\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
