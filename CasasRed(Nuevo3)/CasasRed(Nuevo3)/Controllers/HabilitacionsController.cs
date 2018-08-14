@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CasasRed_Nuevo3_.Models;
-
+//El bueno que se subira a Github y Bitbucket
 namespace CasasRed_Nuevo3_.Controllers
 {
     public class HabilitacionsController : Controller
@@ -39,7 +39,6 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Habilitacions/Create
         public ActionResult Create()
         {
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status");
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status");
             return View();
         }
@@ -53,21 +52,11 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             if (ModelState.IsValid)
             {
-                //habilitacion.Hbt_Apagador_doble =
-                //habilitacion.Hbt_Apagador_sencillo = 
-                //habilitacion.
-                //habilitacion.
-                //habilitacion.
-
-
-
-
                 db.Habilitacion.Add(habilitacion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", habilitacion.Id);
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", habilitacion.Id_Corretaje);
             return View(habilitacion);
         }
@@ -84,7 +73,6 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", habilitacion.Id);
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", habilitacion.Id_Corretaje);
             return View(habilitacion);
         }
@@ -102,7 +90,6 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", habilitacion.Id);
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", habilitacion.Id_Corretaje);
             return View(habilitacion);
         }

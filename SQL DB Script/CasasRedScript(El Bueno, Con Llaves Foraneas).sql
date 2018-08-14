@@ -4,6 +4,60 @@ CREATE DATABASE CasasRed;
 
 USE CasasRed;
 
+/*Departamento de Corretaje*/
+--También llevara el nombre del asesor de la venta
+CREATE TABLE Corretaje(
+	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
+	Crt_Status VARCHAR(20),
+	Crt_Cliente_Nombre VARCHAR(15),
+	Crt_Cliente_ApMat VARCHAR(15),
+	Crt_Cliente_ApPat VARCHAR(15),
+	Crt_Direccion VARCHAR(100),
+	Crt_Precio VARCHAR(20), /*SUPONGO QUE DE LA CASA, NO SE*/ /*<<< Yo tampoco pero me imagino que es el precio de la casa y el gasto para ponerla al corriente y rehabilitacion*/
+	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
+	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
+	planta baja, segundaplanta. Si es Departamento que nivel (nivel 1, nivel 2, nivel 3, nivel 4)*/
+	Crt_Nivel INT,
+	Crt_Num_Habitaciones INT,
+	Crt_Planta INT,
+	Crt_Ano_compra DATE,
+	Crt_Num_Credito_Infonavit VARCHAR(10),
+	Crt_Saldo_infonavit DECIMAL(18,4),
+	Crt_Fec_Nac DATE,
+	Crt_Tel_Celular INT,
+	Crt_Estado_Civil VARCHAR(15),
+	Crt_Tel_Casa VARCHAR(15),
+	Crt_Tel_Trabajo VARCHAR(15),
+	Crt_Tel_Ref1 VARCHAR(15),
+	Crt_Tel_Ref2 VARCHAR(15),
+	Crt_Tel_Ref VARCHAR(15),
+	Crt_Recibo_predial_digital BIT, 
+	Crt_Clave_Catastral VARCHAR(15), 
+	Crt_Adeudo_predial DECIMAL(18,4),
+	Crt_Recibo_luz_digitalizar BIT,
+	Crt_Num_servicio_luz VARCHAR(12),
+	Crt_Adeudo_luz DECIMAL(18,4),
+	Crt_NombreC_Titular_luz VARCHAR(100),
+	Crt_Recibo_agua_digital BIT,
+	Crt_No_cuenta_agua VARCHAR(7), /*EN EL CASO DE CESPT SON 7 NUMEROS*/
+	Crt_Adeudo_agua DECIMAL(18,4),
+	Crt_Ine_Titu BIT,
+	Crt_Ine_Conyu BIT,
+	Crt_Escritura_Simple BIT,
+	Crt_Acuerdo BIT, /*CREO QUE SE REFIERE SI TIENE ACUERDO EN LA CESPT*/ /*Asi es*/
+	Crt_ActaNacTitu BIT,
+	Crt_ActaNacConyu BIT,
+	Crt_ActaMatr BIT,
+	Crt_EscrCert BIT,
+	Crt_CartaDesPre BIT,
+	Crt_ReciboLuz BIT, -- Físico
+	Crt_ReciboAgua BIT, -- Físico
+	Crt_Otros BIT, --Físico
+	Crt_Status_Muestra VARCHAR(30),
+	Crt_Obervaciones VARCHAR(300),
+	--Crt_GastosServicios MONEY
+);
+
 /*Datos Generales del Cliente (Llenado por Gestion)*/
 CREATE TABLE Cliente(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -50,62 +104,16 @@ CREATE TABLE Cliente(
 	Cyg_Correo VARCHAR(320),
 	Cyg_Identificacion VARCHAR(40),
 	Cyg_No_identificacoion INT,
-    Gral_Fechaalta DATE DEFAULT GETDATE()
+    Gral_Fechaalta DATE DEFAULT GETDATE(),
+	Vndr_Nombre VARCHAR(80), -- Vendedor quien trajo al cliente
+	Vndr_Apellidopa VARCHAR(40), -- Vendedor
+	Vndr_Apellidoma VARCHAR(40), -- Vendedor
+	Id_Corretaje INT,
+	CONSTRAINT FK_CrtCasa_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
 );
 
-/*Departamento de Corretaje*/
---También llevara el nombre del asesor de la venta
-CREATE TABLE Corretaje(
-	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
-	Crt_Status VARCHAR(20),
-	Crt_Cliente_Nombre VARCHAR(15),
-	Crt_Cliente_ApMat VARCHAR(15),
-	Crt_Cliente_ApPat VARCHAR(15),
-	Crt_Direccion VARCHAR(100),
-	Crt_Precio VARCHAR(20), /*SUPONGO QUE DE LA CASA, NO SE*/ /*<<< Yo tampoco pero me imagino que es el precio de la casa y el gasto para ponerla al corriente y rehabilitacion*/
-	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
-	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
-	planta baja, segundaplanta. Si es Departamento que nivel (nivel 1, nivel 2, nivel 3, nivel 4)*/
-	Crt_Nivel INT,
-	Crt_Num_Habitaciones INT,
-	Crt_Planta INT,
-	Crt_Ano_compra DATE,
-	Crt_Num_Credito_Infonavit VARCHAR(10),
-	Crt_Saldo_infonavit MONEY,
-	Crt_Fec_Nac DATE,
-	Crt_Tel_Celular INT,
-	Crt_Estado_Civil VARCHAR(15),
-	Crt_Tel_Casa VARCHAR(15),
-	Crt_Tel_Trabajo VARCHAR(15),
-	Crt_Tel_Ref1 VARCHAR(15),
-	Crt_Tel_Ref2 VARCHAR(15),
-	Crt_Tel_Ref VARCHAR(15),
-	Crt_Recibo_predial_digital BIT, 
-	Crt_Clave_Catastral VARCHAR(15), 
-	Crt_Adeudo_predial MONEY,
-	Crt_Recibo_luz_digitalizar BIT,
-	Crt_Num_servicio_luz VARCHAR(12),
-	Crt_Adeudo_luz MONEY,
-	Crt_NombreC_Titular_luz VARCHAR(100),
-	Crt_Recibo_agua_digital BIT,
-	Crt_No_cuenta_agua VARCHAR(7), /*EN EL CASO DE CESPT SON 7 NUMEROS*/
-	Crt_Adeudo_agua MONEY,
-	Crt_Ine_Titu BIT,
-	Crt_Ine_Conyu BIT,
-	Crt_Escritura_Simple BIT,
-	Crt_Acuerdo BIT, /*CREO QUE SE REFIERE SI TIENE ACUERDO EN LA CESPT*/ /*Asi es*/
-	Crt_ActaNacTitu BIT,
-	Crt_ActaNacConyu BIT,
-	Crt_ActaMatr BIT,
-	Crt_EscrCert BIT,
-	Crt_CartaDesPre BIT,
-	Crt_ReciboLuz BIT, -- Físico
-	Crt_ReciboAgua BIT, -- Físico
-	Crt_Otros BIT, --Físico
-	Crt_Status_Muestra VARCHAR(30),
-	Crt_Obervaciones VARCHAR(300),
-	Crt_GastosServicios MONEY
-);
 
 /*Departamento de Gestion*/
 CREATE TABLE Gestion(
@@ -136,20 +144,19 @@ CREATE TABLE Gestion(
 	Gtn_Credito_INFONAVIT BIT,
 	Gtn_Notaria BIT,
 	Gtn_Firma_Escrituras BIT,
-	Gtn_Gastos MONEY,
+	--Gtn_Gastos MONEY,
+	Gtm_Aviso_Susp BIT,
 	Id_Corretaje int, -- Llave Foranea a corretaje
 	Id_Cliente int, -- Llave Foranea a Cliente
 	/*AGEREGAR FK CASA QUE ES LA DE CORRETAJE*/ /*<<<<<<<<<<ESTO ES DEL VENDEDOR?*/
 	--La casa asignada
 	CONSTRAINT FK_Crt_Id
 		FOREIGN KEY (Id_Corretaje)
-		REFERENCES Corretaje(Id)
-		ON DELETE CASCADE,
+		REFERENCES Corretaje(Id),
 	--El comprador de la casa 
 	CONSTRAINT FK_Cliente_Id --Quitar (Pensar mas)
 		FOREIGN KEY (Id_Cliente)
 		REFERENCES Cliente(Id)
-		ON DELETE CASCADE
 );
  
 /*Departamento de Verificacion*/
@@ -160,13 +167,13 @@ CREATE TABLE Verificacion(
 	Vfn_Tiempo_estimado BIT, /*LE DIJO EL TIEMPO ESTIMADO DE ENTREGA?*/
 	Vfn_Tiempo VARCHAR(20), /*QUE TIEMPO LE DIJO EL VENDEDOR?*/
 	Vfn_Tiene_costo BIT, /*LE COMENTO EL ASESOR QUE TIENE UN COSTO?*/
-	Vfn_Costo MONEY, /*QUE COSTO LE DIJO?*/
-	Vfn_Trato_asesor VARCHAR(2), /*DEL 1 AL 10 QUE CALIFICACIN LE DA*/
+	Vfn_Costo DECIMAL(18,4), /*QUE COSTO LE DIJO?*/
+	Vfn_Trato_asesor int, /*DEL 1 AL 10 QUE CALIFICACIN LE DA*/
 	Vfn_Observaciones VARCHAR(150),
-	Id_Gestion int,
-	CONSTRAINT FK_GtnVer_Id -- (Cambiar a cliente)
-		FOREIGN KEY (Id_Gestion)
-		REFERENCES Gestion(Id)
+	Id_Cliente int,
+	CONSTRAINT FK_GtnCli_Id -- (Cambiar a cliente)
+		FOREIGN KEY (Id_Cliente)
+		REFERENCES Cliente(Id)
 		ON DELETE CASCADE
 );
 
@@ -208,35 +215,6 @@ CREATE TABLE Habilitacion(
 		ON DELETE CASCADE
 );
 
-/*Departamento de Contaduria*/ --No permite crear en cascada
-CREATE TABLE Contaduria(
-	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Cnt_Presupuesto_gestion MONEY,
-	Cnt_Presupuesto_corretaje MONEY,
-	Cnt_Presupuesto_habilitacion MONEY,
-	Cnt_Mensualidad MONEY,
-	Cnt_Vigilancia MONEY,
-	Id_Corretaje int,
-	Id_Gestion int,
-	Id_Habilitacion int,
-	/*LLAVE FORANEA DE CASA QUE SERIA LA DE CORRETAJE (Tambien para saber el gasto)*/
-	CONSTRAINT FK_CrtCon_Id
-		FOREIGN KEY (Id_Corretaje)
-		REFERENCES Corretaje(Id),
-	--	ON DELETE CASCADE,
-
-	/*LLAVES FORANEAS DE GESTION PARA SABER CUANTO GASTARON*/
-	CONSTRAINT FK_GtnCon_Id
-		FOREIGN KEY (Id_Gestion)
-		REFERENCES Gestion(Id),
-	--	ON DELETE CASCADE,
-	/*LLAVES FORANEAS DE HABILITACION PARA SABER CUANTO GASTARON*/
-	CONSTRAINT FK_HabCon_Id
-		FOREIGN KEY (Id_Habilitacion)
-		REFERENCES Habilitacion(Id)
-		--ON DELETE CASCADE
-);
-
 
 CREATE TABLE TipoUsuario(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -263,12 +241,56 @@ CREATE TABLE Usuario (
 		ON DELETE CASCADE
 );
 
+CREATE TABLE GastosContaduria(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	GstCon_Mensualidad DECIMAL(18,4),
+	GstCon_Vigilancia DECIMAL(18,4),
+	GstCon_Otros DECIMAL(18,4),
+	Id_Corretaje int,
+	CONSTRAINT FK_GastosCasa_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
+)
+
+CREATE TABLE Gastos(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Gst_Concepto VARCHAR(100),
+	Gst_Monto DECIMAL(18,4),
+	Gst_Fecha DATETIME DEFAULT GETDATE(),
+	Gst_Coment VARCHAR(200),
+	Id_usuario int,
+	Id_Corretaje int,
+	CONSTRAINT FK_Usuario_Id
+		FOREIGN KEY (Id_usuario)
+		REFERENCES Usuario(Id),
+	CONSTRAINT FK_Corretaje_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id),
+)
+
+/*Departamento de Contaduria*/ --No permite crear en cascada
+CREATE TABLE Contaduria(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Cnt_Presupuesto_gestion DECIMAL(18,4),
+	Cnt_Presupuesto_corretaje DECIMAL(18,4),
+	Cnt_Presupuesto_habilitacion DECIMAL(18,4),
+	Cnt_Presupuesto DECIMAL(18,4),
+	Id_Gastos int,
+	Id_GastosContaduria int,
+	CONSTRAINT FK_Gastos_Id
+		FOREIGN KEY (Id_Gastos)
+		REFERENCES Gastos(Id),
+	CONSTRAINT FK_GastosConta_Id
+		FOREIGN KEY (Id_GastosContaduria)
+		REFERENCES GastosContaduria(Id)
+);
+
 
 CREATE TABLE Articulos(
 	art_id VARCHAR(15) PRIMARY KEY,
 	art_nombre VARCHAR(150),
 	art_descripcion VARCHAR(250),
-	art_fechaIngreso DATE, --Cambio de DATETIME a DATE
+	art_fechaIngreso DATE DEFAULT GETDATE(), --Cambio de DATETIME a DATE
 	art_cantidadMinima DECIMAL(18,6)
 )
 
@@ -284,7 +306,8 @@ CREATE TABLE Existencias(
 	ext_cantidad decimal(18,6),
 	ext_cantidadActual decimal(18,6),
 	ext_precioUnitario decimal(18,6),
-	ext_fechaAgregado date, --Cambio de Decimal a Date
+	ext_fechaAgregado date default getdate(), --Cambio de Decimal a Date
 	ext_usuarioAgrego INT FOREIGN KEY REFERENCES Usuario(Id),
 	ext_ubicacion INT FOREIGN KEY REFERENCES Ubicaciones(ubi_id)
 )
+

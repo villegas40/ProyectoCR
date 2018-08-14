@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CasasRed_Nuevo3_.Models;
-
+//El bueno que se subira a Github y Bitbucket
 namespace CasasRed_Nuevo3_.Controllers
 {
     public class ClientesController : Controller
@@ -17,9 +17,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Clientes
         public ActionResult Index()
         {
-            //var cliente = db.Cliente.Include(c => c.Gestion);
-            //return View(cliente.ToList());
-            return View(db.Cliente.ToList());
+            var cliente = db.Cliente.Include(c => c.Corretaje);
+            return View(cliente.ToList());
         }
 
         // GET: Clientes/Details/5
@@ -40,8 +39,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status");
-            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo");
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status");
             return View();
         }
 
@@ -50,7 +48,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Vndr_Nombre,Vndr_Apellidopa,Vndr_Apellidoma,Id_Corretaje")] Cliente cliente)
         {
             int cliente_id;
             var gestion_controller = new GestionsController();
@@ -70,8 +68,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
-            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id_Corretaje);
             return View(cliente);
         }
 
@@ -87,8 +84,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
-            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id_Corretaje);
             return View(cliente);
         }
 
@@ -97,7 +93,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Vndr_Nombre,Vndr_Apellidopa,Vndr_Apellidoma,Id_Corretaje")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -105,8 +101,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.Id = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id);
-            //ViewBag.Id = new SelectList(db.Verificacion, "Id", "Vfn_Tiempo", cliente.Id);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id_Corretaje);
             return View(cliente);
         }
 

@@ -259,6 +259,12 @@
     <Compile Include="Models\Existencias.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Gastos.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GastosContaduria.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Gestion.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>

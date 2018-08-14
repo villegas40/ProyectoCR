@@ -11,146 +11,69 @@ namespace CasasRed_Nuevo3_.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
             this.Gestion = new HashSet<Gestion>();
+            this.Verificacion = new HashSet<Verificacion>();
         }
     
         public int Id { get; set; }
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string Gral_Nombre { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Apellido")]
         public string Gral_Apellidopa { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Apellido")]
         public string Gral_Apellidoma { get; set; }
-
         public Nullable<System.DateTime> Gral_Fechanac { get; set; }
-
-        [RegularExpression("\\d{10}", ErrorMessage = "Deben ser 10 números")]
         public string Gral_Nss { get; set; }
-
-        [RegularExpression("^[a-zA-Z]{4}\\d{6}[a-zA-Z]{6}\\d{2}$", ErrorMessage = "CURP incompleta")]
         public string Gral_Curp { get; set; }
-
-        [RegularExpression("^[a-zA-Z]{4}\\d{6}[a-zA-Z0-9]{3}$", ErrorMessage = "RFC incompleto")]
         public string Gral_Rfc { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Lugar de nacimiento")]
         public string Gral_Lugarnac { get; set; }
-
-        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar calle")]
         public string Gral_Calle { get; set; }
-
-        [RegularExpression("^\\d+$", ErrorMessage = "Revisar")]
         public string Gral_Numero { get; set; }
-
-        [RegularExpression("^\\d+$", ErrorMessage = "Revisar")]
         public string Gral_Cp { get; set; }
-
-        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar Colonia")]
         public string Gral_Colonia { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Municipio")]
         public string Gral_Municipio { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Estado")]
         public string Gral_Estado { get; set; }
-
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar número")]
         public string Gral_Celular { get; set; }
-
-        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Gral_Tel_casa { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+$", ErrorMessage = "Verificar estado civil")] //verificar si es soltero,casado ,divorciado solamente?
         public string Gral_Estado_civil { get; set; }
-
         public string Gral_Regimen_matrimonial { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupación")]
         public string Gral_Ocupacion { get; set; }
-
-        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Gral_Teltrabajo { get; set; }
-
-        [RegularExpression("^([a-zA-Z0-9]+\\S*)[@][a-zA-Z0-9]+[.][a-zA-Z]+$", ErrorMessage = "Verificar estructura correo")]
         public string Gral_Correo { get; set; }
-
-        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Gral_Identificacion { get; set; }
-
-        [RegularExpression("\\d+", ErrorMessage = "Sólo números")]
         public Nullable<int> Gral_No_identificacion { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string Gral_Ref_nombre1 { get; set; }
-
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar números")]
         public string Gral_Ref_cel_1 { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string Gral_Ref_nombre2 { get; set; }
-
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar números")]
         public string Gral_Ref_cel_2 { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Nombre")]
         public string Cyg_Nombre { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Apellido")]
         public string Cyg_Apellidopa { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Apellido")]
         public string Cyg_Apellidoma { get; set; }
-
-
         public Nullable<System.DateTime> Gyg_Fechanac { get; set; }
-
-        [RegularExpression("\\d{10}", ErrorMessage = "Deben ser 10 números")]
         public string Cyg_Nss { get; set; }
-
-        [RegularExpression("^[a-zA-Z]{4}\\d{6}[a-zA-Z]{6}\\d{2}$", ErrorMessage = "CURP incompleta")]
         public string Cyg_Curp { get; set; }
-
-        [RegularExpression("^[a-zA-Z]{4}\\d{6}[a-zA-Z0-9]{3}$", ErrorMessage = "RFC incompleto")]
         public string Cyg_Rfc { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar Lugar de nacimiento")]
         public string Cyg_Lugarnac { get; set; }
-
-        [RegularExpression("\\d{10}", ErrorMessage = "Verificar número")]
         public string Cyg_Celular { get; set; }
-
-        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Cyg_Tel_casa { get; set; }
-
-        [RegularExpression("^[a-zA-Z]+\\s*([a-zA-Z]*\\s*)*$", ErrorMessage = "Verificar ocupación")]
         public string Cyg_Ocupacion { get; set; }
-
-        [RegularExpression("\\d+", ErrorMessage = "Verificar número")]
         public string Cyg_Tel_trabajo { get; set; }
-
-        [RegularExpression("^([a-zA-Z0-9]+\\S*)[@][a-zA-Z0-9]+[.][a-zA-Z]+$", ErrorMessage = "Verificar estructura correo")]
         public string Cyg_Correo { get; set; }
-
-        [RegularExpression("^[a-zA-Z0-9]+\\s*([a-zA-Z0-9]*\\s*)*$", ErrorMessage = "Verificar")]
         public string Cyg_Identificacion { get; set; }
-
-        [RegularExpression("\\d+", ErrorMessage = "Sólo números")]
         public Nullable<int> Cyg_No_identificacoion { get; set; }
-
         public Nullable<System.DateTime> Gral_Fechaalta { get; set; }
+        public string Vndr_Nombre { get; set; }
+        public string Vndr_Apellidopa { get; set; }
+        public string Vndr_Apellidoma { get; set; }
+        public Nullable<int> Id_Corretaje { get; set; }
     
-
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gestion> Gestion { get; set; }
+        public virtual Corretaje Corretaje { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Verificacion> Verificacion { get; set; }
     }
 }

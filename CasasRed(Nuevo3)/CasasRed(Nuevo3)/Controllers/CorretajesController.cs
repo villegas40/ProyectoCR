@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CasasRed_Nuevo3_.Models;
-
+//El bueno que se subira a Github y Bitbucket
 namespace CasasRed_Nuevo3_.Controllers
 {
     public class CorretajesController : Controller
@@ -17,8 +17,6 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes
         public ActionResult Index()
         {
-            //var corretaje = db.Corretaje.Include(c => c.Contaduria).Include(c => c.Gestion).Include(c => c.Habilitacion);
-            //return View(corretaje.ToList());
             return View(db.Corretaje.ToList());
         }
 
@@ -40,10 +38,6 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes/Create
         public ActionResult Create()
         {
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre");
-            //ViewBag.Id = new SelectList(db.Contaduria, "Id", "Id");
-            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id");
-            //ViewBag.Id = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado");
             return View();
         }
 
@@ -71,10 +65,6 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Contaduria, "Id", "Id", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado", corretaje.Id);
             return View(corretaje);
         }
 
@@ -90,10 +80,6 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Contaduria, "Id", "Id", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado", corretaje.Id);
             return View(corretaje);
         }
 
@@ -110,10 +96,6 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Contaduria, "Id", "Id", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Gestion, "Id", "Id", corretaje.Id);
-            //ViewBag.Id = new SelectList(db.Habilitacion, "Id", "Hbt_Calibre_cableado", corretaje.Id);
             return View(corretaje);
         }
 

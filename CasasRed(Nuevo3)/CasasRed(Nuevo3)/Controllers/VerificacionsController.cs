@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CasasRed_Nuevo3_.Models;
-
+//El bueno que va a bitbuket
 namespace CasasRed_Nuevo3_.Controllers
 {
     public class VerificacionsController : Controller
@@ -17,9 +17,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions
         public ActionResult Index()
         {
-            //var verificacion = db.Verificacion.Include(v => v.Gestion);
-            //return View(verificacion.ToList());
-            var verificacion = db.Verificacion.Include(v => v.Gestion);
+            var verificacion = db.Verificacion.Include(v => v.Cliente);
             return View(verificacion.ToList());
         }
 
@@ -41,8 +39,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions/Create
         public ActionResult Create()
         {
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre");
-            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id");
+            ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre");
             return View();
         }
 
@@ -51,7 +48,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Gestion")] Verificacion verificacion)
+        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente")] Verificacion verificacion)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +58,6 @@ namespace CasasRed_Nuevo3_.Controllers
                 verificacion.Vfn_Tiempo = ((verificacion.Vfn_Tiempo == null) ? "" : verificacion.Vfn_Tiempo);
                 verificacion.Vfn_Tiempo_estimado = ((verificacion.Vfn_Tiempo_estimado == null) ? false : verificacion.Vfn_Tiempo_estimado);
                 verificacion.Vfn_Tiene_costo = ((verificacion.Vfn_Tiene_costo == null) ? false : verificacion.Vfn_Tiene_costo);
-                verificacion.Vfn_Trato_asesor = ((verificacion.Vfn_Trato_asesor == null) ? "" : verificacion.Vfn_Trato_asesor);
                 verificacion.Vfn_Visto_persona = ((verificacion.Vfn_Visto_persona == null) ? false : verificacion.Vfn_Visto_persona);
 
                 db.Verificacion.Add(verificacion);
@@ -69,8 +65,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
-            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", verificacion.Id_Gestion);
+            ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
             return View(verificacion);
         }
 
@@ -86,8 +81,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
-            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", verificacion.Id_Gestion);
+            ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
             return View(verificacion);
         }
 
@@ -96,7 +90,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Gestion")] Verificacion verificacion)
+        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente")] Verificacion verificacion)
         {
             if (ModelState.IsValid)
             {
@@ -104,8 +98,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.Id = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id);
-            ViewBag.Id_Gestion = new SelectList(db.Gestion, "Id", "Id", verificacion.Id_Gestion);
+            ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
             return View(verificacion);
         }
 
@@ -153,7 +146,7 @@ namespace CasasRed_Nuevo3_.Controllers
             Vfn_Visto_persona = false,
             Vfn_Tiempo_estimado = false,
             Vfn_Tiene_costo = false,
-            Id_Gestion = gestion_id
+            Id_Cliente = gestion_id
         };
 
             CS.Verificacion.Add(verificacion_obj);

@@ -14,13 +14,6 @@ namespace CasasRed_Nuevo3_.Models
     
     public partial class Gestion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Gestion()
-        {
-            this.Contaduria = new HashSet<Contaduria>();
-            this.Verificacion = new HashSet<Verificacion>();
-        }
-    
         public int Id { get; set; }
         public Nullable<bool> Gtn_Escrituras { get; set; }
         public Nullable<bool> Gtn_Planta_Cartografica { get; set; }
@@ -48,15 +41,11 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<bool> Gtn_Credito_INFONAVIT { get; set; }
         public Nullable<bool> Gtn_Notaria { get; set; }
         public Nullable<bool> Gtn_Firma_Escrituras { get; set; }
-        public Nullable<decimal> Gtn_Gastos { get; set; }
+        public Nullable<bool> Gtm_Aviso_Susp { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Cliente { get; set; }
     
         public virtual Cliente Cliente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contaduria> Contaduria { get; set; }
         public virtual Corretaje Corretaje { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Verificacion> Verificacion { get; set; }
     }
 }
