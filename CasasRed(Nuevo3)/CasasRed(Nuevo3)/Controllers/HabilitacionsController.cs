@@ -134,46 +134,37 @@ namespace CasasRed_Nuevo3_.Controllers
         public string CrearHabilitacion(Habilitacion habilitacion, int corretaje_id)
         {
             CasasRedEntities CS = new CasasRedEntities();
-            Habilitacion hab_obj = new Habilitacion();
+            Habilitacion hab_obj = new Habilitacion
+            {
 
-            int habilitacion_id;
-
-            //Contaduria
-            var contaduria_controller = new ContaduriasController();
-            var contaduria_obj = new Contaduria();
-
-
-            hab_obj.Hbt_Apagador_doble = false;
-            hab_obj.Hbt_Apagador_sencillo = false;
-            hab_obj.Hbt_AvisoSusp = false;
-            hab_obj.Hbt_Bastago = false;
-            hab_obj.Hbt_Bisagras = false;
-            hab_obj.Hbt_Break_interior = false;
-            hab_obj.Hbt_Break_medidor = false;
-            hab_obj.Hbt_Chapas = false;
-            hab_obj.Hbt_Chapeton = false;
-            hab_obj.Hbt_Conector_apagador = false;
-            hab_obj.Hbt_Conector_sencillo = false;
-            hab_obj.Hbt_Domo = false;
-            hab_obj.Hbt_Kit_lavamanos = false;
-            hab_obj.Hbt_Kit_taza = false;
-            hab_obj.Hbt_Lavamanos = false;
-            hab_obj.Hbt_Maneral = false;
-            hab_obj.Hbt_Marcos_puertas = false;
-            hab_obj.Hbt_Pinturas = false;
-            hab_obj.Hbt_Puertas = false;
-            hab_obj.Hbt_Regadera_completa = false;
-            hab_obj.Hbt_Rosetas = false;
-            hab_obj.Hbt_Taza = false;
-            hab_obj.Hbt_Ventanas = false;
-            hab_obj.Id_Corretaje = corretaje_id;
+                Hbt_Apagador_doble = false,
+                Hbt_Apagador_sencillo = false,
+                Hbt_AvisoSusp = false,
+                Hbt_Bastago = false,
+                Hbt_Bisagras = false,
+                Hbt_Break_interior = false,
+                Hbt_Break_medidor = false,
+                Hbt_Chapas = false,
+                Hbt_Chapeton = false,
+                Hbt_Conector_apagador = false,
+                Hbt_Conector_sencillo = false,
+                Hbt_Domo = false,
+                Hbt_Kit_lavamanos = false,
+                Hbt_Kit_taza = false,
+                Hbt_Lavamanos = false,
+                Hbt_Maneral = false,
+                Hbt_Marcos_puertas = false,
+                Hbt_Pinturas = false,
+                Hbt_Puertas = false,
+                Hbt_Regadera_completa = false,
+                Hbt_Rosetas = false,
+                Hbt_Taza = false,
+                Hbt_Ventanas = false,
+                Id_Corretaje = corretaje_id
+            };
 
             CS.Habilitacion.Add(hab_obj);
             CS.SaveChanges();
-
-            //Llamar a mandar la funcion de contaduria
-            habilitacion_id = hab_obj.Id;
-            contaduria_controller.CrearContaduria(contaduria_obj, corretaje_id, habilitacion_id);
 
             return "Esto es un string, repito, es un string...";
         }

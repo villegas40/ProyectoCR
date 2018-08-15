@@ -49,7 +49,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Gastos,Id_GastosContaduria")] Contaduria contaduria)
+        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Gastos,Id_GastosContaduria,Id_Corretaje")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Gastos,Id_GastosContaduria")] Contaduria contaduria)
+        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Gastos,Id_GastosContaduria,Id_Corretaje")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -135,20 +135,17 @@ namespace CasasRed_Nuevo3_.Controllers
 
         //Funcion para crear un registro vacio cuando se de de alta una nueva casa BUSCAR COMO HACER UPDATE PARA QUE CUANDO SE DE DE ALTA EN GESTION PONER EL NUMERO EN LA CASA QUE CORRESPONDE
         [HttpPost]
-        public string CrearContaduria(Contaduria contaduria, int corretaje_id, int habilitacion_id)
+        public string CrearContaduria(Contaduria contaduria, int corretaje_id)
         {
             CasasRedEntities CS = new CasasRedEntities();
-            Contaduria contaduria_obj = new Contaduria();
+            Contaduria contaduria_obj = new Contaduria {
+                Cnt_Presupuesto_corretaje = 0,
+                Cnt_Presupuesto_gestion = 0,
+                Cnt_Presupuesto_habilitacion = 0,
+                Id_Corretaje = corretaje_id //Para saber a que casa esta asociado el gasto
+            };
 
-            //contaduria_obj.Cnt_Mensualidad = 0;
-            //contaduria_obj.Cnt_Presupuesto_corretaje = 0;
-            //contaduria_obj.Cnt_Presupuesto_gestion = 0;
-            //contaduria_obj.Cnt_Presupuesto_habilitacion = 0;
-            //contaduria_obj.Cnt_Vigilancia = 0;
-            //contaduria_obj.Id_Corretaje = corretaje_id;
-            //contaduria_obj.Id_Habilitacion = habilitacion_id;
-
-            CS.Contaduria.Add(contaduria_obj);
+        CS.Contaduria.Add(contaduria_obj);
             CS.SaveChanges();
 
             return "Si funciona!...";

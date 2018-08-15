@@ -134,12 +134,9 @@ namespace CasasRed_Nuevo3_.Controllers
         }
 
         //Crear registro vacio al dar de alta cliente
-        public string GestionCrear(Gestion gestion, int cliente_id)
+        public string GestionCrear(Gestion gestion, int cliente_id, int corretaje_id)
         {
-            int gestion_id;
-            var verificacion_controller = new VerificacionsController();
-            var verificacion = new Verificacion();
-
+            
             CasasRedEntities CS = new CasasRedEntities();
 
             Gestion gestion_obj = new Gestion
@@ -170,15 +167,12 @@ namespace CasasRed_Nuevo3_.Controllers
                 Gtn_Credito_INFONAVIT = false,
                 Gtn_Notaria = false,
                 Gtn_Firma_Escrituras = false,
-                Id_Cliente = cliente_id
+                Id_Cliente = cliente_id,
+                Id_Corretaje = corretaje_id
             };
 
             CS.Gestion.Add(gestion_obj);
             CS.SaveChanges();
-
-            gestion_id = gestion_obj.Id;
-
-            verificacion_controller.VerfificacionCreate(verificacion, gestion_id);
 
             return "String que funciona...";
         }

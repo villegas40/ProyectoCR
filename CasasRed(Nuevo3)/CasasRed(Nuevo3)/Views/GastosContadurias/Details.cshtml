@@ -1,0 +1,50 @@
+﻿@model CasasRed_Nuevo3_.Models.GastosContaduria
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GastosContaduria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GstCon_Mensualidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GstCon_Mensualidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GstCon_Vigilancia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GstCon_Vigilancia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GstCon_Otros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GstCon_Otros)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

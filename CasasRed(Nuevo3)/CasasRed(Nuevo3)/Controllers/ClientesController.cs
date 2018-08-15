@@ -51,8 +51,12 @@ namespace CasasRed_Nuevo3_.Controllers
         public ActionResult Create([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Vndr_Nombre,Vndr_Apellidopa,Vndr_Apellidoma,Id_Corretaje")] Cliente cliente)
         {
             int cliente_id;
+            int corretaje_id;
             var gestion_controller = new GestionsController();
             var gestion = new Gestion();
+
+            var verificacion_controller = new VerificacionsController();
+            var verificacion = new Verificacion();
 
             if (ModelState.IsValid)
             {
@@ -61,9 +65,11 @@ namespace CasasRed_Nuevo3_.Controllers
 
                 //Mandar a llamar el método para crear un formulario vacío
                 cliente_id = cliente.Id;
+                //corretaje_id = cliente.Id_Corretaje;
 
-                gestion_controller.GestionCrear(gestion, cliente_id);
+                //gestion_controller.GestionCrear(gestion, cliente_id, corretaje_id);
 
+                verificacion_controller.VerfificacionCreate(verificacion, cliente_id);
 
                 return RedirectToAction("Index");
             }

@@ -217,6 +217,8 @@
     <Compile Include="Controllers\CorreoController.cs" />
     <Compile Include="Controllers\CorretajesController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
+    <Compile Include="Controllers\GastosContaduriasController.cs" />
+    <Compile Include="Controllers\GastosController.cs" />
     <Compile Include="Controllers\GestionsController.cs" />
     <Compile Include="Controllers\HabilitacionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -513,6 +515,16 @@
     <Content Include="Views\Ubicaciones\Edit.cshtml" />
     <Content Include="Views\Ubicaciones\Index.cshtml" />
     <Content Include="Views\Shared\_Layout Home.cshtml" />
+    <Content Include="Views\Gastos\Create.cshtml" />
+    <Content Include="Views\Gastos\Delete.cshtml" />
+    <Content Include="Views\Gastos\Details.cshtml" />
+    <Content Include="Views\Gastos\Edit.cshtml" />
+    <Content Include="Views\Gastos\Index.cshtml" />
+    <Content Include="Views\GastosContadurias\Create.cshtml" />
+    <Content Include="Views\GastosContadurias\Delete.cshtml" />
+    <Content Include="Views\GastosContadurias\Details.cshtml" />
+    <Content Include="Views\GastosContadurias\Edit.cshtml" />
+    <Content Include="Views\GastosContadurias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,7 +3,7 @@ DROP DATABASE CasasRed
 CREATE DATABASE CasasRed;
 
 USE CasasRed;
-
+Drop table Corretaje
 /*Departamento de Corretaje*/
 --También llevara el nombre del asesor de la venta
 CREATE TABLE Corretaje(
@@ -20,25 +20,25 @@ CREATE TABLE Corretaje(
 	Crt_Nivel INT,
 	Crt_Num_Habitaciones INT,
 	Crt_Planta INT,
-	Crt_Ano_compra DATE,
+	Crt_Ano_compra VARCHAR(4),
 	Crt_Num_Credito_Infonavit VARCHAR(10),
 	Crt_Saldo_infonavit DECIMAL(18,4),
 	Crt_Fec_Nac DATE,
-	Crt_Tel_Celular INT,
+	Crt_Tel_Celular VARCHAR(15),
 	Crt_Estado_Civil VARCHAR(15),
 	Crt_Tel_Casa VARCHAR(15),
 	Crt_Tel_Trabajo VARCHAR(15),
 	Crt_Tel_Ref1 VARCHAR(15),
 	Crt_Tel_Ref2 VARCHAR(15),
 	Crt_Tel_Ref VARCHAR(15),
-	Crt_Recibo_predial_digital BIT, 
+	Crt_Recibo_predial_digital VARCHAR(MAX), 
 	Crt_Clave_Catastral VARCHAR(15), 
 	Crt_Adeudo_predial DECIMAL(18,4),
-	Crt_Recibo_luz_digitalizar BIT,
+	--Crt_Recibo_luz_digitalizar BIT,
 	Crt_Num_servicio_luz VARCHAR(12),
 	Crt_Adeudo_luz DECIMAL(18,4),
 	Crt_NombreC_Titular_luz VARCHAR(100),
-	Crt_Recibo_agua_digital BIT,
+	--Crt_Recibo_agua_digital BIT,
 	Crt_No_cuenta_agua VARCHAR(7), /*EN EL CASO DE CESPT SON 7 NUMEROS*/
 	Crt_Adeudo_agua DECIMAL(18,4),
 	Crt_Ine_Titu BIT,
@@ -50,9 +50,9 @@ CREATE TABLE Corretaje(
 	Crt_ActaMatr BIT,
 	Crt_EscrCert BIT,
 	Crt_CartaDesPre BIT,
-	Crt_ReciboLuz BIT, -- Físico
-	Crt_ReciboAgua BIT, -- Físico
-	Crt_Otros BIT, --Físico
+	Crt_ReciboLuz VARCHAR(MAX), -- Físico
+	Crt_ReciboAgua VARCHAR(MAX), -- Físico
+	Crt_Otros VARCHAR(MAX), --Físico
 	Crt_Status_Muestra VARCHAR(30),
 	Crt_Obervaciones VARCHAR(300),
 	--Crt_GastosServicios MONEY
@@ -269,6 +269,7 @@ CREATE TABLE Gastos(
 )
 
 /*Departamento de Contaduria*/ --No permite crear en cascada
+
 CREATE TABLE Contaduria(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Cnt_Presupuesto_gestion DECIMAL(18,4),
@@ -277,12 +278,16 @@ CREATE TABLE Contaduria(
 	Cnt_Presupuesto DECIMAL(18,4),
 	Id_Gastos int,
 	Id_GastosContaduria int,
+	Id_Corretaje int,
 	CONSTRAINT FK_Gastos_Id
 		FOREIGN KEY (Id_Gastos)
 		REFERENCES Gastos(Id),
 	CONSTRAINT FK_GastosConta_Id
 		FOREIGN KEY (Id_GastosContaduria)
-		REFERENCES GastosContaduria(Id)
+		REFERENCES GastosContaduria(Id),
+	CONSTRAINT FK_CasaCorretaje_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
 );
 
 

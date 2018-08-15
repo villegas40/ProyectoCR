@@ -125,7 +125,8 @@
 
                                     <div class="col-12">
                                         <label for="civil">Estado civil</label>
-                                        @Html.EditorFor(model => model.Crt_Estado_Civil, new { htmlAttributes = new { @class = "form-control data", @id = "civil" } })
+                                        @Html.DropDownListFor(model => model.Crt_Estado_Civil, ViewData["Posicion"] as SelectList, new { @class = "form-control", @id = "Crt_Estado_Civil" })
+                                        @*@Html.EditorFor(model => model.Crt_Estado_Civil, new { htmlAttributes = new { @class = "form-control data", @id = "civil" } })*@
                                         @Html.ValidationMessageFor(model => model.Crt_Estado_Civil, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

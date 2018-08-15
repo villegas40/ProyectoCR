@@ -138,16 +138,17 @@ namespace CasasRed_Nuevo3_.Controllers
         }
 
         [HttpPost]
-        public string VerfificacionCreate(Verificacion verificacion, int gestion_id)
+        public string VerfificacionCreate(Verificacion verificacion, int cliente_id)
         {
             CasasRedEntities CS = new CasasRedEntities();
-            Verificacion verificacion_obj = new Verificacion {
-            Vfn_Persona_fisica = false,
-            Vfn_Visto_persona = false,
-            Vfn_Tiempo_estimado = false,
-            Vfn_Tiene_costo = false,
-            Id_Cliente = gestion_id
-        };
+            Verificacion verificacion_obj = new Verificacion
+            {
+                Vfn_Persona_fisica = false,
+                Vfn_Visto_persona = false,
+                Vfn_Tiempo_estimado = false,
+                Vfn_Tiene_costo = false,
+                Id_Cliente = cliente_id
+            };
 
             CS.Verificacion.Add(verificacion_obj);
             CS.SaveChanges();

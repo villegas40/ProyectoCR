@@ -21,8 +21,10 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<decimal> Cnt_Presupuesto { get; set; }
         public Nullable<int> Id_Gastos { get; set; }
         public Nullable<int> Id_GastosContaduria { get; set; }
+        public Nullable<int> Id_Corretaje { get; set; }
     
         public virtual Gastos Gastos { get; set; }
         public virtual GastosContaduria GastosContaduria { get; set; }
+        public virtual Corretaje Corretaje { get; set; }
     }
 }
