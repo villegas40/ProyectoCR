@@ -1,6 +1,11 @@
 ﻿@model CasasRed_Nuevo3_.Controllers.GerenteController.FooViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //   var test1 = ViewBag.test;
+    List<string> nombre = ViewBag.nombres;
+    List<string> ids = ViewBag.ids;
+
 }
 <br />
 <br />
@@ -41,7 +46,8 @@
             <tr>
                 <th scope="col">Id Casa</th>
                 <th scope="col">Dirección</th>
-                <th scope="col">Cliente asignado </th>
+                <th scope="col">Due;o</th>
+                <th scope="col">Comprador</th>
                 <th scope="col">Status</th>
                 <th scope="col">Progreso </th>
                 <th scope="col">Opciones</th>
@@ -60,6 +66,21 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Crt_Cliente_Nombre)
                     </td>
+                    
+     
+                    @for (int i = 0; i <nombre.Count-1; i++)
+                    {
+
+                        if (ids.i(i)==item.Id)
+                        {
+                         <td>
+                            @item2.Cliente.Gral_Nombre
+                        </td>
+                        }
+                     }  
+                    @*@Html.DisplayFor(modelItem => parameterValue)*@
+                    
+                    
                     <td>
                         @Html.DisplayFor(modelItem => item.Crt_Status) <!--Cambiar, agregar fecha de alta-->
                     </td>

@@ -258,3 +258,4 @@ C:\Users\Jose Garcia\Documents\ProyectoCRapi\CasasRed(Nuevo3)\CasasRed(Nuevo3)\o
 C:\Users\Jose Garcia\Documents\ProyectoCRapi\CasasRed(Nuevo3)\CasasRed(Nuevo3)\obj\Debug\CasasRed(Nuevo3).csproj.CopyComplete
 C:\Users\Jose Garcia\Documents\ProyectoCRapi\CasasRed(Nuevo3)\CasasRed(Nuevo3)\obj\Debug\CasasRed(Nuevo3).dll
 C:\Users\Jose Garcia\Documents\ProyectoCRapi\CasasRed(Nuevo3)\CasasRed(Nuevo3)\obj\Debug\CasasRed(Nuevo3).pdb
+C:\Users\Jose Garcia\Documents\ProyectoCRapi\CasasRed(Nuevo3)\CasasRed(Nuevo3)\obj\Debug\CasasRed(Nuevo3).csprojAssemblyReference.cache

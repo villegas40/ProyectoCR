@@ -1,9 +1,13 @@
 ﻿using System;
+
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
-using CasasRed_Nuevo3_.Models;
 using System.Web.Mvc;
+using CasasRed_Nuevo3_.Models;
 
 namespace CasasRed_Nuevo3_.Controllers
 {
@@ -14,14 +18,30 @@ namespace CasasRed_Nuevo3_.Controllers
         public ActionResult Index()
         {
             var gen = new FooViewModel();
-            gen.clientes = db.Cliente.ToList();
+            gen.gestions = db.Gestion.ToList();
             gen.corretajes = db.Corretaje.ToList();
+
+            var ge = ((from g in db.Gestion select new { g.Id_Corretaje, g.Cliente.Gral_Nombre }).ToList());
+
+            List<string> nombres = new List<string>();
+            List<int?> ids = new List<int?>();
+            foreach (var XD in ge)
+            {
+                nombres.Add(XD.Gral_Nombre);
+                ids.Add(XD.Id_Corretaje);
+            }
+
+            //ViewBag.test = (from g in db.Gestion select new {g.Id_Corretaje, g.Cliente.Gral_Nombre}).ToList();
+            ViewBag.listanombres = nombres;
+            ViewBag.listaids = ids;
+
             return View(gen);
+
         }
 
         public class FooViewModel
         {
-            public IEnumerable<Cliente> clientes { get; set; }
+            public IEnumerable<Gestion> gestions { get; set; }
             public IEnumerable<Corretaje> corretajes { get; set; }
         }
 
@@ -37,17 +57,18 @@ namespace CasasRed_Nuevo3_.Controllers
 
         //public ActionResult Details(int? id, int? idc)
         //{
-        //    if (id == null)
-        //    {
+        //   if (id == null)
+        //   {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
         //    else
         //    {
         //        var result = new DetailsViewModel();
-        //        result.clientes = db.Cliente.Find(id);
-        //        result.gestions = db.Gestion.Find();
+        //        result.corretajes = db.Corretaje.Find(id);
+               
+
         //        db.Cliente.Find(id);
-        //        db.Corretaje.Find();
+        //        db.Corretaje.Find(id);
         //        return View(result);
         //   }
         //}
