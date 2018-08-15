@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     //   var test1 = ViewBag.test;
-    List<string> nombre = ViewBag.nombres;
-    List<string> ids = ViewBag.ids;
+    List<string> nombre = ViewBag.listanombres;
+    List<int?> ids = ViewBag.listaids;
 
 }
 <br />
@@ -12,30 +12,30 @@
 <div class="container">
     <div class="container">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <a>Ordenar por:</a>
             </div>
             <div class="col-sm">
-                <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle btn-outline-dark float-left" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item" href="#">Mas vieja mas nueva</a>
-                    </div>
+                <div class="form-group">
+                    <select class="form-control" id="opcordenar">
+                        <option>Mas viejas a mas nuevas</option>
+                        <option>Mas nuevas a mas viejas</option>
+                       
+                    </select>
                 </div>
             </div>
-            <div class="col-sm">
+            <div class="col-sm-2">
                 <a>Mostrar:</a>
             </div>
             <div class="col-sm">
-                <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle btn-outline-dark float-left " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-
-                    <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 31px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item" href="#">Todas</a>
-                        <a class="dropdown-item" href="#">Vendidas</a>
-                        <a class="dropdown-item" href="#">En proceso</a>
-                        <a class="dropdown-item" href="#">No vendidas</a>
-                    </div>
+                <div class="form-group">
+                    <select class="form-control" id="opcmostrar">
+                        <option>Todas</option>
+                        <option>En venta</option>
+                        <option>En venta</option>
+                        <option>En proceso</option>
+                      
+                    </select>
                 </div>
             </div>
         </div>
@@ -71,10 +71,10 @@
                     @for (int i = 0; i <nombre.Count-1; i++)
                     {
 
-                        if (ids.i(i)==item.Id)
+                        if (ids[i].ToString()==item.Id.ToString())
                         {
                          <td>
-                            @item2.Cliente.Gral_Nombre
+                            @nombre[i]
                         </td>
                         }
                      }  

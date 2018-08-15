@@ -1,6 +1,5 @@
-DROP DATABASE CasasRed
-
 CREATE DATABASE CasasRed;
+GO
 
 USE CasasRed;
 
