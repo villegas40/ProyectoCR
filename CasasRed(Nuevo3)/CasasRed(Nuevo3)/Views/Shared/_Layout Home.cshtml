@@ -32,19 +32,62 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                @if (Session["Usuario"] != null)
+                {
+                    <li class="nav-item active">Bienvenido @Session["NombreCompleto"].ToString()</li>
+                }
+                else
+                {
                 <li class="nav-item active">
                     @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Acerca de Nosotros", "About", "Home", null, new { @class = "nav-link" })
-                </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })
-                </li>
-            </ul>
+                    </li>
+            <li class="nav-item">
+                @Html.ActionLink("Acerca de Nosotros", "About", "Home", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })
+            </li>
+                }
+                    @if (Session["Usuario"] != null)
+                    {
+                        if (Session["Tipo"].ToString() == "Administrador" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Contabilidad")
+                        {
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu jefazo
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if (Session["Tipo"].ToString() == "Administrador")
+                                {
+                                    <a class="dropdown-item" href="#">Usuarios</a>
+                                    <a class="dropdown-item" href="/Clientes">Clientes</a>
+                                    <a class="dropdown-item" href="/Corretajes">Corretaje</a>
+                                    <a class="dropdown-item" href="/Gestions">Gestion</a>
+                                    <a class="dropdown-item" href="/Contadurias">Contaduria</a>
+                                    <a class="dropdown-item" href="/Habilitacions">Habilitacion</a>
+                                    <a class="dropdown-item" href="/Verificacions">Verificacion</a>
+                                }
+                                else if (Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Contabilidad")
+                                {
+                                    <a class="dropdown-item" href="/Habilitacions">Habilitacion</a>
+
+                                }
+
+
+                            </div>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        @Html.ActionLink("Cerrar sesion", "Cerrar", "Login", null, new { @class = "nav-link" })
+
+                    </li>
+                }
+                </ul>
 
         </div>
     </nav>

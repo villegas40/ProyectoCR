@@ -97,25 +97,23 @@
           <Property Name="Crt_Nivel" Type="int" />
           <Property Name="Crt_Num_Habitaciones" Type="int" />
           <Property Name="Crt_Planta" Type="int" />
-          <Property Name="Crt_Ano_compra" Type="date" />
+          <Property Name="Crt_Ano_compra" Type="varchar" MaxLength="4" />
           <Property Name="Crt_Num_Credito_Infonavit" Type="varchar" MaxLength="10" />
           <Property Name="Crt_Saldo_infonavit" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Crt_Fec_Nac" Type="date" />
-          <Property Name="Crt_Tel_Celular" Type="int" />
+          <Property Name="Crt_Tel_Celular" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Estado_Civil" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Tel_Casa" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Tel_Trabajo" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Tel_Ref1" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Tel_Ref2" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Tel_Ref" Type="varchar" MaxLength="15" />
-          <Property Name="Crt_Recibo_predial_digital" Type="bit" />
+          <Property Name="Crt_Recibo_predial_digital" Type="varchar(max)" />
           <Property Name="Crt_Clave_Catastral" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Adeudo_predial" Type="decimal" Precision="18" Scale="4" />
-          <Property Name="Crt_Recibo_luz_digitalizar" Type="bit" />
           <Property Name="Crt_Num_servicio_luz" Type="varchar" MaxLength="12" />
           <Property Name="Crt_Adeudo_luz" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Crt_NombreC_Titular_luz" Type="varchar" MaxLength="100" />
-          <Property Name="Crt_Recibo_agua_digital" Type="bit" />
           <Property Name="Crt_No_cuenta_agua" Type="varchar" MaxLength="7" />
           <Property Name="Crt_Adeudo_agua" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Crt_Ine_Titu" Type="bit" />
@@ -127,9 +125,9 @@
           <Property Name="Crt_ActaMatr" Type="bit" />
           <Property Name="Crt_EscrCert" Type="bit" />
           <Property Name="Crt_CartaDesPre" Type="bit" />
-          <Property Name="Crt_ReciboLuz" Type="bit" />
-          <Property Name="Crt_ReciboAgua" Type="bit" />
-          <Property Name="Crt_Otros" Type="bit" />
+          <Property Name="Crt_ReciboLuz" Type="varchar(max)" />
+          <Property Name="Crt_ReciboAgua" Type="varchar(max)" />
+          <Property Name="Crt_Otros" Type="varchar(max)" />
           <Property Name="Crt_Status_Muestra" Type="varchar" MaxLength="30" />
           <Property Name="Crt_Obervaciones" Type="varchar" MaxLength="300" />
         </EntityType>
@@ -281,7 +279,7 @@
           <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
           <Property Name="Id_Cliente" Type="int" />
         </EntityType>
-        <Association Name="FK__Existenci__ext_a__6FE99F9F">
+        <Association Name="FK__Existenci__ext_a__70DDC3D8">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -293,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Existenci__ext_u__71D1E811">
+        <Association Name="FK__Existenci__ext_u__72C60C4A">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,7 +303,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Existenci__ext_u__72C60C4A">
+        <Association Name="FK__Existenci__ext_u__73BA3083">
           <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -481,15 +479,15 @@
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Existenci__ext_a__6FE99F9F" Association="Self.FK__Existenci__ext_a__6FE99F9F">
+          <AssociationSet Name="FK__Existenci__ext_a__70DDC3D8" Association="Self.FK__Existenci__ext_a__70DDC3D8">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
-          <AssociationSet Name="FK__Existenci__ext_u__71D1E811" Association="Self.FK__Existenci__ext_u__71D1E811">
+          <AssociationSet Name="FK__Existenci__ext_u__72C60C4A" Association="Self.FK__Existenci__ext_u__72C60C4A">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
-          <AssociationSet Name="FK__Existenci__ext_u__72C60C4A" Association="Self.FK__Existenci__ext_u__72C60C4A">
+          <AssociationSet Name="FK__Existenci__ext_u__73BA3083" Association="Self.FK__Existenci__ext_u__73BA3083">
             <End Role="Ubicaciones" EntitySet="Ubicaciones" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
@@ -997,25 +995,23 @@
           <Property Name="Crt_Nivel" Type="Int32" />
           <Property Name="Crt_Num_Habitaciones" Type="Int32" />
           <Property Name="Crt_Planta" Type="Int32" />
-          <Property Name="Crt_Ano_compra" Type="DateTime" Precision="0" />
+          <Property Name="Crt_Ano_compra" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Num_Credito_Infonavit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Saldo_infonavit" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Crt_Fec_Nac" Type="DateTime" Precision="0" />
-          <Property Name="Crt_Tel_Celular" Type="Int32" />
+          <Property Name="Crt_Tel_Celular" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Estado_Civil" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Tel_Casa" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Tel_Trabajo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Tel_Ref1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Tel_Ref2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Tel_Ref" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Recibo_predial_digital" Type="Boolean" />
+          <Property Name="Crt_Recibo_predial_digital" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Clave_Catastral" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Adeudo_predial" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="Crt_Recibo_luz_digitalizar" Type="Boolean" />
           <Property Name="Crt_Num_servicio_luz" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Adeudo_luz" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Crt_NombreC_Titular_luz" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Crt_Recibo_agua_digital" Type="Boolean" />
           <Property Name="Crt_No_cuenta_agua" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Adeudo_agua" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="Crt_Ine_Titu" Type="Boolean" />
@@ -1027,9 +1023,9 @@
           <Property Name="Crt_ActaMatr" Type="Boolean" />
           <Property Name="Crt_EscrCert" Type="Boolean" />
           <Property Name="Crt_CartaDesPre" Type="Boolean" />
-          <Property Name="Crt_ReciboLuz" Type="Boolean" />
-          <Property Name="Crt_ReciboAgua" Type="Boolean" />
-          <Property Name="Crt_Otros" Type="Boolean" />
+          <Property Name="Crt_ReciboLuz" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_ReciboAgua" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Crt_Otros" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Status_Muestra" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Crt_Obervaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cliente" Relationship="CasasRedModel.FK_CrtCasa_Id" FromRole="Corretaje" ToRole="Cliente" />
@@ -1374,11 +1370,9 @@
                 <ScalarProperty Name="Crt_Ine_Titu" ColumnName="Crt_Ine_Titu" />
                 <ScalarProperty Name="Crt_Adeudo_agua" ColumnName="Crt_Adeudo_agua" />
                 <ScalarProperty Name="Crt_No_cuenta_agua" ColumnName="Crt_No_cuenta_agua" />
-                <ScalarProperty Name="Crt_Recibo_agua_digital" ColumnName="Crt_Recibo_agua_digital" />
                 <ScalarProperty Name="Crt_NombreC_Titular_luz" ColumnName="Crt_NombreC_Titular_luz" />
                 <ScalarProperty Name="Crt_Adeudo_luz" ColumnName="Crt_Adeudo_luz" />
                 <ScalarProperty Name="Crt_Num_servicio_luz" ColumnName="Crt_Num_servicio_luz" />
-                <ScalarProperty Name="Crt_Recibo_luz_digitalizar" ColumnName="Crt_Recibo_luz_digitalizar" />
                 <ScalarProperty Name="Crt_Adeudo_predial" ColumnName="Crt_Adeudo_predial" />
                 <ScalarProperty Name="Crt_Clave_Catastral" ColumnName="Crt_Clave_Catastral" />
                 <ScalarProperty Name="Crt_Recibo_predial_digital" ColumnName="Crt_Recibo_predial_digital" />

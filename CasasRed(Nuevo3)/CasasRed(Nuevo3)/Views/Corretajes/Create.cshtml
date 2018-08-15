@@ -341,37 +341,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="col-6 col-lg-6">
-                                <div class="custom-control custom-checkbox">
-                                    @*<label>Recibo de luz digital</label>*@
-                                    @*Html.LabelFor(model => model.Crt_Recibo_luz_digitalizar, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                    <div class="col-md-10">
-                                        <div class="checkbox">
-                                            @*Html.EditorFor(model => model.Crt_Recibo_luz_digitalizar)*@
-                                            @Html.TextBoxFor(model => model.Crt_Recibo_luz_digitalizar, new { @class = "custom-control-input data", @id = "customCheck2", @type = "checkbox", @oninput = "this.value = this.checked" })
-                                            <label class="custom-control-label" for="customCheck2">Recibo de Luz Digital</label>
-                                            @Html.ValidationMessageFor(model => model.Crt_Recibo_luz_digitalizar, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6 col-lg-6">
-                                <div class="custom-control custom-checkbox">
-                                    @*<label>Recibo de agua digital</label>*@
-                                    @*Html.LabelFor(model => model.Crt_Recibo_agua_digital, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                    <div class="col-md-10">
-                                        <div class="checkbox">
-                                            @*Html.EditorFor(model => model.Crt_Recibo_agua_digital)*@
-                                            @Html.TextBoxFor(model => model.Crt_Recibo_agua_digital, new { @class = "custom-control-input data", @id = "customCheck3", @type = "checkbox", @oninput = "this.value = this.checked" })
-                                            <label class="custom-control-label" for="customCheck3">Recibo del Agua Digital</label>
-                                            @Html.ValidationMessageFor(model => model.Crt_Recibo_agua_digital, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="col-6 col-lg-6">
                                 <div class="custom-control custom-checkbox">
                                     @*Html.LabelFor(model => model.Crt_Acuerdo, htmlAttributes: new { @class = "control-label" })*@

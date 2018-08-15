@@ -14,7 +14,7 @@ namespace CasasRed_Nuevo3_.Controllers
         public ActionResult Index()
         {
             if (Session["Usuario"] == null)
-            {
+            {       
                return RedirectToAction("Incio");
             }
             else
@@ -25,6 +25,11 @@ namespace CasasRed_Nuevo3_.Controllers
 
         public ActionResult Inicio()
         {
+            if (Session["Usuario"] != null)
+            {
+                string direccion = Redireccionar();
+                return RedirectToAction(direccion.Split('-')[1], direccion.Split('-')[0]);
+            }
             ViewBag.usuario = "";
             return View();
         }
@@ -42,8 +47,12 @@ namespace CasasRed_Nuevo3_.Controllers
                     Session["Nombre"] = user.u.usu_nombre;
                     Session["ApellidoP"] = user.u.usu_apellidoPa;
                     Session["ApellidoM"] = user.u.usu_apellidoMa;
-                    Session["Tipo"] = user.ut.Id;
-                return RedirectToAction("Index", "Home");
+                    Session["NombreCompleto"] = user.u.usu_nombre + " " + user.u.usu_apellidoPa + " " + user.u.usu_apellidoMa;
+                    Session["Tipo"] = user.ut.tipusu_descricion;
+                    string direccion = Redireccionar();
+                    Session["Vista"] = direccion.Split('-')[1];
+                    Session["Controlador"] = direccion.Split('-')[0];
+                    return RedirectToAction(direccion.Split('-')[1], direccion.Split('-')[0]);
                 }
                 else
                 {
@@ -73,6 +82,33 @@ namespace CasasRed_Nuevo3_.Controllers
             Session["ApellidoM"] = null;
             Session["Tipo"] = null;
             return RedirectToAction("Index", "Home");
+        }
+        private string Redireccionar()
+        {
+            string direccion = "Home-Index";
+            if (Session["Tipo"].ToString() == "Administrador")
+            {
+                direccion = "Home-Index";
+            } else if (Session["Tipo"].ToString() == "Gestion")
+            {
+                direccion = "Gestions-Index";
+            } else if (Session["Tipo"].ToString() == "Corretaje")
+            {
+                direccion = "Corretajes-Index";
+            }
+            else if (Session["Tipo"].ToString() == "Habilitacion")
+            {
+                direccion = "Habilitacions-Index";
+            }
+            else if (Session["Tipo"].ToString() == "Contabilidad")
+            {
+                direccion = "Contadurias-Index";
+            }
+            else if (Session["Tipo"].ToString() == "Verificacion")
+            {
+                direccion = "Verificacions-Index";
+            }
+            return direccion;
         }
     }
 }

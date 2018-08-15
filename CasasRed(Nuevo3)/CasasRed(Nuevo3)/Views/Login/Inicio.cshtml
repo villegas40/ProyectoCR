@@ -3,74 +3,144 @@
     string msg = (ViewBag.MensajeError != null) ? ViewBag.MensajeError : "";
     string usr = ViewBag.usuario;
 }
+
+<style>
+    .login-form .form-control {
+        background: #f7f7f7 none repeat scroll 0 0;
+        border: 1px solid #d4d4d4;
+        border-radius: 4px;
+        font-size: 14px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .main-div {
+        background: #ffffff none repeat scroll 0 0;
+        border-radius: 2px;
+        margin: 10px auto 30px;
+        max-width: 38%;
+        padding: 50px 70px 70px 71px;
+    }
+
+    .login-form .form-group {
+        margin-bottom: 10px;
+    }
+
+    .login-form {
+        text-align: center;
+    }
+
+        .login-form .btn.btn-primary {
+            background: #f0ad4e none repeat scroll 0 0;
+            border-color: #f0ad4e;
+            color: #ffffff;
+            font-size: 14px;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding: 0;
+        }
+
+    .btn-primary {
+        background: #721c24 none repeat scroll 0 0;
+        border-color: #721c24;
+        color: #ffffff;
+        font-size: 14px;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+    }
+
+        .btn-primary:hover {
+            background: black;
+            border-color: black;
+        }
+
+    body {
+        background-color: #F0F0F0;
+    }
+
+    a {
+        color: #721c24;
+    }
+
+        a:hover {
+            color: black;
+        }
+</style>
 <div class="container">
-    <h2 style="margin-top: 20px;">Usuarios</h2>
-    <br>
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#login">Iniciar sesión</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#cliente">cliente</a>
-        </li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div id="login" class="container tab-pane active">
-            <br>
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <div>
-                    <label>@msg</label>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        <label>Usuario</label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
-                            @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger" })
+    <div class="main-div" style="margin-top:70px;">
+        <h2 style="margin-top: 19px;">Iniciar sesión</h2>
+        <br>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#login">Iniciar sesión</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#cliente">Cliente</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="login" class="container tab-pane active">
+                <br>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div>
+                        <label>@msg</label>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+
+                            <label>Usuario</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
+                                @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "" } })
+                                @Html.ValidationMessageFor(model => model.usu_password, " ", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Iniciar sesión" class="btn btn-primary" />
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Contraseña</label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "" } })
-                            @Html.ValidationMessageFor(model => model.usu_password, " ", new { @class = "text-danger" })
+                }
+            </div>
+            <div id="cliente" class="container tab-pane fade">
+                <br>
+                @using (Html.BeginForm("Cliente", "Login"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div>
+                        <label>@msg</label>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label>Folio</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
+                                @Html.ValidationMessageFor(model => model.usu_password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Consultar" class="btn btn-primary" />
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Iniciar sesion" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-        <div id="cliente" class="container tab-pane fade">
-            <br>
-            @using (Html.BeginForm("Cliente", "Login"))
-            {
-                @Html.AntiForgeryToken()
-                <div>
-                    <label>@msg</label>
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        <label>Folio</label>
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
-                            @Html.ValidationMessageFor(model => model.usu_password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Consultar" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
 
 
-            }
+                }
+            </div>
         </div>
     </div>
 </div>
