@@ -27,8 +27,6 @@ namespace WebApiApp.Models
     
         public virtual DbSet<Articulos> Articulos { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
-        public virtual DbSet<Contaduria> Contaduria { get; set; }
-        public virtual DbSet<Corretaje> Corretaje { get; set; }
         public virtual DbSet<Existencias> Existencias { get; set; }
         public virtual DbSet<Gastos> Gastos { get; set; }
         public virtual DbSet<GastosContaduria> GastosContaduria { get; set; }
@@ -38,5 +36,7 @@ namespace WebApiApp.Models
         public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Verificacion> Verificacion { get; set; }
+        public virtual DbSet<Corretaje> Corretaje { get; set; }
+        public virtual DbSet<Contaduria> Contaduria { get; set; }
     }
 }

@@ -74,6 +74,16 @@ namespace WebApiApp.Controllers
         [ResponseType(typeof(Corretaje))]
         public IHttpActionResult PostCorretaje(Corretaje corretaje)
         {
+            int corretaje_id;
+
+            //Habilitacion
+            //var habilitacion = new Habilitacion();
+            var habilitacion_controller = new HabilitacionsController();
+
+            //Contaduria
+            //var contaduria = new Contaduria();
+            var contadiria_controller = new ContaduriasController();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -81,6 +91,13 @@ namespace WebApiApp.Controllers
 
             db.Corretaje.Add(corretaje);
             db.SaveChanges();
+
+            //Variables
+            corretaje_id = corretaje.Id;
+
+            //Funciones
+            habilitacion_controller.CreateHabilitacions(corretaje_id);
+            contadiria_controller.CreateContadurias(corretaje_id);
 
             return CreatedAtRoute("DefaultApi", new { id = corretaje.Id }, corretaje);
         }

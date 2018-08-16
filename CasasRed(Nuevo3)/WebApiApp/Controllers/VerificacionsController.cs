@@ -114,5 +114,22 @@ namespace WebApiApp.Controllers
         {
             return db.Verificacion.Count(e => e.Id == id) > 0;
         }
+
+        ////Funcion generar registro vacio relacionado con un cliente dado de alta
+        public void CreateVerificacions(int cliente_id)
+        {
+            CasasRedEntities CS = new CasasRedEntities();
+            Verificacion verificacion_obj = new Verificacion
+            {
+                Vfn_Costo = 0,
+                Vfn_Persona_fisica = false,
+                Vfn_Tiempo_estimado = false,
+                Vfn_Tiene_costo = false,
+                Vfn_Visto_persona = false
+            };
+
+            CS.Verificacion.Add(verificacion_obj);
+            CS.SaveChanges();
+        }
     }
 }

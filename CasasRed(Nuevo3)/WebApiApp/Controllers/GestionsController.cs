@@ -114,5 +114,46 @@ namespace WebApiApp.Controllers
         {
             return db.Gestion.Count(e => e.Id == id) > 0;
         }
+
+        //Funcion generar registro vacio relacionado con un cliente dado de alta
+        public void CreateGestions(int cliente_id, int corretaje_id)
+        {
+            CasasRedEntities CS = new CasasRedEntities();
+            Gestion gestion_obj = new Gestion
+            {
+                Gtm_Aviso_Susp = false,
+                Gtn_Acta_Nacimiento = false,
+                Gtn_Agua_Pago_Inf = false,
+                Gtn_Aviso_Suspension = false,
+                Gtn_Avaluo = false,
+                Gtn_Cert_Cartogr = false,
+                Gtn_Cert_Fiscal = false,
+                Gtn_Cert_Hip = false,
+                Gtn_Credito_INFONAVIT = false,
+                Gtn_CT_Banco = false,
+                Gtn_Escrituras = false,
+                Gtn_Evaluo_Contacto = false,
+                Gtn_Firma_Escrituras = false,
+                Gtn_Formato_Infonavit = false,
+                Gtn_Fotos_Propiedad = false,
+                Gtn_IFE_Copia = false,
+                Gtn_Junta_URBI = false,
+                Gtn_Notaria = false,
+                Gtn_No_Oficial = false,
+                Gtn_Planeacion_Fianza = false,
+                Gtn_Planta_Cartografica = false,
+                Gtn_Predial = false,
+                Gtn_Recibo_Agua = false,
+                Gtn_Recibo_Luz = false,
+                Gtn_Sol_Estado = false,
+                Gtn_Sol_Ret_Ifo = false,
+                Gtn_Urbanizacion = false,
+                Id_Cliente = cliente_id,
+                Id_Corretaje = corretaje_id
+            };
+
+            CS.Gestion.Add(gestion_obj);
+            CS.SaveChanges();
+        }
     }
 }

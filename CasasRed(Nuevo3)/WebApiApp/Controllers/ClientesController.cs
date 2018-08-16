@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CasasRed_Nuevo3_.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -74,6 +75,21 @@ namespace WebApiApp.Controllers
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult PostCliente(Cliente cliente)
         {
+            int cliente_id, corretaje_id;
+            string correo, telefono;
+
+            //Objeto de Gestion
+            var gestion_controller = new GestionsController();
+
+            //Objeto Verificacion
+            var verificacion_controller = new VerificacionsController();
+
+            //Correo
+            var correo_controller = new CorreoController();
+
+            //SMS
+            var sms_controller = new SmsController();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -81,6 +97,18 @@ namespace WebApiApp.Controllers
 
             db.Cliente.Add(cliente);
             db.SaveChanges();
+
+            //Tomar valores
+            cliente_id = cliente.Id;
+            corretaje_id = cliente.Id_Corretaje.Value; //Preguntar si lo dejo así o corretaje_id = cliente.Id_Corretaje.HasValue ? cliente.Id_Corretaje.Value:0
+            telefono = cliente.Gral_Celular.ToString();
+            correo = cliente.Gral_Correo;
+
+            //Funciones
+            gestion_controller.CreateGestions(cliente_id, corretaje_id);
+            verificacion_controller.CreateVerificacions(cliente_id);
+            //sms_controller.SendSms(telefono); Estan comentadas porque cuestan dinero xd
+            //correo_controller.sendmail(correo);
 
             return CreatedAtRoute("DefaultApi", new { id = cliente.Id }, cliente);
         }

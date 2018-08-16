@@ -52,11 +52,17 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             int cliente_id;
             int corretaje_id;
+            string telefono, correo;
+
             var gestion_controller = new GestionsController();
             var gestion = new Gestion();
 
             var verificacion_controller = new VerificacionsController();
             var verificacion = new Verificacion();
+
+            //SMS y Correo
+            var sms = new SmsController();
+            var correo_controlador = new CorreoController();
 
             if (ModelState.IsValid)
             {
@@ -65,11 +71,17 @@ namespace CasasRed_Nuevo3_.Controllers
 
                 //Mandar a llamar el método para crear un formulario vacío
                 cliente_id = cliente.Id;
-                //corretaje_id = cliente.Id_Corretaje;
-
-                //gestion_controller.GestionCrear(gestion, cliente_id, corretaje_id);
+                corretaje_id = cliente.Id_Corretaje.Value;
+                telefono = cliente.Gral_Celular.ToString();
+                correo = cliente.Gral_Correo;
 
                 verificacion_controller.VerfificacionCreate(verificacion, cliente_id);
+                gestion_controller.GestionCrear(gestion, cliente_id, corretaje_id);
+
+                verificacion_controller.VerfificacionCreate(verificacion, cliente_id);
+
+                //sms.SendSms(telefono); Comentado porque gasta dinero
+                //correo_controlador.sendmail(correo);
 
                 return RedirectToAction("Index");
             }

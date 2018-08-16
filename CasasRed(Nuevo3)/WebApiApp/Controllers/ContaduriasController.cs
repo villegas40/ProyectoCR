@@ -114,5 +114,23 @@ namespace WebApiApp.Controllers
         {
             return db.Contaduria.Count(e => e.Id == id) > 0;
         }
+
+        //Funcion crear registro vacio automantico cuando se da de alta una casa
+        public void CreateContadurias(int corretaje_id)
+        {
+            CasasRedEntities CS = new CasasRedEntities();
+
+            Contaduria contaduria_obj = new Contaduria
+            {
+                Cnt_Presupuesto = 0,
+                Cnt_Presupuesto_corretaje = 0,
+                Cnt_Presupuesto_gestion = 0,
+                Cnt_Presupuesto_habilitacion = 0,
+                Id_Corretaje = corretaje_id,
+            };
+
+            CS.Contaduria.Add(contaduria_obj);
+            CS.SaveChanges();
+        }
     }
 }

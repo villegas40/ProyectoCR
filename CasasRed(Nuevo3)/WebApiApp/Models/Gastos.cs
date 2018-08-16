@@ -28,9 +28,9 @@ namespace WebApiApp.Models
         public Nullable<int> Id_usuario { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
     
+        public virtual Usuario Usuario { get; set; }
+        public virtual Corretaje Corretaje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contaduria> Contaduria { get; set; }
-        public virtual Corretaje Corretaje { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

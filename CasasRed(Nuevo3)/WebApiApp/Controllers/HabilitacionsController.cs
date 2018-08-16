@@ -114,5 +114,42 @@ namespace WebApiApp.Controllers
         {
             return db.Habilitacion.Count(e => e.Id == id) > 0;
         }
+
+        //Funcion registro automatico
+        public void CreateHabilitacions(int corretaje_id)
+        {
+            CasasRedEntities CS = new CasasRedEntities();
+            Habilitacion habilitacion_obj = new Habilitacion
+            {
+                Hbt_Apagador_doble = false,
+                Hbt_Apagador_sencillo = false,
+                Hbt_AvisoSusp = false,
+                Hbt_Bastago = false,
+                Hbt_Bisagras = false,
+                Hbt_Break_interior = false,
+                Hbt_Break_medidor = false,
+                Hbt_Cableado = false,
+                Hbt_Chapas = false,
+                Hbt_Chapeton = false,
+                Hbt_Conector_apagador = false,
+                Hbt_Conector_sencillo = false,
+                Hbt_Domo = false,
+                Hbt_Kit_lavamanos = false,
+                Hbt_Kit_taza = false,
+                Hbt_Lavamanos = false,
+                Hbt_Maneral = false,
+                Hbt_Marcos_puertas = false,
+                Hbt_Pinturas = false,
+                Hbt_Puertas = false,
+                Hbt_Regadera_completa = false,
+                Hbt_Rosetas = false,
+                Hbt_Taza = false,
+                Hbt_Ventanas = false,
+                Id_Corretaje = corretaje_id
+            };
+
+            CS.Habilitacion.Add(habilitacion_obj);
+            CS.SaveChanges();
+        }
     }
 }
