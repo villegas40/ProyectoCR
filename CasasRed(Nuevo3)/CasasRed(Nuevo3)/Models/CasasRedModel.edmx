@@ -62,7 +62,7 @@
           <Property Name="Cyg_Correo" Type="varchar" MaxLength="320" />
           <Property Name="Cyg_Identificacion" Type="varchar" MaxLength="40" />
           <Property Name="Cyg_No_identificacoion" Type="int" />
-          <Property Name="Gral_Fechaalta" Type="date" />
+          <Property Name="Gral_Fechaalta" Type="date" StoreGeneratedPattern="None" />
           <Property Name="Vndr_Nombre" Type="varchar" MaxLength="80" />
           <Property Name="Vndr_Apellidopa" Type="varchar" MaxLength="40" />
           <Property Name="Vndr_Apellidoma" Type="varchar" MaxLength="40" />
@@ -677,7 +677,7 @@
           <Property Name="Cyg_Correo" Type="String" MaxLength="320" FixedLength="false" Unicode="false" />
           <Property Name="Cyg_Identificacion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="Cyg_No_identificacoion" Type="Int32" />
-          <Property Name="Gral_Fechaalta" Type="DateTime" Precision="0" />
+          <Property Name="Gral_Fechaalta" Type="DateTime" Precision="0" annotation:StoreGeneratedPattern="None" />
           <Property Name="Vndr_Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Vndr_Apellidopa" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="Vndr_Apellidoma" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />

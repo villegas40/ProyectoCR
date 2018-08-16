@@ -101,8 +101,8 @@ namespace WebApiApp.Controllers
             //Tomar valores
             cliente_id = cliente.Id;
             corretaje_id = cliente.Id_Corretaje.Value; //Preguntar si lo dejo así o corretaje_id = cliente.Id_Corretaje.HasValue ? cliente.Id_Corretaje.Value:0
-            telefono = cliente.Gral_Celular.ToString();
-            correo = cliente.Gral_Correo;
+            //telefono = cliente.Gral_Celular.ToString();
+            //correo = cliente.Gral_Correo;
 
             //Funciones
             gestion_controller.CreateGestions(cliente_id, corretaje_id);

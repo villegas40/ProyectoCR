@@ -71,9 +71,9 @@ namespace CasasRed_Nuevo3_.Controllers
 
                 //Mandar a llamar el método para crear un formulario vacío
                 cliente_id = cliente.Id;
-                corretaje_id = cliente.Id_Corretaje.Value;
-                telefono = cliente.Gral_Celular.ToString();
-                correo = cliente.Gral_Correo;
+                corretaje_id = cliente.Id_Corretaje.Value; //Preguntar si lo dejo así o corretaje_id = cliente.Id_Corretaje.HasValue ? cliente.Id_Corretaje.Value:0
+                //telefono = cliente.Gral_Celular.ToString();
+                //correo = cliente.Gral_Correo;
 
                 verificacion_controller.VerfificacionCreate(verificacion, cliente_id);
                 gestion_controller.GestionCrear(gestion, cliente_id, corretaje_id);

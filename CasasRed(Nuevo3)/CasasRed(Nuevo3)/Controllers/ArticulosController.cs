@@ -46,10 +46,11 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "art_id,art_nombre,art_descripcion,art_fechaIngreso,art_cantidadMinima")] Articulos articulos)
+        public ActionResult Create([Bind(Include = "art_id,art_nombre,art_descripcion,art_cantidadMinima")] Articulos articulos)
         {
             if (ModelState.IsValid)
             {
+                articulos.art_fechaIngreso = DateTime.Now;
                 db.Articulos.Add(articulos);
                 db.SaveChanges();
                 return RedirectToAction("Index");

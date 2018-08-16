@@ -4,85 +4,122 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2 style="margin-top:20px;">Añadir existencias</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Existencias</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.ext_art_id, "ext_art_id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ext_art_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ext_art_id, "", new { @class = "text-danger" })
+            <div>
+                <label class="control-label col-md-2">Artículo</label>
+                <div class="col-md-10">
+                    <input type="text" id="art_id" class="form-control" placeholder="seleccione un articulo" readonly required="" />
+                </div>
+            </div>
+            <div style="float:left;">
+                <button title="Buscar artículo" onclick="return false;"  data-toggle="modal" data-target="#articuloModal" class="btn btn-sm"><i class="fas fa-search"></i></button>
+                <button title="Agregar nuevo artículo" onclick="return false;" class="btn btn-sm modal-trigger"><i class="fas fa-plus"></i></button>
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.ext_cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Ubicación</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ext_cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" id="ubi_id" class="form-control" placeholder="seleccione una ubicación" readonly required="" />
+            </div>
+            <button title="Agregar nueva ubicación" onclick="return false;" onsubmit="return false;" class="btn"><i class="fas fa-plus"></i></button>
+            <button id="btnAA" title="Buscar ubicación" onclick="return false;" onsubmit="return false;" class="btn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="form-group">
+            <label>Cantidad</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ext_cantidad, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @required = "" } })
                 @Html.ValidationMessageFor(model => model.ext_cantidad, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.ext_cantidadActual, htmlAttributes: new { @class = "control-label col-md-2" })
+            Precio unitario
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ext_cantidadActual, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ext_cantidadActual, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ext_precioUnitario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ext_precioUnitario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ext_precioUnitario, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @required = "" } })
                 @Html.ValidationMessageFor(model => model.ext_precioUnitario, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ext_fechaAgregado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ext_fechaAgregado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ext_fechaAgregado, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ext_usuarioAgrego, "ext_usuarioAgrego", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ext_usuarioAgrego", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ext_usuarioAgrego, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ext_ubicacion, "ext_ubicacion", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ext_ubicacion", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ext_ubicacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar a la lista", "Index")
 </div>
 
+<div class="modal fade" id="articuloModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar articulo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="txtBusquedaA" type="text" class="form-control" onkeyup="buscarArticulo()" />
+               <table class="table table-striped ">
+                   <thead>
+                       <tr>
+                           <th>ID</th>
+                           <th>Descripción</th>
+                           <th>Seleccionar</th>
+                       </tr>
+                   </thead>
+                   <tbody id="ctBA">
+
+                   </tbody>
+               </table>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
+    
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    function buscarArticulo() {
+        var frm = new FormData()
+        frm.append("filtro", document.getElementById("txtBusquedaA").Value)
+        //frm.append("pagina", document.getElementById("txtBusquedaA").Value)
+        var x = new XMLHttpRequest()
+        x.open("get", "/Existencias/buscarArticulo", false)
+        x.addEventListener("load", function (e) {
+            var json = JSON.parse(x.responseText)
+            document.getElementById("ctBA").innerHTML = ""
+            var inner = ""
+            for (var i = 0; i < json.length; i++) {
+                inner = "<tr>" +
+                    "<td>" + json[i].art_id + "</td>" +
+                    "<td>" + json[i].art_nombre + "</td>" +
+                    "<td onclick=\"seleccionarArt(this)\"  data-dismiss=\"modal\" >sele</td>" +
+                    "</tr>"
+            }
+            document.getElementById("ctBA").innerHTML = inner
+        });
+        x.send(frm)
+    }
+    function seleccionarArt(itm) {
+        document.getElementById("art_id").value = itm.parentNode.children[0].textContent
+    }
+
+</script>
+
 }

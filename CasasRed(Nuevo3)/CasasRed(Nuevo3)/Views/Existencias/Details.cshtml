@@ -1,7 +1,7 @@
 ﻿@model CasasRed_Nuevo3_.Models.Existencias
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Existencia";
 }
 
 <h2>Details</h2>
@@ -10,6 +10,14 @@
     <h4>Existencias</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articulos.art_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articulos.art_id)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ext_cantidad)
         </dt>
@@ -40,14 +48,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.ext_fechaAgregado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Articulos.art_nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Articulos.art_nombre)
         </dd>
 
         <dt>

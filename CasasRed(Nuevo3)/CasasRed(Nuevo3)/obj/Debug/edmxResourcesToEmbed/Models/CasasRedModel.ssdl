@@ -57,7 +57,7 @@
     <Property Name="Cyg_Correo" Type="varchar" MaxLength="320" />
     <Property Name="Cyg_Identificacion" Type="varchar" MaxLength="40" />
     <Property Name="Cyg_No_identificacoion" Type="int" />
-    <Property Name="Gral_Fechaalta" Type="date" />
+    <Property Name="Gral_Fechaalta" Type="date" StoreGeneratedPattern="None" />
     <Property Name="Vndr_Nombre" Type="varchar" MaxLength="80" />
     <Property Name="Vndr_Apellidopa" Type="varchar" MaxLength="40" />
     <Property Name="Vndr_Apellidoma" Type="varchar" MaxLength="40" />

@@ -11,7 +11,8 @@ namespace CasasRed_Nuevo3_.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Cliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,6 +26,8 @@ namespace CasasRed_Nuevo3_.Models
         public string Gral_Nombre { get; set; }
         public string Gral_Apellidopa { get; set; }
         public string Gral_Apellidoma { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Gral_Fechanac { get; set; }
         public string Gral_Nss { get; set; }
         public string Gral_Curp { get; set; }
