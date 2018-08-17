@@ -39,7 +39,15 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status");
+            //Select List de las casas
+            //var listaCasas = db.Corretaje.ToList();
+            //SelectList listItems = new SelectList(listaCasas, "Id");
+
+            //ViewData["Posicion"] = listaCasas;
+
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion");
+            
+            ViewData["Posicion"] = ViewBag.Id_Corretaje;
             return View();
         }
 
@@ -64,6 +72,14 @@ namespace CasasRed_Nuevo3_.Controllers
             var sms = new SmsController();
             var correo_controlador = new CorreoController();
 
+            //Select List de las casas
+            //var listaCasas = db.Corretaje.ToList().Select(x => new SelectListItem {
+            //    Value = x.Id.ToString(),
+            //    Text = x.Crt_Direccion
+            //});
+            //var listaCasas = db.Corretaje.ToList();
+            //SelectList listItems = new SelectList(listaCasas, "Id");
+
             if (ModelState.IsValid)
             {
                 db.Cliente.Add(cliente);
@@ -86,7 +102,9 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id_Corretaje);
+            
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion", cliente.Id_Corretaje);
+            ViewData["Posicion"] = ViewBag.Id_Corretaje;
             return View(cliente);
         }
 
@@ -102,7 +120,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id_Corretaje);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion", cliente.Id_Corretaje);
             return View(cliente);
         }
 
@@ -119,7 +137,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", cliente.Id_Corretaje);
+            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion", cliente.Id_Corretaje);
             return View(cliente);
         }
 
@@ -157,5 +175,11 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    public class MyViewModel
+    {
+        public Cliente Cliente { get; set; }
+        public IEnumerable<SelectList> Corretaje { get; set; }
     }
 }

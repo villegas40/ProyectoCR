@@ -42,8 +42,17 @@
 
                         <div class="row justify-content-around">
                             <div class="col">
+                                <label for="Casa Asignada">Casa Asignada</label>
+                                @Html.DropDownListFor(model => model.Id_Corretaje, ViewData["Posicion"] as SelectList, new { @class = "form-control", @id = "Casa Asignada" })
+                                @*@Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })*@
+                                @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-around">
+                            <div class="col">
                                 <label for="Gral_Fechaalta">Fecha de Alta</label>
-                                @Html.EditorFor(model => model.Gral_Fechaalta, new { htmlAttributes = new { @class = "form-control", @id = "datetimePicker",  @Value = Model.Gral_Fechaalta.Value.ToString("yyyy/MM/dd") } })
+                                @Html.EditorFor(model => model.Gral_Fechaalta, new { htmlAttributes = new { @class = "form-control", @id = "datetimePicker", @Value = Model.Gral_Fechaalta.Value.ToString("yyyy/MM/dd") } })
                                 @Html.ValidationMessageFor(model => model.Gral_Fechaalta, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -68,7 +77,7 @@
                                 <label for="Gral_Fechanac">Fecha de Nacimiento</label>
                                 @if (Model.Gral_Fechanac.HasValue)
                                 {
-                                    @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data", @id= "fechanac", @onkeyup = "funcionDate()", @Value = Model.Gral_Fechanac.Value.ToString("yyyy/MM/dd") } })
+                                    @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data", @id = "fechanac", @onkeyup = "funcionDate()", @Value = Model.Gral_Fechanac.Value.ToString("yyyy/MM/dd") } })
                                 }
                                 else
                                 {

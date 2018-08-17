@@ -41,8 +41,9 @@
 
                         <div class="row justify-content-around">
                             <div class="col">
-                                <label for="Gral_Fechaalta">Casa Asignada</label>
-                                @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })
+                                <label for="Casa Asignada">Casa Asignada</label>
+                                @Html.DropDownListFor(model => model.Id_Corretaje, ViewData["Posicion"] as SelectList , new { @class = "form-control", @id="Gral_Fechaalta" })
+                                @*@Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })*@
                                 @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
                             </div>
                         </div>
