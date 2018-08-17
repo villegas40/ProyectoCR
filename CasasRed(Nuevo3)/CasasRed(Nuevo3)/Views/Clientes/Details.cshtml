@@ -9,18 +9,103 @@
 <div>
     <h4>Cliente</h4>
     <hr />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div id="list-example" class="list-group">
+                    <a class="list-group-item list-group-item-action active list-group-item-danger" id="list-DG-list" data-toggle="list" href="#list-DG" role="tab" aria-controls="DG">Datos Generales</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-dir-list" data-toggle="list" href="#list-dir" role="tab" aria-controls="dir">Dirección</a>
+                    <a class="list-group-item list-group-item-action list-group-item-danger" id="list-contac-list" data-toggle="list" href="#list-contac" role="tab" aria-controls="contac">Contacto</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-DR-list" data-toggle="list" href="#list-DR" role="tab" aria-controls="DR">Datos de Referencia</a>
+                    <a class="list-group-item list-group-item-action list-group-item-danger" id="list-DC-list" data-toggle="list" href="#list-DC" role="tab" aria-controls="DC">Datos de Cónyuge</a>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="nav-tabContent">
+                    @*DATOS GENERALES*@
+                    <div class="tab-pane fade show active" id="list-DG" role="tabpanel" aria-labelledby="list-DG-list">
+                        <h5>Datos Generales</h5>
+
+                        <div class="row justify-content-around">
+                            <div class="col">
+                                <label class="font-weight-bold">Casa Asignada</label>
+                                <p>@Html.DisplayFor(model => model.Corretaje.Crt_Direccion)</p>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-around">
+                            <div class="col">
+                                <label class="font-weight-bold">Fecha de Alta</label>
+                                <p>@Html.DisplayFor(model => model.Gral_Fechaalta)</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-around py-3">
+                            <div class="col-lg-4">
+                                <label class="font-weight-bold">Nombre</label>
+                                <p>@Html.DisplayFor(model => model.Gral_Nombre)</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="font-weight-bold">Apellido Paterno</label>
+                                <p>@Html.DisplayFor(model => model.Gral_Apellidopa)</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="font-weight-bold">Apellido Materno</label>
+                                
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label class="font-weight-bold">Fecha de Nacimiento</label>
+                                    
+                            </div>
+                            <div class="col-lg-5">
+                                <label class="font-weight-bold">Lugar de Nacimiento</label>
+                                
+                            </div>
+                            <div class="col-lg-3">
+                                <label class="font-weight-bold">No. Seguro Social</label>
+                               
+                            </div>
+
+                            <div class="col-lg-4">
+                                <label class="font-weight-bold">CURP</label>
+                                
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="font-weight-bold">RFC</label>
+                                
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="font-weight-bold">Estado civil</label>
+                                
+                            </div>
+
+                            <div class="col-lg-6">
+                                <label class="font-weight-bold">Régimen Matrimonial</label>
+                                
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="font-weight-bold">Ocupación</label>
+                                
+                            </div>
+
+                            <div class="col-lg-6">
+                                <label class="font-weight-bold">Identificación</label>
+                                
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="font-weight-bold">Número de Identificación</label>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Gral_Nombre)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gral_Nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gral_Apellidopa)
-        </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Gral_Apellidopa)
