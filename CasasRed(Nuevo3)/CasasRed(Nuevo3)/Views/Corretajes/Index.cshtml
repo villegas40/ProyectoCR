@@ -1,30 +1,30 @@
 ﻿@model IEnumerable<CasasRed_Nuevo3_.Models.Corretaje>
 
-@{
+    @{
     ViewBag.Title = "Index";
-}
-<br />
-<h2 style="margin-top:20px;">Dpt. Corretaje</h2>
-<h4>Lic. Iván Argotte</h4>
+    }
+    <br />
+    <h2 style="margin-top:20px;">Dpt. Corretaje</h2>
+    <h4>Lic. Iván Argotte</h4>
 
-<p>
-    @Html.ActionLink("+ Nueva Casa Create New", "Create")
-</p>
+    <p>
+        @Html.ActionLink("+ Nueva Casa Create New", "Create")
+    </p>
 
-<table class="table table-striped table-responsive-lg">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Dirección</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Fecha de Ingreso</th>
-            <th scope="col">Status</th>
-            <th scope="col">Opciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table table-striped table-responsive-lg">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha de Ingreso</th>
+                <th scope="col">Status</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
@@ -47,13 +47,13 @@
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
 
 
-@section Scripts {
+    @section Scripts {
     <script>
         $(document.body).css('padding-top', '70px');
     </script>
-}
+    }
