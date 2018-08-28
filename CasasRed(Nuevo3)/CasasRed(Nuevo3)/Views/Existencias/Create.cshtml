@@ -83,8 +83,12 @@
 
                    </tbody>
                </table>
+               <div>
+                   <button id="btnPrevious" onclick="buscarArticulo(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
+                   <label id="previous" ></label><label> - <label id="actual"></label>-</label><label id="next"></label>
+                   <button id="btnNext" onclick="buscarArticulo(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+               </div>
             </div>
-            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
@@ -95,24 +99,47 @@
     
     @Scripts.Render("~/bundles/jqueryval")
 <script>
-    function buscarArticulo() {
+    var pageP = 1
+    function buscarArticulo(page) {
+        var totalPages = 1
+        if (page == undefined) {
+            page = 1
+        }
+        pageP = page
         var frm = new FormData()
-        frm.append("filtro", document.getElementById("txtBusquedaA").Value)
-        //frm.append("pagina", document.getElementById("txtBusquedaA").Value)
+        var filtro = document.getElementById("txtBusquedaA").value
+        frm.append("filtro", filtro)
+        frm.append("pagina", page)
         var x = new XMLHttpRequest()
         x.open("get", "/Existencias/buscarArticulo", false)
         x.addEventListener("load", function (e) {
             var json = JSON.parse(x.responseText)
             document.getElementById("ctBA").innerHTML = ""
             var inner = ""
+            if (json.length == 0) {
+                page = 0
+            }
             for (var i = 0; i < json.length; i++) {
                 inner = "<tr>" +
                     "<td>" + json[i].art_id + "</td>" +
                     "<td>" + json[i].art_nombre + "</td>" +
                     "<td onclick=\"seleccionarArt(this)\"  data-dismiss=\"modal\" >sele</td>" +
                     "</tr>"
+                totalPages = json[i].total
             }
             document.getElementById("ctBA").innerHTML = inner
+            if (page <= 1) {
+                document.getElementById("previous").textContent = page
+                document.getElementById("btnPrevious").disabled = true
+            }
+            if ( page == totalPages) {
+                document.getElementById("next").textContent = totalPages
+                document.getElementById("btnNext").disabled = true
+            } else {
+                document.getElementById("next").textContent = page
+                document.getElementById("btnNext").disabled = false
+            }
+            document.getElementById("actual").textContent = page
         });
         x.send(frm)
     }

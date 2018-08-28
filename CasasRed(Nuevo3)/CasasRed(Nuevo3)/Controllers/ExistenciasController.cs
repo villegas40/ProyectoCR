@@ -158,9 +158,10 @@ namespace CasasRed_Nuevo3_.Controllers
         }
         public JsonResult buscarArticulo(string filtro = "", int pagina = 1)
         {
-            var busqueda = (from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion }).OrderBy(a => a.art_nombre).Skip((pagina - 1)* 15).Take(15).ToList();
+            int totalPaginas = (int)Math.Ceiling((double)db.Articulos.Count() / 2);
+            var busqueda = (from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1)* 15).Take(15).ToList();
             return Json(busqueda, JsonRequestBehavior.AllowGet);
         }
-
+        
     }
 }
