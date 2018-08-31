@@ -1,57 +1,50 @@
 ﻿@model CasasRed_Nuevo3_.Models.Existencias
-
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Detalle";
 }
-<h2>Añadir existencias</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h4>Modificar existencia</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div>
-                <label class="control-label col-md-2">Artículo</label>
-                <div class="col-md-10">
-                    <input type="text" id="ext_art_id" name="ext_art_id" class="form-control" placeholder="seleccione un articulo" readonly required="" style="float:left;" />
-                    <div>
-                        <button style="margin-left: 5px;" title="Buscar artículo" onclick="buscarArticulo(); return false;" data-toggle="modal" data-target="#articuloModal" class="btn btn-sm btn-info"><i class="fas fa-search"></i></button>
-                        <button title="Agregar nuevo artículo" onclick="window.open('/Articulos/Create'); return false;" class="btn btn-sm modal-trigger btn-success"><i class="fas fa-plus"></i></button>
-                    </div>
+    <div class="form-group">
+        <div>
+            <label class="control-label col-md-2">Artículo</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ext_art_id, new { htmlAttributes = new { @class = "form-control", @id = "ext_art_id", @required = "", @placeholder = "Seleccione un artículo", @style = "float:left;", @readonly = "" } })
+                <div>
+                    <button style="margin-left: 5px;" title="Buscar artículo" onclick="buscarArticulo(); return false;" data-toggle="modal" data-target="#articuloModal" class="btn btn-sm btn-info"><i class="fas fa-search"></i></button>
+                    <button title="Agregar nuevo artículo" onclick="window.open('/Articulos/Create'); return false;" class="btn btn-sm modal-trigger btn-success"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Ubicación</label>
-            <div class="col-md-10">
-                <input type="text" id="ubiDes" class="form-control" placeholder="seleccione una ubicación" readonly required="" style="float:left;" href="https://www.w3schools.com" target="_blank" />
-                <input type="text" id="ext_ubicacion" name="ext_ubicacion" style="display:none;" />
-                <button style="margin-left: 5px;" title="Buscar Ubicacion" onclick="buscarUbicacion(); return false;" data-toggle="modal" data-target="#ubicacionModal" class="btn btn-sm btn-info"><i class="fas fa-search"></i></button>
-                <button title="Agregar nueva ubicación" onclick="window.open('/Ubicaciones/Create'); return false;" class="btn btn-sm modal-trigger btn-success"><i class="fas fa-plus"></i></button>
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Ubicación</label>
+        <div class="col-md-10">
+            <input type="text" id="ubiDes" class="form-control" placeholder="seleccione una ubicación" readonly required="" style="float:left;" />
+            @Html.EditorFor(model => model.ext_ubicacion, new { htmlAttributes = new { @class = "form-control", @id = "ext_ubicacion", @style = "display:none;" } })
+            <button style="margin-left: 5px;" title="Buscar Ubicacion" onclick="buscarUbicacion(); return false;" data-toggle="modal" data-target="#ubicacionModal" class="btn btn-sm btn-info"><i class="fas fa-search"></i></button>
+            <button title="Agregar nueva ubicación" onclick="window.open('/Ubicaciones/Create'); return false;" class="btn btn-sm modal-trigger btn-success"><i class="fas fa-plus"></i></button>
         </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Cantidad</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ext_cantidad, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @required = "" } })
-                @Html.ValidationMessageFor(model => model.ext_cantidad, "", new { @class = "text-danger" })
-            </div>
+    </div>
+
+    <div class="form-group">
+        <label>Cantidad</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ext_cantidad, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @required = "" } })
+            @Html.ValidationMessageFor(model => model.ext_cantidad, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Precio unitario</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ext_precioUnitario, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @required = "" } })
-                @Html.ValidationMessageFor(model => model.ext_precioUnitario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-<hr />
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-success" /> | @Html.ActionLink("Regresar a la lista", "Index")
-            </div>
-        </div>
+    </div>
+
+</div>
+    <hr />
+    <div class="">
+        <input type="submit" value="Actualizar" class="btn btn-success" /> | @Html.ActionLink("Regresar a la lista", "Details", new { id = Model.ext_art_id })
     </div>
 }
 
@@ -71,12 +64,12 @@
                         <tr>
                             <th>ID</th>
                             <th>Descripción</th>
-                            <th style="text-align: center;">Seleccionar</th>
+                            <th>Seleccionar</th>
                         </tr>
                     </thead>
                     <tbody id="ctBA"></tbody>
                 </table>
-                <div>
+                <div class="mx-auto" style="width:100%;">
                     <button class="btn btn-default" id="btnPrevious" onclick="buscarArticulo(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
                     <label id="previous"></label><label> - <label id="actual"></label>-</label><label id="next"></label>
                     <button class="btn btn-default" id="btnNext" onclick="buscarArticulo(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
@@ -102,15 +95,15 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th style="display:none;">ID</th>
+                            <th style="display:none;" >Id</th>
                             <th>Código</th>
                             <th>Descripción</th>
-                            <th style="text-align: center;">Seleccionar</th>
+                            <th>Seleccionar</th>
                         </tr>
                     </thead>
                     <tbody id="ctBU"></tbody>
                 </table>
-                <div>
+                <div class="mx-auto" style="width:100%;">
                     <button class="btn btn-default" id="btnPreviousU" onclick="buscarUbicacion(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
                     <label id="previousU"></label><label> - <label id="actualU"></label>-</label><label id="nextU"></label>
                     <button class="btn btn-default" id="btnNextU" onclick="buscarUbicacion(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
@@ -122,8 +115,7 @@
         </div>
     </div>
 </div>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@section  Scripts {
     <script>
         var pageP = 1
         function buscarArticulo(page) {
@@ -158,7 +150,7 @@
                     inner += "<tr>" +
                         "<td>" + json[i].art_id + "</td>" +
                         "<td>" + json[i].art_nombre + "</td>" +
-                        "<td style=\"text-align: center;\" onmouseover=\"sobreRow(this)\" onmouseout=\"fueraRow(this)\" onclick=\"seleccionarArt(this)\"  data-dismiss=\"modal\"><i class=\"fa fa-circle text-info\"></i></td>" +
+                        "<td style=\"text-align: center;\" onmouseover=\"sobreRow(this)\" onmouseout=\"fueraRow(this)\" onclick=\"seleccionarArt(this)\"  data-dismiss=\"modal\" ><i class=\"fa fa-circle text-info\"></i></td>" +
                         "</tr>"
                 }
                 document.getElementById("ctBA").innerHTML = inner
@@ -208,7 +200,7 @@
                         "<td style=\"display: none;\">" + json[i].id + "</td>" +
                         "<td>" + json[i].codigo + "</td>" +
                         "<td>" + json[i].descripcion + "</td>" +
-                        "<td style=\"text-align: center;\" onmouseover=\"sobreRow(this)\" onmouseout=\"fueraRow(this)\"  onclick=\"seleccionarUbi(this)\" data-dismiss=\"modal\" ><i class=\"fa fa-circle text-info\"></i></td>" +
+                        "<td style=\"text-align: center;\" onmouseover=\"sobreRow(this)\" onmouseout=\"fueraRow(this)\" onclick=\"seleccionarUbi(this)\"  data-dismiss=\"modal\" ><i class=\"fa fa-circle text-info\"></i></td>" +
                         "</tr>"
                 }
                 document.getElementById("ctBU").innerHTML = inner
@@ -216,7 +208,7 @@
                 if (pageP <= 1) {
                     document.getElementById("previousU").textContent = page
                     document.getElementById("btnPreviousU").disabled = true
-                    if (totalPages = pageP) {
+                    if (totalPages == pageP) {
                         document.getElementById("btnNextU").disabled = true
                     }
                 } else if (pageP == totalPages) {
@@ -237,6 +229,17 @@
             document.getElementById("ext_ubicacion").value = itm.parentNode.children[0].textContent
             document.getElementById("ubiDes").value = itm.parentNode.children[1].textContent
         }
+        function obtenerUbicaciones() {
+            var id = document.getElementById("ext_ubicacion").value
+            var frm = new FormData()
+            frm.append("ubi", parseInt(id))
+            var x = new XMLHttpRequest()
+            x.open("POST", "/Existencias/UbicacionDetalle", false)
+            x.addEventListener("load", function (e) {
+                document.getElementById("ubiDes").value = JSON.parse(x.responseText)
+            });
+            x.send(frm);
+        }
 
         function sobreRow(elm) {
             elm.children[0].className = "fa fa-check-circle text-success"
@@ -245,6 +248,8 @@
         function fueraRow(elm) {
             elm.children[0].className = "fa fa-circle text-info"
         }
+
+        obtenerUbicaciones()
     </script>
 
 }

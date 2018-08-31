@@ -123,5 +123,18 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public JsonResult BuscarUbicaciones(string filtro = "", int pagina = 1)
+        {
+            int totalPagina = (int)Math.Ceiling((decimal)(db.Ubicaciones.Count() / 15));
+            var busqueda = (from u in db.Ubicaciones where u.ubi_codigo.Contains(filtro) || u.ubi_descripcion.Contains(filtro) select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo, total = totalPagina }).Skip((pagina - 1) * 15).Take(15);
+            if (filtro == "")
+	        {
+                totalPagina = (int)Math.Ceiling((decimal)(db.Ubicaciones.Count() / 15));
+                busqueda = (from u in db.Ubicaciones select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo, total = totalPagina }).Skip((pagina - 1) * 15).Take(15);
+            }
+            return Json(busqueda, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

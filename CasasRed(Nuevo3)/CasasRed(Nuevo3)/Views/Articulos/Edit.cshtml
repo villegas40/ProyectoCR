@@ -17,14 +17,14 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.art_id)
     <div class="form-group">
-        @Html.LabelFor(model => model.art_id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2" for="art_id">Código</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.art_id, new { htmlAttributes = new { @class = "form-control", @required = "", @readonly = "" } })
             @Html.ValidationMessageFor(model => model.art_id, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.art_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2" for="art_nombre">Nombre</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.art_nombre, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.art_nombre, "", new { @class = "text-danger" })
@@ -32,40 +32,31 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.art_descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2" for="art_descripcion">Descripción</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.art_descripcion, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.art_descripcion, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.art_fechaIngreso, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.art_fechaIngreso, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
-            @Html.ValidationMessageFor(model => model.art_fechaIngreso, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    @Html.EditorFor(model => model.art_fechaIngreso, new { htmlAttributes = new { @class = "form-control", @readonly = "", @style = "display:none;" } })
 
     <div class="form-group">
-        @Html.LabelFor(model => model.art_cantidadMinima, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2" for="art_cantidadMinima">Cantidad mínima</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.art_cantidadMinima, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.art_cantidadMinima, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <hr />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Guardar" class="btn btn-default" />
+            <input type="submit" value="Guardar" class="btn btn-success" /> | @Html.ActionLink("Regresar", "Index")
         </div>
     </div>
 </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

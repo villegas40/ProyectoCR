@@ -83,28 +83,32 @@ namespace CasasRed_Nuevo3_.Controllers
             Session["Tipo"] = null;
             return RedirectToAction("Index", "Home");
         }
-        private string Redireccionar()
+        public string Redireccionar(string tipo = "")
         {
+            if (tipo == "")
+            {
+                tipo = Session["Tipo"].ToString();
+            }
             string direccion = "Home-Index";
-            if (Session["Tipo"].ToString() == "Administrador")
+            if (tipo == "Administrador")
             {
                 direccion = "Home-Index";
-            } else if (Session["Tipo"].ToString() == "Gestion")
+            } else if (tipo == "Gestion")
             {
                 direccion = "Gestions-Index";
-            } else if (Session["Tipo"].ToString() == "Corretaje")
+            } else if (tipo == "Corretaje")
             {
                 direccion = "Corretajes-Index";
             }
-            else if (Session["Tipo"].ToString() == "Habilitacion")
+            else if (tipo == "Habilitacion")
             {
                 direccion = "Habilitacions-Index";
             }
-            else if (Session["Tipo"].ToString() == "Contabilidad")
+            else if (tipo == "Contabilidad")
             {
                 direccion = "Contadurias-Index";
             }
-            else if (Session["Tipo"].ToString() == "Verificacion")
+            else if (tipo == "Verificacion")
             {
                 direccion = "Verificacions-Index";
             }

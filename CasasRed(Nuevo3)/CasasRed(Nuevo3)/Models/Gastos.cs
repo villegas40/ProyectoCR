@@ -30,7 +30,7 @@ namespace CasasRed_Nuevo3_.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contaduria> Contaduria { get; set; }
-        public virtual Usuario Usuario { get; set; }
         public virtual Corretaje Corretaje { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

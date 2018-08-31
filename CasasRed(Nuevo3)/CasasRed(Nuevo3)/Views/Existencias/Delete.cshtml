@@ -1,80 +1,34 @@
 ﻿@model CasasRed_Nuevo3_.Models.Existencias
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar existencia";
 }
 
-<h2>Delete</h2>
+<h2>Eliminar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Desea eliminar el registro permanentemente?</h3>
 <div>
-    <h4>Existencias</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ext_cantidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ext_cantidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ext_cantidadActual)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ext_cantidadActual)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ext_precioUnitario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ext_precioUnitario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ext_fechaAgregado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ext_fechaAgregado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Articulos.art_nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Articulos.art_nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.usu_nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.usu_nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ubicaciones.ubi_codigo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ubicaciones.ubi_codigo)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
+    <p class="col-md-offset-2 col-md-10"><strong>Articulo</strong></p>
+    <label class="col-md-offset-2 col-md-10">@Html.DisplayFor(model => model.ext_art_id)</label>
+    <p class="col-md-offset-2 col-md-10"><strong>Ubicación</strong></p>
+    <label class="col-md-offset-2 col-md-10">@Html.DisplayFor(model => model.Ubicaciones.ubi_codigo)</label>
+    <p class="col-md-offset-2 col-md-10"><strong>Cantidad restante</strong></p>
+    <label class="col-md-offset-2 col-md-10">@Html.DisplayFor(model => model.ext_cantidadActual)</label>
+    <p class="col-md-offset-2 col-md-10"><strong>Cantidad inicial</strong></p>
+    <label class="col-md-offset-2 col-md-10">@Html.DisplayFor(model => model.ext_cantidad)</label>
+    <P class="col-md-offset-2 col-md-10"><strong>Fecha agregado</strong></P>
+    <label class="col-md-offset-2 col-md-10">@Html.DisplayFor(model => model.ext_fechaAgregado)</label>
+    <p class="col-md-offset-2 col-md-10"><strong>Usuario agregó</strong></p>
+    <label class="col-md-offset-2 col-md-10">@Html.DisplayFor(model => model.Usuario.usu_username)</label>
+    <hr />  
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar a la lista", "Details", new { id = Model.ext_art_id })
         </div>
     }
 </div>

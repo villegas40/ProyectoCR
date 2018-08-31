@@ -80,6 +80,57 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Corretaje">
+      <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
+        <MappingFragment StoreEntitySet="Corretaje">
+          <ScalarProperty Name="Crt_Obervaciones" ColumnName="Crt_Obervaciones" />
+          <ScalarProperty Name="Crt_Status_Muestra" ColumnName="Crt_Status_Muestra" />
+          <ScalarProperty Name="Crt_Otros" ColumnName="Crt_Otros" />
+          <ScalarProperty Name="Crt_ReciboAgua" ColumnName="Crt_ReciboAgua" />
+          <ScalarProperty Name="Crt_ReciboLuz" ColumnName="Crt_ReciboLuz" />
+          <ScalarProperty Name="Crt_CartaDesPre" ColumnName="Crt_CartaDesPre" />
+          <ScalarProperty Name="Crt_EscrCert" ColumnName="Crt_EscrCert" />
+          <ScalarProperty Name="Crt_ActaMatr" ColumnName="Crt_ActaMatr" />
+          <ScalarProperty Name="Crt_ActaNacConyu" ColumnName="Crt_ActaNacConyu" />
+          <ScalarProperty Name="Crt_ActaNacTitu" ColumnName="Crt_ActaNacTitu" />
+          <ScalarProperty Name="Crt_Acuerdo" ColumnName="Crt_Acuerdo" />
+          <ScalarProperty Name="Crt_Escritura_Simple" ColumnName="Crt_Escritura_Simple" />
+          <ScalarProperty Name="Crt_Ine_Conyu" ColumnName="Crt_Ine_Conyu" />
+          <ScalarProperty Name="Crt_Ine_Titu" ColumnName="Crt_Ine_Titu" />
+          <ScalarProperty Name="Crt_Adeudo_agua" ColumnName="Crt_Adeudo_agua" />
+          <ScalarProperty Name="Crt_No_cuenta_agua" ColumnName="Crt_No_cuenta_agua" />
+          <ScalarProperty Name="Crt_NombreC_Titular_luz" ColumnName="Crt_NombreC_Titular_luz" />
+          <ScalarProperty Name="Crt_Adeudo_luz" ColumnName="Crt_Adeudo_luz" />
+          <ScalarProperty Name="Crt_Num_servicio_luz" ColumnName="Crt_Num_servicio_luz" />
+          <ScalarProperty Name="Crt_Adeudo_predial" ColumnName="Crt_Adeudo_predial" />
+          <ScalarProperty Name="Crt_Clave_Catastral" ColumnName="Crt_Clave_Catastral" />
+          <ScalarProperty Name="Crt_Recibo_predial_digital" ColumnName="Crt_Recibo_predial_digital" />
+          <ScalarProperty Name="Crt_Tel_Ref" ColumnName="Crt_Tel_Ref" />
+          <ScalarProperty Name="Crt_Tel_Ref2" ColumnName="Crt_Tel_Ref2" />
+          <ScalarProperty Name="Crt_Tel_Ref1" ColumnName="Crt_Tel_Ref1" />
+          <ScalarProperty Name="Crt_Tel_Trabajo" ColumnName="Crt_Tel_Trabajo" />
+          <ScalarProperty Name="Crt_Tel_Casa" ColumnName="Crt_Tel_Casa" />
+          <ScalarProperty Name="Crt_Estado_Civil" ColumnName="Crt_Estado_Civil" />
+          <ScalarProperty Name="Crt_Tel_Celular" ColumnName="Crt_Tel_Celular" />
+          <ScalarProperty Name="Crt_Fec_Nac" ColumnName="Crt_Fec_Nac" />
+          <ScalarProperty Name="Crt_Saldo_infonavit" ColumnName="Crt_Saldo_infonavit" />
+          <ScalarProperty Name="Crt_Num_Credito_Infonavit" ColumnName="Crt_Num_Credito_Infonavit" />
+          <ScalarProperty Name="Crt_Ano_compra" ColumnName="Crt_Ano_compra" />
+          <ScalarProperty Name="Crt_Planta" ColumnName="Crt_Planta" />
+          <ScalarProperty Name="Crt_Num_Habitaciones" ColumnName="Crt_Num_Habitaciones" />
+          <ScalarProperty Name="Crt_Nivel" ColumnName="Crt_Nivel" />
+          <ScalarProperty Name="Crt_Tipo_Vivienda" ColumnName="Crt_Tipo_Vivienda" />
+          <ScalarProperty Name="Crt_Gasto" ColumnName="Crt_Gasto" />
+          <ScalarProperty Name="Crt_Precio" ColumnName="Crt_Precio" />
+          <ScalarProperty Name="Crt_Direccion" ColumnName="Crt_Direccion" />
+          <ScalarProperty Name="Crt_Cliente_ApPat" ColumnName="Crt_Cliente_ApPat" />
+          <ScalarProperty Name="Crt_Cliente_ApMat" ColumnName="Crt_Cliente_ApMat" />
+          <ScalarProperty Name="Crt_Cliente_Nombre" ColumnName="Crt_Cliente_Nombre" />
+          <ScalarProperty Name="Crt_Status" ColumnName="Crt_Status" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Existencias">
       <EntityTypeMapping TypeName="CasasRedModel.Existencias">
         <MappingFragment StoreEntitySet="Existencias">
@@ -233,57 +284,6 @@
           <ScalarProperty Name="Vfn_Tiempo_estimado" ColumnName="Vfn_Tiempo_estimado" />
           <ScalarProperty Name="Vfn_Visto_persona" ColumnName="Vfn_Visto_persona" />
           <ScalarProperty Name="Vfn_Persona_fisica" ColumnName="Vfn_Persona_fisica" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Corretaje">
-      <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
-        <MappingFragment StoreEntitySet="Corretaje">
-          <ScalarProperty Name="Crt_Obervaciones" ColumnName="Crt_Obervaciones" />
-          <ScalarProperty Name="Crt_Status_Muestra" ColumnName="Crt_Status_Muestra" />
-          <ScalarProperty Name="Crt_Otros" ColumnName="Crt_Otros" />
-          <ScalarProperty Name="Crt_ReciboAgua" ColumnName="Crt_ReciboAgua" />
-          <ScalarProperty Name="Crt_ReciboLuz" ColumnName="Crt_ReciboLuz" />
-          <ScalarProperty Name="Crt_CartaDesPre" ColumnName="Crt_CartaDesPre" />
-          <ScalarProperty Name="Crt_EscrCert" ColumnName="Crt_EscrCert" />
-          <ScalarProperty Name="Crt_ActaMatr" ColumnName="Crt_ActaMatr" />
-          <ScalarProperty Name="Crt_ActaNacConyu" ColumnName="Crt_ActaNacConyu" />
-          <ScalarProperty Name="Crt_ActaNacTitu" ColumnName="Crt_ActaNacTitu" />
-          <ScalarProperty Name="Crt_Acuerdo" ColumnName="Crt_Acuerdo" />
-          <ScalarProperty Name="Crt_Escritura_Simple" ColumnName="Crt_Escritura_Simple" />
-          <ScalarProperty Name="Crt_Ine_Conyu" ColumnName="Crt_Ine_Conyu" />
-          <ScalarProperty Name="Crt_Ine_Titu" ColumnName="Crt_Ine_Titu" />
-          <ScalarProperty Name="Crt_Adeudo_agua" ColumnName="Crt_Adeudo_agua" />
-          <ScalarProperty Name="Crt_No_cuenta_agua" ColumnName="Crt_No_cuenta_agua" />
-          <ScalarProperty Name="Crt_NombreC_Titular_luz" ColumnName="Crt_NombreC_Titular_luz" />
-          <ScalarProperty Name="Crt_Adeudo_luz" ColumnName="Crt_Adeudo_luz" />
-          <ScalarProperty Name="Crt_Num_servicio_luz" ColumnName="Crt_Num_servicio_luz" />
-          <ScalarProperty Name="Crt_Adeudo_predial" ColumnName="Crt_Adeudo_predial" />
-          <ScalarProperty Name="Crt_Clave_Catastral" ColumnName="Crt_Clave_Catastral" />
-          <ScalarProperty Name="Crt_Recibo_predial_digital" ColumnName="Crt_Recibo_predial_digital" />
-          <ScalarProperty Name="Crt_Tel_Ref" ColumnName="Crt_Tel_Ref" />
-          <ScalarProperty Name="Crt_Tel_Ref2" ColumnName="Crt_Tel_Ref2" />
-          <ScalarProperty Name="Crt_Tel_Ref1" ColumnName="Crt_Tel_Ref1" />
-          <ScalarProperty Name="Crt_Tel_Trabajo" ColumnName="Crt_Tel_Trabajo" />
-          <ScalarProperty Name="Crt_Tel_Casa" ColumnName="Crt_Tel_Casa" />
-          <ScalarProperty Name="Crt_Estado_Civil" ColumnName="Crt_Estado_Civil" />
-          <ScalarProperty Name="Crt_Tel_Celular" ColumnName="Crt_Tel_Celular" />
-          <ScalarProperty Name="Crt_Fec_Nac" ColumnName="Crt_Fec_Nac" />
-          <ScalarProperty Name="Crt_Saldo_infonavit" ColumnName="Crt_Saldo_infonavit" />
-          <ScalarProperty Name="Crt_Num_Credito_Infonavit" ColumnName="Crt_Num_Credito_Infonavit" />
-          <ScalarProperty Name="Crt_Ano_compra" ColumnName="Crt_Ano_compra" />
-          <ScalarProperty Name="Crt_Planta" ColumnName="Crt_Planta" />
-          <ScalarProperty Name="Crt_Num_Habitaciones" ColumnName="Crt_Num_Habitaciones" />
-          <ScalarProperty Name="Crt_Nivel" ColumnName="Crt_Nivel" />
-          <ScalarProperty Name="Crt_Tipo_Vivienda" ColumnName="Crt_Tipo_Vivienda" />
-          <ScalarProperty Name="Crt_Gasto" ColumnName="Crt_Gasto" />
-          <ScalarProperty Name="Crt_Precio" ColumnName="Crt_Precio" />
-          <ScalarProperty Name="Crt_Direccion" ColumnName="Crt_Direccion" />
-          <ScalarProperty Name="Crt_Cliente_ApPat" ColumnName="Crt_Cliente_ApPat" />
-          <ScalarProperty Name="Crt_Cliente_ApMat" ColumnName="Crt_Cliente_ApMat" />
-          <ScalarProperty Name="Crt_Cliente_Nombre" ColumnName="Crt_Cliente_Nombre" />
-          <ScalarProperty Name="Crt_Status" ColumnName="Crt_Status" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

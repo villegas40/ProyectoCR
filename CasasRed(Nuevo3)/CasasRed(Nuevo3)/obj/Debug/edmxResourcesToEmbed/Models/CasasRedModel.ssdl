@@ -57,7 +57,7 @@
     <Property Name="Cyg_Correo" Type="varchar" MaxLength="320" />
     <Property Name="Cyg_Identificacion" Type="varchar" MaxLength="40" />
     <Property Name="Cyg_No_identificacoion" Type="int" />
-    <Property Name="Gral_Fechaalta" Type="date" StoreGeneratedPattern="None" />
+    <Property Name="Gral_Fechaalta" Type="date" />
     <Property Name="Vndr_Nombre" Type="varchar" MaxLength="80" />
     <Property Name="Vndr_Apellidopa" Type="varchar" MaxLength="40" />
     <Property Name="Vndr_Apellidoma" Type="varchar" MaxLength="40" />
@@ -274,7 +274,7 @@
     <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
     <Property Name="Id_Cliente" Type="int" />
   </EntityType>
-  <Association Name="FK__Existenci__ext_a__70DDC3D8">
+  <Association Name="FK__Existenci__ext_a__5EBF139D">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -286,7 +286,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__72C60C4A">
+  <Association Name="FK__Existenci__ext_u__60A75C0F">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -298,7 +298,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Existenci__ext_u__73BA3083">
+  <Association Name="FK__Existenci__ext_u__619B8048">
     <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
     <ReferentialConstraint>
@@ -461,28 +461,28 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="CasasRedModelStoreContainer">
-    <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Contaduria" EntityType="Self.Contaduria" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Corretaje" EntityType="Self.Corretaje" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Existencias" EntityType="Self.Existencias" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Gastos" EntityType="Self.Gastos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="GastosContaduria" EntityType="Self.GastosContaduria" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Gestion" EntityType="Self.Gestion" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Habilitacion" EntityType="Self.Habilitacion" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Existenci__ext_a__70DDC3D8" Association="Self.FK__Existenci__ext_a__70DDC3D8">
+    <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Contaduria" EntityType="Self.Contaduria" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Corretaje" EntityType="Self.Corretaje" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Existencias" EntityType="Self.Existencias" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Gastos" EntityType="Self.Gastos" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="GastosContaduria" EntityType="Self.GastosContaduria" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Gestion" EntityType="Self.Gestion" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Habilitacion" EntityType="Self.Habilitacion" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="adminDani" store:Type="Tables" />
+    <AssociationSet Name="FK__Existenci__ext_a__5EBF139D" Association="Self.FK__Existenci__ext_a__5EBF139D">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__72C60C4A" Association="Self.FK__Existenci__ext_u__72C60C4A">
+    <AssociationSet Name="FK__Existenci__ext_u__60A75C0F" Association="Self.FK__Existenci__ext_u__60A75C0F">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
-    <AssociationSet Name="FK__Existenci__ext_u__73BA3083" Association="Self.FK__Existenci__ext_u__73BA3083">
+    <AssociationSet Name="FK__Existenci__ext_u__619B8048" Association="Self.FK__Existenci__ext_u__619B8048">
       <End Role="Ubicaciones" EntitySet="Ubicaciones" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>

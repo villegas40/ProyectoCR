@@ -1,6 +1,8 @@
 ﻿@{ 
-    string fun = Session["Vista"].ToString();
-    string con = Session["Controlador"].ToString();
+    //string fun = Session["Vista"].ToString();
+    //string con = Session["Controlador"].ToString();
+    string fun = "";
+    string con = "";
 
 }
 <!DOCTYPE html>
@@ -103,8 +105,8 @@
         </div>
     </nav>
 
-    <div class="container body-content">
-        <main role="main">
+    <div class="container body-content" style="margin-top: 100px;">
+        <main role="main" >
             @RenderBody()
         </main>
     </div>

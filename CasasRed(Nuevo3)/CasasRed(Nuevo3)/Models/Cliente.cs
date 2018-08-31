@@ -72,8 +72,8 @@ namespace CasasRed_Nuevo3_.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gestion> Gestion { get; set; }
+        public virtual Corretaje Corretaje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Verificacion> Verificacion { get; set; }
-        public virtual Corretaje Corretaje { get; set; }
     }
 }

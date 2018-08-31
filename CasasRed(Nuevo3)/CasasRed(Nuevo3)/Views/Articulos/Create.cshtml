@@ -1,61 +1,57 @@
 ﻿@model CasasRed_Nuevo3_.Models.Articulos
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear artículo";
 }
 
-<h2>Create</h2>
+<h2>Crear artículo</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Articulos</h4>
-        <hr />
-         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.art_id, htmlAttributes: new { @class = "control-label col-md-2", @required = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.art_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.art_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.art_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.art_nombre, new { htmlAttributes = new { @class = "form-control", @required = "" } })
-                @Html.ValidationMessageFor(model => model.art_nombre, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.art_descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.art_descripcion, new { htmlAttributes = new { @class = "form-control", @required = "" } })
-                @Html.ValidationMessageFor(model => model.art_descripcion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.art_cantidadMinima, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.art_cantidadMinima, new { htmlAttributes = new { @class = "form-control", @required = "" } })
-                @Html.ValidationMessageFor(model => model.art_cantidadMinima, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2" for="art_id" required="">Código</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.art_id, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+            @Html.ValidationMessageFor(model => model.art_id, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="art_nombre" required="">Nombre</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.art_nombre, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+            @Html.ValidationMessageFor(model => model.art_nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="art_descripcion" required="">Descripción</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.art_descripcion, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+            @Html.ValidationMessageFor(model => model.art_descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="art_cantidadMinima" required="">Cantidad mínima</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.art_cantidadMinima, new { htmlAttributes = new { @class = "form-control", @required = "" } })
+            @Html.ValidationMessageFor(model => model.art_cantidadMinima, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success" /> | @Html.ActionLink("Regresar", "Index")
+        </div>
+    </div>
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

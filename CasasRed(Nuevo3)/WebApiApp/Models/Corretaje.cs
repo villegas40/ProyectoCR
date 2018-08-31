@@ -18,11 +18,11 @@ namespace WebApiApp.Models
         public Corretaje()
         {
             this.Cliente = new HashSet<Cliente>();
+            this.Contaduria = new HashSet<Contaduria>();
             this.Gastos = new HashSet<Gastos>();
             this.Gestion = new HashSet<Gestion>();
             this.Habilitacion = new HashSet<Habilitacion>();
             this.GastosContaduria = new HashSet<GastosContaduria>();
-            this.Contaduria = new HashSet<Contaduria>();
         }
     
         public int Id { get; set; }
@@ -74,6 +74,8 @@ namespace WebApiApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contaduria> Contaduria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gastos> Gastos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gestion> Gestion { get; set; }
@@ -81,7 +83,5 @@ namespace WebApiApp.Models
         public virtual ICollection<Habilitacion> Habilitacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GastosContaduria> GastosContaduria { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contaduria> Contaduria { get; set; }
     }
 }
