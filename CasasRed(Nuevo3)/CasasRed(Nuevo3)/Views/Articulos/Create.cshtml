@@ -1,11 +1,10 @@
 ﻿@model CasasRed_Nuevo3_.Models.Articulos
 
 @{
-    ViewBag.Title = "Crear artículo";
+    ViewBag.Title = "Artículos > Crear";
 }
 
 <h2>Crear artículo</h2>
-
 
 @using (Html.BeginForm()) 
 {
@@ -46,7 +45,7 @@
     <hr />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" /> | @Html.ActionLink("Regresar", "Index")
+            <input type="submit" value="Create" class="btn btn-success" /> | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-secondary" })
         </div>
     </div>
 </div>

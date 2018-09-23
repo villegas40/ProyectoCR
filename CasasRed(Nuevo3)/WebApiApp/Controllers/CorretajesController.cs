@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Corretajes/5
+        [Route("api/Corretajes/{id}")]
         [ResponseType(typeof(Corretaje))]
         public IHttpActionResult GetCorretaje(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Corretajes/5
+        [Route("api/Corretajes/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCorretaje(int id, Corretaje corretaje)
         {
@@ -89,6 +91,8 @@ namespace WebApiApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            //Borrar si no sirve
+
             db.Corretaje.Add(corretaje);
             db.SaveChanges();
 
@@ -103,6 +107,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Corretajes/5
+        [Route("api/Corretajes/{id}")]
         [ResponseType(typeof(Corretaje))]
         public IHttpActionResult DeleteCorretaje(int id)
         {
@@ -131,5 +136,6 @@ namespace WebApiApp.Controllers
         {
             return db.Corretaje.Count(e => e.Id == id) > 0;
         }
+
     }
 }

@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -250,6 +251,7 @@
     <Compile Include="Controllers\GestionsController.cs" />
     <Compile Include="Controllers\HabilitacionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\TipoUsuariosController.cs" />
     <Compile Include="Controllers\UbicacionesController.cs" />
@@ -260,6 +262,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Articulos.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalificacionVendedor.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CasaInventario.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CasasRedModel.Context.cs">
@@ -280,16 +288,25 @@
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comentarios.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comision.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Contaduria.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Corretaje.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetallesComision.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Existencias.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Gastos.cs">
+    <Compile Include="Models\FotosHabilitacion.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GastosContaduria.cs">
@@ -301,6 +318,9 @@
     <Compile Include="Models\Habilitacion.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HistorialAsignacion.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoUsuario.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
@@ -308,6 +328,9 @@
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendedor.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Verificacion.cs">

@@ -17,6 +17,7 @@ namespace WebApiApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Articulos()
         {
+            this.CasaInventario = new HashSet<CasaInventario>();
             this.Existencias = new HashSet<Existencias>();
         }
     
@@ -26,6 +27,8 @@ namespace WebApiApp.Models
         public Nullable<System.DateTime> art_fechaIngreso { get; set; }
         public Nullable<decimal> art_cantidadMinima { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CasaInventario> CasaInventario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Existencias> Existencias { get; set; }
     }

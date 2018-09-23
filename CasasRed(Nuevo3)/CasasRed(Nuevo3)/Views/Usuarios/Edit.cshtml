@@ -1,84 +1,120 @@
 ﻿@model CasasRed_Nuevo3_.Models.Usuario
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Usuarios > Editar";
+    List<string> ListaD = ViewBag.Descs;
+    List<int> ListaI = ViewBag.Ids;
 }
 
-<h2>Edit</h2>
+<h2>Editar</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+<div class="form-horizontal">
+    <h4>Usuario</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.usu_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usu_nombre, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Nombre de usuario</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @disabled="" } })
+            @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger" })
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usu_apellidoPa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_apellidoPa, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usu_apellidoPa, "", new { @class = "text-danger" })
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Contraseña</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+            @Html.ValidationMessageFor(model => model.usu_password, "", new { @class = "text-danger" })
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usu_apellidoMa, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_apellidoMa, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usu_apellidoMa, "", new { @class = "text-danger" })
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Correo</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_correo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.usu_correo, "", new { @class = "text-danger" })
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usu_alta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_alta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usu_alta, "", new { @class = "text-danger" })
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Nombre</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.usu_nombre, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.usu_tipo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_tipo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usu_tipo, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Apellido Paterno</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_apellidoPa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.usu_apellidoPa, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.usu_activo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.usu_activo)
-                    @Html.ValidationMessageFor(model => model.usu_activo, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Apellido Materno</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_apellidoMa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.usu_apellidoMa, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <div style="display:none;">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_alta, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Tipo de usuario</label>
+        <div class="col-md-10">
+            <select class="form-control" id="selectTipo" oninput="document.getElementById('usuarioTipo').value = document.getElementById('selectTipo').children[document.getElementById('selectTipo').selectedIndex].id;">
+                @for (int i = 0; i < @ListaD.Count; i++)
+                {
+                    <option id="@ListaI[i]">@ListaD[i]</option>
+                }
+            </select>
+            <input name="usu_tipo" style="display:none;" value="@Model.usu_tipo" id="usuarioTipo" />
+
+        </div>
+    </div>
+    <div class="form-group" style=@((Model.usu_username == "administrador")? "display:none;" : "" )>
+        <div class="col-md-10">
+
+            <div class="custom-control custom-checkbox">
+                @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked", @required = "", @checked = Model.usu_activo })
+                <label class="custom-control-label" for="customCheck1">Usuario Activo</label>
+                @Html.ValidationMessageFor(model => model.usu_activo, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <hr />
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Guardar" onclick="document.getElementsByName('usu_username')[0].removeAttribute('disabled')" class="btn btn-success" /> | @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-secondary" })
+    </div>
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    function seleccionarOpcion() {
+        var id = document.getElementById("usuarioTipo").value
+        var elemnts = document.getElementById("selectTipo")
+        var selecI = 0
+        for (var i = 0; i < elemnts.childElementCount; i++) {
+            if (elemnts[i].id == id) {
+                selecI = i
+                break;
+            }
+        }
+        document.getElementById("selectTipo").selectedIndex = selecI;
+    }
+    seleccionarOpcion()
+    </script>
 }

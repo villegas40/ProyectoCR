@@ -9,208 +9,104 @@
 <div>
     <h4>Habilitación</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Puertas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Puertas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Chapas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Chapas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Marcos_puertas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Marcos_puertas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Bisagras)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Bisagras)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Taza)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Taza)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Lavamanos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Lavamanos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Bastago)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Bastago)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Chapeton)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Chapeton)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Maneral)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Maneral)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Regadera_completa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Regadera_completa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Kit_lavamanos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Kit_lavamanos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Kit_taza)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Kit_taza)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Rosetas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Rosetas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Apagador_sencillo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Apagador_sencillo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Conector_sencillo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Conector_sencillo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Apagador_doble)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Apagador_doble)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Conector_apagador)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Conector_apagador)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Domo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Domo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Ventanas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Ventanas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Cableado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Cableado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Calibre_cableado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Calibre_cableado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Break_interior)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Break_interior)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Break_medidor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Break_medidor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hbt_Pinturas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hbt_Pinturas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
-        </dd>
-
-    </dl>
+    <table class="table table-bordered">
+        <tr>
+            <th>Puertas</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Puertas)</td>
+        </tr>
+        <tr>
+            <th>Chapas</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Chapas)</td>
+        </tr>
+        <tr>
+            <th>Marcos de puertas</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Marcos_puertas)</td>
+        </tr>
+        <tr>
+            <th>Bisagras</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Bisagras)</td>
+        </tr>
+        <tr>
+            <th>Taza</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Taza)</td>
+        </tr>
+        <tr>
+            <th>Lavamanos</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Lavamanos)</td>
+        </tr>
+        <tr>
+            <th>Bastago</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Bastago)</td>
+        </tr>
+        <tr>
+            <th>Chapeton</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Chapeton)</td>
+        </tr>
+        <tr>
+            <th>Maneral</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Maneral)</td>
+        </tr>
+        <tr>
+            <th>Regadera completa</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Regadera_completa)</td>
+        </tr>
+        <tr>
+            <th>Kit lavamanos</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Kit_lavamanos)</td>
+        </tr>
+        <tr>
+            <th>Kit taza</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Kit_taza)</td>
+        </tr>
+        <tr>
+            <th>Rosetas</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Rosetas)</td>
+        </tr>
+        <tr>
+            <th>Apagador sencillo</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Apagador_sencillo)</td>
+        </tr>
+        <tr>
+            <th>Conector sencillo</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Conector_sencillo)</td>
+        </tr>
+        <tr>
+            <th>Apagador doble</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Apagador_doble)</td>
+        </tr>
+        <tr>
+            <th>Conector apagador</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Conector_apagador)</td>
+        </tr>
+        <tr>
+            <th>Domo</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Domo)</td>
+        </tr>
+        <tr>
+            <th>Ventanas</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Ventanas)</td>
+        </tr>
+        <tr>
+            <th>Cableado</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Cableado)</td>
+        </tr>
+        <tr>
+            <th>Interior</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Break_interior)</td>
+        </tr>
+        <tr>
+            <th>Medidor</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Break_medidor)</td>
+        </tr>
+        <tr>
+            <th>Pinturas</th>
+            <td>@Html.DisplayFor(model => model.Hbt_Pinturas)</td>
+        </tr>
+        <tr>
+            <th>Estatus</th>
+            <td>@Html.DisplayFor(model => model.Corretaje.Crt_Status)</td>
+        </tr>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

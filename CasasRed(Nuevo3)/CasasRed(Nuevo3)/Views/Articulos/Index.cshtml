@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CasasRed_Nuevo3_.Models.Articulos>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Artículos";
 }
 
 <h2>Artículos</h2>
@@ -9,38 +9,83 @@
 <p>
     @Html.ActionLink("Añadir artículo", "Create")
 </p>
-<table class="table">
-    <tr><th>Código</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Fecha registro</th>
-        <th>Cantidad mínima</th>
-        <th>Opciones</th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.art_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.art_nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.art_descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.art_fechaIngreso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.art_cantidadMinima)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.art_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.art_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.art_id })
-        </td>
-    </tr>
-}
-
+<input id="txtBusquedaA" class="form-control" style="margin-bottom:5px;" placeholder="Buscar por artículo o descripción" onkeyup="buscarArticulo()" />
+<table class="table table-striped table-responsive-lg">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Fecha registro</th>
+            <th>Cantidad mínima</th>
+            <th colspan="3">Opciones</th>
+        </tr>
+    </thead>
+    <tbody id="ctBA"></tbody>
 </table>
+<center>
+    <button disabled class="btn btn-default" id="btnPrevious" onclick="buscarArticulo(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
+    <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
+    <button disabled class="btn btn-default" id="btnNext" onclick="buscarArticulo(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+</center>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var pageP = 1
+        function buscarArticulo(page) {
+            var totalPages = 1
+            if (page == undefined) {
+                page = 1
+            }
+            pageP = page
+            var filtro = document.getElementById("txtBusquedaA").value
+            var frm = new FormData()
+            frm.append("filtro", filtro)
+            frm.append("pagina", page)
+
+            var x = new XMLHttpRequest()
+            x.open("POST", "/Articulos/BuscarArticulo")
+            x.addEventListener("load", function (e) {
+                var json = JSON.parse(x.responseText)
+                document.getElementById("ctBA").innerHTML = ""
+
+                if (json.length == 0) {
+                    page = 0
+                    totalPages = 0
+                } else {
+                    totalPages = json[0].total;
+                }
+                var inner = ""
+                for (var i = 0; i < json.length; i++) {
+                    inner += "<tr>" +
+                        "<td>" + json[i].art_id + "</td>" +
+                        "<td>" + json[i].art_nombre + "</td>" +
+                        "<td>" + json[i].art_descripcion + "</td>" +
+                        "<td>" + json[i].fecha + "</td>" +
+                        "<td>" + json[i].art_cantidadMinima + "</td>" +
+                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Articulos/Edit/" + json[i].art_id + "\">Editar</a></td><td><a class=\"btn btn-info\" href=\"/Articulos/Details/" + json[i].art_id + "\">Detalles</a></td><td><a class=\"btn btn-danger\" href=\"/Articulos/Delete/" + json[i].art_id + "\">Eliminar</a> </td></tr>"+
+                        "</tr>"
+                }
+                document.getElementById("ctBA").innerHTML = inner
+                document.getElementById("next").textContent = totalPages
+                if (pageP <= 1) {
+                    document.getElementById("previous").textContent = page
+                    document.getElementById("btnPrevious").disabled = true
+                    if (pageP == totalPages) {
+                        document.getElementById("btnNext").disabled = true
+                    }
+                } else if (pageP == totalPages) {
+                    document.getElementById("btnPrevious").disabled = false
+                    document.getElementById("btnNext").disabled = true
+                } else {
+                    document.getElementById("btnNext").disabled = false
+                }
+                document.getElementById("actual").textContent = page
+            });
+            x.send(frm)
+        }
+        buscarArticulo()
+    </script>
+
+}

@@ -1,95 +1,110 @@
 ﻿@model CasasRed_Nuevo3_.Models.Verificacion
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Verificación > Eliminar";
 }
 
-<h2 style="margin-top:20px;">Delete</h2>
+<h2 @*style="margin-top:20px;"*@>Eliminar</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Desea eliminar el registro permanentemente?</h3>
 <div>
     <h4>Verificacion</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Persona_fisica)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Persona_fisica)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Visto_persona)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Visto_persona)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Tiempo_estimado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Tiempo_estimado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Tiempo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Tiempo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Tiene_costo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Tiene_costo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Costo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Costo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Trato_asesor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Trato_asesor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vfn_Observaciones)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vfn_Observaciones)
-        </dd>
-
-    </dl>
+    <table class="table table-bordered">
+        <tr>
+            <th>Conoce la ubicación físicamente del inmueble</th>
+            <td>
+                @if (Model.Vfn_Persona_fisica != null)
+                {
+                    if ((bool)Model.Vfn_Persona_fisica)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>La ha visto por dentro personalmente</th>
+            <td>
+                @if (Model.Vfn_Visto_persona != null)
+                {
+                    if ((bool)Model.Vfn_Visto_persona)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Le dijo el tiempo estimado de entrega y firma</th>
+            <td>
+                @if (Model.Vfn_Tiempo_estimado != null)
+                {
+                    if ((bool)Model.Vfn_Tiempo_estimado)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>¿Qué tiempo le dijo el vendedor?</th>
+            <td>@Html.DisplayFor(model => model.Vfn_Tiempo)</td>
+        </tr>
+        <tr>
+            <th>Le comentó el asesor que el proceso de trámite tiene un costo</th>
+            <td>
+                @if (Model.Vfn_Tiene_costo != null)
+                {
+                    if ((bool)Model.Vfn_Tiene_costo)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>¿Cuál es el precio que le comentó el asesor?</th>
+            <td>@Html.DisplayFor(model => model.Vfn_Costo)</td>
+        </tr>
+        <tr>
+            <th>¿Cómo considera que fue el trato del asesor?</th>
+            <td>@Html.DisplayFor(model => model.Vfn_Trato_asesor)</td>
+        </tr>
+        <tr>
+            <th>¿Tiene alguna observación o crítica constructiva sobre la empresa y/o el vendedor?</th>
+            <td>@Html.DisplayFor(model => model.Vfn_Observaciones)</td>
+        </tr>
+    </table>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
+        <hr />
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> | @Html.ActionLink("Regresar", "Index", null, new { @class= "btn btn-outline-secondary" })
         </div>
     }
 </div>
 
-@section Scripts {
+@*@section Scripts {
     <script>
         $(document.body).css('padding-top', '70px');
     </script>
-}
+}*@

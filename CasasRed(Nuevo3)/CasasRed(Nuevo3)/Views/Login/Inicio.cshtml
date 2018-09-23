@@ -2,6 +2,7 @@
 @{
     string msg = (ViewBag.MensajeError != null) ? ViewBag.MensajeError : "";
     string usr = ViewBag.usuario;
+  
 }
 
 <style>
@@ -26,8 +27,14 @@
         margin-bottom: 10px;
     }
 
+
     .login-form {
-        text-align: center;
+        /*text-align: center;*/
+        text-align: left;
+        margin-top: 60px;
+        /*box-shadow: 0px 0px 10px 1px grey;*/
+        padding-bottom: 20px;
+        background: white;
     }
 
         .login-form .btn.btn-primary {
@@ -70,8 +77,8 @@
         }
 </style>
 <div class="container">
-    <div class="main-div" style="margin-top:70px;">
-        <h2 style="margin-top: 19px;">Iniciar sesión</h2>
+    <div class="login-form col-md-4 offset-md-4">
+        <h2 class="panel-title">Iniciar sesión</h2>
         <br>
 
         <!-- Nav tabs -->
@@ -93,32 +100,33 @@
                     <div>
                         <label>@msg</label>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-
-                            <label>Usuario</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
-                                @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger" })
+                        <form>
+                            <div class="form-group">
+                                <label>Usuario</label>
+                                <div>
+                                    @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
+                                    @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Contraseña</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "" } })
-                                @Html.ValidationMessageFor(model => model.usu_password, " ", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label>Contraseña</label>
+                                <div >
+                                    @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "password", @required = "" } })
+                                    @Html.ValidationMessageFor(model => model.usu_password, " ", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Iniciar sesión" class="btn btn-primary" />
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" value="Iniciar sesión" class="btn btn-primary" />
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 }
             </div>
             <div id="cliente" class="container tab-pane fade">
                 <br>
-                @using (Html.BeginForm("Cliente", "Login"))
+                @using (Html.BeginForm("ClienteFolio", "Login"))
                 {
                     @Html.AntiForgeryToken()
                     <div>
@@ -126,14 +134,13 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             <label>Folio</label>
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @class = "form-control", @type = "text", @required = "" } })
-                                @Html.ValidationMessageFor(model => model.usu_password, "", new { @class = "text-danger" })
-                            </div>
+                                <div>
+                                    <input id="Grlal_Folio" name="Grlal_Folio" class="form-control" type="text" required />
+                                </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Consultar" class="btn btn-primary" />
+                            <div>
+                                <button type="submit" class="btn btn-primary">Consultar</button>
                             </div>
                         </div>
                     </div>
@@ -152,5 +159,6 @@
         });
 
         $(document.body).css('padding-top', '70px');
+
     </script>
 }

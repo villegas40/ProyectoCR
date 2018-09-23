@@ -14,6 +14,12 @@ namespace CasasRed_Nuevo3_.Models
     
     public partial class Existencias
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Existencias()
+        {
+            this.HistorialAsignacion = new HashSet<HistorialAsignacion>();
+        }
+    
         public int Id { get; set; }
         public string ext_art_id { get; set; }
         public Nullable<decimal> ext_cantidad { get; set; }
@@ -26,5 +32,7 @@ namespace CasasRed_Nuevo3_.Models
         public virtual Articulos Articulos { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Ubicaciones Ubicaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HistorialAsignacion> HistorialAsignacion { get; set; }
     }
 }

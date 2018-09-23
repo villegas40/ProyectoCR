@@ -17,22 +17,49 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Ubicaciones
         public ActionResult Index()
         {
-            return View(db.Ubicaciones.ToList());
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
+            {   
+                return View();
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Ubicaciones/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
-            if (ubicaciones == null)
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+             
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
+                if (ubicaciones == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(ubicaciones);
             }
-            return View(ubicaciones);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Ubicaciones/Create
@@ -48,29 +75,54 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ubi_id,ubi_codigo,ubi_descripcion")] Ubicaciones ubicaciones)
         {
-            if (ModelState.IsValid)
+            if (Session["Usuario"] == null)
             {
-                db.Ubicaciones.Add(ubicaciones);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(ubicaciones);
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Ubicaciones.Add(ubicaciones);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(ubicaciones);
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Ubicaciones/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
-            if (ubicaciones == null)
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
+                if (ubicaciones == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(ubicaciones);
             }
-            return View(ubicaciones);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Ubicaciones/Edit/5
@@ -80,28 +132,54 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ubi_id,ubi_codigo,ubi_descripcion")] Ubicaciones ubicaciones)
         {
-            if (ModelState.IsValid)
+            if (Session["Usuario"] == null)
             {
-                db.Entry(ubicaciones).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
-            return View(ubicaciones);
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(ubicaciones).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(ubicaciones);
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Ubicaciones/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
-            if (ubicaciones == null)
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
+                if (ubicaciones == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(ubicaciones);
             }
-            return View(ubicaciones);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Ubicaciones/Delete/5
@@ -109,10 +187,23 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
-            db.Ubicaciones.Remove(ubicaciones);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
+            {
+                Ubicaciones ubicaciones = db.Ubicaciones.Find(id);
+                db.Ubicaciones.Remove(ubicaciones);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -124,14 +215,14 @@ namespace CasasRed_Nuevo3_.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult BuscarUbicaciones(string filtro = "", int pagina = 1)
+        public JsonResult BuscarUbicaciones(string filtro = "", int pagina = 1, int registrosPagina = 15)
         {
-            int totalPagina = (int)Math.Ceiling((decimal)(db.Ubicaciones.Count() / 15));
-            var busqueda = (from u in db.Ubicaciones where u.ubi_codigo.Contains(filtro) || u.ubi_descripcion.Contains(filtro) select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo, total = totalPagina }).Skip((pagina - 1) * 15).Take(15);
+            int totalPagina = (int)Math.Ceiling((double)(db.Ubicaciones.Count()) / registrosPagina);
+            var busqueda = (from u in db.Ubicaciones where u.ubi_codigo.Contains(filtro) || u.ubi_descripcion.Contains(filtro) select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo, total = totalPagina }).OrderBy(a => a.codigo).Skip((pagina - 1) * registrosPagina).Take(registrosPagina);
             if (filtro == "")
 	        {
-                totalPagina = (int)Math.Ceiling((decimal)(db.Ubicaciones.Count() / 15));
-                busqueda = (from u in db.Ubicaciones select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo, total = totalPagina }).Skip((pagina - 1) * 15).Take(15);
+                totalPagina = (int)Math.Ceiling((double)(db.Ubicaciones.Count()) / registrosPagina);
+                busqueda = (from u in db.Ubicaciones select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo, total = totalPagina }).OrderBy(a => a.codigo).Skip((pagina - 1) * registrosPagina).Take(registrosPagina);
             }
             return Json(busqueda, JsonRequestBehavior.AllowGet);
         }

@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Habilitacions/5
+        [Route("api/Habilitacions/{id}")]
         [ResponseType(typeof(Habilitacion))]
         public IHttpActionResult GetHabilitacion(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Habilitacions/5
+        [Route("api/Habilitacions/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutHabilitacion(int id, Habilitacion habilitacion)
         {
@@ -86,6 +88,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Habilitacions/5
+        [Route("api/Habilitacions/{id}")]
         [ResponseType(typeof(Habilitacion))]
         public IHttpActionResult DeleteHabilitacion(int id)
         {

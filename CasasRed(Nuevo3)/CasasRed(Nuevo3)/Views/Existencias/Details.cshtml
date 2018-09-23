@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Existencia";
 }
-<h2>Detalles</h2>
+<h2>Detalles por articulo</h2>
 <div>
     <table class="table table-striped table-responsive-lg">
         <thead>
@@ -26,11 +26,11 @@
         {
             <tr>
                 <td>@item.ext_art_id</td>
-                <td>@item.ext_ubicacion</td>
+                <td>@item.Ubicaciones.ubi_codigo</td>
                 <td>@item.ext_cantidadActual</td>
                 <td>@item.ext_cantidad</td>
                 <td>@item.ext_precioUnitario</td>
-                <td>@item.ext_usuarioAgrego</td>
+                <td>@item.Usuario.usu_username</td>
                 <td>@item.ext_fechaAgregado</td>
                 @if (Session["Tipo"].ToString() == "Administrador" && @item.ext_cantidad == @item.ext_cantidadActual)
                 {   
@@ -43,9 +43,9 @@
         </tbody>
     </table>
 </div>
-
+<hr />
 <p>
-    @Html.ActionLink("Regresar al inventario", "Index")
+    @Html.ActionLink("Regresar al inventario", "Index", null, new { @class = "btn btn-outline-secondary" })
 </p>
 
 <script>
@@ -78,5 +78,5 @@
             obtenerUsuarios(tbody.children[i].children[5])
         }
     }
-    actualizarIDS()
+    //actualizarIDS()
 </script>

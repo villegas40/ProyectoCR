@@ -1,90 +1,125 @@
 ﻿@model CasasRed_Nuevo3_.Models.Usuario
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear usuario";
+    List<string> ListaD = ViewBag.Descs;
+    List<int> ListaI = ViewBag.Ids;
 }
-
-<h2>Create</h2>
-
-
+<h2>Crear usuario</h2>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.usu_nombre, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-2" for="usuarioNombre">Nombre</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_nombre, new { htmlAttributes = new { @class = "form-control", @id = "usuarioNombre" } })
-                @Html.ValidationMessageFor(model => model.usu_nombre, "", new { @class = "text-danger" })
-            </div>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2" for="usuarioNombre">Nombre de usuario</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @id = "userName", @required = "", @onkeyup= "comprobarUsuario()" } })
+            @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger", @id="AdvertenciaUsername" })
         </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.usu_apellidoPa, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-2" for="apellidoMaterno">Apellido Paterno</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_apellidoPa, new { htmlAttributes = new { @class = "form-control", @id = "Apellido Paterno" } })
-                @Html.ValidationMessageFor(model => model.usu_apellidoPa, "", new { @class = "text-danger" })
-            </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="usuarioContra">Contraseña</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_password, new { htmlAttributes = new { @type="password", @class = "form-control", @id = "usuarioContra", @required = "" } })
+            @Html.ValidationMessageFor(model => model.usu_password, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.usu_apellidoMa, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-2" for="apellidoMaterno">Apellido Materno</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_apellidoMa, new { htmlAttributes = new { @class = "form-control", @id = "apellidoMaterno" } })
-                @Html.ValidationMessageFor(model => model.usu_apellidoMa, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="usuarioNombre">Correo</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_correo, new { htmlAttributes = new { @class = "form-control", @id = "email", @required = "", @onkeyup = "comprobarUsuario(this)" } })
+            @Html.ValidationMessageFor(model => model.usu_correo, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.usu_alta, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-2" for="usuarioAlta">Usuario Alta</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_alta, new { htmlAttributes = new { @class = "form-control", @id = "usuarioAlta" } })
-                @Html.ValidationMessageFor(model => model.usu_alta, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="usuarioNombre">Nombre</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_nombre, new { htmlAttributes = new { @class = "form-control", @id = "usuarioNombre", @required = "" } })
+            @Html.ValidationMessageFor(model => model.usu_nombre, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.usu_tipo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class = "control-label col-md-2" for="usuarioTipo">Tipo de Usuario</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usu_tipo, new { htmlAttributes = new { @class = "form-control", @id="usuarioTipo" } })
-                @Html.ValidationMessageFor(model => model.usu_tipo, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="apellidoMaterno">Apellido Paterno</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_apellidoPa, new { htmlAttributes = new { @class = "form-control", @id = "Apellido Paterno", @required = "" } })
+            @Html.ValidationMessageFor(model => model.usu_apellidoPa, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.usu_activo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                <div class="custom-control custom-checkbox">
-                    @*@Html.EditorFor(model => model.usu_activo)*@
-                    @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked" })
-                    <label class="custom-control-label" for="customCheck1">Usuario Activo</label>
-                    @Html.ValidationMessageFor(model => model.usu_activo, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="apellidoMaterno">Apellido Materno</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.usu_apellidoMa, new { htmlAttributes = new { @class = "form-control", @id = "apellidoMaterno", @required = "" } })
+            @Html.ValidationMessageFor(model => model.usu_apellidoMa, "", new { @class = "text-danger" })
         </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="usuarioTipo">Tipo de Usuario</label>
+        <div class="col-md-10">
+            <select class="form-control" id="selectTipo" oninput="document.getElementById('usuarioTipo').value = document.getElementById('selectTipo').children[document.getElementById('selectTipo').selectedIndex].id;">
+                <option id="">---</option>
+    @for (int i = 0; i < @ListaD.Count; i++)
+    { 
+        <option id="@ListaI[i]">@ListaD[i]</option>
+    }
+            </select>
+                <input name="usu_tipo" style="display:none;" id="usuarioTipo" />
+        </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-                <button type="submit" class="btn btn-outline-danger">Guardar</button>
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="custom-control custom-checkbox">
+                @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked", @required = "" })
+                <label class="custom-control-label" for="customCheck1">Usuario Activo</label>
+                @Html.ValidationMessageFor(model => model.usu_activo, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar" onclick=" return correcto;" class="btn btn-success" /> | @Html.ActionLink("Regresar a la lista", "Index", null, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    var correcto = true
+    function comprobarUsuario(elm) {
+        var frm = new FormData()
+        if (elm != undefined) {
+           var id = elm.value
+            frm.append("correo", id)
+        } else {
+            var id = document.getElementById("userName").value
+        frm.append("username", id)
+        }
+        var x = new XMLHttpRequest()
+        x.open("POST", "/Usuarios/ComprobarUsuarios", false)
+        x.addEventListener("load", function (e) {
+            var data = JSON.parse(x.responseText)
+            correcto = !data
+            if (data) {
+                
+            } else {
+                
+            }
+        });
+        x.send(frm)
+    }
+
+    
+    </script>
 }

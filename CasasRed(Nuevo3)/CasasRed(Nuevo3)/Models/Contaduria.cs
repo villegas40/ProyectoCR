@@ -15,16 +15,16 @@ namespace CasasRed_Nuevo3_.Models
     public partial class Contaduria
     {
         public int Id { get; set; }
-        public Nullable<decimal> Cnt_Presupuesto_gestion { get; set; }
-        public Nullable<decimal> Cnt_Presupuesto_corretaje { get; set; }
-        public Nullable<decimal> Cnt_Presupuesto_habilitacion { get; set; }
-        public Nullable<decimal> Cnt_Presupuesto { get; set; }
-        public Nullable<int> Id_Gastos { get; set; }
-        public Nullable<int> Id_GastosContaduria { get; set; }
+        public Nullable<decimal> Cnt_M_Preguntar { get; set; }
+        public Nullable<decimal> Cnt_Material { get; set; }
+        public Nullable<decimal> Cnt_Vigilancia { get; set; }
+        public Nullable<decimal> Cnt_Tramites { get; set; }
+        public Nullable<decimal> Cnt_CESPT { get; set; }
+        public Nullable<decimal> Cnt_CFE { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         public virtual Corretaje Corretaje { get; set; }
-        public virtual Gastos Gastos { get; set; }
-        public virtual GastosContaduria GastosContaduria { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

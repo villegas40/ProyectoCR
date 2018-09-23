@@ -7,6 +7,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApiApp.Models;
@@ -24,7 +25,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Clientes/5
-        [ResponseType(typeof(Cliente))]
+        [Route("api/Clientes/{id}")]
         public IHttpActionResult GetCliente(int id)
         {
             Cliente cliente = db.Cliente.Find(id);
@@ -37,6 +38,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Clientes/5
+        [Route("api/Clientes/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCliente(int id, Cliente cliente)
         {
@@ -75,6 +77,7 @@ namespace WebApiApp.Controllers
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult PostCliente(Cliente cliente)
         {
+
             int cliente_id, corretaje_id;
             string correo, telefono;
 
@@ -101,8 +104,8 @@ namespace WebApiApp.Controllers
             //Tomar valores
             cliente_id = cliente.Id;
             corretaje_id = cliente.Id_Corretaje.Value; //Preguntar si lo dejo así o corretaje_id = cliente.Id_Corretaje.HasValue ? cliente.Id_Corretaje.Value:0
-            //telefono = cliente.Gral_Celular.ToString();
-            //correo = cliente.Gral_Correo;
+                                                       //telefono = cliente.Gral_Celular.ToString();
+                                                       //correo = cliente.Gral_Correo;
 
             //Funciones
             gestion_controller.CreateGestions(cliente_id, corretaje_id);
@@ -111,9 +114,40 @@ namespace WebApiApp.Controllers
             //correo_controller.sendmail(correo);
 
             return CreatedAtRoute("DefaultApi", new { id = cliente.Id }, cliente);
+
+        }
+
+        //Metodo Folio
+        public string CrearFolio(int longitud)
+        {
+            string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            while (0 < longitud--)
+            {
+                res.Append(caracteres[rnd.Next(caracteres.Length)]);
+            }
+            return res.ToString();
+        }
+
+        public string ValidarFolioDuplicado()
+        {
+            var folio = CrearFolio(10);
+            List<Cliente> clientes = new List<Cliente>();
+            clientes = db.Cliente.ToList();
+
+            foreach (var item in clientes)
+            {
+                if (item.Grlal_Folio == folio)
+                {
+                    ValidarFolioDuplicado();
+                }
+            }
+            return folio;
         }
 
         // DELETE: api/Clientes/5
+        [Route("api/Clientes/{id}")]
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult DeleteCliente(int id)
         {

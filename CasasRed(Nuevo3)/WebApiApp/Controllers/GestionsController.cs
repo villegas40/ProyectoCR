@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Gestions/5
+        [Route("api/Gestions/{id}")]
         [ResponseType(typeof(Gestion))]
         public IHttpActionResult GetGestion(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Gestions/5
+        [Route("api/Gestions/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutGestion(int id, Gestion gestion)
         {
@@ -86,6 +88,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Gestions/5
+        [Route("api/Gestions/{id}")]
         [ResponseType(typeof(Gestion))]
         public IHttpActionResult DeleteGestion(int id)
         {
@@ -121,7 +124,6 @@ namespace WebApiApp.Controllers
             CasasRedEntities CS = new CasasRedEntities();
             Gestion gestion_obj = new Gestion
             {
-                Gtm_Aviso_Susp = false,
                 Gtn_Acta_Nacimiento = false,
                 Gtn_Agua_Pago_Inf = false,
                 Gtn_Aviso_Suspension = false,

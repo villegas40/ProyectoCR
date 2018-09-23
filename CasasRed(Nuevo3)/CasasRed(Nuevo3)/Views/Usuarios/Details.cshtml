@@ -11,64 +11,59 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.usu_nombre)
+            Nombre de usuario
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.usu_username)
+        </dd>
+        <dt>
+            Nombre
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.usu_nombre)
+            @Html.DisplayFor(model => model.usu_nombre) @Html.DisplayFor(model => model.usu_apellidoPa) @Html.DisplayFor(model => model.usu_apellidoMa)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.usu_apellidoPa)
+            Correo
+        </dt>
+            @if (Model.usu_correo == "")
+            {
+        <dd> 
+                No asignado
+        </dd>
+            }
+            else
+            {
+                <dd>
+                @Html.DisplayFor(model => model.usu_correo) 
+                </dd>
+            }
+        <dt>
+            Fecha registro
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.usu_apellidoPa)
+            @Html.DisplayFor(model => model.usu_alta))
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.usu_apellidoMa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usu_apellidoMa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.usu_alta)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usu_alta)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.usu_tipo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usu_tipo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.usu_activo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usu_activo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoUsuario.tipusu_descricion)
+            Tipo
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.TipoUsuario.tipusu_descricion)
         </dd>
 
+        <dt>
+            Estado del usuario
+        </dt>
+
+        <dd>
+            @(((bool)Model.usu_activo) ? "Activo" : "Inactivo" )
+        </dd>
     </dl>
 </div>
+<hr />
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class="btn btn-primary" }) | @Html.ActionLink("Regresar", "Index", null, new { @class= "btn-outline-secondary" })
 </p>

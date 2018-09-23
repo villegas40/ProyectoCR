@@ -1,0 +1,285 @@
+﻿@model CasasRed_Nuevo3_.Controllers.ClientesController.DetailsViewModel
+
+@{
+    ViewBag.Title = "Folioview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int? progreso = 0;
+    var folio = ViewBag.folios;
+    int? progresohabi = 0;
+    int? progresocorre = 0;
+    int? progresogestion = 0;
+}
+
+
+<h3>Datos del folio numero: @folio </h3>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div id="list-example" class="list-group">
+                <a class="list-group-item list-group-item-action active list-group-item-danger" id="list-DCompra-list" data-toggle="list" href="#list-Dcompra" role="tab" aria-controls="Dcompra">Datos Comprador</a>
+                <a class="list-group-item list-group-item-action list-group-item-light" id="list-Dcasa-list" data-toggle="list" href="#list-Dcasa" role="tab" aria-controls="Dcasa">Datos Casa</a>
+                <a class="list-group-item list-group-item-action list-group-item-danger" id="list-Dventa-list" data-toggle="list" href="#list-Dventa" role="tab" aria-controls="Dventa">Progreso</a>
+
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-Dcompra" role="tabpanel" aria-labelledby="list-Dcompra-list">
+                    <h4>Datos del cliente</h4>
+                    <div class="container">
+
+                        <table class="table table-striped table-responsive-lg">
+                            <thead>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.clientes)
+                                {
+                                    <tr>
+                                        <td>
+                                            <b>Nombre Completo :</b>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Gral_Nombre)  @Html.DisplayFor(modelItem => item.Gral_Apellidopa)  @Html.DisplayFor(modelItem => item.Gral_Apellidoma)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Fecha de nacimiento: </b>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelitem => item.Gral_Fechanac)
+                                        </td>
+                                        <td>
+                                            <b>Lugar de nacimiento: </b>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelitem => item.Gral_Lugarnac)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>No.Seguro Social :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Nss)</td>
+                                        <td><b>Estado Civil</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Estado_civil)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>CURP :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Curp)</td>
+                                        <td><b>RFC :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Rfc)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Régimen Matrimonial :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Regimen_matrimonial)</td>
+                                        <td><b>Ocupación :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Ocupacion)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Dirección</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Calle :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Calle)</td>
+                                        <td><b>Número :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Numero)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>CP :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Cp)</td>
+
+
+                                        <td><b>Colonia :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Colonia)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Municipio :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Municipio)</td>
+                                        <td><b>Estado :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Estado)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Contacto </b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Celular :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Celular)</td>
+                                        <td><b>Telefono de casa :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Cyg_Tel_casa)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Telefono de trabajo :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Teltrabajo)</td>
+                                        <td><b>Correo electronico :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Gral_Correo)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade show " id="list-Dcasa" role="tabpanel" aria-labelledby="list-Dcasa-list">
+                    <h4>Datos de la casa</h4>
+                    <div class="container">
+                        <table class="table table-striped table-responsive-lg">
+                            <thead>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.corretajes)
+                                {
+                                    progreso = progreso + item.Crt_ProgresoForm;
+                                    progresocorre = item.Crt_ProgresoForm;
+                                    <tr>
+                                        <td><b>Dirección:</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Crt_Direccion)</td>
+                                        <td><b>Precio :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Crt_Precio)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tipo de vivienda :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Crt_Tipo_Vivienda)</td>
+                                        <td><b>Nivel :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Crt_Nivel)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Número de habitaciones</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Crt_Num_Habitaciones)</td>
+                                        <td><b>Planta :</b></td>
+                                        <td>@Html.DisplayFor(modelitem => item.Crt_Planta)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade show" id="list-Dventa" role="tabpanel" aria-labelledby="list-Dventa-list">
+                    <h4>Progreso general de la casa</h4>
+                    <div class=" container">
+                        @foreach (var item in Model.gestions)
+                        {
+                            progresogestion = item.Gtn_ProgresoForm;
+                            progreso = (progreso + item.Gtn_ProgresoForm) / 2;
+                        }
+                        @foreach (var item2 in Model.habilitacions)
+                        {
+                            progresohabi = item2.Hbt_ProgresoForm;
+                        }
+
+                        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@progreso%">@progreso% Completado </div>
+                        
+                        @* Cambiar a los valores reales *@
+                        <table class="table tab-content table-responsive-lg">
+                            <thead>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Gestion
+                                    </td>
+                                    <td>
+                                        Habilitacion
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@progresogestion%">@progresogestion% Completado </div>
+                                    </td>
+                                    <td>
+                                        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@progresohabi%">@progresohabi% Completado </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Corretaje</td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@progresocorre%">@progresocorre% Completado </div>
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .social {
+        position: fixed;
+        left: 0;
+        top: 550px;
+        z-index: 2000;
+    }
+
+        .social ul {
+            list-style: none;
+        }
+
+            .social ul li a {
+                display: inline-block;
+                color: #fff;
+                background: #fff;
+                padding: 10px 15px;
+                text-decoration: none;
+                -webkit-transition: all 500ms ease;
+                -o-transition: all 500ms ease;
+                transition: all 500ms ease;
+            }
+
+            .social ul li .fa-whatsapp {
+                background: #4cff00;
+            }
+           .social ul li .fa-facebook{
+               background: #4800ff;
+           }
+            .social ul li a:hover {
+                background: #000000;
+                padding: 10px 30px;
+            }
+</style>
+<div class="social">
+
+    <ul>
+        <a>Contacto</a>
+        <li>
+            <a href="https://web.whatsapp.com/send?phone=526644392448" target="_blank" class="fab fa-whatsapp"></a>
+        </li>
+        <li>
+            <a href="https://www.facebook.com/CCasasRed/" target="_blank" class="fab fa-facebook"></a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+@*<div class="row">
+    <div class="col">
+        <a>Corretaje</a>
+        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@progreso%">@progreso% Completado </div>
+    </div>
+    <div class="col">
+        <a>Habilitacion</a>
+        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@progreso%">@progreso% Completado </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a>Gestion</a>
+        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@progreso%">@progreso% Completado </div>
+    </div>
+</div>*@

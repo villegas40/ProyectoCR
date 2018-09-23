@@ -17,8 +17,17 @@ namespace WebApiApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.CasaInventario = new HashSet<CasaInventario>();
+            this.Cliente = new HashSet<Cliente>();
+            this.Comision = new HashSet<Comision>();
+            this.Contaduria = new HashSet<Contaduria>();
+            this.Corretaje = new HashSet<Corretaje>();
             this.Existencias = new HashSet<Existencias>();
-            this.Gastos = new HashSet<Gastos>();
+            this.GastosContaduria = new HashSet<GastosContaduria>();
+            this.Gestion = new HashSet<Gestion>();
+            this.Habilitacion = new HashSet<Habilitacion>();
+            this.HistorialAsignacion = new HashSet<HistorialAsignacion>();
+            this.Verificacion = new HashSet<Verificacion>();
         }
     
         public int Id { get; set; }
@@ -34,9 +43,27 @@ namespace WebApiApp.Models
         public Nullable<int> Id_TipoUsiario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CasaInventario> CasaInventario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comision> Comision { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Contaduria> Contaduria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Corretaje> Corretaje { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Existencias> Existencias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gastos> Gastos { get; set; }
+        public virtual ICollection<GastosContaduria> GastosContaduria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Gestion> Gestion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Habilitacion> Habilitacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HistorialAsignacion> HistorialAsignacion { get; set; }
         public virtual TipoUsuario TipoUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Verificacion> Verificacion { get; set; }
     }
 }

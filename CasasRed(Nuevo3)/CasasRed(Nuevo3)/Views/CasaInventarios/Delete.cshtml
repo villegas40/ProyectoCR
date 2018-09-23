@@ -1,0 +1,43 @@
+﻿@model CasasRed_Nuevo3_.Models.CasaInventario
+
+@{
+    ViewBag.Title = "Habilitacion > Eliminar asignación";
+}
+    <h3>¿Desea eliminar permanentemente el registro?</h3>
+    <div>
+        <h4>Material asignado</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Artículo
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ci_articulo_id)
+            </dd>
+            <dt>
+                Cantidad asignada
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ci_cantidadAsignada)
+            </dd>
+            <dt>
+                Fecha
+            </dt>
+            <dd>
+                @Model.ci_fecha.ToShortDateString()
+            </dd>
+            <dt>
+                Usuario asigno
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Usuario.usu_username)
+            </dd>
+        </dl>
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+<hr />    
+<div >
+    <input type="submit" value="Eliminar" class="btn btn-danger" /> | @Html.ActionLink("Regresar", "Index", new { id = Model.ci_corretaje_id }, new { @class = "btn btn-outline-secundary" })
+</div>
+        }
+    </div>

@@ -95,7 +95,7 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Detalle([Bind(Include = "Id,ext_art_id,ext_cantidad,ext_precioUnitario,ext_ubicacion")] Existencias existencias)
         {
-            Existencias ex = db.Existencias.Find(existencias.Id);
+            Existencias ex = db.Existencias.AsNoTracking().Where( x => x.Id == existencias.Id).First();
             existencias.ext_cantidadActual = ex.ext_cantidadActual;
             existencias.ext_fechaAgregado = ex.ext_fechaAgregado;
             existencias.ext_usuarioAgrego = ex.ext_usuarioAgrego;
@@ -189,7 +189,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 db.Entry(existencias).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = existencias.ext_art_id });
             }
 
             return View(existencias);
@@ -205,15 +205,15 @@ namespace CasasRed_Nuevo3_.Controllers
             else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
             {
                 if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Existencias existencias = db.Existencias.Find(id);
-            if (existencias == null)
-            {
-                return HttpNotFound();
-            }
-            return View(existencias);
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Existencias existencias = db.Existencias.Find(id);
+                if (existencias == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(existencias);
             }
             else
             {
@@ -242,18 +242,18 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             base.Dispose(disposing);
         }
-        public JsonResult BuscarArticulo(string filtro = "", int pagina = 1)
+        public JsonResult BuscarArticulo(string filtro = "", int pagina = 1, int registrosPagina = 15)
         {
             if (filtro == "")
             {
-                int totalPaginas = (int)Math.Ceiling((double)db.Articulos.Count() / 15);
-                var busqueda = (from a in db.Articulos select new { a.art_id, a.art_nombre, a.art_descripcion, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1) * 15).Take(15).ToList();
+                int totalPaginas = (int)Math.Ceiling((double)db.Articulos.Count() / registrosPagina);
+                var busqueda = (from a in db.Articulos select new { a.art_id, a.art_nombre, a.art_descripcion, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
             return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion}).Count() / 15);
-                var busqueda = (from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1) * 15).Take(15).ToList();
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion}).Count() / registrosPagina);
+                var busqueda = (from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }
@@ -269,7 +269,7 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                int totalPagina = (int)Math.Ceiling((double)((from u in db.Ubicaciones where u.ubi_codigo.Contains(filtro) || u.ubi_descripcion.Contains(filtro) select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo }).Count() / 15));
+                int totalPagina = (int)Math.Ceiling(((double)(from u in db.Ubicaciones where u.ubi_codigo.Contains(filtro) || u.ubi_descripcion.Contains(filtro) select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo }).Count() / 15));
                 var busqueda = (from u in db.Ubicaciones where u.ubi_codigo.Contains(filtro) || u.ubi_descripcion.Contains(filtro) select new { id = u.ubi_id, descripcion = u.ubi_descripcion, codigo = u.ubi_codigo, total = totalPagina }).OrderBy(u => u.codigo).Skip((pagina - 1) * 15).Take(15).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
 

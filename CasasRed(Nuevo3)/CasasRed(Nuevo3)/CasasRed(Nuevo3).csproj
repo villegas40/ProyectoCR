@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -212,17 +213,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\CasaInventariosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ContaduriasController.cs" />
     <Compile Include="Controllers\CorreoController.cs" />
     <Compile Include="Controllers\CorretajesController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
+    <Compile Include="Controllers\GaleriaController.cs" />
     <Compile Include="Controllers\GastosContaduriasController.cs" />
-    <Compile Include="Controllers\GastosController.cs" />
+    <Compile Include="Controllers\GerenteController.cs" />
     <Compile Include="Controllers\GestionsController.cs" />
     <Compile Include="Controllers\HabilitacionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\TipoUsuariosController.cs" />
     <Compile Include="Controllers\UbicacionesController.cs" />
@@ -232,6 +236,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Articulos.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalificacionVendedor.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CasaInventario.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CasasRedModel.Context.cs">
@@ -252,16 +262,25 @@
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comentarios.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comision.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Contaduria.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Corretaje.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetallesComision.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Existencias.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Gastos.cs">
+    <Compile Include="Models\FotosHabilitacion.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GastosContaduria.cs">
@@ -273,6 +292,9 @@
     <Compile Include="Models\Habilitacion.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HistorialAsignacion.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoUsuario.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
@@ -280,6 +302,9 @@
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendedor.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Verificacion.cs">
@@ -309,6 +334,7 @@
     <Content Include="Content\fontawsome\webfonts\fa-brands-400.svg" />
     <Content Include="Content\fontawsome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\fontawsome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\Print\print.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -375,6 +401,7 @@
     <Content Include="Models\CasasRedModel.edmx.diagram">
       <DependentUpon>CasasRedModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Properties\PublishProfiles\CustomProfile.pubxml.user" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -527,6 +554,26 @@
     <Content Include="Views\GastosContadurias\Edit.cshtml" />
     <Content Include="Views\GastosContadurias\Index.cshtml" />
     <Content Include="Views\Existencias\Detalle.cshtml" />
+    <Content Include="Views\Gerente\Details.cshtml" />
+    <Content Include="Views\Gerente\index.cshtml" />
+    <Content Include="Views\Gerente\Editc.cshtml" />
+    <Content Include="Views\Gerente\Editg.cshtml" />
+    <Content Include="Views\Gerente\Edith.cshtml" />
+    <Content Include="Views\Gerente\Editv.cshtml" />
+    <Content Include="Views\Gerente\Editconta.cshtml" />
+    <Content Include="Views\Gerente\DeleteDetails.cshtml" />
+    <Content Include="Views\CasaInventarios\Create.cshtml" />
+    <Content Include="Views\CasaInventarios\Delete.cshtml" />
+    <Content Include="Views\CasaInventarios\Details.cshtml" />
+    <Content Include="Views\CasaInventarios\Edit.cshtml" />
+    <Content Include="Views\CasaInventarios\Index.cshtml" />
+    <Content Include="Views\Gerente\DeleteCliente.cshtml" />
+    <Content Include="Views\Gerente\DeleteCorretaje.cshtml" />
+    <Content Include="Views\Reportes\Index.cshtml" />
+    <Content Include="Views\Clientes\Folioview.cshtml" />
+    <Content Include="Views\Galeria\index.cshtml" />
+    <Content Include="Views\Galeria\Create.cshtml" />
+    <Content Include="Views\Galeria\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

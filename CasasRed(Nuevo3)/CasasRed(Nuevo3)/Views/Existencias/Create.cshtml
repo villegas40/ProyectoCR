@@ -1,7 +1,7 @@
 ﻿@model CasasRed_Nuevo3_.Models.Existencias
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Inventario > Añadir";
 }
 <h2>Añadir existencias</h2>
 @using (Html.BeginForm())
@@ -49,7 +49,7 @@
 <hr />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-success" /> | @Html.ActionLink("Regresar a la lista", "Index")
+                <input type="submit" value="Crear" class="btn btn-success" /> | @Html.ActionLink("Regresar a la lista", "Index", null, new { @class = "btn btn-outline-secondary" })
             </div>
         </div>
     </div>
@@ -76,11 +76,11 @@
                     </thead>
                     <tbody id="ctBA"></tbody>
                 </table>
-                <div>
+                <center>
                     <button class="btn btn-default" id="btnPrevious" onclick="buscarArticulo(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
                     <label id="previous"></label><label> - <label id="actual"></label>-</label><label id="next"></label>
                     <button class="btn btn-default" id="btnNext" onclick="buscarArticulo(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
-                </div>
+                </center>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -110,11 +110,11 @@
                     </thead>
                     <tbody id="ctBU"></tbody>
                 </table>
-                <div>
+                <center>
                     <button class="btn btn-default" id="btnPreviousU" onclick="buscarUbicacion(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
                     <label id="previousU"></label><label> - <label id="actualU"></label>-</label><label id="nextU"></label>
                     <button class="btn btn-default" id="btnNextU" onclick="buscarUbicacion(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
-                </div>
+                </center>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -133,15 +133,11 @@
             }
             pageP = page
             var filtro = document.getElementById("txtBusquedaA").value
-            console.log(filtro)
-            console.log(page)
-
             var frm = new FormData()
             frm.append("filtro", filtro)
             frm.append("pagina", page)
 
             var x = new XMLHttpRequest()
-
             x.open("POST", "/Existencias/BuscarArticulo")
             x.addEventListener("load", function (e) {
                 var json = JSON.parse(x.responseText)

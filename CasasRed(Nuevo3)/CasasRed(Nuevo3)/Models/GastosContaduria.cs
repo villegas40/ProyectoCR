@@ -14,20 +14,15 @@ namespace CasasRed_Nuevo3_.Models
     
     public partial class GastosContaduria
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GastosContaduria()
-        {
-            this.Contaduria = new HashSet<Contaduria>();
-        }
-    
         public int Id { get; set; }
-        public Nullable<decimal> GstCon_Mensualidad { get; set; }
-        public Nullable<decimal> GstCon_Vigilancia { get; set; }
-        public Nullable<decimal> GstCon_Otros { get; set; }
+        public string GstCon_Concepto { get; set; }
+        public Nullable<decimal> GstCon_Monto { get; set; }
+        public string GstCon_Descripcion { get; set; }
+        public Nullable<System.DateTime> GstCon_Fecha { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contaduria> Contaduria { get; set; }
         public virtual Corretaje Corretaje { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

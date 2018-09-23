@@ -17,8 +17,22 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: GastosContadurias
         public ActionResult Index()
         {
-            var gastosContaduria = db.GastosContaduria.Include(g => g.Corretaje);
-            return View(gastosContaduria.ToList());
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Administrador")
+            {
+                var gastosContaduria = db.GastosContaduria.Include(g => g.Contaduria);
+                return View(gastosContaduria.ToList());
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
+            
         }
 
         // GET: GastosContadurias/Details/5
@@ -48,16 +62,17 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GstCon_Mensualidad,GstCon_Vigilancia,GstCon_Otros,Id_Corretaje")] GastosContaduria gastosContaduria)
+        public ActionResult Create([Bind(Include = "Id,GstCon_Concepto,GstCon_Monto,GstCon_Fecha,Id_TipoGasto,Id_Contaduria,Id_Corretaje")] GastosContaduria gastosContaduria, int id_casa = 0)
         {
             if (ModelState.IsValid)
             {
+                gastosContaduria.Id_Contaduria = id_casa;
                 db.GastosContaduria.Add(gastosContaduria);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gastosContaduria.Id_Corretaje);
+            //ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gastosContaduria.Id_Corretaje); <--------------------------------------------Abiel Aqui Mero
             return View(gastosContaduria);
         }
 
@@ -73,7 +88,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gastosContaduria.Id_Corretaje);
+            //ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gastosContaduria.Id_Corretaje);  <--------------------------------------------Abiel Aqui Mero
             return View(gastosContaduria);
         }
 
@@ -82,7 +97,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GstCon_Mensualidad,GstCon_Vigilancia,GstCon_Otros,Id_Corretaje")] GastosContaduria gastosContaduria)
+        public ActionResult Edit([Bind(Include = "Id,GstCon_Concepto,GstCon_Monto,GstCon_Fecha,Id_TipoGasto,Id_Contaduria,Id_Corretaje")] GastosContaduria gastosContaduria)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +105,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gastosContaduria.Id_Corretaje);
+            //ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gastosContaduria.Id_Corretaje); <--------------------------------------------Abiel Aqui Mero
             return View(gastosContaduria);
         }
 

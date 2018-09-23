@@ -1,34 +1,29 @@
 ﻿@model CasasRed_Nuevo3_.Models.Ubicaciones
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>Ubicaciones</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ubi_codigo)
+            Código
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ubi_codigo)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.ubi_descripcion)
+            Descrición
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ubi_descripcion)
         </dd>
-
     </dl>
+    <hr />
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ubi_id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ubi_id }, new { @class="btn btn-info" }) | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-danger" })
 </p>

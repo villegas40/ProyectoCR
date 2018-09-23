@@ -41,11 +41,16 @@ namespace WebApiApp.Models
         public Nullable<bool> Gtn_Credito_INFONAVIT { get; set; }
         public Nullable<bool> Gtn_Notaria { get; set; }
         public Nullable<bool> Gtn_Firma_Escrituras { get; set; }
+        public Nullable<bool> Gtn_CuentaBancaria { get; set; }
+        public Nullable<bool> Gtn_Taller { get; set; }
         public Nullable<bool> Gtm_Aviso_Susp { get; set; }
+        public Nullable<int> Gtn_ProgresoForm { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Cliente { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual Corretaje Corretaje { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

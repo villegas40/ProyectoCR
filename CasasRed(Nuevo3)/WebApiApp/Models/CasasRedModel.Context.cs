@@ -26,17 +26,24 @@ namespace WebApiApp.Models
         }
     
         public virtual DbSet<Articulos> Articulos { get; set; }
+        public virtual DbSet<CalificacionVendedor> CalificacionVendedor { get; set; }
+        public virtual DbSet<CasaInventario> CasaInventario { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Comentarios> Comentarios { get; set; }
+        public virtual DbSet<Comision> Comision { get; set; }
         public virtual DbSet<Contaduria> Contaduria { get; set; }
         public virtual DbSet<Corretaje> Corretaje { get; set; }
+        public virtual DbSet<DetallesComision> DetallesComision { get; set; }
         public virtual DbSet<Existencias> Existencias { get; set; }
-        public virtual DbSet<Gastos> Gastos { get; set; }
+        public virtual DbSet<FotosHabilitacion> FotosHabilitacion { get; set; }
         public virtual DbSet<GastosContaduria> GastosContaduria { get; set; }
         public virtual DbSet<Gestion> Gestion { get; set; }
         public virtual DbSet<Habilitacion> Habilitacion { get; set; }
+        public virtual DbSet<HistorialAsignacion> HistorialAsignacion { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Vendedor> Vendedor { get; set; }
         public virtual DbSet<Verificacion> Verificacion { get; set; }
     }
 }

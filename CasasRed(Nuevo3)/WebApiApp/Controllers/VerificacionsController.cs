@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Verificacions/5
+        [Route("api/Verificacions/{id}")]
         [ResponseType(typeof(Verificacion))]
         public IHttpActionResult GetVerificacion(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Verificacions/5
+        [Route("api/Verificacions/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutVerificacion(int id, Verificacion verificacion)
         {
@@ -86,6 +88,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Verificacions/5
+        [Route("api/Verificacions/{id}")]
         [ResponseType(typeof(Verificacion))]
         public IHttpActionResult DeleteVerificacion(int id)
         {

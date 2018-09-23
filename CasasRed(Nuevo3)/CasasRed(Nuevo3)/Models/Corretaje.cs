@@ -17,9 +17,11 @@ namespace CasasRed_Nuevo3_.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Corretaje()
         {
+            this.CalificacionVendedor = new HashSet<CalificacionVendedor>();
+            this.CasaInventario = new HashSet<CasaInventario>();
             this.Cliente = new HashSet<Cliente>();
+            this.Comision = new HashSet<Comision>();
             this.Contaduria = new HashSet<Contaduria>();
-            this.Gastos = new HashSet<Gastos>();
             this.Gestion = new HashSet<Gestion>();
             this.Habilitacion = new HashSet<Habilitacion>();
             this.GastosContaduria = new HashSet<GastosContaduria>();
@@ -70,17 +72,26 @@ namespace CasasRed_Nuevo3_.Models
         public string Crt_Otros { get; set; }
         public string Crt_Status_Muestra { get; set; }
         public string Crt_Obervaciones { get; set; }
+        public Nullable<int> Crt_ProgresoForm { get; set; }
+        public Nullable<int> Id_Vendedor { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalificacionVendedor> CalificacionVendedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CasaInventario> CasaInventario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contaduria> Contaduria { get; set; }
+        public virtual ICollection<Comision> Comision { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gastos> Gastos { get; set; }
+        public virtual ICollection<Contaduria> Contaduria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gestion> Gestion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Habilitacion> Habilitacion { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual Vendedor Vendedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GastosContaduria> GastosContaduria { get; set; }
     }

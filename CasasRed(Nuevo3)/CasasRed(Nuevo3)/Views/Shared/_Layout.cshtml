@@ -17,7 +17,8 @@
     <!--Footer-->
     <link href="~/Content/customcss/sticky-footer.css" rel="stylesheet" />
     <!--Iconos-->
-    <link href="~/Content/fontawsome/css/fontawesome-all.css" rel="stylesheet" />   
+    <link href="~/Content/fontawsome/css/fontawesome-all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
 
 </head>
 <body>
@@ -40,7 +41,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         @*@Html.ActionLink("Casas Red", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-        <a class="navbar-brand" href="#"><img src="~/Media/logo-casas-red.png" height="55" width="70"></a>
+        <a class="navbar-brand" href="/Home"><img src="~/Media/logo-casas-red.png" height="55" width="70"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,44 +62,69 @@
                     <li class="nav-item active">
                         @Html.ActionLink("Inicio", @fun, con, null, new { @class = "nav-link" })
                     </li>
-                    if (Session["Tipo"].ToString() == "Administrador" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Contabilidad")
+                    if (Session["Tipo"].ToString() == "Administrador" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString()=="Gestion")
                     {
-
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Menu jefazo
+                                Menú
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if (Session["Tipo"].ToString() == "Administrador")
                                 {
-                                    <a class="dropdown-item" href="#">Usuarios</a>
+                                    <a class="dropdown-item" href="/Gerente/index">Administrador</a>
+                                    <a class="dropdown-item" href="/Usuarios">Usuarios</a>
                                     <a class="dropdown-item" href="/Clientes">Clientes</a>
                                     <a class="dropdown-item" href="/Corretajes">Corretaje</a>
                                     <a class="dropdown-item" href="/Gestions">Gestion</a>
                                     <a class="dropdown-item" href="/Contadurias">Contaduria</a>
                                     <a class="dropdown-item" href="/Habilitacions">Habilitacion</a>
                                     <a class="dropdown-item" href="/Verificacions">Verificacion</a>
+                                    <hr />
+                                    <a class="dropdown-item" href="/Existencias">Inventario</a>
+                                    <a class="dropdown-item" href="/Articulos">Artículos</a>
+                                    <a class="dropdown-item" href="/Ubicaciones">Ubicaciones</a>
+
                                 }
                                 else if (Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Contabilidad")
                                 {
                                     <a class="dropdown-item" href="/Habilitacions">Habilitacion</a>
-
+                                    <hr />
+                                    <a class="dropdown-item" href="/Existencias">Inventario</a>
+                                    <a class="dropdown-item" href="/Articulos">Artículos</a>
+                                    <a class="dropdown-item" href="/Ubicaciones">Ubicaciones</a>
                                 }
-
-
+                                else if (Session["Tipo"].ToString() == "Gestion")
+                                {
+                                    <a class="dropdown-item" href="/Clientes">Clientes</a>
+                                    <a class="dropdown-item" href="/Gestions">Gestion</a>
+                                }
                             </div>
                         </li>
                     }
-                    <li class="nav-item">
-                        @Html.ActionLink("Cerrar sesion", "Cerrar", "Login", null, new { @class = "nav-link" })
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @Session["NombreCompleto"].ToString()
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/Usuarios/Edit/@Session["UsuarioID"].ToString()">Editar cuenta</a>
+                            <hr />
+                            <a class="dropdown-item" href="/Login/Cerrar">Cerrar sesión</a>
+                        </div>
 
                     </li>
                 }
                 else
                 {
+                    <li class="nav-item">
                     @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Acerca de Nosotros", "About", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })
+                    </li>
                 }
             </ul>
 

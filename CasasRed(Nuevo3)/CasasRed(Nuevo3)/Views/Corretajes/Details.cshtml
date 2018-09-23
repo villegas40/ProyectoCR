@@ -5,6 +5,82 @@
 }
 
 <h2 style="margin-top:20px;">Details</h2>
+<style>
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 70px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .list-group-item.active{
+        z-index:-1 !important;
+    }
+
+</style>
 
 <div class="container">
 
@@ -38,480 +114,234 @@
                 <!-- Datos personales -->
                 <div class="tab-pane fade show active" id="elemento1" role="tabpanel" aria-labelledby="elemento1">
                     <h3>Datos personales</h3>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <!--Status -->
-                                <label class="control-label col-md-4 font-weight-bold" for="estatus">Estatus</label>
-                                <div class="col-md-12">
-                                    @Html.DisplayName(Model.Crt_Status)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-lg-4">
-                            <div class="form-group">
-                                <!--Nombre del cliente -->
-                                <div class="col-12 ">
-                                    <label for="nombre" class="font-weight-bold">Nombre</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Cliente_Nombre)
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="form-group">
-                                <div class="col-12">
-                                    <!-- ap paterno -->
-                                    <label for="apepat" class="font-weight-bold">Apellido paterno</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Cliente_ApPat)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="form-group">
-                                <!-- AP MATERNO-->
-                                <div class="col-12">
-                                    <label for="apemat" class="font-weight-bold">Apellido Materno</label>
-                                    @Html.DisplayName(Model.Crt_Cliente_ApMat)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-12">
-                                    <label for="datepicker" class="font-weight-bold">Fecha de nacimiento</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Fec_Nac.ToString())
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-12">
-                                    <label for="civil" class="font-weight-bold">Estado civil</label>
-                                    <br />
-                                    <label>@ViewBag.civil</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-12">
-                                    <label for="celular" class="font-weight-bold">Numero de celular</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Tel_Celular)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-12">
-                                    <label for="telcasa" class="font-weight-bold">Telefono de casa</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Tel_Casa)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-12">
-                                    <label for="teltrabajo" class="font-weight-bold">Telefono de trabajo</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Tel_Trabajo)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-bordered">
+                        <!--Status -->
+                        <tr>
+                            <th>Estatus</th>
+                            @*<td>@Html.DisplayName(Model.Crt_Status)</td>*@
+                            <td>@ViewBag.estatus</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>@Html.DisplayName(Model.Crt_Cliente_Nombre)</td>
+                        </tr>
+                        <tr>
+                            <th>Apellido paterno</th>
+                            <td>@Html.DisplayName(Model.Crt_Cliente_ApPat)</td>
+                        </tr>
+                        <tr>
+                            <th>Apellido Materno</th>
+                            <td>@Html.DisplayName(Model.Crt_Cliente_ApMat)</td>
+                        </tr>
+                        <tr>
+                            <th>Fecha de nacimiento</th>
+                            <td>@Html.DisplayName(Model.Crt_Fec_Nac.ToString())</td>
+                        </tr>
+                        <tr>
+                            <th>Estado civil</th>
+                            <td>@ViewBag.civil</td>
+                        </tr>
+                        <tr>
+                            <th>Número de celular</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Celular)</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono de casa</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Casa)</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono de trabajo</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Trabajo)</td>
+                        </tr>
+                    </table>
                 </div><!--Fianl  tap panel 1-->
                 <!-- Datos de vivienda -->
                 <div class="tab-pane fade show" id="elemento2" role="tabpanel" aria-labelledby="elemento2">
                     <h3>Datos de vivienda</h3>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="direccion" class="font-weight-bold">Direccíon</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Direccion)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label class="font-weight-bold" for="precio">Precio</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Precio)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="gasto" class="font-weight-bold">Gasto</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Gasto)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label class="font-weight-bold" for="vivienda">Tipo de vivienda</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Tipo_Vivienda)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label class="font-weight-bold" for="compra">Año comprada</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Ano_compra.ToString())
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="catastral" class="font-weight-bold">Clave catastral</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Clave_Catastral)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="nivel" class="font-weight-bold">Nivel</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Nivel.ToString())
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="catastral" class="font-weight-bold">Numero de habitaciones</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Num_Habitaciones.ToString())
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="nivel" class="font-weight-bold">Planta</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Planta.ToString())
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Direccíon</th>
+                            <td>@Html.DisplayName(Model.Crt_Direccion)</td>
+                        </tr>
+                        <tr>
+                            <th>Precio</th>
+                            <td>@Html.DisplayName(Model.Crt_Precio)</td>
+                        </tr>                        
+                        <tr>
+                            <th>Tipo de vivienda</th>
+                            <td>@Html.DisplayName(Model.Crt_Tipo_Vivienda)</td>
+                        </tr>
+                        <tr>
+                            <th>Año de compra</th>
+                            <td>@Html.DisplayName(Model.Crt_Ano_compra.ToString())</td>
+                        </tr>
+                        <tr>
+                            <th>Clave catastral</th>
+                            <td>@Html.DisplayName(Model.Crt_Clave_Catastral)</td>
+                        </tr>
+                        <tr>
+                            <th>Nivel</th>
+                            <td>@Html.DisplayName(Model.Crt_Nivel.ToString())</td>
+                        </tr>
+                        <tr>
+                            <th>Numero de habitaciones</th>
+                            <td>@Html.DisplayName(Model.Crt_Num_Habitaciones.ToString())</td>
+                        </tr>
+                        <tr>
+                            <th>Planta</th>
+                            <td>@Html.DisplayName(Model.Crt_Planta.ToString())</td>
+                        </tr>
+                    </table>
                 </div><!-- Fin tap 2-->
                 <!-- Adeudos -->
                 <div class="tab-pane fade show" id="elemento3" role="tabpanel" aria-labelledby="elemento3">
                     <h3>Recuperacion</h3>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="saldo" class="font-weight-bold">Numero de credito Infonavit </label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Num_Credito_Infonavit)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="saldo" class="font-weight-bold">Saldo Infonavit</label>
-                                    <br />
-                                    @Html.DisplayFor(m => m.Crt_Saldo_infonavit)
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="predial" class="font-weight-bold">Adeudo de predial</label>
-                                    <br />
-                                    @Html.DisplayFor(m => m.Crt_Adeudo_predial)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="predial" class="font-weight-bold">Nombre del titular de la luz</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_NombreC_Titular_luz)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="luz" class="font-weight-bold">Numero de servicio de luz</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Num_servicio_luz)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="agua" class="font-weight-bold">Adeudo del servicio de luz</label>
-                                    <br />
-                                    @Html.DisplayFor(m => m.Crt_Adeudo_luz)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="luz" class="font-weight-bold">Numero de cuenta de agua</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_No_cuenta_agua)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="agua" class="font-weight-bold">Adeudo de agua</label>
-                                    <br />
-                                    @Html.DisplayFor(m => m.Crt_Adeudo_agua)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Numero de credito Infonavit</th>
+                            <td>@Html.DisplayName(Model.Crt_Num_Credito_Infonavit)</td>
+                        </tr>
+                        <tr>
+                            <th>Saldo Infonavit</th>
+                            <td>@Html.DisplayFor(m => m.Crt_Saldo_infonavit)</td>
+                        </tr>
+                        <tr>
+                            <th>Adeudo de predial</th>
+                            <td>@Html.DisplayFor(m => m.Crt_Adeudo_predial)</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre del titular de la luz</th>
+                            <td>@Html.DisplayName(Model.Crt_NombreC_Titular_luz)</td>
+                        </tr>
+                        <tr>
+                            <th>Numero de servicio de luz</th>
+                            <td>@Html.DisplayName(Model.Crt_Num_servicio_luz)</td>
+                        </tr>
+                        <tr>
+                            <th>Adeudo del servicio de luz</th>
+                            <td>@Html.DisplayFor(m => m.Crt_Adeudo_luz)</td>
+                        </tr>
+                        <tr>
+                            <th>Número de cuenta de agua</th>
+                            <td>@Html.DisplayName(Model.Crt_No_cuenta_agua)</td>
+                        </tr>
+                        <tr>
+                            <th>Adeudo de agua</th>
+                            <td>@Html.DisplayFor(m => m.Crt_Adeudo_agua)</td>
+                        </tr>
+                        <tr>
+                            <th>Gasto</th>
+                            <td>@Html.DisplayName(Model.Crt_Gasto)</td>
+                        </tr>
+                    </table>
                 </div><!-- Fin tap 3-->
                 <!--Documentos-->
                 <div class="tab-pane fade show" id="elemento4" role="tabpanel" aria-labelledby="elemento4">
                     <h3>Documentos</h3>
-                    <div class="row">
-                        <div class="col-6 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_Ine_Titu.Value)
-                                    <label class="font-weight-bold">Credencial del titular</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_Ine_Conyu.Value)
-                                    <label for="customCheck4" class="font-weight-bold">Credencial del conyuge</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_ActaNacTitu.Value)
-                                    <label for="servicioLuz" class="font-weight-bold">Acta de nacimiento del titular</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_ActaNacConyu.Value)
-                                    <label for="numAgua" class="font-weight-bold">Acta de nacimiento conyuge</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_ActaMatr.Value)
-                                    <label for="servicioLuz" class="font-weight-bold">Acta de matrimonio</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_EscrCert.Value)
-                                    <label for="numAgua" class="font-weight-bold">Escritura certificada</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_Acuerdo.Value)
-                                    <label for="servicioLuz" class="font-weight-bold">Acuerdo</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_CartaDesPre.Value)
-                                    <label for="numAgua" class="font-weight-bold">Carta de desbloqueo de predial</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.CheckBoxFor(model => model.Crt_Escritura_Simple.Value)
-                                    <label for="servicioLuz" class="font-weight-bold">Escritura simple</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="servicioLuz" class="font-weight-bold">Numero de servicio de luz</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Num_servicio_luz)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Credencial del titular</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_Ine_Titu.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Credencial del conyuge</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_Ine_Conyu.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Acta de nacimiento del titular</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_ActaNacTitu.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Acta de nacimiento conyuge</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_ActaNacConyu.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Acta de matrimonio</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_ActaMatr.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Escritura certificada</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_EscrCert.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Acuerdo</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_Acuerdo.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Carta de desbloqueo de predial</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_CartaDesPre.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Escritura simple</th>
+                            <td>@Html.CheckBoxFor(model => model.Crt_Escritura_Simple.Value)</td>
+                        </tr>
+                        <tr>
+                            <th>Numero de servicio de luz</th>
+                            <td>@Html.DisplayName(Model.Crt_Num_servicio_luz)</td>
+                        </tr>
+                    </table>
                 </div><!--Fin tap 4-->
                 <!-- Datos de referencia -->
                 <!-- Digitalizacion de documentos -->
                 <div class="tab-pane fade show" id="elemento5" role="tabpanel" aria-labelledby="elemento5">
+
                     <h3>Digitalizacion de documentos</h3>
+                    <table class="table table-bordered">
+                        <tr>
 
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label class="font-weight-bold">Recibo agua</label>
-                                    <br />
-                                    <img src="@Url.Content(Model.Crt_ReciboAgua)" width="150px" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 ">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label class="font-weight-bold">Recibo luz</label>
-                                    <br />
-                                    <img src="@Url.Content(Model.Crt_ReciboLuz)" width="150px" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="telefonoR" class="font-weight-bold">Recibo Predial</label>
-                                    <br />
-                                    <img src="@Url.Content(Model.Crt_Recibo_predial_digital)" width="150px" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 ">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="telefonoR" class="font-weight-bold">Recibo Otros</label>
-                                    <br />
-                                    <img src="@Url.Content(Model.Crt_Otros)" width="150px" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                            <th>Recibo agua</th>
+                            <td><img src="@Url.Content(Model.Crt_ReciboAgua)" width="150" alt="Recibo agua" id="myImg" /></td>
+                        </tr>
+                        <tr>
+                            <th>Recibo luz</th>
+                            <td><img src="@Url.Content(Model.Crt_ReciboLuz)" width="150" alt="Recibo luz" id="myImg1" /></td>
+                        </tr>
+                        <tr>
+                            <th>Recibo Predial</th>
+                            <td><img src="@Url.Content(Model.Crt_Recibo_predial_digital)" width="150" alt="Recibo predial" id="myImg2" /></td>
+                        </tr>
+                        <tr>
+                            <th>Recibo Otros</th>
+                            <td><img src="@Url.Content(Model.Crt_Otros)" width="150" alt="otros" id="myImg3" /></td>
+                        </tr>
+                    </table>
 
                 </div><!-- Fin tap 5-->
                 <!-- Datos de referencia -->
                 <div class="tab-pane fade show" id="elemento6" role="tabpanel" aria-labelledby="elemento6">
                     <h3>Datos de referencia</h3>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-lg-4">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="telefonoRe1" class="font-weight-bold">Telefono referencia 1</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Tel_Ref1)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-lg-4">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="telefonoRe2" class="font-weight-bold">Telefono referencia 2</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Tel_Ref2)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-lg-4">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="telefonoRe3" class="font-weight-bold">Telefono referencia</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Tel_Ref)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-lg-6">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label for="estatusMues" class="font-weight-bold">Estatus muestra</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Status_Muestra)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <label class="font-weight-bold">Observaciones</label>
-                                    <br />
-                                    @Html.DisplayName(Model.Crt_Obervaciones)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Telefono referencia 1</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Ref1)</td>
+                        </tr>
+                        <tr>
+                            <th>Telefono referencia 2</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Ref2)</td>
+                        </tr>
+                        <tr>
+                            <th>Telefono referencia</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Ref)</td>
+                        </tr>
+                        <tr>
+                            <th>Estatus muestra</th>
+                            <td>@Html.DisplayName(Model.Crt_Status_Muestra)</td>
+                        </tr>
+                        <tr>
+                            <th>Observaciones</th>
+                            <td>@Html.DisplayName(Model.Crt_Obervaciones)</td>
+                        </tr>
+                    </table>
                 </div><!-- Fin tap 6-->
+
             </div>
         </div>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
     </div>
 
 </div>
@@ -523,5 +353,45 @@
 @section Scripts {
     <script>
         $(document.body).css('padding-top', '70px');
+
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg');
+        var img1 = document.getElementById('myImg1');
+        var img2 = document.getElementById('myImg2');
+        var img3 = document.getElementById('myImg3');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        img1.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        img2.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        img3.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
     </script>
 }

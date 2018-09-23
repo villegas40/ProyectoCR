@@ -14,6 +14,12 @@ namespace WebApiApp.Models
     
     public partial class Habilitacion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Habilitacion()
+        {
+            this.FotosHabilitacion = new HashSet<FotosHabilitacion>();
+        }
+    
         public int Id { get; set; }
         public Nullable<bool> Hbt_Puertas { get; set; }
         public Nullable<bool> Hbt_Chapas { get; set; }
@@ -40,8 +46,13 @@ namespace WebApiApp.Models
         public Nullable<bool> Hbt_Break_medidor { get; set; }
         public Nullable<bool> Hbt_Pinturas { get; set; }
         public Nullable<bool> Hbt_AvisoSusp { get; set; }
+        public Nullable<int> Hbt_ProgresoForm { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         public virtual Corretaje Corretaje { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FotosHabilitacion> FotosHabilitacion { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

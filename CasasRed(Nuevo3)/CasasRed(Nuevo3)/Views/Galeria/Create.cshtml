@@ -1,0 +1,35 @@
+﻿@model CasasRed_Nuevo3_.Models.FotosHabilitacion
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Create", "Galeria", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>Create</h2>
+    <div>
+        <label for="nombreh">Nombre del archivo</label>
+        @Html.EditorFor(model => model.fh_nombre, new { htmlAttributes = new { @class = "form-control data", @id = "nombreh" } })
+        @Html.ValidationMessageFor(model => model.fh_nombre, "", new { @class = "text-danger" })
+    </div>
+
+    <div>
+
+        <label for="telefonoR">Foto</label>
+        @Html.EditorFor(model => model.fh_archivo, new { htmlAttributes = new { @class = "form-control data", @id = "agua", @type = "file", @name = "Crt_ReciboAgua" } })
+        @Html.ValidationMessageFor(model => model.fh_archivo, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class=" d-flex justify-content-end">
+        <!--<input type="submit" value="Create" class="btn btn-primary btn-lg btn-block" />-->
+        <input type="submit" value="Create" class="btn btn-outline-danger btn-lg btn-block" />
+
+    </div>
+
+    <div>
+        <a href='javascript:history.go(-1)'>Regresar</a>
+    </div>
+}

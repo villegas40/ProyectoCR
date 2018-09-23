@@ -5,7 +5,83 @@
 }
 
 <h2 style="margin-top:20px;">Editar</h2>
+<style>
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
+        #myImg:hover {
+            opacity: 0.7;
+        }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
+
+    /* Modal Content (image) */
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation */
+    .modal-content, #caption {
+        -webkit-animation-name: zoom;
+        -webkit-animation-duration: 0.6s;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+
+    /* The Close Button */
+    .close {
+        position: absolute;
+        top: 70px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .list-group-item.active {
+        z-index: -1 !important;
+    }
+</style>
 
 @using (Html.BeginForm("Edit", "Corretajes", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -17,8 +93,18 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         <div class="progress">
-            <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: @Html.DisplayFor(model => model.Crt_ProgresoForm)%">@Html.DisplayFor(model => model.Crt_ProgresoForm)% Completado</div>
         </div>
+        <div>
+            <label for="Gral_ProgresoForm">Progreso</label>
+            @Html.EditorFor(model => model.Crt_ProgresoForm, new { htmlAttributes = new { @class = "form-control data", @id = "progreso", @type = "hidden" } })
+            @Html.ValidationMessageFor(model => model.Crt_ProgresoForm, "", new { @class = "text-danger" })
+        </div>
+
+        <h5>Dirección del Inmueble: @Html.DisplayFor(model => model.Crt_Direccion)</h5>
+        <h5>Vendedor: @Html.DisplayFor(modelItem => modelItem.Crt_Cliente_Nombre) @Html.DisplayFor(modelItem => modelItem.Crt_Cliente_ApPat) @Html.DisplayFor(modelItem => modelItem.Crt_Cliente_ApMat)</h5>
+
+        <br />
         <div class="form-horizontal">
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -48,6 +134,7 @@
                             <a class="list-group-item list-group-item-action list-group-item-light" data-toggle="list" href="#elemento6" role="tab" aria-controls="elemento6">
                                 <i class="fas fa-user-friends fa-2x"></i> Datos de referencia
                             </a>
+
                         </div>
                     </div>
                     <!-- Formulario derecha-->
@@ -63,14 +150,33 @@
                                             @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
                                             <label class="control-label col-md-4" for="estatus">Estatus</label>
                                             <div class="col-md-12">
-                                                @Html.EditorFor(model => model.Crt_Status, new { htmlAttributes = new { @class = "form-control col-12", @id = "estatus" } })
+                                                @Html.EditorFor(model => model.Crt_Status, new { htmlAttributes = new { @class = "form-control col-12 data", @id = "estatus" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Status, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4" for="Gral_Fechaalta">Fecha de Alta</label>
+                                            <div class="col-md-12">
+                                                @if (Model.Crt_FechaAlta.HasValue)
+                                                {
+                                                    @Html.EditorFor(model => model.Crt_FechaAlta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker", @Value = Model.Crt_FechaAlta.Value.ToString("yyyy/MM/dd") } })
+                                                }
+                                                else
+                                                {
+                                                    @Html.EditorFor(model => model.Crt_FechaAlta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker", @type = "date" } })
+                                                }
+                                                @Html.ValidationMessageFor(model => model.Crt_FechaAlta, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
+
                                     <div class="col-12 col-sm-12 col-lg-4">
                                         <div class="form-group">
                                             <!--Nombre del cliente -->
@@ -78,7 +184,7 @@
 
                                             <div class="col-12 ">
                                                 <label for="nombre">Nombre</label>
-                                                @Html.EditorFor(model => model.Crt_Cliente_Nombre, new { htmlAttributes = new { @class = "form-control", @id = "nombre" } })
+                                                @Html.EditorFor(model => model.Crt_Cliente_Nombre, new { htmlAttributes = new { @class = "form-control data", @id = "nombre" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Cliente_Nombre, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -90,7 +196,7 @@
                                             <div class="col-12">
                                                 <!-- ap paterno -->
                                                 <label for="apepat">Apellido paterno</label>
-                                                @Html.EditorFor(model => model.Crt_Cliente_ApPat, new { htmlAttributes = new { @class = "form-control", @id = "apepat" } })
+                                                @Html.EditorFor(model => model.Crt_Cliente_ApPat, new { htmlAttributes = new { @class = "form-control data", @id = "apepat" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Cliente_ApPat, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -102,7 +208,7 @@
 
                                             <div class="col-12">
                                                 <label for="apemat">Apellido Materno</label>
-                                                @Html.EditorFor(model => model.Crt_Cliente_ApMat, new { htmlAttributes = new { @class = "form-control", @id = "apemat" } })
+                                                @Html.EditorFor(model => model.Crt_Cliente_ApMat, new { htmlAttributes = new { @class = "form-control data", @id = "apemat" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Cliente_ApMat, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -116,7 +222,14 @@
 
                                             <div class="col-12">
                                                 <label for="datepicker">Fecha de nacimiento</label>
-                                                @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                                                @if (Model.Crt_Fec_Nac.HasValue)
+                                                {
+                                                    @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control data", @id = "fechanac", @onkeyup = "funcionDate()", @Value = Model.Crt_Fec_Nac.Value.ToString("yyyy/MM/dd") } })
+                                                }
+                                                else
+                                                {
+                                                    @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control data", @type = "date" } })
+                                                }
                                                 @Html.ValidationMessageFor(model => model.Crt_Fec_Nac, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -128,7 +241,7 @@
                                             <div class="col-12">
                                                 @*agregar select*@
                                                 <label for="Crt_Estado_Civil">Estado civil</label>
-                                                @Html.DropDownListFor(model => model.Crt_Estado_Civil, ViewData["Posicion"] as SelectList, new { @class = "form-control", @id = "Crt_Estado_Civil" })
+                                                @Html.DropDownListFor(model => model.Crt_Estado_Civil, ViewData["Posicion"] as SelectList, new { @class = "form-control data", @id = "Crt_Estado_Civil" })
                                                 @*@Html.EditorFor(model => model.Crt_Estado_Civil, new { htmlAttributes = new { @class = "form-control data" } })*@
                                                 @Html.ValidationMessageFor(model => model.Crt_Estado_Civil, "", new { @class = "text-danger" })
                                             </div>
@@ -144,7 +257,7 @@
 
                                             <div class="col-12">
                                                 <label for="celular">Numero de celular</label>
-                                                @Html.EditorFor(model => model.Crt_Tel_Celular, new { htmlAttributes = new { @class = "form-control", @id = "celular" } })
+                                                @Html.EditorFor(model => model.Crt_Tel_Celular, new { htmlAttributes = new { @class = "form-control data", @id = "celular" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Tel_Celular, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -155,7 +268,7 @@
 
                                             <div class="col-12">
                                                 <label for="telcasa">Telefono de casa</label>
-                                                @Html.EditorFor(model => model.Crt_Tel_Casa, new { htmlAttributes = new { @class = "form-control", @id = "telcasa" } })
+                                                @Html.EditorFor(model => model.Crt_Tel_Casa, new { htmlAttributes = new { @class = "form-control data", @id = "telcasa" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Tel_Casa, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -166,7 +279,7 @@
 
                                             <div class="col-12">
                                                 <label for="teltrabajo">Telefono de trabajo</label>
-                                                @Html.EditorFor(model => model.Crt_Tel_Trabajo, new { htmlAttributes = new { @class = "form-control", @id = "teltrabajo" } })
+                                                @Html.EditorFor(model => model.Crt_Tel_Trabajo, new { htmlAttributes = new { @class = "form-control data", @id = "teltrabajo" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Tel_Trabajo, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -184,7 +297,7 @@
                                             @*Html.LabelFor(model => model.Crt_Direccion, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="direccion">Direccíon</label>
-                                                @Html.EditorFor(model => model.Crt_Direccion, new { htmlAttributes = new { @class = "form-control col-12", @id = "direccion" } })
+                                                @Html.EditorFor(model => model.Crt_Direccion, new { htmlAttributes = new { @class = "form-control col-12 data", @id = "direccion" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Direccion, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -197,7 +310,7 @@
                                             @*Html.LabelFor(model => model.Crt_Precio, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="precio">Precio</label>
-                                                @Html.EditorFor(model => model.Crt_Precio, new { htmlAttributes = new { @class = "form-control", @id = "precio" } })
+                                                @Html.EditorFor(model => model.Crt_Precio, new { htmlAttributes = new { @class = "form-control data", @id = "precio" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Precio, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -205,61 +318,33 @@
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
 
-                                            @*Html.LabelFor(model => model.Crt_Gasto, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                            @*Html.LabelFor(model => model.Crt_Tipo_Vivienda, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="gasto">Gasto</label>
-                                                @Html.EditorFor(model => model.Crt_Gasto, new { htmlAttributes = new { @class = "form-control", @id = "gasto" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_Gasto, "", new { @class = "text-danger" })
+                                                <label for="vivienda">Tipo de vivienda</label>
+                                                @Html.EditorFor(model => model.Crt_Tipo_Vivienda, new { htmlAttributes = new { @class = "form-control data", @id = "vivienda" } })
+                                                @Html.ValidationMessageFor(model => model.Crt_Tipo_Vivienda, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-
-                                            @*Html.LabelFor(model => model.Crt_Tipo_Vivienda, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                            <div class="col-md-10">
-                                                <label for="vivienda">Tipo de vivienda</label>
-                                                @Html.EditorFor(model => model.Crt_Tipo_Vivienda, new { htmlAttributes = new { @class = "form-control", @id = "vivienda" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_Tipo_Vivienda, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                    </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
                                             @*Html.LabelFor(model => model.Crt_Ano_compra, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="datepicker2">Año comprada</label>
-                                                @Html.EditorFor(model => model.Crt_Ano_compra, new { htmlAttributes = new { @class = "form-control", @id = "datepicker2" } })
+                                                @Html.EditorFor(model => model.Crt_Ano_compra, new { htmlAttributes = new { @class = "form-control data" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Ano_compra, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
-
-                                </div>
-
-                                <div class="row">
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
                                             @*Html.LabelFor(model => model.Crt_Adeudo_luz, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="luz">Clave Catastral</label>
-                                                @Html.EditorFor(model => model.Crt_Clave_Catastral, new { htmlAttributes = new { @class = "form-control", @id = "luz" } })
+                                                @Html.EditorFor(model => model.Crt_Clave_Catastral, new { htmlAttributes = new { @class = "form-control data", @id = "luz" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Clave_Catastral, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            @*Html.LabelFor(model => model.Crt_Clave_Catastral, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                                            <div class="col-md-10">
-                                                <label for="Nivel">Nivel</label>
-                                                @Html.EditorFor(model => model.Crt_Nivel, new { htmlAttributes = new { @class = "form-control", @id = "catastral" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_Nivel, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
@@ -267,27 +352,37 @@
                                 <div class="row">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
-                                            @*Html.LabelFor(model => model.Crt_Ano_compra, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                            @*Html.LabelFor(model => model.Crt_Clave_Catastral, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="compra">Numero de habicaciones</label>
-                                                @Html.EditorFor(model => model.Crt_Num_Habitaciones, new { htmlAttributes = new { @class = "form-control", @id = "compra" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_Num_Habitaciones, "", new { @class = "text-danger" })
+                                                <label for="nivel">Nivel</label>
+                                                @Html.EditorFor(model => model.Crt_Nivel, new { htmlAttributes = new { @class = "form-control data", @id = "nivel" } })
+                                                @Html.ValidationMessageFor(model => model.Crt_Nivel, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group">
+                                            @*Html.LabelFor(model => model.Crt_Ano_compra, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                            <div class="col-md-10">
+                                                <label for="habitacion">Numero de habicaciones</label>
+                                                @Html.EditorFor(model => model.Crt_Num_Habitaciones, new { htmlAttributes = new { @class = "form-control data", @id = "habitacion" } })
+                                                @Html.ValidationMessageFor(model => model.Crt_Num_Habitaciones, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
                                             @*Html.LabelFor(model => model.Crt_Clave_Catastral, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="catastral">Plantas</label>
-                                                @Html.EditorFor(model => model.Crt_Planta, new { htmlAttributes = new { @class = "form-control", @id = "catastral" } })
+                                                <label for="plantas">Plantas</label>
+                                                @Html.EditorFor(model => model.Crt_Planta, new { htmlAttributes = new { @class = "form-control data", @id = "plantas" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Planta, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div><!-- Fin tap 2-->
                             <!-- Recuperacion -->
                             <div class="tab-pane fade show" id="elemento3" role="tabpanel" aria-labelledby="elemento3">
@@ -297,19 +392,18 @@
                                         <div class="form-group">
                                             @*Html.LabelFor(model => model.Crt_Adeudo_predial, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="predial">Número de Crédito Infonavit</label>
-                                                @Html.EditorFor(model => model.Crt_Num_Credito_Infonavit, new { htmlAttributes = new { @class = "form-control", @id = "predial" } })
+                                                <label for="credito">Número de Crédito Infonavit</label>
+                                                @Html.EditorFor(model => model.Crt_Num_Credito_Infonavit, new { htmlAttributes = new { @class = "form-control data", @id = "credito" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Num_Credito_Infonavit, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-
                                             @*Html.LabelFor(model => model.Crt_Saldo_infonavit, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="saldo">Saldo Infonavit</label>
-                                                @Html.EditorFor(model => model.Crt_Saldo_infonavit, new { htmlAttributes = new { @class = "form-control", @id = "saldo" } })
+                                                @Html.EditorFor(model => model.Crt_Saldo_infonavit, new { htmlAttributes = new { @class = "form-control data", @id = "saldo" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Saldo_infonavit, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -321,8 +415,8 @@
                                         <div class="form-group">
                                             @*Html.LabelFor(model => model.Crt_Adeudo_agua, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="agua">Adeudo de Predial</label>
-                                                @Html.EditorFor(model => model.Crt_Adeudo_predial, new { htmlAttributes = new { @class = "form-control", @id = "agua" } })
+                                                <label for="adeudo_predial">Adeudo de Predial</label>
+                                                @Html.EditorFor(model => model.Crt_Adeudo_predial, new { htmlAttributes = new { @class = "form-control data", @id = "adeudo_predial", @onkeyup = "sumar();" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Adeudo_predial, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -331,33 +425,30 @@
                                         <div class="form-group">
                                             @*Html.LabelFor(model => model.Crt_Adeudo_luz, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="luz">Nombre del Titular (Servicio de Luz)</label>
-                                                @Html.EditorFor(model => model.Crt_NombreC_Titular_luz, new { htmlAttributes = new { @class = "form-control", @id = "luz" } })
+                                                <label for="titularluz">Nombre del Titular (Servicio de Luz)</label>
+                                                @Html.EditorFor(model => model.Crt_NombreC_Titular_luz, new { htmlAttributes = new { @class = "form-control data", @id = "titularluz" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_NombreC_Titular_luz, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-
                                             @*Html.LabelFor(model => model.Crt_Adeudo_luz, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="luz">Número de servicio de luz</label>
-                                                @Html.EditorFor(model => model.Crt_Num_servicio_luz, new { htmlAttributes = new { @class = "form-control", @id = "luz" } })
+                                                @Html.EditorFor(model => model.Crt_Num_servicio_luz, new { htmlAttributes = new { @class = "form-control data", @id = "luz" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Num_servicio_luz, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-
                                             @*Html.LabelFor(model => model.Crt_Adeudo_agua, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="agua">Adeudo de Luz</label>
-                                                @Html.EditorFor(model => model.Crt_Adeudo_luz, new { htmlAttributes = new { @class = "form-control", @id = "agua" } })
+                                                <label for="adeudo_luz">Adeudo de Luz</label>
+                                                @Html.EditorFor(model => model.Crt_Adeudo_luz, new { htmlAttributes = new { @class = "form-control data", @id = "adeudo_luz", @onkeyup = "sumar();" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Adeudo_luz, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -366,28 +457,35 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-
                                             @*Html.LabelFor(model => model.Crt_Saldo_infonavit, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="saldo">Número de Servicio del Agua</label>
-                                                @Html.EditorFor(model => model.Crt_No_cuenta_agua, new { htmlAttributes = new { @class = "form-control", @id = "saldo" } })
+                                                <label for="numagua">Número de Servicio del Agua</label>
+                                                @Html.EditorFor(model => model.Crt_No_cuenta_agua, new { htmlAttributes = new { @class = "form-control data", @id = "numagua" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_No_cuenta_agua, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6">
                                         <div class="form-group">
-
                                             @*Html.LabelFor(model => model.Crt_Adeudo_predial, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
-                                                <label for="predial">Adeudo de Agua</label>
-                                                @Html.EditorFor(model => model.Crt_Adeudo_agua, new { htmlAttributes = new { @class = "form-control", @id = "predial" } })
+                                                <label for="adeudo_agua">Adeudo de Agua</label>
+                                                @Html.EditorFor(model => model.Crt_Adeudo_agua, new { htmlAttributes = new { @class = "form-control data", @id = "adeudo_agua", @onkeyup = "sumar();" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Adeudo_agua, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            @*Html.LabelFor(model => model.Crt_Gasto, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                            <div class="col-md-10">
+                                                <label for="gasto">Gasto</label>
+                                                @Html.EditorFor(model => model.Crt_Gasto, new { htmlAttributes = new { @class = "form-control data", @id = "gasto" } })
+                                                @Html.ValidationMessageFor(model => model.Crt_Gasto, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div><!-- Fin tap 3-->
                             <!--Documentos-->
                             <div class="tab-pane fade show" id="elemento4" role="tabpanel" aria-labelledby="elemento4">
@@ -397,8 +495,9 @@
                                         <div class="custom-control custom-checkbox">
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    @Html.TextBoxFor(model => model.Crt_Ine_Titu.Value, new { @class = "custom-control-input data", @id = "customCheck2", @type = "checkbox", @oninput = "this.value = this.checked" })
-                                                    <label class="custom-control-label" for="customCheck2">Credencial del titular</label>
+                                                    @*@Html.TextBoxFor(model => model.Crt_Ine_Titu.Value, new { @class = "custom-control-input data", @id = "customCheck1", @type = "checkbox", @oninput = "this.value = this.checked; resetCheckbox();" })*@
+                                                    <input id="checkbox1" class="custom-control-input data" name="Crt_Ine_Titu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Ine_Titu.Value ? "checked=\"checked\"" : "") />
+                                                    <label class="custom-control-label" for="checkbox1">Credencial del titular</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_Ine_Titu, "", new { @class = "text-danger" })
                                                 </div>
                                             </div>
@@ -408,7 +507,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    @Html.TextBoxFor(model => model.Crt_Ine_Conyu.Value, new { @class = "custom-control-input data", @id = "customCheck3", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    <input id="customCheck3" class="custom-control-input data" name="Crt_Ine_Conyu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Ine_Conyu.Value ? "checked=\"checked\"" : "") />
                                                     <label class="custom-control-label" for="customCheck3">Credencial Conyuge</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_Ine_Conyu, "", new { @class = "text-danger" })
                                                 </div>
@@ -419,7 +518,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    @Html.TextBoxFor(model => model.Crt_ActaNacTitu.Value, new { @class = "custom-control-input data", @id = "customCheck4", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    <input id="customCheck4" class="custom-control-input data" name="Crt_ActaNacTitu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaNacTitu.Value ? "checked=\"checked\"" : "") />
                                                     <label class="custom-control-label" for="customCheck4">Acta de necimiento titular</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_ActaNacTitu, "", new { @class = "text-danger" })
                                                 </div>
@@ -433,7 +532,9 @@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    @Html.TextBoxFor(model => model.Crt_ActaNacConyu.Value, new { @class = "custom-control-input data", @id = "customCheck5", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    <input id="customCheck5" class="custom-control-input data" name="Crt_ActaNacConyu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaNacConyu.Value ? "checked=\"checked\"" : "") />
+
+                                                    @*  @Html.TextBoxFor(model => model.Crt_ActaNacConyu.Value, new { @class = "custom-control-input data", @id = "customCheck5", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck5">Acta de nacimiento conyuge</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_ActaNacConyu, "", new { @class = "text-danger" })
                                                 </div>
@@ -444,7 +545,9 @@
                                         <div class="custom-control custom-checkbox">
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    @Html.TextBoxFor(model => model.Crt_ActaMatr.Value, new { @class = "custom-control-input data", @id = "customCheck6", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    <input id="customCheck6" class="custom-control-input data" name="Crt_ActaMatr" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaMatr.Value ? "checked=\"checked\"" : "") />
+
+                                                    @* @Html.TextBoxFor(model => model.Crt_ActaMatr.Value, new { @class = "custom-control-input data", @id = "customCheck6", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck6">Acta de matrimonio</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_ActaMatr, "", new { @class = "text-danger" })
                                                 </div>
@@ -457,8 +560,10 @@
                                             @*<label>Acuerdo</label>*@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
+                                                    <input id="customCheck7" class="custom-control-input data" name="Crt_EscrCert" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_EscrCert.Value ? "checked=\"checked\"" : "") />
+
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    @Html.TextBoxFor(model => model.Crt_EscrCert.Value, new { @class = "custom-control-input data", @id = "customCheck7", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    @* @Html.TextBoxFor(model => model.Crt_EscrCert.Value, new { @class = "custom-control-input data", @id = "customCheck7", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck7">Escritura certificada</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_EscrCert, "", new { @class = "text-danger" })
                                                 </div>
@@ -472,7 +577,9 @@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    @Html.TextBoxFor(model => model.Crt_Acuerdo.Value, new { @class = "custom-control-input data", @id = "customCheck8", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    <input id="customCheck8" class="custom-control-input data" name="Crt_Acuerdo" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Acuerdo.Value ? "checked=\"checked\"" : "") />
+
+                                                    @* @Html.TextBoxFor(model => model.Crt_Acuerdo.Value, new { @class = "custom-control-input data", @id = "customCheck8", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck8">Acuerdo</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_Acuerdo, "", new { @class = "text-danger" })
                                                 </div>
@@ -485,8 +592,10 @@
                                             @*<label>Acuerdo</label>*@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
+                                                    <input id="customCheck9" class="custom-control-input data" name="Crt_CartaDesPre" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_CartaDesPre.Value ? "checked=\"checked\"" : "") />
+
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    @Html.TextBoxFor(model => model.Crt_CartaDesPre.Value, new { @class = "custom-control-input data", @id = "customCheck9", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    @*  @Html.TextBoxFor(model => model.Crt_CartaDesPre.Value, new { @class = "custom-control-input data", @id = "customCheck9", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck9">Carta de desbloqueo de predial</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_CartaDesPre, "", new { @class = "text-danger" })
                                                 </div>
@@ -498,7 +607,9 @@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    @Html.TextBoxFor(model => model.Crt_Escritura_Simple, new { @class = "custom-control-input data", @id = "customCheck10", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                                    <input id="customCheck10" class="custom-control-input data" name="Crt_Escritura_Simple" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Escritura_Simple.Value ? "checked=\"checked\"" : "") />
+
+                                                    @*  @Html.TextBoxFor(model => model.Crt_Escritura_Simple, new { @class = "custom-control-input data", @id = "customCheck10", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck10">Escritura simple</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_Escritura_Simple, "", new { @class = "text-danger" })
                                                 </div>
@@ -518,7 +629,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div><!--Fin tap 4-->
                             <!-- Digitalizacion de documentos -->
                             <div class="tab-pane fade show" id="elemento5" role="tabpanel" aria-labelledby="elemento5">
@@ -530,11 +640,13 @@
 
                                             @*Html.LabelFor(model => model.Crt_Tel_Ref1, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
+                                                <img id="imgAgua" src="@Url.Content(Model.Crt_ReciboAgua)" width="150" alt="Recibo agua" />
                                                 <label for="telefonoR">Recibo de agua</label>
-                                                @Html.EditorFor(model => model.Crt_ReciboAgua, new { htmlAttributes = new { @class = "form-control", @id = "agua", @type = "file", @name = "Crt_ReciboAgua" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_ReciboAgua, "", new { @class = "text-danger" })
+                                                <input class="data" type="file" name="Crt_ReciboAgua" value="" />
+                                                @* @Html.EditorFor(model => model.Crt_ReciboAgua, new { htmlAttributes = new { @class = "form-control", @id = "agua", @type = "file", @name = "Crt_ReciboAgua", @value= Url.Content(Model.Crt_ReciboAgua) } })*@
+                                                @* @Html.ValidationMessageFor(model => model.Crt_ReciboAgua, "", new { @class = "text-danger" })*@
                                                 @*<label for="telefonoR">Recibo de Agua</label>
-                                                    <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
+                                        <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
                                             </div>
                                         </div>
                                     </div>
@@ -543,11 +655,13 @@
 
                                             @*Html.LabelFor(model => model.Crt_Tel_Ref1, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
+                                                <img id="imgLuz" src="@Url.Content(Model.Crt_ReciboLuz)" width="150" alt="Recibo luz" />
                                                 <label for="telefonoR">Recibo de luz</label>
-                                                @Html.EditorFor(model => model.Crt_ReciboLuz, new { htmlAttributes = new { @class = "form-control", @id = "luz", @type = "file", @name = "Crt_ReciboLuz" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_ReciboLuz, "", new { @class = "text-danger" })
+                                                <input class="data" type="file" name="Crt_ReciboLuz" value="" />
+                                                @*@Html.EditorFor(model => model.Crt_ReciboLuz, new { htmlAttributes = new { @class = "form-control", @id = "luz", @type = "file", @name = "Crt_ReciboLuz" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_ReciboLuz, "", new { @class = "text-danger" })*@
                                                 @*<label for="telefonoR">Recibo de Luz</label>
-                                                    <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
+                                        <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
                                             </div>
                                         </div>
                                     </div>
@@ -556,9 +670,11 @@
 
                                             @*Html.LabelFor(model => model.Crt_Tel_Ref1, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
+                                                <img id="imgPredial" src="@Url.Content(Model.Crt_Recibo_predial_digital)" width="150" alt="Recibo predial" />
                                                 <label for="telefonoR">Predial</label>
-                                                @Html.EditorFor(model => model.Crt_Recibo_predial_digital, new { htmlAttributes = new { @class = "form-control", @id = "predial", @type = "file", @name = "Crt_Recibo_predial_digital" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_Recibo_predial_digital, "", new { @class = "text-danger" })
+                                                <input class="data" type="file" name="Crt_Recibo_predial_digital" value="" />
+                                                @*@Html.EditorFor(model => model.Crt_Recibo_predial_digital, new { htmlAttributes = new { @class = "form-control", @id = "predial", @type = "file", @name = "Crt_Recibo_predial_digital" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Recibo_predial_digital, "", new { @class = "text-danger" })*@
                                                 @*<input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
                                             </div>
                                         </div>
@@ -568,9 +684,11 @@
 
                                             @*Html.LabelFor(model => model.Crt_Tel_Ref1, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
+                                                <img id="imgOtros" src="@Url.Content(Model.Crt_Otros)" width="150" alt="Recibo" />
                                                 <label for="telefonoR">Otros</label>
-                                                @Html.EditorFor(model => model.Crt_Otros, new { htmlAttributes = new { @class = "form-control", @id = "otro", @type = "file", @name = "Crt_Otros" } })
-                                                @Html.ValidationMessageFor(model => model.Crt_Otros, "", new { @class = "text-danger" })
+                                                <input class="data" type="file" name="Crt_Otros" value="" />
+                                                @*@Html.EditorFor(model => model.Crt_Otros, new { htmlAttributes = new { @class = "form-control", @id = "otro", @type = "file", @name = "Crt_Otros" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Otros, "", new { @class = "text-danger" })*@
                                                 @*<input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple>*@
                                             </div>
                                         </div>
@@ -584,7 +702,7 @@
                                             @*Html.LabelFor(model => model.Crt_Obervaciones, htmlAttributes: new { @class = "control-label" })*@
                                             <div class="col-md-10">
                                                 @*@Html.EditorFor(model => model.Crt_Obervaciones, new { htmlAttributes = new { @class = "form-control col-12", @placeholder = "Observaciones" } })
-                                                    @Html.ValidationMessageFor(model => model.Crt_Obervaciones, "", new { @class = "text-danger" })*@
+                                        @Html.ValidationMessageFor(model => model.Crt_Obervaciones, "", new { @class = "text-danger" })*@
                                             </div>
                                         </div>
                                     </div>
@@ -604,7 +722,7 @@
                                             @*Html.LabelFor(model => model.Crt_Tel_Ref1, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="telefonoRe1">Telefono referencia 1</label>
-                                                @Html.EditorFor(model => model.Crt_Tel_Ref1, new { htmlAttributes = new { @class = "form-control", @id = "telefonoRe1" } })
+                                                @Html.EditorFor(model => model.Crt_Tel_Ref1, new { htmlAttributes = new { @class = "form-control data", @id = "telefonoRe1" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Tel_Ref1, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -615,7 +733,7 @@
                                             @*Html.LabelFor(model => model.Crt_Tel_Ref2, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="telefonoRe2">Telefono referencia 2</label>
-                                                @Html.EditorFor(model => model.Crt_Tel_Ref2, new { htmlAttributes = new { @class = "form-control", @id = "telefonoRe2" } })
+                                                @Html.EditorFor(model => model.Crt_Tel_Ref2, new { htmlAttributes = new { @class = "form-control data", @id = "telefonoRe2" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Tel_Ref2, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -626,7 +744,7 @@
                                             @*Html.LabelFor(model => model.Crt_Tel_Ref, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 <label for="telefonoRe3">Telefono referencia</label>
-                                                @Html.EditorFor(model => model.Crt_Tel_Ref, new { htmlAttributes = new { @class = "form-control", @id = "telefonoRe3" } })
+                                                @Html.EditorFor(model => model.Crt_Tel_Ref, new { htmlAttributes = new { @class = "form-control data", @id = "telefonoRe3" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Tel_Ref, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -642,7 +760,7 @@
                                             @*Html.LabelFor(model => model.Crt_Status_Muestra, htmlAttributes: new { @class = "control-label" })*@
                                             <div class="col-md-10">
                                                 <label for="estatusMues">Estatus muestra</label>
-                                                @Html.EditorFor(model => model.Crt_Status_Muestra, new { htmlAttributes = new { @class = "form-control", @id = "estatusMues" } })
+                                                @Html.EditorFor(model => model.Crt_Status_Muestra, new { htmlAttributes = new { @class = "form-control data", @id = "estatusMues" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Status_Muestra, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -653,7 +771,7 @@
                                             @*Html.LabelFor(model => model.Gtn_Gastos, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                             <div class="col-md-10">
                                                 @*@Html.EditorFor(model => model.Gtn_Gastos, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gastos" } })
-                                                    @Html.ValidationMessageFor(model => model.Gtn_Gastos, "", new { @class = "text-danger" })*@
+                                        @Html.ValidationMessageFor(model => model.Gtn_Gastos, "", new { @class = "text-danger" })*@
                                             </div>
                                         </div>
                                     </div>
@@ -666,7 +784,7 @@
                                             @*Html.LabelFor(model => model.Crt_Obervaciones, htmlAttributes: new { @class = "control-label" })*@
                                             <div class="col-md-10">
                                                 <label for="obervaciones">Observaciones</label>
-                                                @Html.EditorFor(model => model.Crt_Obervaciones, new { htmlAttributes = new { @class = "form-control col-12", @id = "observaciones" } })
+                                                @Html.EditorFor(model => model.Crt_Obervaciones, new { htmlAttributes = new { @class = "form-control col-12 data", @id = "observaciones" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Obervaciones, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -677,17 +795,27 @@
                     </div>
                 </div>
 
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
+                </div>
+
             </div>
 
 
             <div class=" d-flex justify-content-end">
                 <!--<input type="submit" value="Create" class="btn btn-primary btn-lg btn-block" />-->
-                <input type="submit" value="Actualizar" class="btn btn-outline-danger btn-lg btn-block" />
+                <input type="submit" id="enviar" value="Actualizar" class="btn btn-outline-danger btn-lg btn-block" />
 
             </div>
 
 
-
+            @Html.HiddenFor(model => model.Crt_ReciboAgua)
+            @Html.HiddenFor(model => model.Crt_ReciboLuz)
+            @Html.HiddenFor(model => model.Crt_Recibo_predial_digital)
+            @Html.HiddenFor(model => model.Crt_Otros)
         </div>
     </div>
 }
@@ -699,7 +827,32 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document.body).css('padding-top', '70px');
+        //Si se tiene fecha y se quiere editar al borrarla completamente convierte el input en un date
+        function funcionDate() {
+            var x = document.getElementById("fechanac");
+            if (x.value == null || x.value == "") {
+                x.setAttribute('type', 'date');
+            }
+        }
+
+        (document.body).setAttribute("onload", "resetCheckbox();");
+
+        function resetCheckbox() {
+            var checkBox = document.getElementsByTagName("input");
+            var variable = [];
+            for (var i = 0; i < checkBox.length; i++) {
+                if (checkBox[i].getAttribute("type") == "checkbox") {
+                    variable.push(checkBox[i])
+                }
+            }
+            for (var i = 0; i < variable.length; i++) {
+                if (variable[i].checked == false) {
+                    variable[i].value = "";
+                }
+            }
+        }
+
+        resetCheckbox();
 
         $(document).ready(function () {
             $(".data").on('change paste', function () {
@@ -708,11 +861,77 @@
                     return $(this).val() === "";
                 }).length;
                 var width = ((1 / dataCount) * (dataCount - myFilledDataCount)) * 100;
-                var mydataPercent = width + "%";
+                var mydataPercent = Math.round(width) + "%";
                 $(".progress-bar").css("width", mydataPercent);
                 $("#bar").text(mydataPercent + " Completado");
+
+                //Guardar porcentaje
+                var x = document.getElementById("progreso");
+                x.setAttribute('value', Math.round(width));
+
             });
         });
+
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('imgAgua');
+        var img1 = document.getElementById('imgLuz');
+        var img2 = document.getElementById('imgPredial');
+        var img3 = document.getElementById('imgOtros');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        img1.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        img2.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+        img3.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        function sumar() {
+            var x = document.getElementById("adeudo_luz");
+            var y = document.getElementById("adeudo_agua");
+            var yx = document.getElementById("adeudo_predial");
+            var z = document.getElementById("gasto");
+
+            if (x.value === "") {
+                x.value = 0;
+            }
+            else if (y.value==="") {
+                y.value = 0;
+            }
+            else if (yx.value === "") {
+                yx.value = 0;
+            }
+
+            var res = parseFloat(x.value) + parseFloat(y.value) + parseFloat(yx.value);
+
+            z.value = parseFloat(res);
+        }
+
     </script>
 
 }

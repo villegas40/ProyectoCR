@@ -1,10 +1,11 @@
 DROP DATABASE CasasRed
-
+GO
 CREATE DATABASE CasasRed;
-
+GO
 USE CasasRed;
-Drop table Corretaje
-/*Departamento de Corretaje*/
+GO
+
+
 --También llevara el nombre del asesor de la venta
 CREATE TABLE Corretaje(
 	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
@@ -13,7 +14,7 @@ CREATE TABLE Corretaje(
 	Crt_Cliente_ApMat VARCHAR(15),
 	Crt_Cliente_ApPat VARCHAR(15),
 	Crt_Direccion VARCHAR(100),
-	Crt_Precio VARCHAR(20), /*SUPONGO QUE DE LA CASA, NO SE*/ /*<<< Yo tampoco pero me imagino que es el precio de la casa y el gasto para ponerla al corriente y rehabilitacion*/
+	Crt_Precio VARCHAR(20),
 	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
 	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
 	planta baja, segundaplanta. Si es Departamento que nivel (nivel 1, nivel 2, nivel 3, nivel 4)*/
@@ -50,12 +51,23 @@ CREATE TABLE Corretaje(
 	Crt_ActaMatr BIT,
 	Crt_EscrCert BIT,
 	Crt_CartaDesPre BIT,
-	Crt_ReciboLuz VARCHAR(MAX), -- Físico
-	Crt_ReciboAgua VARCHAR(MAX), -- Físico
-	Crt_Otros VARCHAR(MAX), --Físico
+	Crt_ReciboLuz VARCHAR(MAX), -- Físico FOTO
+	Crt_ReciboAgua VARCHAR(MAX), -- Físico FOTO
+	Crt_Otros VARCHAR(MAX), --Físico FOTO
 	Crt_Status_Muestra VARCHAR(30),
 	Crt_Obervaciones VARCHAR(300),
 	--Crt_GastosServicios MONEY
+	Crt_ProgresoForm INT,
+	Id_Vendedor INT,
+	Id_Usuario INT,
+	CONSTRAINT FK_CrtVendedor_Id
+		FOREIGN KEY (Id_Vendedor)
+		REFERENCES Vendedor(Id)
+		ON DELETE SET NULL,
+	CONSTRAINT FK_CrtUsuario_Id
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
+		ON DELETE SET NULL
 );
 
 /*Datos Generales del Cliente (Llenado por Gestion)*/
@@ -105,13 +117,26 @@ CREATE TABLE Cliente(
 	Cyg_Identificacion VARCHAR(40),
 	Cyg_No_identificacoion INT,
     Gral_Fechaalta DATE DEFAULT GETDATE(),
-	Vndr_Nombre VARCHAR(80), -- Vendedor quien trajo al cliente
-	Vndr_Apellidopa VARCHAR(40), -- Vendedor
-	Vndr_Apellidoma VARCHAR(40), -- Vendedor
+	Gral_ProgresoForm INT,
+	Grlal_Folio varchar(10),
+	--Vndr_Nombre VARCHAR(80), -- Vendedor quien trajo al cliente
+	--Vndr_Apellidopa VARCHAR(40), -- Vendedor
+	--Vndr_Apellidoma VARCHAR(40), -- Vendedor
+	Id_Vendedor INT,
 	Id_Corretaje INT,
+	Id_Usuario INT,
 	CONSTRAINT FK_CrtCasa_Id
 		FOREIGN KEY (Id_Corretaje)
 		REFERENCES Corretaje(Id)
+		ON DELETE SET NULL,
+	CONSTRAINT FK_GralVendedor_Id
+		FOREIGN KEY (Id_Vendedor)
+		REFERENCES Vendedor(Id)
+		ON DELETE SET NULL,
+	CONSTRAINT FK_GralUsuario_Id
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
+		ON DELETE SET NULL
 );
 
 
@@ -121,7 +146,7 @@ CREATE TABLE Gestion(
 	Gtn_Escrituras BIT,
 	Gtn_Planta_Cartografica BIT,
 	Gtn_Predial BIT,
-	Gtn_Recibo_Luz BIT, /*ESTOS NO DEBERIAN SER CAMPOS DE FOTO?*/
+	Gtn_Recibo_Luz BIT, 
 	Gtn_Recibo_Agua BIT,
 	Gtn_Acta_Nacimiento BIT,
 	Gtn_IFE_Copia BIT,
@@ -144,19 +169,29 @@ CREATE TABLE Gestion(
 	Gtn_Credito_INFONAVIT BIT,
 	Gtn_Notaria BIT,
 	Gtn_Firma_Escrituras BIT,
+	Gtn_CuentaBancaria BIT, --Nuevo
+	Gtn_Taller BIT, --Nuevo
 	--Gtn_Gastos MONEY,
 	Gtm_Aviso_Susp BIT,
+	Gtn_ProgresoForm INT,
 	Id_Corretaje int, -- Llave Foranea a corretaje
-	Id_Cliente int, -- Llave Foranea a Cliente
+	Id_Cliente int, -- Llave Foranea a Cliente1
+	Id_Usuario INT,
 	/*AGEREGAR FK CASA QUE ES LA DE CORRETAJE*/ /*<<<<<<<<<<ESTO ES DEL VENDEDOR?*/
 	--La casa asignada
 	CONSTRAINT FK_Crt_Id
 		FOREIGN KEY (Id_Corretaje)
-		REFERENCES Corretaje(Id),
+		REFERENCES Corretaje(Id)
+		ON DELETE SET NULL,
 	--El comprador de la casa 
 	CONSTRAINT FK_Cliente_Id --Quitar (Pensar mas)
 		FOREIGN KEY (Id_Cliente)
 		REFERENCES Cliente(Id)
+		ON DELETE SET NULL,
+	CONSTRAINT FK_Usuario_Id
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
+		ON DELETE SET NULL,
 );
  
 /*Departamento de Verificacion*/
@@ -170,11 +205,17 @@ CREATE TABLE Verificacion(
 	Vfn_Costo DECIMAL(18,4), /*QUE COSTO LE DIJO?*/
 	Vfn_Trato_asesor int, /*DEL 1 AL 10 QUE CALIFICACIN LE DA*/
 	Vfn_Observaciones VARCHAR(150),
+	Vfn_ProgresoForm INT,
 	Id_Cliente int,
-	CONSTRAINT FK_GtnCli_Id -- (Cambiar a cliente)
+	Id_Usuario INT,
+	CONSTRAINT FK_GtnCli_Id
 		FOREIGN KEY (Id_Cliente)
 		REFERENCES Cliente(Id)
-		ON DELETE CASCADE
+		ON DELETE CASCADE,
+	CONSTRAINT FK_VrfUsu_Id 
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
+		ON DELETE CASCADE,
 );
 
 
@@ -206,12 +247,17 @@ CREATE TABLE Habilitacion(
 	Hbt_Break_medidor BIT,
 	Hbt_Pinturas BIT,
 	Hbt_AvisoSusp BIT,
+	Hbt_ProgresoForm INT,
 	Id_Corretaje int,
-	--Agregar campos para foto y vídeo
+	Id_Usuario INT,
 	/*LLAVE FORANEA DE LA CASA QUE ES LA DE CORRETAJE*/
 	CONSTRAINT FK_CrtHab_Id
 		FOREIGN KEY (Id_Corretaje)
 		REFERENCES Corretaje(Id)
+		ON DELETE CASCADE,
+	CONSTRAINT FK_HabUsuario_Id
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
 		ON DELETE CASCADE
 );
 
@@ -241,54 +287,46 @@ CREATE TABLE Usuario (
 		ON DELETE CASCADE
 );
 
-CREATE TABLE GastosContaduria(
-	Id INT IDENTITY(1,1) PRIMARY KEY,
-	GstCon_Mensualidad DECIMAL(18,4),
-	GstCon_Vigilancia DECIMAL(18,4),
-	GstCon_Otros DECIMAL(18,4),
-	Id_Corretaje int,
-	CONSTRAINT FK_GastosCasa_Id
-		FOREIGN KEY (Id_Corretaje)
-		REFERENCES Corretaje(Id)
-)
-
-CREATE TABLE Gastos(
-	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Gst_Concepto VARCHAR(100),
-	Gst_Monto DECIMAL(18,4),
-	Gst_Fecha DATETIME DEFAULT GETDATE(),
-	Gst_Coment VARCHAR(200),
-	Id_usuario int,
-	Id_Corretaje int,
-	CONSTRAINT FK_Usuario_Id
-		FOREIGN KEY (Id_usuario)
-		REFERENCES Usuario(Id),
-	CONSTRAINT FK_Corretaje_Id
-		FOREIGN KEY (Id_Corretaje)
-		REFERENCES Corretaje(Id),
-)
-
-/*Departamento de Contaduria*/ --No permite crear en cascada
-
+/*Nueva tabla de contaduria*/
 CREATE TABLE Contaduria(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Cnt_Presupuesto_gestion DECIMAL(18,4),
-	Cnt_Presupuesto_corretaje DECIMAL(18,4),
-	Cnt_Presupuesto_habilitacion DECIMAL(18,4),
-	Cnt_Presupuesto DECIMAL(18,4),
-	Id_Gastos int,
-	Id_GastosContaduria int,
+	Cnt_M_Preguntar DECIMAL(18,4),
+	Cnt_Material DECIMAL(18,4),
+	Cnt_Vigilancia DECIMAL(18,4),
+	Cnt_Tramites DECIMAL(18,4), -- Tramites Posiblemente Borrar
+	Cnt_CESPT DECIMAL(18,4), -- Posiblemente Borrar
+	Cnt_CFE DECIMAL(18,4), --Corretaje posiblemente borrar
+	--Cnt_DevMensualidad DECIMAL(18,4), --No
+	--Cnt_Otros DECIMAL(18,4), --No
 	Id_Corretaje int,
-	CONSTRAINT FK_Gastos_Id
-		FOREIGN KEY (Id_Gastos)
-		REFERENCES Gastos(Id),
-	CONSTRAINT FK_GastosConta_Id
-		FOREIGN KEY (Id_GastosContaduria)
-		REFERENCES GastosContaduria(Id),
+	Id_Usuario INT,
 	CONSTRAINT FK_CasaCorretaje_Id
 		FOREIGN KEY (Id_Corretaje)
 		REFERENCES Corretaje(Id)
+		ON DELETE SET NULL,
+	CONSTRAINT FK_CntUsuario_Id
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
+		ON DELETE SET NULL,
 );
+
+CREATE TABLE GastosContaduria(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	GstCon_Concepto VARCHAR(50),
+	GstCon_Monto DECIMAL(18,4),
+	GstCon_Descripcion VARCHAR(150),
+	GstCon_Fecha DATE,
+	Id_Corretaje int,
+	Id_Usuario int,
+	CONSTRAINT FK_GastosCasa_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
+		ON DELETE SET NULL,
+	CONSTRAINT FK_GastosCasaUsu_Id
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
+		ON DELETE SET NULL
+)
 
 
 CREATE TABLE Articulos(
@@ -316,3 +354,206 @@ CREATE TABLE Existencias(
 	ext_ubicacion INT FOREIGN KEY REFERENCES Ubicaciones(ubi_id)
 )
 
+CREATE TABLE [CasaInventario](
+	[ci_Id] [int] IDENTITY(1,1) NOT NULL,
+	[ci_corretaje_id] [int] NOT NULL,
+	[ci_cantidadAsignada] [decimal](18, 6) NOT NULL,
+	[ci_fecha] [datetime] NOT NULL,
+	[ci_usuario_id] [int] NOT NULL,
+	[ci_articulo_id] [varchar](15) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ci_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [adminDani].[CasaInventario] ADD  DEFAULT (getdate()) FOR [ci_fecha]
+GO
+
+ALTER TABLE [adminDani].[CasaInventario]  WITH CHECK ADD FOREIGN KEY([ci_articulo_id])
+REFERENCES [adminDani].[Articulos] ([art_id])
+GO
+
+ALTER TABLE [adminDani].[CasaInventario]  WITH CHECK ADD FOREIGN KEY([ci_corretaje_id])
+REFERENCES [adminDani].[Corretaje] ([Id])
+GO
+
+ALTER TABLE [adminDani].[CasaInventario]  WITH CHECK ADD FOREIGN KEY([ci_usuario_id])
+REFERENCES [adminDani].[Usuario] ([Id])
+GO
+
+
+CREATE TABLE [adminDani].[HistorialAsignacion](
+	[ha_id] [int] IDENTITY(1,1) NOT NULL,
+	[ha_casaInventario] [int] NULL,
+	[ha_existencia_id] [int] NOT NULL,
+	[ha_usuarioEntrego] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ha_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [adminDani].[HistorialAsignacion]  WITH CHECK ADD FOREIGN KEY([ha_casaInventario])
+REFERENCES [adminDani].[CasaInventario] ([ci_Id])
+GO
+
+ALTER TABLE [adminDani].[HistorialAsignacion]  WITH CHECK ADD FOREIGN KEY([ha_existencia_id])
+REFERENCES [adminDani].[Existencias] ([Id])
+GO
+
+ALTER TABLE [adminDani].[HistorialAsignacion]  WITH CHECK ADD FOREIGN KEY([ha_usuarioEntrego])
+REFERENCES [adminDani].[Usuario] ([Id])
+GO
+
+
+CREATE TABLE FotosHabilitacion(
+	fh_id INT IDENTITY(1,1) PRIMARY KEY,
+	fh_archivo VARCHAR(MAX) NOT NULL,
+	fh_nombre VARCHAR(200) NOT NULL,
+	fh_habilitacion INT 
+	CONSTRAINT FK_FotosHab_Id
+		FOREIGN KEY (fh_habilitacion)
+		REFERENCES Habilitacion(Id) 
+		ON DELETE CASCADE
+)
+
+
+--Nuevas Tablas
+/*Nueva tabla de Vendedor*/
+CREATE TABLE Vendedor(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Vndr_Nombre VARCHAR(80), -- Vendedor quien trajo al cliente
+	Vndr_Apellidopa VARCHAR(40), -- Vendedor
+	Vndr_Apellidoma VARCHAR(40), -- Vendedor
+)
+
+CREATE TABLE CalificacionVendedor(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	DVndr_Puntaje DECIMAL(18,4),
+	Id_Corretaje INT,
+	Id_Vendedor INT,
+	CONSTRAINT FK_DVndrCorretaje_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
+		ON DELETE CASCADE,
+	CONSTRAINT FK_DVndrVendedor_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Vendedor(Id)
+		ON DELETE CASCADE
+)
+
+/*Nueva tabla de Comisiones*/
+CREATE TABLE Comision(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Id_Corretaje INT,
+	Id_Usuario INT,
+	CONSTRAINT FK_CmsCorretaje_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
+		ON DELETE CASCADE,
+	CONSTRAINT FK_CmsUsuario_Id
+		FOREIGN KEY (Id_Usuario)
+		REFERENCES Usuario(Id)
+		ON DELETE SET NULL
+)
+
+CREATE TABLE DetallesComision(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Id_Vendedor INT,
+	Id_Comision INT,
+	DCms_Monto DECIMAL(18, 4),
+	DCms_TipoCom VARCHAR(25),
+	CONSTRAINT FK_DCmsComision_Id
+		FOREIGN KEY (Id_Comision)
+		REFERENCES Comision(Id)
+		ON DELETE CASCADE,
+	CONSTRAINT FK_DCmsVendedor_Id
+		FOREIGN KEY (Id_Vendedor)
+		REFERENCES Vendedor(Id)
+		ON DELETE CASCADE,
+)
+
+
+CREATE TABLE Comentarios(
+	Id INT IDENTITY(1,1) PRIMARY KEY,
+	Cmt_Titulo VARCHAR(50),
+	Cmt_Nota VARCHAR(MAX),
+	Cmt_Fecha DATE,
+	Id_Cliente int,
+	CONSTRAINT FK_ComentClie_Id
+		FOREIGN KEY (Id_Cliente)
+		REFERENCES Cliente(Id)
+		ON DELETE CASCADE
+)
+
+/*Campos agregados a gestion*/
+--ALTER TABLE Gestion
+--ADD Gtn_CuentaBancaria BIT, Gtn_Taller BIT;
+
+TRUNCATE TABLE Corretaje
+TRUNCATE TABLE Cliente
+TRUNCATE TABLE Gestion
+TRUNCATE TABLE Verificacion
+TRUNCATE TABLE Habilitacion
+TRUNCATE TABLE Contaduria
+TRUNCATE TABLE GastosContaduria
+TRUNCATE TABLE FotosHabilitacion
+TRUNCATE TABLE HistorialAsignacion
+TRUNCATE TABLE CasaInventario
+
+
+DROP TABLE Corretaje
+DROP TABLE Cliente
+DROP TABLE Gestion
+DROP TABLE Verificacion
+DROP TABLE Habilitacion
+DROP TABLE Contaduria
+DROP TABLE GastosContaduria
+DROP TABLE FotosHabilitacion
+DROP TABLE HistorialAsignacion
+DROP TABLE CasaInventario
+DROP TABLE GastosContaduria
+
+
+--Eliminar Constraints
+ALTER TABLE Corretaje
+DROP CONSTRAINT FK_CrtVendedor_Id, FK_CrtUsuario_Id; 
+
+ALTER TABLE Cliente
+DROP CONSTRAINT FK_CrtCasa_Id , FK_CrtVendedor_Id, FK_GralUsuario_Id;
+
+ALTER TABLE Gestion
+DROP CONSTRAINT FK_Crt_Id, FK_Cliente_Id, FK_Usuario_Id;
+
+ALTER TABLE Verificacion
+DROP CONSTRAINT FK_GtnCli_Id  , FK_GtnUsu_Id;
+
+ALTER TABLE Habilitacion
+DROP CONSTRAINT FK_CrtHab_Id  , FK_HabUsuario_Id;
+
+ALTER TABLE Usuario
+DROP CONSTRAINT FK_TipoUsuario_Id;
+
+ALTER TABLE Contaduria
+DROP CONSTRAINT FK_CasaCorretaje_Id, FK_CntUsuario_Id;
+
+ALTER TABLE GastosContaduria 
+DROP CONSTRAINT FK_GastosCasa_Id, FK_GastosCasaUsu_Id;
+
+ALTER TABLE CalificacionVendedor 
+DROP CONSTRAINT FK_DVndrCorretaje_Id, FK_DVndrVendedor_Id;
+
+ALTER TABLE Comision 
+DROP CONSTRAINT FK_CmsCorretaje_Id;
+
+ALTER TABLE DetallesComision 
+DROP CONSTRAINT FK_DCmsComision_Id, FK_DCmsVendedor_Id;
+
+ALTER TABLE Comentarios 
+DROP CONSTRAINT FK_ComentClie_Id;
+
+ALTER TABLE FotosHabilitacion 
+DROP CONSTRAINT FK_FotosHab_Id;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,32 +20,74 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes
         public ActionResult Index()
         {
-            return View(db.Corretaje.ToList());
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Corretaje" || Session["Tipo"].ToString() == "Administrador")
+            {
+                Corretaje corretaje = new Corretaje();
+                string[] posestatus = new string[] { "Nunguna", "Venta", "Disponible" };
+                int id = Convert.ToInt16(corretaje.Crt_Status);
+                ViewBag.estatus = posestatus[id];
+                return View(db.Corretaje.ToList());
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Corretajes/Details/5
         public ActionResult Details(int? id)
         {
-            string[] pos = new string[] { "Soltero", "Casado", "Viudo", "Divorsiado" };
-
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Corretaje corretaje = db.Corretaje.Find(id);
-            int a = Convert.ToInt16(corretaje.Crt_Estado_Civil);
-            ViewBag.civil = pos[a];
-            if (corretaje == null)
+            else if (Session["Tipo"].ToString() == "Corretaje" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                string[] pos = new string[] { "Soltero", "Casado", "Viudo", "Divorsiado" };
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Corretaje corretaje = db.Corretaje.Find(id);
+                int a = Convert.ToInt16(corretaje.Crt_Estado_Civil);
+                ViewBag.civil = pos[a];
+                if (corretaje == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(corretaje);
             }
-            return View(corretaje);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Corretajes/Create
         public ActionResult Create()
         {
-            var posicion = new SelectList(new[] {
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Corretaje" || Session["Tipo"].ToString() == "Administrador")
+            {
+                //Select List para estatus de casa
+                var estatus = new SelectList(new[] {
+                new { value = "No seleccionado", text = "Selecciona una opción.."},
+                new { value = "Venta", text = "Venta" },
+                new { value = "Disponible", text = "Disponible" },
+            }, "value", "text", 0);
+
+                var posicion = new SelectList(new[] {
                 new { value = 0, text = "Selecciona una opción.."},
                 new { value = 1, text = "Soltero" },
                 new { value = 2, text = "Casado" },
@@ -52,9 +95,16 @@ namespace CasasRed_Nuevo3_.Controllers
                 new { value = 4, text = "Divorciado" }
             }, "value", "text", 0);
 
-            ViewData["Posicion"] = posicion;
-
-            return View();
+                ViewData["Posicion"] = posicion;
+                ViewData["Estatus"] = estatus;
+                return View();
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Corretajes/Create
@@ -72,6 +122,14 @@ namespace CasasRed_Nuevo3_.Controllers
 
             var contaduria = new Contaduria();
             var contaduria_controller = new ContaduriasController();
+
+            //Select List para estatus de casa
+            var estatus = new SelectList(new[] {
+                new { value = "0", text = "Selecciona una opción.."}, //Esto puede ser con 0 o 1
+                new { value = "1", text = "Venta" },
+                new { value = "2", text = "Disponible" },
+            }, "value", "text", 0);
+
 
             var posicion = new SelectList(new[] {
                 new { value = 0, text = "Selecciona una opción.."},
@@ -99,6 +157,41 @@ namespace CasasRed_Nuevo3_.Controllers
             if (corretaje.Crt_Acuerdo == null) corretaje.Crt_Acuerdo = false;
             if (corretaje.Crt_CartaDesPre == null) corretaje.Crt_CartaDesPre = false;
             if (corretaje.Crt_Escritura_Simple == null) corretaje.Crt_Escritura_Simple = false;
+
+            // Mini hack
+            DateTime aux = new DateTime();
+            corretaje.Crt_Status = (corretaje.Crt_Status == null) ? "" : corretaje.Crt_Status;
+            corretaje.Crt_Cliente_Nombre = (corretaje.Crt_Cliente_Nombre == null) ? "" : corretaje.Crt_Cliente_Nombre;
+            corretaje.Crt_Cliente_ApMat = (corretaje.Crt_Cliente_ApMat == null) ? "" : corretaje.Crt_Cliente_ApMat;
+            corretaje.Crt_Cliente_ApPat = (corretaje.Crt_Cliente_ApPat == null) ? "" : corretaje.Crt_Cliente_ApPat;
+            corretaje.Crt_Direccion = (corretaje.Crt_Direccion == null) ? "" : corretaje.Crt_Direccion;
+            corretaje.Crt_Precio = (corretaje.Crt_Precio == null) ? "" : corretaje.Crt_Precio;
+            corretaje.Crt_Gasto = (corretaje.Crt_Gasto == null) ? "" : corretaje.Crt_Gasto;
+            corretaje.Crt_Tipo_Vivienda = (corretaje.Crt_Tipo_Vivienda == null) ? "" : corretaje.Crt_Tipo_Vivienda;
+            corretaje.Crt_Nivel = (corretaje.Crt_Nivel == null) ? 0 : corretaje.Crt_Nivel;
+            corretaje.Crt_Num_Habitaciones = (corretaje.Crt_Num_Habitaciones == null) ? 0 : corretaje.Crt_Num_Habitaciones;
+            corretaje.Crt_Planta = (corretaje.Crt_Planta == null) ? 0 : corretaje.Crt_Planta;
+            corretaje.Crt_Ano_compra = (corretaje.Crt_Ano_compra == null) ? "" : corretaje.Crt_Ano_compra;
+            corretaje.Crt_Num_Credito_Infonavit = (corretaje.Crt_Num_Credito_Infonavit == null) ? "" : corretaje.Crt_Num_Credito_Infonavit;
+            corretaje.Crt_Saldo_infonavit = (corretaje.Crt_Saldo_infonavit == null) ? 0 : corretaje.Crt_Saldo_infonavit;
+            corretaje.Crt_Fec_Nac = (corretaje.Crt_Fec_Nac == null) ? aux : corretaje.Crt_Fec_Nac;
+            corretaje.Crt_Tel_Celular = (corretaje.Crt_Tel_Celular == null) ? "" : corretaje.Crt_Tel_Celular;
+            corretaje.Crt_Estado_Civil = (corretaje.Crt_Estado_Civil == null) ? "" : corretaje.Crt_Estado_Civil;
+            corretaje.Crt_Tel_Casa = (corretaje.Crt_Tel_Casa == null) ? "" : corretaje.Crt_Tel_Casa;
+            corretaje.Crt_Tel_Trabajo = (corretaje.Crt_Tel_Trabajo == null) ? "" : corretaje.Crt_Tel_Trabajo;
+            corretaje.Crt_Tel_Ref1 = (corretaje.Crt_Tel_Ref1 == null) ? "" : corretaje.Crt_Tel_Ref1;
+            corretaje.Crt_Tel_Ref2 = (corretaje.Crt_Tel_Ref2 == null) ? "" : corretaje.Crt_Tel_Ref2;
+            corretaje.Crt_Tel_Ref = (corretaje.Crt_Tel_Ref == null) ? "" : corretaje.Crt_Tel_Ref;
+            corretaje.Crt_Clave_Catastral = (corretaje.Crt_Clave_Catastral == null) ? "" : corretaje.Crt_Clave_Catastral;
+            corretaje.Crt_Adeudo_predial = (corretaje.Crt_Adeudo_predial == null) ? 0 : corretaje.Crt_Adeudo_predial;
+            corretaje.Crt_Num_servicio_luz = (corretaje.Crt_Num_servicio_luz == null) ? "" : corretaje.Crt_Num_servicio_luz;
+            corretaje.Crt_Adeudo_luz = (corretaje.Crt_Adeudo_luz == null) ? 0 : corretaje.Crt_Adeudo_luz;
+            corretaje.Crt_NombreC_Titular_luz = (corretaje.Crt_NombreC_Titular_luz == null) ? "" : corretaje.Crt_NombreC_Titular_luz;
+            corretaje.Crt_No_cuenta_agua = (corretaje.Crt_No_cuenta_agua == null) ? "" : corretaje.Crt_No_cuenta_agua;
+            corretaje.Crt_Adeudo_agua = (corretaje.Crt_Adeudo_agua == null) ? 0 : corretaje.Crt_Adeudo_agua;
+            corretaje.Crt_Status_Muestra = (corretaje.Crt_Status_Muestra == null) ? "" : corretaje.Crt_Status_Muestra;
+            corretaje.Crt_Obervaciones = (corretaje.Crt_Obervaciones == null) ? "" : corretaje.Crt_Obervaciones;
+
             if (ModelState.IsValid)
             {
 
@@ -115,6 +208,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewData["Estatus"] = estatus;
             ViewData["Posicion"] = posicion;
             return View(corretaje);
         }
@@ -148,6 +242,16 @@ namespace CasasRed_Nuevo3_.Controllers
 
             ViewData["Posicion"] = posicion;
 
+            //Estatus de la casa
+            var estatus = new SelectList(new[] {
+                new { value = 0, text = "Selecciona una opción.."},
+                new { value = 1, text = "Venta" },
+                new { value = 2, text = "Disponible" },
+            }, "value", "text", 0);
+
+            ViewData["Estatus"] = estatus;
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -157,6 +261,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(corretaje);
         }
 
@@ -178,11 +283,59 @@ namespace CasasRed_Nuevo3_.Controllers
             if (corretaje.Crt_Escritura_Simple == null) corretaje.Crt_Escritura_Simple = false;
 
             // Imagenes
-            corretaje.Crt_ReciboAgua = "data:image/jpg;base64," + convertTo64(Crt_ReciboAgua);
-            corretaje.Crt_ReciboLuz = "data:image/jpg;base64," + convertTo64(Crt_ReciboLuz);
-            corretaje.Crt_Recibo_predial_digital = "data:image/jpg;base64," + convertTo64(Crt_Recibo_predial_digital);
-            corretaje.Crt_Otros = "data:image/jpg;base64," + convertTo64(Crt_Otros);
+            if (Crt_ReciboAgua != null)
+            {
+                corretaje.Crt_ReciboAgua = "data:image/jpg;base64," + convertTo64(Crt_ReciboAgua);
+            }
+            if (Crt_ReciboLuz != null)
+            {
+                corretaje.Crt_ReciboLuz = "data:image/jpg;base64," + convertTo64(Crt_ReciboLuz);
+            }
+
+            if (Crt_Recibo_predial_digital != null)
+            {
+                corretaje.Crt_Recibo_predial_digital = "data:image/jpg;base64," + convertTo64(Crt_Recibo_predial_digital);
+            }
+
+            if (Crt_Otros != null)
+            {
+                corretaje.Crt_Otros = "data:image/jpg;base64," + convertTo64(Crt_Otros);
+            }
             //
+            // Mini hack
+            DateTime aux = new DateTime();
+            corretaje.Crt_Status = (corretaje.Crt_Status == null) ? "" : corretaje.Crt_Status;
+            corretaje.Crt_Cliente_Nombre = (corretaje.Crt_Cliente_Nombre == null) ? "" : corretaje.Crt_Cliente_Nombre;
+            corretaje.Crt_Cliente_ApMat = (corretaje.Crt_Cliente_ApMat == null) ? "" : corretaje.Crt_Cliente_ApMat;
+            corretaje.Crt_Cliente_ApPat = (corretaje.Crt_Cliente_ApPat == null) ? "" : corretaje.Crt_Cliente_ApPat;
+            corretaje.Crt_Direccion = (corretaje.Crt_Direccion == null) ? "" : corretaje.Crt_Direccion;
+            corretaje.Crt_Precio = (corretaje.Crt_Precio == null) ? "" : corretaje.Crt_Precio;
+            corretaje.Crt_Gasto = (corretaje.Crt_Gasto == null) ? "" : corretaje.Crt_Gasto;
+            corretaje.Crt_Tipo_Vivienda = (corretaje.Crt_Tipo_Vivienda == null) ? "" : corretaje.Crt_Tipo_Vivienda;
+            corretaje.Crt_Nivel = (corretaje.Crt_Nivel == null) ? 0 : corretaje.Crt_Nivel;
+            corretaje.Crt_Num_Habitaciones = (corretaje.Crt_Num_Habitaciones == null) ? 0 : corretaje.Crt_Num_Habitaciones;
+            corretaje.Crt_Planta = (corretaje.Crt_Planta == null) ? 0 : corretaje.Crt_Planta;
+            corretaje.Crt_Ano_compra = (corretaje.Crt_Ano_compra == null) ? "" : corretaje.Crt_Ano_compra;
+            corretaje.Crt_Num_Credito_Infonavit = (corretaje.Crt_Num_Credito_Infonavit == null) ? "" : corretaje.Crt_Num_Credito_Infonavit;
+            corretaje.Crt_Saldo_infonavit = (corretaje.Crt_Saldo_infonavit == null) ? 0 : corretaje.Crt_Saldo_infonavit;
+            corretaje.Crt_Fec_Nac = (corretaje.Crt_Fec_Nac == null) ? aux : corretaje.Crt_Fec_Nac;
+            corretaje.Crt_Tel_Celular = (corretaje.Crt_Tel_Celular == null) ? "" : corretaje.Crt_Tel_Celular;
+            corretaje.Crt_Estado_Civil = (corretaje.Crt_Estado_Civil == null) ? "" : corretaje.Crt_Estado_Civil;
+            corretaje.Crt_Tel_Casa = (corretaje.Crt_Tel_Casa == null) ? "" : corretaje.Crt_Tel_Casa;
+            corretaje.Crt_Tel_Trabajo = (corretaje.Crt_Tel_Trabajo == null) ? "" : corretaje.Crt_Tel_Trabajo;
+            corretaje.Crt_Tel_Ref1 = (corretaje.Crt_Tel_Ref1 == null) ? "" : corretaje.Crt_Tel_Ref1;
+            corretaje.Crt_Tel_Ref2 = (corretaje.Crt_Tel_Ref2 == null) ? "" : corretaje.Crt_Tel_Ref2;
+            corretaje.Crt_Tel_Ref = (corretaje.Crt_Tel_Ref == null) ? "" : corretaje.Crt_Tel_Ref;
+            corretaje.Crt_Clave_Catastral = (corretaje.Crt_Clave_Catastral == null) ? "" : corretaje.Crt_Clave_Catastral;
+            corretaje.Crt_Adeudo_predial = (corretaje.Crt_Adeudo_predial == null) ? 0 : corretaje.Crt_Adeudo_predial;
+            corretaje.Crt_Num_servicio_luz = (corretaje.Crt_Num_servicio_luz == null) ? "" : corretaje.Crt_Num_servicio_luz;
+            corretaje.Crt_Adeudo_luz = (corretaje.Crt_Adeudo_luz == null) ? 0 : corretaje.Crt_Adeudo_luz;
+            corretaje.Crt_NombreC_Titular_luz = (corretaje.Crt_NombreC_Titular_luz == null) ? "" : corretaje.Crt_NombreC_Titular_luz;
+            corretaje.Crt_No_cuenta_agua = (corretaje.Crt_No_cuenta_agua == null) ? "" : corretaje.Crt_No_cuenta_agua;
+            corretaje.Crt_Adeudo_agua = (corretaje.Crt_Adeudo_agua == null) ? 0 : corretaje.Crt_Adeudo_agua;
+            corretaje.Crt_Status_Muestra = (corretaje.Crt_Status_Muestra == null) ? "" : corretaje.Crt_Status_Muestra;
+            corretaje.Crt_Obervaciones = (corretaje.Crt_Obervaciones == null) ? "" : corretaje.Crt_Obervaciones;
+
 
             if (ModelState.IsValid)
             {
@@ -196,16 +349,29 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Corretaje corretaje = db.Corretaje.Find(id);
-            if (corretaje == null)
+            else if (Session["Tipo"].ToString() == "Corretaje" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Corretaje corretaje = db.Corretaje.Find(id);
+                if (corretaje == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(corretaje);
             }
-            return View(corretaje);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Corretajes/Delete/5
@@ -254,6 +420,23 @@ namespace CasasRed_Nuevo3_.Controllers
             }
         };
 
+        }
+
+        //Obteber las casas
+        public JsonResult BuscarCorretaje(string filtro = "", int pagina = 1, int registrosPagina = 15)
+        {
+            if (filtro == "")
+            {
+                int totalPaginas = (int)Math.Ceiling((double)db.Corretaje.Count() / registrosPagina);
+                var busqueda = (from a in db.Corretaje select new { a.Id, a.Crt_Direccion, a.Crt_Ano_compra, a.Crt_Status , cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Corretaje where (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat).Contains(filtro) || a.Crt_Ano_compra.Contains(filtro) || a.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Corretaje where (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat).Contains(filtro) || a.Crt_Ano_compra.Contains(filtro) || a.Crt_Direccion.Contains(filtro) select new { a.Id, a.Crt_Direccion, a.Crt_Ano_compra, a.Crt_Status, cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

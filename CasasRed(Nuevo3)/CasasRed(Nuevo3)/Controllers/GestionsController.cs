@@ -17,8 +17,22 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Gestions
         public ActionResult Index()
         {
-            var gestion = db.Gestion.Include(g => g.Cliente).Include(g => g.Corretaje);
-            return View(gestion.ToList());
+            //if (Session["Usuario"] == null)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
+            //{
+                var gestion = db.Gestion.Include(g => g.Cliente).Include(g => g.Corretaje);
+                return View(gestion.ToList());
+            //}
+            //else
+            //{
+            //    LoginController lc = new LoginController();
+            //    string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+            //    return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            //}
+            
         }
 
         // GET: Gestions/Details/5
@@ -49,8 +63,35 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Gtn_Escrituras,Gtn_Planta_Cartografica,Gtn_Predial,Gtn_Recibo_Luz,Gtn_Recibo_Agua,Gtn_Acta_Nacimiento,Gtn_IFE_Copia,Gtn_Sol_Ret_Ifo,Gtn_Cert_Hip,Gtn_Cert_Fiscal,Gtn_Sol_Estado,Gtn_Junta_URBI,Gtn_Agua_Pago_Inf,Gtn_Cert_Cartogr,Gtn_No_Oficial,Gtn_Avaluo,Gtn_CT_Banco,Gtn_Aviso_Suspension,Gtn_Formato_Infonavit,Gtn_Fotos_Propiedad,Gtn_Evaluo_Contacto,Gtn_Planeacion_Fianza,Gtn_Urbanizacion,Gtn_Credito_INFONAVIT,Gtn_Notaria,Gtn_Firma_Escrituras,Gtm_Aviso_Susp,Id_Corretaje,Id_Cliente")] Gestion gestion)
+        public ActionResult Create([Bind(Include = "Id,Gtn_Escrituras,Gtn_Planta_Cartografica,Gtn_Predial,Gtn_Recibo_Luz,Gtn_Recibo_Agua,Gtn_Acta_Nacimiento,Gtn_IFE_Copia,Gtn_Sol_Ret_Ifo,Gtn_Cert_Hip,Gtn_Cert_Fiscal,Gtn_Sol_Estado,Gtn_Junta_URBI,Gtn_Agua_Pago_Inf,Gtn_Cert_Cartogr,Gtn_No_Oficial,Gtn_Avaluo,Gtn_CT_Banco,Gtn_Aviso_Suspension,Gtn_Formato_Infonavit,Gtn_Fotos_Propiedad,Gtn_Evaluo_Contacto,Gtn_Planeacion_Fianza,Gtn_Urbanizacion,Gtn_Credito_INFONAVIT,Gtn_Notaria,Gtn_Firma_Escrituras,Gtm_Aviso_Susp,Id_Corretaje,Id_Cliente,Gtn_ProgresoForm")] Gestion gestion)
         {
+            gestion.Gtn_Escrituras = ((gestion.Gtn_Escrituras == null) ? false: gestion.Gtn_Escrituras);
+            gestion.Gtn_Planta_Cartografica = ((gestion.Gtn_Planta_Cartografica == null) ? false: gestion.Gtn_Planta_Cartografica);
+            gestion.Gtn_Predial = ((gestion.Gtn_Predial == null) ? false : gestion.Gtn_Predial);
+            gestion.Gtn_Recibo_Luz = ((gestion.Gtn_Recibo_Luz == null) ? false : gestion.Gtn_Recibo_Luz);
+            gestion.Gtn_Recibo_Agua = ((gestion.Gtn_Recibo_Agua == null) ? false : gestion.Gtn_Recibo_Agua);
+            gestion.Gtn_Acta_Nacimiento = ((gestion.Gtn_Acta_Nacimiento == null) ? false : gestion.Gtn_Acta_Nacimiento); 
+            gestion.Gtn_IFE_Copia = ((gestion.Gtn_IFE_Copia == null) ? false : gestion.Gtn_IFE_Copia);
+            gestion.Gtn_Sol_Ret_Ifo = ((gestion.Gtn_Sol_Ret_Ifo == null) ? false : gestion.Gtn_Sol_Ret_Ifo);
+            gestion.Gtn_Cert_Hip = ((gestion.Gtn_Cert_Hip == null) ? false : gestion.Gtn_Cert_Hip);
+            gestion.Gtn_Cert_Fiscal = ((gestion.Gtn_Cert_Fiscal == null) ? false : gestion.Gtn_Cert_Fiscal);
+            gestion.Gtn_Sol_Estado = ((gestion.Gtn_Sol_Estado == null) ? false : gestion.Gtn_Sol_Estado);
+            gestion.Gtn_Junta_URBI = ((gestion.Gtn_Junta_URBI == null) ? false : gestion.Gtn_Junta_URBI);
+            gestion.Gtn_Agua_Pago_Inf = ((gestion.Gtn_Agua_Pago_Inf == null) ? false : gestion.Gtn_Agua_Pago_Inf);
+            gestion.Gtn_Cert_Cartogr = ((gestion.Gtn_Cert_Cartogr == null) ? false : gestion.Gtn_Cert_Cartogr);
+            gestion.Gtn_No_Oficial = ((gestion.Gtn_No_Oficial == null) ? false : gestion.Gtn_No_Oficial);
+            gestion.Gtn_Avaluo = ((gestion.Gtn_Avaluo == null) ? false : gestion.Gtn_Avaluo);
+            gestion.Gtn_CT_Banco = ((gestion.Gtn_CT_Banco == null) ? false : gestion.Gtn_CT_Banco);
+            gestion.Gtn_Aviso_Suspension = ((gestion.Gtn_Aviso_Suspension == null) ? false : gestion.Gtn_Aviso_Suspension);
+            gestion.Gtn_Formato_Infonavit = ((gestion.Gtn_Formato_Infonavit == null) ? false : gestion.Gtn_Formato_Infonavit);
+            gestion.Gtn_Fotos_Propiedad = ((gestion.Gtn_Fotos_Propiedad == null) ? false : gestion.Gtn_Fotos_Propiedad);
+            gestion.Gtn_Evaluo_Contacto = ((gestion.Gtn_Evaluo_Contacto == null) ? false : gestion.Gtn_Evaluo_Contacto);
+            gestion.Gtn_Planeacion_Fianza = ((gestion.Gtn_Planeacion_Fianza == null) ? false : gestion.Gtn_Planeacion_Fianza);
+            gestion.Gtn_Urbanizacion = ((gestion.Gtn_Urbanizacion == null) ? false : gestion.Gtn_Urbanizacion); 
+            gestion.Gtn_Credito_INFONAVIT = ((gestion.Gtn_Credito_INFONAVIT == null) ? false : gestion.Gtn_Credito_INFONAVIT);
+            gestion.Gtn_Notaria = ((gestion.Gtn_Notaria == null) ? false : gestion.Gtn_Notaria);
+            gestion.Gtn_Firma_Escrituras = ((gestion.Gtn_Firma_Escrituras == null) ? false : gestion.Gtn_Firma_Escrituras);
+
             if (ModelState.IsValid)
             {
                 db.Gestion.Add(gestion);
@@ -85,8 +126,35 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Gtn_Escrituras,Gtn_Planta_Cartografica,Gtn_Predial,Gtn_Recibo_Luz,Gtn_Recibo_Agua,Gtn_Acta_Nacimiento,Gtn_IFE_Copia,Gtn_Sol_Ret_Ifo,Gtn_Cert_Hip,Gtn_Cert_Fiscal,Gtn_Sol_Estado,Gtn_Junta_URBI,Gtn_Agua_Pago_Inf,Gtn_Cert_Cartogr,Gtn_No_Oficial,Gtn_Avaluo,Gtn_CT_Banco,Gtn_Aviso_Suspension,Gtn_Formato_Infonavit,Gtn_Fotos_Propiedad,Gtn_Evaluo_Contacto,Gtn_Planeacion_Fianza,Gtn_Urbanizacion,Gtn_Credito_INFONAVIT,Gtn_Notaria,Gtn_Firma_Escrituras,Gtm_Aviso_Susp,Id_Corretaje,Id_Cliente")] Gestion gestion)
+        public ActionResult Edit([Bind(Include = "Id,Gtn_Escrituras,Gtn_Planta_Cartografica,Gtn_Predial,Gtn_Recibo_Luz,Gtn_Recibo_Agua,Gtn_Acta_Nacimiento,Gtn_IFE_Copia,Gtn_Sol_Ret_Ifo,Gtn_Cert_Hip,Gtn_Cert_Fiscal,Gtn_Sol_Estado,Gtn_Junta_URBI,Gtn_Agua_Pago_Inf,Gtn_Cert_Cartogr,Gtn_No_Oficial,Gtn_Avaluo,Gtn_CT_Banco,Gtn_Aviso_Suspension,Gtn_Formato_Infonavit,Gtn_Fotos_Propiedad,Gtn_Evaluo_Contacto,Gtn_Planeacion_Fianza,Gtn_Urbanizacion,Gtn_Credito_INFONAVIT,Gtn_Notaria,Gtn_Firma_Escrituras,Gtm_Aviso_Susp,Id_Corretaje,Id_Cliente,Gtn_ProgresoForm")] Gestion gestion)
         {
+            gestion.Gtn_Escrituras = ((gestion.Gtn_Escrituras == null) ? false : gestion.Gtn_Escrituras);
+            gestion.Gtn_Planta_Cartografica = ((gestion.Gtn_Planta_Cartografica == null) ? false : gestion.Gtn_Planta_Cartografica);
+            gestion.Gtn_Predial = ((gestion.Gtn_Predial == null) ? false : gestion.Gtn_Predial);
+            gestion.Gtn_Recibo_Luz = ((gestion.Gtn_Recibo_Luz == null) ? false : gestion.Gtn_Recibo_Luz);
+            gestion.Gtn_Recibo_Agua = ((gestion.Gtn_Recibo_Agua == null) ? false : gestion.Gtn_Recibo_Agua);
+            gestion.Gtn_Acta_Nacimiento = ((gestion.Gtn_Acta_Nacimiento == null) ? false : gestion.Gtn_Acta_Nacimiento);
+            gestion.Gtn_IFE_Copia = ((gestion.Gtn_IFE_Copia == null) ? false : gestion.Gtn_IFE_Copia);
+            gestion.Gtn_Sol_Ret_Ifo = ((gestion.Gtn_Sol_Ret_Ifo == null) ? false : gestion.Gtn_Sol_Ret_Ifo);
+            gestion.Gtn_Cert_Hip = ((gestion.Gtn_Cert_Hip == null) ? false : gestion.Gtn_Cert_Hip);
+            gestion.Gtn_Cert_Fiscal = ((gestion.Gtn_Cert_Fiscal == null) ? false : gestion.Gtn_Cert_Fiscal);
+            gestion.Gtn_Sol_Estado = ((gestion.Gtn_Sol_Estado == null) ? false : gestion.Gtn_Sol_Estado);
+            gestion.Gtn_Junta_URBI = ((gestion.Gtn_Junta_URBI == null) ? false : gestion.Gtn_Junta_URBI);
+            gestion.Gtn_Agua_Pago_Inf = ((gestion.Gtn_Agua_Pago_Inf == null) ? false : gestion.Gtn_Agua_Pago_Inf);
+            gestion.Gtn_Cert_Cartogr = ((gestion.Gtn_Cert_Cartogr == null) ? false : gestion.Gtn_Cert_Cartogr);
+            gestion.Gtn_No_Oficial = ((gestion.Gtn_No_Oficial == null) ? false : gestion.Gtn_No_Oficial);
+            gestion.Gtn_Avaluo = ((gestion.Gtn_Avaluo == null) ? false : gestion.Gtn_Avaluo);
+            gestion.Gtn_CT_Banco = ((gestion.Gtn_CT_Banco == null) ? false : gestion.Gtn_CT_Banco);
+            gestion.Gtn_Aviso_Suspension = ((gestion.Gtn_Aviso_Suspension == null) ? false : gestion.Gtn_Aviso_Suspension);
+            gestion.Gtn_Formato_Infonavit = ((gestion.Gtn_Formato_Infonavit == null) ? false : gestion.Gtn_Formato_Infonavit);
+            gestion.Gtn_Fotos_Propiedad = ((gestion.Gtn_Fotos_Propiedad == null) ? false : gestion.Gtn_Fotos_Propiedad);
+            gestion.Gtn_Evaluo_Contacto = ((gestion.Gtn_Evaluo_Contacto == null) ? false : gestion.Gtn_Evaluo_Contacto);
+            gestion.Gtn_Planeacion_Fianza = ((gestion.Gtn_Planeacion_Fianza == null) ? false : gestion.Gtn_Planeacion_Fianza);
+            gestion.Gtn_Urbanizacion = ((gestion.Gtn_Urbanizacion == null) ? false : gestion.Gtn_Urbanizacion);
+            gestion.Gtn_Credito_INFONAVIT = ((gestion.Gtn_Credito_INFONAVIT == null) ? false : gestion.Gtn_Credito_INFONAVIT);
+            gestion.Gtn_Notaria = ((gestion.Gtn_Notaria == null) ? false : gestion.Gtn_Notaria);
+            gestion.Gtn_Firma_Escrituras = ((gestion.Gtn_Firma_Escrituras == null) ? false : gestion.Gtn_Firma_Escrituras);
+
             if (ModelState.IsValid)
             {
                 db.Entry(gestion).State = EntityState.Modified;
@@ -168,7 +236,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 Gtn_Notaria = false,
                 Gtn_Firma_Escrituras = false,
                 Id_Cliente = cliente_id,
-                Id_Corretaje = corretaje_id
+                Id_Corretaje = corretaje_id,
+                Gtn_ProgresoForm = 0
             };
 
             CS.Gestion.Add(gestion_obj);

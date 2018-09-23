@@ -1,0 +1,150 @@
+﻿@model CasasRed_Nuevo3_.Models.CasaInventario
+
+@{
+    ViewBag.Title = "Habilitacion > Asignar material";
+    int corretaje = ViewBag.casa;
+}
+<h2>Asignar material</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <input class="form-control" name="ci_corretaje_id" value="@corretaje" style="display:none;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label class="control-label col-md-2">Artículo</label>
+                <div class="col-md-10">
+                    <input type="text" id="ci_articulo_id" name="ci_articulo_id" class="form-control" placeholder="seleccione un articulo" readonly required="" style="float:left;" />
+                    <div>
+                        <button style="margin-left: 5px;" title="Buscar artículo" onclick="buscarArticulo(); return false;" data-toggle="modal" data-target="#articuloModal" class="btn btn-sm btn-info"><i class="fas fa-search"></i></button>
+                        <button title="Añadir existencias" onclick="window.open('/Existencias/Create'); return false;" class="btn btn-sm modal-trigger btn-success"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Cantidad </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ci_cantidadAsignada, new { htmlAttributes = new { @class = "form-control", @type="number", @min="1", @required="" } })
+                @Html.ValidationMessageFor(model => model.ci_cantidadAsignada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-success" /> | @Html.ActionLink("Regresar", "Index", new {id = corretaje }, new { @class= "btn btn-outline-secondary" })
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="articuloModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar articulo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="txtBusquedaA" type="text" class="form-control" value="" onkeyup="buscarArticulo()" />
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Cantidad dispobible</th>
+                            <th style="text-align: center;">Seleccionar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ctBA"></tbody>
+                </table>
+                <center>
+                    <button disabled class="btn btn-default" id="btnPrevious" onclick="buscarArticulo(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
+                    <label id="previous"></label><label> - <label id="actual"></label>-</label><label id="next"></label>
+                    <button disabled class="btn btn-default" id="btnNext" onclick="buscarArticulo(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var pageP = 1
+        function buscarArticulo(page) {
+            var totalPages = 1
+            if (page == undefined) {
+                page = 1
+            }
+            pageP = page
+            var filtro = document.getElementById("txtBusquedaA").value
+            var frm = new FormData()
+            frm.append("filtro", filtro)
+            frm.append("pagina", page)
+
+            var x = new XMLHttpRequest()
+            x.open("POST", "/Existencias/BuscarExistencias")
+            x.addEventListener("load", function (e) {
+                var json = JSON.parse(x.responseText)
+                document.getElementById("ctBA").innerHTML = ""
+
+                if (json.length == 0) {
+                    page = 0
+                    totalPages = 0
+                } else {
+                    totalPages = json[0].total;
+                }
+                var inner = ""
+                for (var i = 0; i < json.length; i++) {
+                    inner += "<tr>" +
+                        "<td>" + json[i].item + "</td>" +
+                        "<td>" + json[i].cantidad + "</td>" +
+                        "<td style=\"text-align: center;\" onmouseover=\"sobreRow(this)\" onmouseout=\"fueraRow(this)\" onclick=\"seleccionarArt(this)\"  data-dismiss=\"modal\"><i class=\"fa fa-circle text-info\"></i></td>" +
+                        "</tr>"
+                }
+                document.getElementById("ctBA").innerHTML = inner
+                document.getElementById("next").textContent = totalPages
+                if (pageP <= 1) {
+                    document.getElementById("previous").textContent = page
+                    document.getElementById("btnPrevious").disabled = true
+                    if (pageP == totalPages) {
+                        document.getElementById("btnNext").disabled = true
+                    }
+                } else if (pageP == totalPages) {
+                    document.getElementById("btnPrevious").disabled = false
+                    document.getElementById("btnNext").disabled = true
+                } else {
+                    document.getElementById("btnNext").disabled = false
+                }
+                document.getElementById("actual").textContent = page
+            });
+            x.send(frm)
+        }
+
+        function seleccionarArt(itm) {
+            document.getElementById("ci_articulo_id").value = itm.parentNode.children[0].textContent
+            document.getElementById("ci_cantidadAsignada").value = 1;
+            document.getElementById("ci_cantidadAsignada").setAttribute("max",itm.parentNode.children[1].textContent)
+        }
+        function sobreRow(elm) {
+            elm.children[0].className = "fa fa-check-circle text-success"
+        }
+
+        function fueraRow(elm) {
+            elm.children[0].className = "fa fa-circle text-info"
+        }
+    </script>
+
+}

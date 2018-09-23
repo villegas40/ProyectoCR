@@ -1,50 +1,48 @@
 ﻿@model CasasRed_Nuevo3_.Models.Articulos
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Artículos > Detalles";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
     <h4>Articulos</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.art_nombre)
+            Código
         </dt>
-
+        <dd>
+            @Html.DisplayFor(model => model.art_id)
+        </dd>
+        <dt>
+            Nombre
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.art_nombre)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.art_descripcion)
+            Descripción
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.art_descripcion)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.art_fechaIngreso)
+            Fecha de registro
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.art_fechaIngreso)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.art_cantidadMinima)
+            Cantidad mínima
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.art_cantidadMinima)
         </dd>
-
     </dl>
+    <hr />
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.art_id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.art_id }, new { @class = "btn btn-info" }) | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-danger" })
 </p>

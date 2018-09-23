@@ -9,41 +9,24 @@
 <div>
     <h4>Contaduría</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Cnt_Presupuesto_gestion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cnt_Presupuesto_gestion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cnt_Presupuesto_corretaje)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cnt_Presupuesto_corretaje)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cnt_Presupuesto_habilitacion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cnt_Presupuesto_habilitacion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
-        </dd>
-
-
-    </dl>
+    <table class="table table-bordered">
+        <tr>
+            <th>Presupuesto de Gestión</th>
+            <td>@Html.DisplayFor(model => model.Cnt_Presupuesto_gestion)</td>
+        </tr>
+        <tr>
+            <th>Presupuesto de Corretaje</th>
+            <td>@Html.DisplayFor(model => model.Cnt_Presupuesto_corretaje)</td>
+        </tr>
+        <tr>
+            <th>Presupuesto de Habilitación</th>
+            <td>@Html.DisplayFor(model => model.Cnt_Presupuesto_habilitacion)</td>
+        </tr>
+        <tr>
+            <th>Estatus Corretaje</th>
+            <td>@Html.DisplayFor(model => model.Corretaje.Crt_Status)</td>
+        </tr>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

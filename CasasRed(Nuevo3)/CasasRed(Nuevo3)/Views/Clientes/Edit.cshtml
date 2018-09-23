@@ -18,9 +18,15 @@
     @Html.HiddenFor(model => model.Id)
 
     <div class="progress">
-        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+        <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(model => model.Gral_ProgresoForm)%">@Html.DisplayFor(model => model.Gral_ProgresoForm)% Completado</div>
     </div>
-    
+
+    <div>
+        <label for="Gral_ProgresoForm">Progreso</label>
+        @Html.EditorFor(model => model.Gral_ProgresoForm, new { htmlAttributes = new { @class = "form-control data", @id = "progreso", @type="hidden" } })
+        @Html.ValidationMessageFor(model => model.Gral_ProgresoForm, "", new { @class = "text-danger" })
+    </div>
+    @Html.DisplayFor(modelItem => modelItem.Gral_ProgresoForm)
     <br />
 
     <div class="container">
@@ -32,6 +38,8 @@
                     <a class="list-group-item list-group-item-action list-group-item-danger" id="list-contac-list" data-toggle="list" href="#list-contac" role="tab" aria-controls="contac">Contacto</a>
                     <a class="list-group-item list-group-item-action list-group-item-light" id="list-DR-list" data-toggle="list" href="#list-DR" role="tab" aria-controls="DR">Datos de Referencia</a>
                     <a class="list-group-item list-group-item-action list-group-item-danger" id="list-DC-list" data-toggle="list" href="#list-DC" role="tab" aria-controls="DC">Datos de Cónyuge</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-folio-list" data-toggle="list" href="#list-folio" role="tab" aria-controls="fl">Folio del cliente</a>
+
                 </div>
             </div>
             <div class="col-8">
@@ -313,8 +321,34 @@
                                 @Html.EditorFor(model => model.Cyg_No_identificacoion, new { htmlAttributes = new { @class = "form-control data" } })
                                 @Html.ValidationMessageFor(model => model.Cyg_No_identificacoion, "", new { @class = "text-danger" })
                             </div>
+                            <div class="col-lg-4">
+                                <label for="Grlal_Folio">Folio Generado</label>
+                                @Html.EditorFor(model => model.Grlal_Folio, new { htmlAttributes = new { @class = "form-control data", @readonly = "true" } })
+                                @Html.ValidationMessageFor(model => model.Grlal_Folio, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="list-folio" role="tabpanel" aria-labelledby="list-folio-list">
+                       
+                        <table class=" table table-bordered table-responsive-lg">
+                            <thead>
+                                <tr>
+                                    Folio asignado al cliente
+                                </tr>  
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Folio:
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Grlal_Folio)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
@@ -337,7 +371,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
 
-        $(document.body).css('padding-top', '70px');
+        //$(document.body).css('padding-top', '70px');
 
         //Si se tiene fecha y se quiere editar al borrarla completamente convierte el input en un date
         function funcionDate() {
@@ -355,9 +389,13 @@
                     return $(this).val() === "";
                 }).length;
                 var width = ((1 / dataCount) * (dataCount - myFilledDataCount)) * 100;
-                var mydataPercent = width + "%";
+                var mydataPercent = Math.round(width) + "%";
                 $(".progress-bar").css("width", mydataPercent);
                 $("#bar").text(mydataPercent + " Completado");
+
+                //Guardar porcentaje
+                var x = document.getElementById("progreso");
+                x.setAttribute('value', Math.round(width));
             });
         });
     </script>

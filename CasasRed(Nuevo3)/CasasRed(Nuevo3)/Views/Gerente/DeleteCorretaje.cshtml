@@ -1,0 +1,261 @@
+﻿@model CasasRed_Nuevo3_.Models.Corretaje
+@{
+    ViewBag.Title = "Delete";
+}
+<h2 style="margin-top:20px;">Eliminar</h2>
+<h3>¿Estás seguro que quieres eliminarlo?</h3>
+
+
+<div class="container">
+
+    <div class="row">
+
+        <!-- Formulario derecha-->
+        <div class="col-12 col-sm-8">
+            <div class="tab-content" id="nav-tabContent">
+                <!-- Datos personales -->
+                <div>
+                    <h3>Datos personales</h3>
+                    <table class="table table-bordered">
+                        <!--Status -->
+                        <tr>
+                            <th>Estatus</th>
+                            <td>@Html.DisplayName(Model.Crt_Status)</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>@Html.DisplayName(Model.Crt_Cliente_Nombre)</td>
+                        </tr>
+                        <tr>
+                            <th>Apellido paterno</th>
+                            <td>@Html.DisplayName(Model.Crt_Cliente_ApPat)</td>
+                        </tr>
+                        <tr>
+                            <th>Apellido Materno</th>
+                            <td>@Html.DisplayName(Model.Crt_Cliente_ApMat)</td>
+                        </tr>
+                        <tr>
+                            <th>Fecha de nacimiento</th>
+                            <td>@Html.DisplayName(Model.Crt_Fec_Nac.ToString())</td>
+                        </tr>
+                        <tr>
+                            <th>Estado civil</th>
+                            <td>@ViewBag.civil</td>
+                        </tr>
+                        <tr>
+                            <th>Número de celular</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Celular)</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono de casa</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Casa)</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono de trabajo</th>
+                            <td>@Html.DisplayName(Model.Crt_Tel_Trabajo)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div><!--Fianl  tap panel 1-->
+            <!-- Datos de vivienda -->
+            <div>
+                <h3>Datos de vivienda</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Direccíon</th>
+                        <td>@Html.DisplayName(Model.Crt_Direccion)</td>
+                    </tr>
+                    <tr>
+                        <th>Precio</th>
+                        <td>@Html.DisplayName(Model.Crt_Precio)</td>
+                    </tr>
+                    <tr>
+                        <th>Gasto</th>
+                        <td>@Html.DisplayName(Model.Crt_Gasto)</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo de vivienda</th>
+                        <td>@Html.DisplayName(Model.Crt_Tipo_Vivienda)</td>
+                    </tr>
+                    <tr>
+                        <th>Año de compra</th>
+                        <td>@Html.DisplayName(Model.Crt_Ano_compra.ToString())</td>
+                    </tr>
+                    <tr>
+                        <th>Clave catastral</th>
+                        @Html.DisplayName(Model.Crt_Clave_Catastral)
+                    </tr>
+                    <tr>
+                        <th>Nivel</th>
+                        <td>@Html.DisplayName(Model.Crt_Nivel.ToString())</td>
+                    </tr>
+                    <tr>
+                        <th>Numero de habitaciones</th>
+                        <td>@Html.DisplayName(Model.Crt_Num_Habitaciones.ToString())</td>
+                    </tr>
+                    <tr>
+                        <th>Planta</th>
+                        <td>@Html.DisplayName(Model.Crt_Planta.ToString())</td>
+                    </tr>
+                </table>
+            </div><!-- Fin tap 2-->
+            <!-- Adeudos -->
+            <div>
+                <h3>Recuperacion</h3>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Numero de credito Infonavit</th>
+                        <td>@Html.DisplayName(Model.Crt_Num_Credito_Infonavit)</td>
+                    </tr>
+                    <tr>
+                        <th>Saldo Infonavit</th>
+                        <td>@Html.DisplayFor(m => m.Crt_Saldo_infonavit)</td>
+                    </tr>
+                    <tr>
+                        <th>Adeudo de predial</th>
+                        <td>@Html.DisplayFor(m => m.Crt_Adeudo_predial)</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre del titular de la luz</th>
+                        <td>@Html.DisplayName(Model.Crt_NombreC_Titular_luz)</td>
+                    </tr>
+                    <tr>
+                        <th>Numero de servicio de luz</th>
+                        <td>@Html.DisplayName(Model.Crt_Num_servicio_luz)</td>
+                    </tr>
+                    <tr>
+                        <th>Adeudo del servicio de luz</th>
+                        <td>@Html.DisplayFor(m => m.Crt_Adeudo_luz)</td>
+                    </tr>
+                    <tr>
+                        <th>Número de cuenta de agua</th>
+                        <tb>@Html.DisplayName(Model.Crt_No_cuenta_agua)</tb>
+                    </tr>
+                    <tr>
+                        <th>Adeudo de agua</th>
+                        <td>@Html.DisplayFor(m => m.Crt_Adeudo_agua)</td>
+                    </tr>
+                </table>
+            </div><!-- Fin tap 3-->
+            <!--Documentos-->
+            <div>
+                <h3>Documentos</h3>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Credencial del titular</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_Ine_Titu.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Credencial del conyuge</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_Ine_Conyu.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Acta de nacimiento del titular</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_ActaNacTitu.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Acta de nacimiento conyuge</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_ActaNacConyu.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Acta de matrimonio</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_ActaMatr.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Escritura certificada</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_EscrCert.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Acuerdo</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_Acuerdo.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Carta de desbloqueo de predial</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_CartaDesPre.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Escritura simple</th>
+                        <td>@Html.CheckBoxFor(model => model.Crt_Escritura_Simple.Value)</td>
+                    </tr>
+                    <tr>
+                        <th>Numero de servicio de luz</th>
+                        <td>@Html.DisplayName(Model.Crt_Num_servicio_luz)</td>
+                    </tr>
+                </table>
+            </div><!--Fin tap 4-->
+            <!-- Datos de referencia -->
+            <!-- Digitalizacion de documentos -->
+            <div>
+                <h3>Digitalizacion de documentos</h3>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Recibo agua</th>
+                        <td><img src="@Url.Content(Model.Crt_ReciboAgua)" width="150" /></td>
+                    </tr>
+                    <tr>
+                        <th>Recibo luz</th>
+                        <td><img src="@Url.Content(Model.Crt_ReciboLuz)" width="150" /></td>
+                    </tr>
+                    <tr>
+                        <th>Recibo Predial</th>
+                        <td><img src="@Url.Content(Model.Crt_Recibo_predial_digital)" width="150" /></td>
+                    </tr>
+                    <tr>
+                        <th>Recibo Otros</th>
+                        <td><img src="@Url.Content(Model.Crt_Otros)" width="150" /></td>
+                    </tr>
+                </table>
+            </div><!-- Fin tap 5-->
+            <!-- Datos de referencia -->
+            <div>
+                <h3>Datos de referencia</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Telefono referencia 1</th>
+                        <td>@Html.DisplayName(Model.Crt_Tel_Ref1)</td>
+                    </tr>
+                    <tr>
+                        <th>Telefono referencia 2</th>
+                        <td>@Html.DisplayName(Model.Crt_Tel_Ref2)</td>
+                    </tr>
+                    <tr>
+                        <th>Telefono referencia</th>
+                        <td>@Html.DisplayName(Model.Crt_Tel_Ref)</td>
+                    </tr>
+                    <tr>
+                        <th>Estatus muestra</th>
+                        <td>@Html.DisplayName(Model.Crt_Status_Muestra)</td>
+                    </tr>
+                    <tr>
+                        <th>Observaciones</th>
+                        <td>@Html.DisplayName(Model.Crt_Obervaciones)</td>
+                    </tr>
+                </table>
+            </div><!-- Fin tap 6-->
+        </div>
+    </div>
+    <a href='javascript:history.go(-1)'>Regresar</a>
+</div>
+
+<center>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class=" d-flex justify-content-end">
+        <!--<input type="submit" value="Create" class="btn btn-primary btn-lg btn-block" />-->
+        <input type="submit" value="Confirmar borrado" class="btn btn-outline-danger btn-lg btn-block" />
+       
+
+    </div>
+}
+    </center>
+
+@section Scripts {
+<script>
+    $(document.body).css('padding-top', '70px');
+</script>
+}

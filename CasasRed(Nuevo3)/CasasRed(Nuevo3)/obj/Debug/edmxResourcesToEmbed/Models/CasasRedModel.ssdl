@@ -10,6 +10,17 @@
     <Property Name="art_fechaIngreso" Type="date" />
     <Property Name="art_cantidadMinima" Type="decimal" Precision="18" Scale="6" />
   </EntityType>
+  <EntityType Name="CasaInventario">
+    <Key>
+      <PropertyRef Name="ci_Id" />
+    </Key>
+    <Property Name="ci_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ci_corretaje_id" Type="int" Nullable="false" />
+    <Property Name="ci_cantidadAsignada" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+    <Property Name="ci_fecha" Type="datetime" Nullable="false" />
+    <Property Name="ci_usuario_id" Type="int" Nullable="false" />
+    <Property Name="ci_articulo_id" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cliente">
     <Key>
       <PropertyRef Name="Id" />
@@ -58,6 +69,8 @@
     <Property Name="Cyg_Identificacion" Type="varchar" MaxLength="40" />
     <Property Name="Cyg_No_identificacoion" Type="int" />
     <Property Name="Gral_Fechaalta" Type="date" />
+    <Property Name="Gral_ProgresoForm" Type="int" />
+    <Property Name="Grlal_Folio" Type="varchar" MaxLength="10" />
     <Property Name="Vndr_Nombre" Type="varchar" MaxLength="80" />
     <Property Name="Vndr_Apellidopa" Type="varchar" MaxLength="40" />
     <Property Name="Vndr_Apellidoma" Type="varchar" MaxLength="40" />
@@ -72,8 +85,6 @@
     <Property Name="Cnt_Presupuesto_corretaje" Type="decimal" Precision="18" Scale="4" />
     <Property Name="Cnt_Presupuesto_habilitacion" Type="decimal" Precision="18" Scale="4" />
     <Property Name="Cnt_Presupuesto" Type="decimal" Precision="18" Scale="4" />
-    <Property Name="Id_Gastos" Type="int" />
-    <Property Name="Id_GastosContaduria" Type="int" />
     <Property Name="Id_Corretaje" Type="int" />
   </EntityType>
   <EntityType Name="Corretaje">
@@ -125,6 +136,8 @@
     <Property Name="Crt_Otros" Type="varchar(max)" />
     <Property Name="Crt_Status_Muestra" Type="varchar" MaxLength="30" />
     <Property Name="Crt_Obervaciones" Type="varchar" MaxLength="300" />
+    <Property Name="Crt_ProgresoForm" Type="int" />
+    <Property Name="Crt_FechaAlta" Type="date" />
   </EntityType>
   <EntityType Name="Existencias">
     <Key>
@@ -139,27 +152,26 @@
     <Property Name="ext_usuarioAgrego" Type="int" />
     <Property Name="ext_ubicacion" Type="int" />
   </EntityType>
-  <EntityType Name="Gastos">
+  <EntityType Name="FotosHabilitacion">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="fh_id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Gst_Concepto" Type="varchar" MaxLength="100" />
-    <Property Name="Gst_Monto" Type="decimal" Precision="18" Scale="4" />
-    <Property Name="Gst_Fecha" Type="datetime" />
-    <Property Name="Gst_Coment" Type="varchar" MaxLength="200" />
-    <Property Name="Id_usuario" Type="int" />
-    <Property Name="Id_Corretaje" Type="int" />
+    <Property Name="fh_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fh_archivo" Type="varchar(max)" Nullable="false" />
+    <Property Name="fh_nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="fh_habilitacion" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="GastosContaduria">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GstCon_Mensualidad" Type="decimal" Precision="18" Scale="4" />
-    <Property Name="GstCon_Vigilancia" Type="decimal" Precision="18" Scale="4" />
-    <Property Name="GstCon_Otros" Type="decimal" Precision="18" Scale="4" />
-    <Property Name="Id_Corretaje" Type="int" />
+    <Property Name="GstCon_Concepto" Type="varchar" MaxLength="150" />
+    <Property Name="GstCon_Monto" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="GstCon_Fecha" Type="date" />
+    <Property Name="Id_TipoGasto" Type="int" />
+    <Property Name="Id_Contaduria" Type="int" />
+    <Property Name="Id_Usuario" Type="int" />
   </EntityType>
   <EntityType Name="Gestion">
     <Key>
@@ -192,7 +204,7 @@
     <Property Name="Gtn_Credito_INFONAVIT" Type="bit" />
     <Property Name="Gtn_Notaria" Type="bit" />
     <Property Name="Gtn_Firma_Escrituras" Type="bit" />
-    <Property Name="Gtm_Aviso_Susp" Type="bit" />
+    <Property Name="Gtn_ProgresoForm" Type="int" />
     <Property Name="Id_Corretaje" Type="int" />
     <Property Name="Id_Cliente" Type="int" />
   </EntityType>
@@ -226,7 +238,24 @@
     <Property Name="Hbt_Break_medidor" Type="bit" />
     <Property Name="Hbt_Pinturas" Type="bit" />
     <Property Name="Hbt_AvisoSusp" Type="bit" />
+    <Property Name="Hbt_ProgresoForm" Type="int" />
     <Property Name="Id_Corretaje" Type="int" />
+  </EntityType>
+  <EntityType Name="HistorialAsignacion">
+    <Key>
+      <PropertyRef Name="ha_id" />
+    </Key>
+    <Property Name="ha_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ha_casaInventario" Type="int" />
+    <Property Name="ha_existencia_id" Type="int" Nullable="false" />
+    <Property Name="ha_usuarioEntrego" Type="int" />
+  </EntityType>
+  <EntityType Name="TipoGasto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="TipoUsuario">
     <Key>
@@ -272,8 +301,45 @@
     <Property Name="Vfn_Costo" Type="decimal" Precision="18" Scale="4" />
     <Property Name="Vfn_Trato_asesor" Type="int" />
     <Property Name="Vfn_Observaciones" Type="varchar" MaxLength="150" />
+    <Property Name="Vfn_ProgresoForm" Type="int" />
     <Property Name="Id_Cliente" Type="int" />
   </EntityType>
+  <Association Name="FK__CasaInven__ci_ar__1EA48E88">
+    <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+    <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Articulos">
+        <PropertyRef Name="art_id" />
+      </Principal>
+      <Dependent Role="CasaInventario">
+        <PropertyRef Name="ci_articulo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CasaInven__ci_co__160F4887">
+    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
+    <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corretaje">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CasaInventario">
+        <PropertyRef Name="ci_corretaje_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CasaInven__ci_us__18EBB532">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CasaInventario">
+        <PropertyRef Name="ci_usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Existenci__ext_a__5EBF139D">
     <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
     <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
@@ -310,6 +376,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__FotosHabi__fh_ha__40058253">
+    <End Role="Habilitacion" Type="Self.Habilitacion" Multiplicity="1" />
+    <End Role="FotosHabilitacion" Type="Self.FotosHabilitacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Habilitacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FotosHabilitacion">
+        <PropertyRef Name="fh_habilitacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historial__ha_ca__1BC821DD">
+    <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="0..1" />
+    <End Role="HistorialAsignacion" Type="Self.HistorialAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CasaInventario">
+        <PropertyRef Name="ci_Id" />
+      </Principal>
+      <Dependent Role="HistorialAsignacion">
+        <PropertyRef Name="ha_casaInventario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historial__ha_ex__1CBC4616">
+    <End Role="Existencias" Type="Self.Existencias" Multiplicity="1" />
+    <End Role="HistorialAsignacion" Type="Self.HistorialAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Existencias">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HistorialAsignacion">
+        <PropertyRef Name="ha_existencia_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Historial__ha_us__1F98B2C1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="HistorialAsignacion" Type="Self.HistorialAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HistorialAsignacion">
+        <PropertyRef Name="ha_usuarioEntrego" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CasaCorretaje_Id">
     <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1" />
     <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="*" />
@@ -331,18 +445,6 @@
       </Principal>
       <Dependent Role="Gestion">
         <PropertyRef Name="Id_Cliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Corretaje_Id">
-    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1" />
-    <End Role="Gastos" Type="Self.Gastos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Corretaje">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Gastos">
-        <PropertyRef Name="Id_Corretaje" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -384,39 +486,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Gastos_Id">
-    <End Role="Gastos" Type="Self.Gastos" Multiplicity="0..1" />
-    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Gastos">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Contaduria">
-        <PropertyRef Name="Id_Gastos" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_GastosCasa_Id">
-    <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1" />
+    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="0..1" />
     <End Role="GastosContaduria" Type="Self.GastosContaduria" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Corretaje">
+      <Principal Role="Contaduria">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="GastosContaduria">
-        <PropertyRef Name="Id_Corretaje" />
+        <PropertyRef Name="Id_Contaduria" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_GastosConta_Id">
-    <End Role="GastosContaduria" Type="Self.GastosContaduria" Multiplicity="0..1" />
-    <End Role="Contaduria" Type="Self.Contaduria" Multiplicity="*" />
+  <Association Name="FK_GastosCasaTipo_Id">
+    <End Role="TipoGasto" Type="Self.TipoGasto" Multiplicity="0..1" />
+    <End Role="GastosContaduria" Type="Self.GastosContaduria" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="GastosContaduria">
+      <Principal Role="TipoGasto">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Contaduria">
-        <PropertyRef Name="Id_GastosContaduria" />
+      <Dependent Role="GastosContaduria">
+        <PropertyRef Name="Id_TipoGasto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GastosCasaUsu_Id">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="GastosContaduria" Type="Self.GastosContaduria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GastosContaduria">
+        <PropertyRef Name="Id_Usuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -448,32 +550,35 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Usuario_Id">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="Gastos" Type="Self.Gastos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Gastos">
-        <PropertyRef Name="Id_usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="CasasRedModelStoreContainer">
     <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="CasaInventario" EntityType="Self.CasaInventario" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Contaduria" EntityType="Self.Contaduria" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Corretaje" EntityType="Self.Corretaje" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Existencias" EntityType="Self.Existencias" Schema="adminDani" store:Type="Tables" />
-    <EntitySet Name="Gastos" EntityType="Self.Gastos" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="FotosHabilitacion" EntityType="Self.FotosHabilitacion" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="GastosContaduria" EntityType="Self.GastosContaduria" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Gestion" EntityType="Self.Gestion" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Habilitacion" EntityType="Self.Habilitacion" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="HistorialAsignacion" EntityType="Self.HistorialAsignacion" Schema="adminDani" store:Type="Tables" />
+    <EntitySet Name="TipoGasto" EntityType="Self.TipoGasto" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="adminDani" store:Type="Tables" />
     <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="adminDani" store:Type="Tables" />
+    <AssociationSet Name="FK__CasaInven__ci_ar__1EA48E88" Association="Self.FK__CasaInven__ci_ar__1EA48E88">
+      <End Role="Articulos" EntitySet="Articulos" />
+      <End Role="CasaInventario" EntitySet="CasaInventario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CasaInven__ci_co__160F4887" Association="Self.FK__CasaInven__ci_co__160F4887">
+      <End Role="Corretaje" EntitySet="Corretaje" />
+      <End Role="CasaInventario" EntitySet="CasaInventario" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CasaInven__ci_us__18EBB532" Association="Self.FK__CasaInven__ci_us__18EBB532">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="CasaInventario" EntitySet="CasaInventario" />
+    </AssociationSet>
     <AssociationSet Name="FK__Existenci__ext_a__5EBF139D" Association="Self.FK__Existenci__ext_a__5EBF139D">
       <End Role="Articulos" EntitySet="Articulos" />
       <End Role="Existencias" EntitySet="Existencias" />
@@ -486,6 +591,22 @@
       <End Role="Ubicaciones" EntitySet="Ubicaciones" />
       <End Role="Existencias" EntitySet="Existencias" />
     </AssociationSet>
+    <AssociationSet Name="FK__FotosHabi__fh_ha__40058253" Association="Self.FK__FotosHabi__fh_ha__40058253">
+      <End Role="Habilitacion" EntitySet="Habilitacion" />
+      <End Role="FotosHabilitacion" EntitySet="FotosHabilitacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historial__ha_ca__1BC821DD" Association="Self.FK__Historial__ha_ca__1BC821DD">
+      <End Role="CasaInventario" EntitySet="CasaInventario" />
+      <End Role="HistorialAsignacion" EntitySet="HistorialAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historial__ha_ex__1CBC4616" Association="Self.FK__Historial__ha_ex__1CBC4616">
+      <End Role="Existencias" EntitySet="Existencias" />
+      <End Role="HistorialAsignacion" EntitySet="HistorialAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Historial__ha_us__1F98B2C1" Association="Self.FK__Historial__ha_us__1F98B2C1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="HistorialAsignacion" EntitySet="HistorialAsignacion" />
+    </AssociationSet>
     <AssociationSet Name="FK_CasaCorretaje_Id" Association="Self.FK_CasaCorretaje_Id">
       <End Role="Corretaje" EntitySet="Corretaje" />
       <End Role="Contaduria" EntitySet="Contaduria" />
@@ -493,10 +614,6 @@
     <AssociationSet Name="FK_Cliente_Id" Association="Self.FK_Cliente_Id">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Gestion" EntitySet="Gestion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Corretaje_Id" Association="Self.FK_Corretaje_Id">
-      <End Role="Corretaje" EntitySet="Corretaje" />
-      <End Role="Gastos" EntitySet="Gastos" />
     </AssociationSet>
     <AssociationSet Name="FK_Crt_Id" Association="Self.FK_Crt_Id">
       <End Role="Corretaje" EntitySet="Corretaje" />
@@ -510,17 +627,17 @@
       <End Role="Corretaje" EntitySet="Corretaje" />
       <End Role="Habilitacion" EntitySet="Habilitacion" />
     </AssociationSet>
-    <AssociationSet Name="FK_Gastos_Id" Association="Self.FK_Gastos_Id">
-      <End Role="Gastos" EntitySet="Gastos" />
-      <End Role="Contaduria" EntitySet="Contaduria" />
-    </AssociationSet>
     <AssociationSet Name="FK_GastosCasa_Id" Association="Self.FK_GastosCasa_Id">
-      <End Role="Corretaje" EntitySet="Corretaje" />
+      <End Role="Contaduria" EntitySet="Contaduria" />
       <End Role="GastosContaduria" EntitySet="GastosContaduria" />
     </AssociationSet>
-    <AssociationSet Name="FK_GastosConta_Id" Association="Self.FK_GastosConta_Id">
+    <AssociationSet Name="FK_GastosCasaTipo_Id" Association="Self.FK_GastosCasaTipo_Id">
+      <End Role="TipoGasto" EntitySet="TipoGasto" />
       <End Role="GastosContaduria" EntitySet="GastosContaduria" />
-      <End Role="Contaduria" EntitySet="Contaduria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GastosCasaUsu_Id" Association="Self.FK_GastosCasaUsu_Id">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="GastosContaduria" EntitySet="GastosContaduria" />
     </AssociationSet>
     <AssociationSet Name="FK_GtnCli_Id" Association="Self.FK_GtnCli_Id">
       <End Role="Cliente" EntitySet="Cliente" />
@@ -529,10 +646,6 @@
     <AssociationSet Name="FK_TipoUsuario_Id" Association="Self.FK_TipoUsuario_Id">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Usuario" EntitySet="Usuario" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Usuario_Id" Association="Self.FK_Usuario_Id">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Gastos" EntitySet="Gastos" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

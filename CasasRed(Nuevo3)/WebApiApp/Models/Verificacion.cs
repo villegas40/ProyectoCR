@@ -23,8 +23,11 @@ namespace WebApiApp.Models
         public Nullable<decimal> Vfn_Costo { get; set; }
         public Nullable<int> Vfn_Trato_asesor { get; set; }
         public string Vfn_Observaciones { get; set; }
+        public Nullable<int> Vfn_ProgresoForm { get; set; }
         public Nullable<int> Id_Cliente { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         public virtual Cliente Cliente { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

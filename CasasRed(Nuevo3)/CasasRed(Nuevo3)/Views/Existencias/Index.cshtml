@@ -8,22 +8,27 @@
     @Html.ActionLink("Añadir existencias", "Create")
 </p>
 <input class="form-control mb-1" id="inpBusqueda" onkeyup="paginadoExistencias()" placeholder="Buscar por artículo" />
-<table class="table table-striped table-responsive-lg">
+<div id="printZone" class="margenTopPrint">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Artículo</th>
             <th>Cantidad Actual</th>
-            <th>Opciones</th>
+            <th class="InvisiblePrint">Opciones</th>
         </tr>
     </thead>
-    <tbody id="ctExistencias"></tbody>
-
+    <tbody id="ctExistencias">
+    </tbody>
 </table>
-<button id="btnPrevious" class="btn btn-default" onclick="paginadoExistencias(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
-<label id="previous"></label><label> - <label id="actual"></label>-</label><label id="next"></label>
-<button id="btnNext" class="btn btn-default" onclick="paginadoExistencias(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+</div>
+<center>
+    <button id="btnPrevious" class="btn btn-default" onclick="paginadoExistencias(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
+    <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
+    <button id="btnNext" class="btn btn-default" onclick="paginadoExistencias(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+</center>
+<button id="print" onclick="imprimirBusqueda(document.getElementById('printZone'),'Resultados busqueda') " >Imprimir</button>
 <script>
-    var pageP = 0
+    var pageP = 0;
     function paginadoExistencias(page) {
         if (page == undefined) {
             pageP = 1
@@ -32,7 +37,7 @@
         }
         var totalpaginas = 0
         var filtro = document.getElementById("inpBusqueda").value
-        var frm = new FormData()
+        var frm = new FormData()    
         frm.append("filtro", filtro)
         frm.append("pagina", pageP)
         frm.append("registrosPagina", 15)
@@ -54,7 +59,7 @@
             for (var i = 0; i < response.length; i++) {
                 inner += "<tr><td>" + response[i].item + "</td>" +
                     "<td>" + response[i].cantidad + "</td>" +
-                    "<td><a class=\"btn btn-info\" href=\"/Existencias/Details/" + response[i].item + "\">Detalles</a></td></tr>"
+                    "<td class=\"InvisiblePrint\"><a class=\"btn btn-info\" href=\"/Existencias/Details/" + response[i].item + "\">Detalles</a></td></tr>"
             }
             document.getElementById("ctExistencias").innerHTML = inner
 
@@ -62,7 +67,7 @@
             if (pageP <= 1) {
                 document.getElementById("previous").textContent = pageP
                 document.getElementById("btnPrevious").disabled = true
-                if (pageP =  totalpaginas) {
+                if (pageP = totalpaginas) {
                     document.getElementById("btnNext").disabled = true
                 }
             } else if (pageP == totalpaginas) {
@@ -76,4 +81,33 @@
         x.send(frm)
     }
     paginadoExistencias()
+
+    function imprimirBusqueda(elem, title) {
+        var invisible = document.getElementsByClassName("InvisiblePrint")
+        for (var i = 0; i < invisible.length; i++) {
+            invisible[i].style.display = "none";
+        }
+
+        var margen = document.getElementsByClassName("margenTopPrint")[0].children[0]
+        margen.style = 'padding-top:60px;'
+
+        setTimeout(function () {
+
+            var printWindow;
+            printWindow = window.open('/Reportes/Index/test1', '', 'height=400,width=800');
+            var stringHTML = elem.innerHTML;
+            printWindow.document.getElementById('ContenidoImprimir').innerHTML = stringHTML;
+            printWindow.document.close();
+            printWindow.focus();
+            setTimeout(function () {
+                printWindow.print();
+                printWindow.close();
+            }, 750);
+        }, 750);
+        setTimeout(function () {
+            for (var i = 0; i < invisible.length; i++) {
+                invisible[i].style.removeProperty("display");
+            }
+        }, 500);       
+    }
 </script>

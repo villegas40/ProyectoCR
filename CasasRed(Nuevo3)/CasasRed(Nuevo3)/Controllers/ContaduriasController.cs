@@ -17,31 +17,71 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Contadurias
         public ActionResult Index()
         {
-            var contaduria = db.Contaduria.Include(c => c.Gastos).Include(c => c.GastosContaduria);
-            return View(contaduria.ToList());
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Administrador")
+            {
+                var contaduria = db.Contaduria.Include(c => c.Corretaje);
+                return View(contaduria.ToList());
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
+            
         }
 
         // GET: Contadurias/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Contaduria contaduria = db.Contaduria.Find(id);
-            if (contaduria == null)
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Contaduria contaduria = db.Contaduria.Find(id);
+                if (contaduria == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(contaduria);
             }
-            return View(contaduria);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Contadurias/Create
         public ActionResult Create()
         {
-            ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto");
-            ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id");
-            return View();
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Administrador")
+            {
+                //ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto");
+                ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id");
+                return View();
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Contadurias/Create
@@ -49,7 +89,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Gastos,Id_GastosContaduria,Id_Corretaje")] Contaduria contaduria)
+        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +98,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto", contaduria.Id_Gastos);
-            ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id", contaduria.Id_GastosContaduria);
+            //ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto", contaduria.Id_Gastos);
+            //ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id", contaduria.Id_GastosContaduria);
             return View(contaduria);
         }
 
@@ -75,8 +115,8 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto", contaduria.Id_Gastos);
-            ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id", contaduria.Id_GastosContaduria);
+            //ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto", contaduria.Id_Gastos);
+            //ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id", contaduria.Id_GastosContaduria);
             return View(contaduria);
         }
 
@@ -85,7 +125,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Gastos,Id_GastosContaduria,Id_Corretaje")] Contaduria contaduria)
+        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -93,24 +133,37 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto", contaduria.Id_Gastos);
-            ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id", contaduria.Id_GastosContaduria);
+            //ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto", contaduria.Id_Gastos);
+            //ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id", contaduria.Id_GastosContaduria);
             return View(contaduria);
         }
 
         // GET: Contadurias/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Contaduria contaduria = db.Contaduria.Find(id);
-            if (contaduria == null)
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Contaduria contaduria = db.Contaduria.Find(id);
+                if (contaduria == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(contaduria);
             }
-            return View(contaduria);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Contadurias/Delete/5
@@ -142,6 +195,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 Cnt_Presupuesto_corretaje = 0,
                 Cnt_Presupuesto_gestion = 0,
                 Cnt_Presupuesto_habilitacion = 0,
+                Cnt_Presupuesto = 0,
                 Id_Corretaje = corretaje_id //Para saber a que casa esta asociado el gasto
             };
 
@@ -149,6 +203,22 @@ namespace CasasRed_Nuevo3_.Controllers
             CS.SaveChanges();
 
             return "Si funciona!...";
+        }
+
+        public JsonResult BuscarConduria(string filtro = "", int pagina = 1, int registrosPagina = 15)
+        {
+            if (filtro == "")
+            {
+                int totalPaginas = (int)Math.Ceiling((double)db.Contaduria.Count() / registrosPagina);
+                var busqueda = (from a in db.Contaduria select new { a.Id, direccion = ((a.Id_Corretaje != null)? a.Corretaje.Crt_Direccion : "Sin asignar"), vendedor = ((a.Id_Corretaje != null)?(a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat): "Sin asignar"), estatus = ((a.Id_Corretaje != null)? a.Corretaje.Crt_Status : "--"), corretaje = ((a.Id_Corretaje != null)?a.Corretaje.Id : 0), total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Contaduria where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Contaduria where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select new { a.Id, direccion = ((a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "Sin asignar"), vendedor = ((a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "Sin asignar"), estatus = ((a.Id_Corretaje != null) ? a.Corretaje.Crt_Status : "--"), corretaje = ((a.Id_Corretaje != null) ? a.Corretaje.Id : 0), total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

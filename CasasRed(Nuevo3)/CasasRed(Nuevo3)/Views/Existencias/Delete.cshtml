@@ -1,7 +1,7 @@
 ﻿@model CasasRed_Nuevo3_.Models.Existencias
 
 @{
-    ViewBag.Title = "Eliminar existencia";
+    ViewBag.Title = "Inventario > Eliminar";
 }
 
 <h2>Eliminar</h2>
@@ -28,7 +28,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Regresar a la lista", "Details", new { id = Model.ext_art_id })
+            @Html.ActionLink("Regresar a la lista", "Details", new { id = Model.ext_art_id }, new { @class= "btn btn-outline-secondary" })
         </div>
     }
 </div>

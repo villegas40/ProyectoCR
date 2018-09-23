@@ -18,6 +18,7 @@ namespace CasasRed_Nuevo3_.Models
         public Cliente()
         {
             this.Gestion = new HashSet<Gestion>();
+            this.Comentarios = new HashSet<Comentarios>();
             this.Verificacion = new HashSet<Verificacion>();
         }
     
@@ -65,14 +66,19 @@ namespace CasasRed_Nuevo3_.Models
         public string Cyg_Identificacion { get; set; }
         public Nullable<int> Cyg_No_identificacoion { get; set; }
         public Nullable<System.DateTime> Gral_Fechaalta { get; set; }
-        public string Vndr_Nombre { get; set; }
-        public string Vndr_Apellidopa { get; set; }
-        public string Vndr_Apellidoma { get; set; }
+        public Nullable<int> Gral_ProgresoForm { get; set; }
+        public string Grlal_Folio { get; set; }
+        public Nullable<int> Id_Vendedor { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gestion> Gestion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comentarios> Comentarios { get; set; }
         public virtual Corretaje Corretaje { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual Vendedor Vendedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Verificacion> Verificacion { get; set; }
     }

@@ -17,30 +17,69 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions
         public ActionResult Index()
         {
-            var verificacion = db.Verificacion.Include(v => v.Cliente);
-            return View(verificacion.ToList());
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Verificacion" || Session["Tipo"].ToString() == "Administrador")
+            {
+                var verificacion = db.Verificacion.Include(v => v.Cliente);
+                return View(verificacion.ToList());
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Verificacions/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Verificacion verificacion = db.Verificacion.Find(id);
-            if (verificacion == null)
+            else if (Session["Tipo"].ToString() == "Verificacion" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Verificacion verificacion = db.Verificacion.Find(id);
+                if (verificacion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(verificacion);
             }
-            return View(verificacion);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // GET: Verificacions/Create
         public ActionResult Create()
         {
-            ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre");
-            return View();
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Verificacion" || Session["Tipo"].ToString() == "Administrador")
+            {
+                ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre");
+                return View();
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Verificacions/Create
@@ -48,7 +87,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente")] Verificacion verificacion)
+        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm")] Verificacion verificacion)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +111,23 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions/Edit/5
         public ActionResult Edit(int? id)
         {
+            //Lista de valor para trato de asesor
+            var valor = new SelectList(new[] {
+                new { value = 0, text = "Seleccione una opción"},
+                new { value = 1, text = "1"},
+                new { value = 2, text = "2" },
+                new { value = 3, text = "3" },
+                new { value = 4, text = "4" },
+                new { value = 5, text = "5" },
+                new { value = 6, text = "6" },
+                new { value = 7, text = "7" },
+                new { value = 8, text = "8" },
+                new { value = 9, text = "9" },
+                new { value = 10, text = "10" }
+            }, "value", "text", 0);
+
+            ViewData["Valor"] = valor;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -90,8 +146,13 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente")] Verificacion verificacion)
+        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm")] Verificacion verificacion)
         {
+            if (verificacion.Vfn_Persona_fisica == null) verificacion.Vfn_Persona_fisica = false;
+            if (verificacion.Vfn_Visto_persona == null) verificacion.Vfn_Visto_persona = false;
+            if (verificacion.Vfn_Tiempo_estimado == null) verificacion.Vfn_Tiempo_estimado = false;
+            if (verificacion.Vfn_Tiene_costo == null) verificacion.Vfn_Tiene_costo = false;
+
             if (ModelState.IsValid)
             {
                 db.Entry(verificacion).State = EntityState.Modified;
@@ -105,16 +166,29 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Verificacion verificacion = db.Verificacion.Find(id);
-            if (verificacion == null)
+            else if (Session["Tipo"].ToString() == "Verificacion" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Verificacion verificacion = db.Verificacion.Find(id);
+                if (verificacion == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(verificacion);
             }
-            return View(verificacion);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Verificacions/Delete/5
@@ -147,13 +221,30 @@ namespace CasasRed_Nuevo3_.Controllers
                 Vfn_Visto_persona = false,
                 Vfn_Tiempo_estimado = false,
                 Vfn_Tiene_costo = false,
-                Id_Cliente = cliente_id
+                Id_Cliente = cliente_id,
+                Vfn_ProgresoForm = 0
             };
 
             CS.Verificacion.Add(verificacion_obj);
             CS.SaveChanges();
 
             return "String si se pudo...";
+        }
+
+        public JsonResult BuscarVerificaciones(string filtro = "", int pagina =1, int registrosPagina = 15)
+        {
+            if (filtro == "")
+            {
+                int totalPaginas = (int)Math.Ceiling((double)db.Verificacion.Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma).Contains(filtro) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

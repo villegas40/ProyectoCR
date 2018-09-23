@@ -1,6 +1,6 @@
 ﻿@model CasasRed_Nuevo3_.Models.Existencias
 @{
-    ViewBag.Title = "Detalle";
+    ViewBag.Title = "Existencias > Editar";
 }
 @using (Html.BeginForm())
 {
@@ -34,17 +34,24 @@
     </div>
 
     <div class="form-group">
-        <label>Cantidad</label>
+        <label class="control-label col-md-2">Cantidad</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.ext_cantidad, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @required = "" } })
             @Html.ValidationMessageFor(model => model.ext_cantidad, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Precio unitario</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ext_precioUnitario, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @required = "", @step="any" } })
+            @Html.ValidationMessageFor(model => model.ext_precioUnitario, "", new { @class = "text-danger" })
         </div>
     </div>
 
 </div>
     <hr />
     <div class="">
-        <input type="submit" value="Actualizar" class="btn btn-success" /> | @Html.ActionLink("Regresar a la lista", "Details", new { id = Model.ext_art_id })
+        <input type="submit" value="Actualizar" class="btn btn-success" /> | @Html.ActionLink("Regresar a la lista", "Details", new { id = Model.ext_art_id }, new { @class= "btn btn-outline-secondary"})
     </div>
 }
 
@@ -58,7 +65,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input id="txtBusquedaA" type="text" class="form-control" value="" onkeyup="buscarArticulo()" />
+                <input id="txtBusquedaA" type="text" class="form-control" value="" onkeyup="buscarArticulo()" style="margin-bottom:10px;" placeholder="Tecleé para buscar" />
                 <table class="table table-striped ">
                     <thead>
                         <tr>
@@ -69,11 +76,11 @@
                     </thead>
                     <tbody id="ctBA"></tbody>
                 </table>
-                <div class="mx-auto" style="width:100%;">
+                <center>
                     <button class="btn btn-default" id="btnPrevious" onclick="buscarArticulo(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
                     <label id="previous"></label><label> - <label id="actual"></label>-</label><label id="next"></label>
                     <button class="btn btn-default" id="btnNext" onclick="buscarArticulo(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
-                </div>
+                </center>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -91,7 +98,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input id="txtBusquedaU" type="text" class="form-control" value="" onkeyup="buscarUbicacion()" />
+                <input id="txtBusquedaU" type="text" class="form-control" value="" onkeyup="buscarUbicacion()" style="margin-bottom:10px;" placeholder="Tecleé para buscar" />
                 <table class="table table-striped ">
                     <thead>
                         <tr>
@@ -103,11 +110,11 @@
                     </thead>
                     <tbody id="ctBU"></tbody>
                 </table>
-                <div class="mx-auto" style="width:100%;">
+                <center>
                     <button class="btn btn-default" id="btnPreviousU" onclick="buscarUbicacion(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
                     <label id="previousU"></label><label> - <label id="actualU"></label>-</label><label id="nextU"></label>
                     <button class="btn btn-default" id="btnNextU" onclick="buscarUbicacion(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
-                </div>
+                </center>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
