@@ -89,7 +89,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje")] Contaduria contaduria)
+        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje,Id_Usuario")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje")] Contaduria contaduria)
+        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje,Id_Usuario")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -192,14 +192,16 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             CasasRedEntities CS = new CasasRedEntities();
             Contaduria contaduria_obj = new Contaduria {
-                Cnt_Presupuesto_corretaje = 0,
-                Cnt_Presupuesto_gestion = 0,
-                Cnt_Presupuesto_habilitacion = 0,
-                Cnt_Presupuesto = 0,
+                Cnt_M_Preguntar = 0,
+                Cnt_Material = 0,
+                Cnt_Tramites = 0,
+                Cnt_Vigilancia = 0,
+                Cnt_CESPT = 0,
+                Cnt_CFE = 0,
                 Id_Corretaje = corretaje_id //Para saber a que casa esta asociado el gasto
             };
 
-        CS.Contaduria.Add(contaduria_obj);
+            CS.Contaduria.Add(contaduria_obj);
             CS.SaveChanges();
 
             return "Si funciona!...";

@@ -1,7 +1,52 @@
-﻿.InvisiblePrint {
+﻿@page {
+    size: auto;
+    margin: 0mm;
+}
+
+.margenesPrint {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.InvisiblePrint {
     display: none;
 }
 
-.margenTopPrint{
-    margin-top:25px;
+.margenTopPrint {
+    margin-top: 25px;
+}
+
+.navbar-brand, .cabecero {
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+
+input[readonly] {
+    background-color: transparent !important;
+    border: 0 !important;
+    font-size: 1em !important;
+}
+
+select[disabled] {
+    background-color: transparent !important;
+    border: 0 !important;
+    font-size: 1em !important;
+}
+
+::-webkit-input-placeholder {
+    color: transparent !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: transparent !important;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: transparent !important;
+}
+
+:-ms-input-placeholder {
+    color: transparent !important;
 }

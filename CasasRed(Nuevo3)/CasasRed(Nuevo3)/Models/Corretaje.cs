@@ -75,6 +75,7 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<int> Crt_ProgresoForm { get; set; }
         public Nullable<int> Id_Vendedor { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
+        public Nullable<System.DateTime> Crt_FechaAlta { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CalificacionVendedor> CalificacionVendedor { get; set; }

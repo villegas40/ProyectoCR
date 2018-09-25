@@ -23,7 +23,7 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Administrador")
             {
-                var gastosContaduria = db.GastosContaduria.Include(g => g.Contaduria);
+                var gastosContaduria = db.GastosContaduria.Include(g => g.Corretaje);
                 return View(gastosContaduria.ToList());
             }
             else
@@ -62,11 +62,11 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,GstCon_Concepto,GstCon_Monto,GstCon_Fecha,Id_TipoGasto,Id_Contaduria,Id_Corretaje")] GastosContaduria gastosContaduria, int id_casa = 0)
+        public ActionResult Create([Bind(Include = "Id,GstCon_Concepto,GstCon_Monto,GstCon_Fecha,Id_TipoGasto,Id_Contaduria,Id_Corretaje,Id_Usuario")] GastosContaduria gastosContaduria, int id_casa = 0)
         {
             if (ModelState.IsValid)
             {
-                gastosContaduria.Id_Contaduria = id_casa;
+                gastosContaduria.Id_Corretaje = id_casa;
                 db.GastosContaduria.Add(gastosContaduria);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,7 +97,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,GstCon_Concepto,GstCon_Monto,GstCon_Fecha,Id_TipoGasto,Id_Contaduria,Id_Corretaje")] GastosContaduria gastosContaduria)
+        public ActionResult Edit([Bind(Include = "Id,GstCon_Concepto,GstCon_Monto,GstCon_Fecha,Id_TipoGasto,Id_Contaduria,Id_Corretaje,Id_Usuario")] GastosContaduria gastosContaduria)
         {
             if (ModelState.IsValid)
             {

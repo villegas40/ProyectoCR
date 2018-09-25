@@ -9,9 +9,9 @@ namespace CasasRed_Nuevo3_.Controllers
     public class ReportesController : Controller
     {
         // GET: Reportes
-        public ActionResult Index(string titulo)
+        public ActionResult Index(string titulo = "")
         {
-            @ViewBag.Title = titulo;
+            @ViewBag.Title = titulo.Replace('-', ' ');
             return View();
         }
 

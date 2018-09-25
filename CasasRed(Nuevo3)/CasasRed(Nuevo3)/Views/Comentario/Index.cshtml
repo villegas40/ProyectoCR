@@ -1,0 +1,66 @@
+﻿@model CasasRed_Nuevo3_.Controllers.ComentarioController.DetailsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> CMT_TITULOS = ViewBag.CMT_TITULOS;
+    List<string> COMENTARIOS = ViewBag.COMENTARIOS;
+    List<int?> IDCLIENTES = ViewBag.IDCLIENTES;
+    int idcli = 0;
+}
+@foreach (var item in Model.clientes)
+{
+    idcli = item.Id;
+}
+
+
+<center><h2>Comentarios para el cliente con id : @idcli </h2></center>
+<tr>
+    <th scope="col">@Html.ActionLink("Añadir Comentario", "Create", new { idcliente = idcli }, new { @class = "btn btn-info" })</th>
+</tr>
+
+<br>
+<br />
+
+<div class="container">
+    <table class="table tab-content table-responsive-lg">
+        <thead>
+        <tr>
+            <td>
+                Titulo 
+            </td>
+            <td>
+                Comentario
+            </td>
+            <td>
+                Opciones
+            </td>
+        </tr>
+       </thead>
+    
+    <tbody>
+
+     @for (int i = 0; i < COMENTARIOS.Count; i++)
+     {
+         if (idcli == IDCLIENTES[i])
+         {
+
+
+        <tr>
+            <td>
+                @CMT_TITULOS[i]
+            </td>
+            <td>
+                @COMENTARIOS[i]
+            </td>
+            <td>
+                <a href="www.facebook.com" class="far fa-trash-alt"></a>
+            </td>
+        </tr>
+         }
+     }
+    </tbody>
+    </table>
+    <div>
+        <a href='javascript:history.go(-1)'>Regresar</a>
+    </div>
+</div>

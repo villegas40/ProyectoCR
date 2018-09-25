@@ -173,6 +173,7 @@
           <Property Name="Crt_ProgresoForm" Type="int" />
           <Property Name="Id_Vendedor" Type="int" />
           <Property Name="Id_Usuario" Type="int" />
+          <Property Name="Crt_FechaAlta" Type="date" />
         </EntityType>
         <EntityType Name="DetallesComision">
           <Key>
@@ -960,7 +961,6 @@
           <EntitySet Name="Corretaje" EntityType="CasasRedModel.Corretaje" />
           <EntitySet Name="DetallesComision" EntityType="CasasRedModel.DetallesComision" />
           <EntitySet Name="Existencias" EntityType="CasasRedModel.Existencias" />
-          <EntitySet Name="FotosHabilitacion" EntityType="CasasRedModel.FotosHabilitacion" />
           <EntitySet Name="GastosContaduria" EntityType="CasasRedModel.GastosContaduria" />
           <EntitySet Name="Gestion" EntityType="CasasRedModel.Gestion" />
           <EntitySet Name="Habilitacion" EntityType="CasasRedModel.Habilitacion" />
@@ -1078,10 +1078,6 @@
             <End Role="Existencias" EntitySet="Existencias" />
             <End Role="HistorialAsignacion" EntitySet="HistorialAsignacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_FotosHab_Id" Association="CasasRedModel.FK_FotosHab_Id">
-            <End Role="Habilitacion" EntitySet="Habilitacion" />
-            <End Role="FotosHabilitacion" EntitySet="FotosHabilitacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_GastosCasaUsu_Id" Association="CasasRedModel.FK_GastosCasaUsu_Id">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="GastosContaduria" EntitySet="GastosContaduria" />
@@ -1105,6 +1101,11 @@
           <AssociationSet Name="FK_VrfUsu_Id" Association="CasasRedModel.FK_VrfUsu_Id">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Verificacion" EntitySet="Verificacion" />
+          </AssociationSet>
+          <EntitySet Name="FotosHabilitacion" EntityType="CasasRedModel.FotosHabilitacion" />
+          <AssociationSet Name="FK_FotosHab_Id" Association="CasasRedModel.FK_FotosHab_Id">
+            <End Role="Habilitacion" EntitySet="Habilitacion" />
+            <End Role="FotosHabilitacion" EntitySet="FotosHabilitacion" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Articulos">
@@ -1305,6 +1306,7 @@
           <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_CrtUsuario_Id" FromRole="Corretaje" ToRole="Usuario" />
           <NavigationProperty Name="Vendedor" Relationship="CasasRedModel.FK_CrtVendedor_Id" FromRole="Corretaje" ToRole="Vendedor" />
           <NavigationProperty Name="GastosContaduria" Relationship="CasasRedModel.FK_GastosCasa_Id" FromRole="Corretaje" ToRole="GastosContaduria" />
+          <Property Name="Crt_FechaAlta" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="DetallesComision">
           <Key>
@@ -1334,16 +1336,6 @@
           <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK__Existenci__ext_u__60A75C0F" FromRole="Existencias" ToRole="Usuario" />
           <NavigationProperty Name="Ubicaciones" Relationship="CasasRedModel.FK__Existenci__ext_u__619B8048" FromRole="Existencias" ToRole="Ubicaciones" />
           <NavigationProperty Name="HistorialAsignacion" Relationship="CasasRedModel.FK__Historial__ha_ex__28ED12D1" FromRole="Existencias" ToRole="HistorialAsignacion" />
-        </EntityType>
-        <EntityType Name="FotosHabilitacion">
-          <Key>
-            <PropertyRef Name="fh_id" />
-          </Key>
-          <Property Name="fh_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fh_archivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="fh_nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="fh_habilitacion" Type="Int32" />
-          <NavigationProperty Name="Habilitacion" Relationship="CasasRedModel.FK_FotosHab_Id" FromRole="FotosHabilitacion" ToRole="Habilitacion" />
         </EntityType>
         <EntityType Name="GastosContaduria">
           <Key>
@@ -1435,8 +1427,8 @@
           <Property Name="Id_Corretaje" Type="Int32" />
           <Property Name="Id_Usuario" Type="Int32" />
           <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_CrtHab_Id" FromRole="Habilitacion" ToRole="Corretaje" />
-          <NavigationProperty Name="FotosHabilitacion" Relationship="CasasRedModel.FK_FotosHab_Id" FromRole="Habilitacion" ToRole="FotosHabilitacion" />
           <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_HabUsuario_Id" FromRole="Habilitacion" ToRole="Usuario" />
+          <NavigationProperty Name="FotosHabilitacion" Relationship="CasasRedModel.FK_FotosHab_Id" FromRole="Habilitacion" ToRole="FotosHabilitacion" />
         </EntityType>
         <EntityType Name="HistorialAsignacion">
           <Key>
@@ -1867,20 +1859,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FotosHab_Id">
-          <End Type="CasasRedModel.Habilitacion" Role="Habilitacion" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="CasasRedModel.FotosHabilitacion" Role="FotosHabilitacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Habilitacion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FotosHabilitacion">
-              <PropertyRef Name="fh_habilitacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GastosCasaUsu_Id">
           <End Type="CasasRedModel.Usuario" Role="Usuario" Multiplicity="0..1" />
           <End Type="CasasRedModel.GastosContaduria" Role="GastosContaduria" Multiplicity="*" />
@@ -1954,6 +1932,30 @@
             </Principal>
             <Dependent Role="Verificacion">
               <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FotosHabilitacion">
+          <Key>
+            <PropertyRef Name="fh_id" />
+          </Key>
+          <Property Name="fh_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fh_archivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fh_nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="fh_habilitacion" Type="Int32" />
+          <NavigationProperty Name="Habilitacion" Relationship="CasasRedModel.FK_FotosHab_Id" FromRole="FotosHabilitacion" ToRole="Habilitacion" />
+        </EntityType>
+        <Association Name="FK_FotosHab_Id">
+          <End Type="CasasRedModel.Habilitacion" Role="Habilitacion" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CasasRedModel.FotosHabilitacion" Role="FotosHabilitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habilitacion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FotosHabilitacion">
+              <PropertyRef Name="fh_habilitacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2089,6 +2091,7 @@
           <EntitySetMapping Name="Corretaje">
             <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
               <MappingFragment StoreEntitySet="Corretaje">
+                <ScalarProperty Name="Crt_FechaAlta" ColumnName="Crt_FechaAlta" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
                 <ScalarProperty Name="Crt_ProgresoForm" ColumnName="Crt_ProgresoForm" />
@@ -2162,16 +2165,6 @@
                 <ScalarProperty Name="ext_cantidad" ColumnName="ext_cantidad" />
                 <ScalarProperty Name="ext_art_id" ColumnName="ext_art_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FotosHabilitacion">
-            <EntityTypeMapping TypeName="CasasRedModel.FotosHabilitacion">
-              <MappingFragment StoreEntitySet="FotosHabilitacion">
-                <ScalarProperty Name="fh_habilitacion" ColumnName="fh_habilitacion" />
-                <ScalarProperty Name="fh_nombre" ColumnName="fh_nombre" />
-                <ScalarProperty Name="fh_archivo" ColumnName="fh_archivo" />
-                <ScalarProperty Name="fh_id" ColumnName="fh_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2332,6 +2325,16 @@
                 <ScalarProperty Name="Vfn_Visto_persona" ColumnName="Vfn_Visto_persona" />
                 <ScalarProperty Name="Vfn_Persona_fisica" ColumnName="Vfn_Persona_fisica" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FotosHabilitacion">
+            <EntityTypeMapping TypeName="CasasRedModel.FotosHabilitacion">
+              <MappingFragment StoreEntitySet="FotosHabilitacion">
+                <ScalarProperty Name="fh_habilitacion" ColumnName="fh_habilitacion" />
+                <ScalarProperty Name="fh_nombre" ColumnName="fh_nombre" />
+                <ScalarProperty Name="fh_archivo" ColumnName="fh_archivo" />
+                <ScalarProperty Name="fh_id" ColumnName="fh_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

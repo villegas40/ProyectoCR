@@ -87,7 +87,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm")] Verificacion verificacion)
+        public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
             if (ModelState.IsValid)
             {
@@ -146,7 +146,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm")] Verificacion verificacion)
+        public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
             if (verificacion.Vfn_Persona_fisica == null) verificacion.Vfn_Persona_fisica = false;
             if (verificacion.Vfn_Visto_persona == null) verificacion.Vfn_Visto_persona = false;
@@ -236,13 +236,13 @@ namespace CasasRed_Nuevo3_.Controllers
             if (filtro == "")
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Verificacion.Count() / registrosPagina);
-                var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
-                var busqueda = (from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma).Contains(filtro) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vndr_Nombre + " " + a.Cliente.Vndr_Apellidopa + " " + a.Cliente.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

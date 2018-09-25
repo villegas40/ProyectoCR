@@ -7,40 +7,59 @@
 <p>
     @Html.ActionLink("Añadir existencias", "Create")
 </p>
-<input class="form-control mb-1" id="inpBusqueda" onkeyup="paginadoExistencias()" placeholder="Buscar por artículo" />
+<div id="cabeceroPrint">
+    <div class="form-inline mx-sm-3 mb-2 float-left">
+        <label>Filtro: </label>
+        <input class="form-control" id="inpBusqueda" onkeyup="paginadoExistencias()" placeholder="Buscar por artículo" />
+    </div>
+    <div class="form-inline mx-sm-3 mb-2 float-left">
+        <label>Registros por página: </label>
+        <select id="slcR" class="form-control" onchange="paginadoExistencias()">
+            <option>15</option>
+            <option>30</option>
+            <option>50</option>
+            <option>Todos</option>
+        </select>
+    </div>
+</div>
 <div id="printZone" class="margenTopPrint">
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Artículo</th>
-            <th>Cantidad Actual</th>
-            <th class="InvisiblePrint">Opciones</th>
-        </tr>
-    </thead>
-    <tbody id="ctExistencias">
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Artículo</th>
+                <th>Descripción</th>
+                <th>Cantidad Actual</th>
+                <th class="InvisiblePrint">Opciones</th>
+            </tr>
+        </thead>
+        <tbody id="ctExistencias"></tbody>
+    </table>
 </div>
 <center>
     <button id="btnPrevious" class="btn btn-default" onclick="paginadoExistencias(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
     <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
     <button id="btnNext" class="btn btn-default" onclick="paginadoExistencias(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
 </center>
-<button id="print" onclick="imprimirBusqueda(document.getElementById('printZone'),'Resultados busqueda') " >Imprimir</button>
+<button id="print" class="btn btn-outline-primary" onclick="imprimirBusqueda(document.getElementById('cabeceroPrint'),document.getElementById('printZone'),'Resultados busqueda') "><i class="fas fa-print"></i> Imprimir</button>
 <script>
+    var printWindow;
     var pageP = 0;
     function paginadoExistencias(page) {
         if (page == undefined) {
-            pageP = 1
+            pageP = 1;
         } else {
-            pageP = page
+            pageP = page;
         }
-        var totalpaginas = 0
-        var filtro = document.getElementById("inpBusqueda").value
-        var frm = new FormData()    
-        frm.append("filtro", filtro)
-        frm.append("pagina", pageP)
-        frm.append("registrosPagina", 15)
+        var totalpaginas = 0;
+        var rxp = 0;
+        if (document.getElementById('slcR').value != "Todos") {
+            rxp = parseInt(document.getElementById('slcR').value);
+        }
+        var filtro = document.getElementById("inpBusqueda").value;
+        var frm = new FormData();
+        frm.append("filtro", filtro);
+        frm.append("pagina", pageP);
+        frm.append("registrosPagina", rxp);
 
         var x = new XMLHttpRequest()
         x.open("POST", "/Existencias/BuscarExistencias")
@@ -53,11 +72,12 @@
                 totalpaginas = response[0].total;
             }
 
-            document.getElementById("ctExistencias").innerHTML = ""
+            document.getElementById("ctExistencias").innerHTML = "";
             var inner = ""
 
             for (var i = 0; i < response.length; i++) {
                 inner += "<tr><td>" + response[i].item + "</td>" +
+                    "<td>" + response[i].descripcion + "</td>" +
                     "<td>" + response[i].cantidad + "</td>" +
                     "<td class=\"InvisiblePrint\"><a class=\"btn btn-info\" href=\"/Existencias/Details/" + response[i].item + "\">Detalles</a></td></tr>"
             }
@@ -80,34 +100,5 @@
         });
         x.send(frm)
     }
-    paginadoExistencias()
-
-    function imprimirBusqueda(elem, title) {
-        var invisible = document.getElementsByClassName("InvisiblePrint")
-        for (var i = 0; i < invisible.length; i++) {
-            invisible[i].style.display = "none";
-        }
-
-        var margen = document.getElementsByClassName("margenTopPrint")[0].children[0]
-        margen.style = 'padding-top:60px;'
-
-        setTimeout(function () {
-
-            var printWindow;
-            printWindow = window.open('/Reportes/Index/test1', '', 'height=400,width=800');
-            var stringHTML = elem.innerHTML;
-            printWindow.document.getElementById('ContenidoImprimir').innerHTML = stringHTML;
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(function () {
-                printWindow.print();
-                printWindow.close();
-            }, 750);
-        }, 750);
-        setTimeout(function () {
-            for (var i = 0; i < invisible.length; i++) {
-                invisible[i].style.removeProperty("display");
-            }
-        }, 500);       
-    }
+    paginadoExistencias();
 </script>

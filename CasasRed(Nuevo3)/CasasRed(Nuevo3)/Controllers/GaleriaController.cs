@@ -77,9 +77,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 db.FotosHabilitacion.Add(fotosHabilitacion);
                 db.SaveChanges();
 
-                // return RedirectToRoute("/index" + "?" + "idhabilitacion=" + idkappa);
-                //return View("/index"+"?idhabilitacion="+idkappa);
-                return RedirectToAction("/index"+"?idhabilitacion="+idkappa);
+              
+                return Redirect("/Galeria/index"+"?idhabilitacion="+idkappa);
             }
 
             return View(fotosHabilitacion);
@@ -111,5 +110,22 @@ namespace CasasRed_Nuevo3_.Controllers
             public List<FotosHabilitacion> fotoshabilitacion = new List<FotosHabilitacion>();
 
         }
+        //Terminar metodos
+       public ActionResult Delete(int? idfoto)
+        {
+            if (idfoto == 0 || idfoto == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View();
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? idfoto)
+        {
+            return View();
+        }
+
     }
 }

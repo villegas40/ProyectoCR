@@ -95,6 +95,9 @@ namespace CasasRed_Nuevo3_.Controllers
                 new { value = 4, text = "Divorciado" }
             }, "value", "text", 0);
 
+                ViewBag.Id_Vendedor = new SelectList(db.Vendedor, "Id", "Vndr_Nombre");
+                ViewData["Vendedor"] = ViewBag.Id_Vendedor;
+
                 ViewData["Posicion"] = posicion;
                 ViewData["Estatus"] = estatus;
                 return View();
@@ -194,7 +197,7 @@ namespace CasasRed_Nuevo3_.Controllers
 
             if (ModelState.IsValid)
             {
-
+                corretaje.Crt_FechaAlta = DateTime.Now;
                 db.Corretaje.Add(corretaje);
                 db.SaveChanges();
 
@@ -210,6 +213,10 @@ namespace CasasRed_Nuevo3_.Controllers
 
             ViewData["Estatus"] = estatus;
             ViewData["Posicion"] = posicion;
+
+            ViewBag.Id_Vendedor = new SelectList(db.Vendedor, "Id", "Vndr_Nombre", corretaje.Id_Vendedor);
+            ViewData["Vendedor"] = ViewBag.Id_Vendedor;
+
             return View(corretaje);
         }
 
@@ -246,7 +253,7 @@ namespace CasasRed_Nuevo3_.Controllers
             var estatus = new SelectList(new[] {
                 new { value = 0, text = "Selecciona una opción.."},
                 new { value = 1, text = "Venta" },
-                new { value = 2, text = "Disponible" },
+                new { value = 2, text = "Disponible" }
             }, "value", "text", 0);
 
             ViewData["Estatus"] = estatus;

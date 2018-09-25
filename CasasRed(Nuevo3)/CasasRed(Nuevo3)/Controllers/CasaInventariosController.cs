@@ -261,13 +261,19 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             base.Dispose(disposing);
         }
-        public JsonResult BuscarInventarioAsignado(int id, string filtro = "", int pagina = 1)
+        public JsonResult BuscarInventarioAsignado(int id, string filtro = "", int pagina = 1, int registrosPagina = 15)
         {
             if (filtro != "")
             {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = (from ci in db.CasaInventario
+                                       where ci.ci_corretaje_id == id && (ci.Articulos.art_descripcion.Contains(filtro) || ci.ci_articulo_id.Contains(filtro) || ci.Usuario.usu_username.Contains(filtro))
+                                       select ci).Count();
+                }
                 int totalPaginas = (int)Math.Ceiling((double)(from ci in db.CasaInventario
-                             where ci.ci_corretaje_id == id && (ci.Articulos.art_descripcion.Contains(filtro) || ci.ci_articulo_id.Contains(filtro) || ci.Usuario.usu_username.Contains(filtro))
-                             select ci).Count() / 15);
+                                                              where ci.ci_corretaje_id == id && (ci.Articulos.art_descripcion.Contains(filtro) || ci.ci_articulo_id.Contains(filtro) || ci.Usuario.usu_username.Contains(filtro))
+                                                              select ci).Count() / 15);
 
 
                 var respuesta = (from ci in db.CasaInventario
@@ -282,13 +288,23 @@ namespace CasasRed_Nuevo3_.Controllers
                                      ci.ci_Id,
                                      total = totalPaginas
                                  }).OrderBy(c => c.ci_articulo_id);
-            return Json(respuesta.ToList(), JsonRequestBehavior.AllowGet);
+                return Json(respuesta.ToList(), JsonRequestBehavior.AllowGet);
             }
             else
             {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = (from ci in db.CasaInventario where ci.ci_corretaje_id == id select ci).Count();
+                }
                 int totalPaginas = (int)Math.Ceiling((double)(from ci in db.CasaInventario where ci.ci_corretaje_id == id select ci).Count() / 15);
 
-                var respuesta = (from ci in db.CasaInventario where ci.ci_corretaje_id == id select new { ci.ci_articulo_id, ci.Articulos.art_descripcion, ci.ci_cantidadAsignada,
+                var respuesta = (from ci in db.CasaInventario
+                                 where ci.ci_corretaje_id == id
+                                 select new
+                                 {
+                                     ci.ci_articulo_id,
+                                     ci.Articulos.art_descripcion,
+                                     ci.ci_cantidadAsignada,
                                      fecha = SqlFunctions.DateName("year", ci.ci_fecha).Trim() + "/" + SqlFunctions.StringConvert((double)ci.ci_fecha.Month).TrimStart() + "/" + SqlFunctions.DateName("day", ci.ci_fecha).Trim(),
                                      nombre = (ci.Usuario.usu_nombre + " " + ci.Usuario.usu_apellidoPa),
                                      ci.ci_Id,

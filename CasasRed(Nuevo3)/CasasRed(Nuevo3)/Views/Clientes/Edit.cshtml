@@ -55,6 +55,35 @@
                                 @*@Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })*@
                                 @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
                             </div>
+                            <!--Usuario-->
+                            <div class="col-lg-4">
+                                <label for="Id_Usuario">Id Usuario</label>
+                                @Html.EditorFor(model => model.Id_Usuario, new { htmlAttributes = new { @class = "form-control data", @id = "Id_Usuario", @type = "hidden" } })
+                                @Html.ValidationMessageFor(model => model.Id_Usuario, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="row justify-content-around">
+                            <div class="col">
+                                <input type="text" id="Id_Corretaje" name="Id_Corretaje" class="form-control" placeholder="seleccione un casa" readonly required="" style="float:left;" />
+                                <div>
+                                    <button style="margin-left: 5px;" title="Buscar Casa" onclick="buscarArticulo(); return false;" data-toggle="modal" data-target="#articuloModal" class="btn btn-sm btn-info"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>*@
+
+                        <div class="row justify-content-around">
+                            <div class="col">
+                                <div class="form-group">
+                                    <!--Status -->
+                                    @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
+                                    <label class="control-label col-md-4" for="Id_Vendedor">Asesor</label>
+                                    
+                                        @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Posicion2"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
+                                        @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
+                                    
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row justify-content-around">
@@ -362,6 +391,40 @@
 
 </div>
 }
+
+<div class="modal fade" id="articuloModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar Casa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input id="txtBusquedaA" type="text" class="form-control" value="" onkeyup="buscarArticulo()" />
+                <table class="table table-striped ">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th style="text-align: center;">Seleccionar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ctBA"></tbody>
+                </table>
+                <center>
+                    <button class="btn btn-default" id="btnPrevious" onclick="buscarArticulo(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
+                    <label id="previous"></label><label> - <label id="actual"></label>-</label><label id="next"></label>
+                    <button class="btn btn-default" id="btnNext" onclick="buscarArticulo(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

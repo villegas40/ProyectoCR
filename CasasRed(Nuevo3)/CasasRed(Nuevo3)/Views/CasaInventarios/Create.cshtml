@@ -60,6 +60,7 @@
                     <thead>
                         <tr>
                             <th>Código</th>
+                            <th>Descripción</th>
                             <th>Cantidad dispobible</th>
                             <th style="text-align: center;">Seleccionar</th>
                         </tr>
@@ -110,6 +111,7 @@
                 for (var i = 0; i < json.length; i++) {
                     inner += "<tr>" +
                         "<td>" + json[i].item + "</td>" +
+                        "<td>" + json[i].descripcion + "</td>" +
                         "<td>" + json[i].cantidad + "</td>" +
                         "<td style=\"text-align: center;\" onmouseover=\"sobreRow(this)\" onmouseout=\"fueraRow(this)\" onclick=\"seleccionarArt(this)\"  data-dismiss=\"modal\"><i class=\"fa fa-circle text-info\"></i></td>" +
                         "</tr>"

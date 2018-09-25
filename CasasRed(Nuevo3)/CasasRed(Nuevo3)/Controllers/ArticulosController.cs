@@ -14,10 +14,11 @@ namespace CasasRed_Nuevo3_.Controllers
     public class ArticulosController : Controller
     {
         private CasasRedEntities db = new CasasRedEntities();
-
+        LoginController lc = new LoginController();
         // GET: Articulos
         public ActionResult Index()
         {
+            lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -28,7 +29,6 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                LoginController lc = new LoginController();
                 string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
@@ -37,7 +37,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Details/5
         public ActionResult Details(string id)
         {
-
+            lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -57,7 +57,6 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                LoginController lc = new LoginController();
                 string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
@@ -66,6 +65,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Create
         public ActionResult Create()
         {
+            lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -76,7 +76,6 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                LoginController lc = new LoginController();
                 string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
@@ -89,6 +88,7 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "art_id,art_nombre,art_descripcion,art_cantidadMinima")] Articulos articulos)
         {
+            lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -107,7 +107,6 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                LoginController lc = new LoginController();
                 string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
@@ -117,6 +116,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Edit/5
         public ActionResult Edit(string id)
         {
+            lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -137,7 +137,6 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                LoginController lc = new LoginController();
                 string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
@@ -175,6 +174,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Delete/5
         public ActionResult Delete(string id)
         {
+            lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -194,7 +194,6 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                LoginController lc = new LoginController();
                 string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
@@ -205,6 +204,7 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -218,10 +218,30 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else
             {
-                LoginController lc = new LoginController();
                 string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
+        }
+
+        public ActionResult Historial(string id)
+        {
+            lc.ActualizarVariables();
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else if (Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
+            {
+                ViewBag.Articulo = (from c in db.Articulos where c.art_id == id select c.art_nombre).FirstOrDefault();
+                ViewBag.id = id;
+                return View();
+            }
+            else
+            {
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
+           
         }
 
         protected override void Dispose(bool disposing)
@@ -247,6 +267,59 @@ namespace CasasRed_Nuevo3_.Controllers
                 var busqueda = (from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion, fecha = SqlFunctions.DateName("year", a.art_fechaIngreso).Trim() + "/" + SqlFunctions.StringConvert((double)a.art_fechaIngreso.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.art_fechaIngreso).Trim(), a.art_cantidadMinima, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             } 
+        }
+
+        public JsonResult BuscarInventarioAsignado(string id = "", string filtro = "", int pagina = 1, int registrosPagina = 15, string tipo = "")
+        {
+            if (filtro != "")
+            {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = (from ci in db.CasaInventario where ci.ci_articulo_id == id && (ci.Corretaje.Crt_Direccion.Contains(filtro) || ci.Usuario.usu_username.Contains(filtro) || (ci.Usuario.usu_nombre + " " + ci.Usuario.usu_apellidoPa + " " + ci.Usuario.usu_apellidoMa).Contains(filtro)) select ci).Count();
+                }
+                int totalPaginas = (int)Math.Ceiling((double)(from ci in db.CasaInventario
+                                                              where ci.ci_articulo_id == id && (ci.Corretaje.Crt_Direccion.Contains(filtro) || ci.Usuario.usu_username.Contains(filtro))
+                                                              select ci).Count() / registrosPagina);
+
+
+                var respuesta = (from ci in db.CasaInventario
+                                 where ci.ci_articulo_id == id && (ci.Corretaje.Crt_Direccion.Contains(filtro) || ci.Usuario.usu_username.Contains(filtro) || (ci.Usuario.usu_nombre + " " + ci.Usuario.usu_apellidoPa + " " + ci.Usuario.usu_apellidoMa).Contains(filtro))
+                                 select new
+                                 {
+                                     descripcion = ci.Corretaje.Crt_Direccion,
+                                     tipo = "Salida",
+                                     cantidad = ci.ci_cantidadAsignada,
+                                     fecha = SqlFunctions.DateName("year", ci.ci_fecha).Trim() + "/" + SqlFunctions.StringConvert((double)ci.ci_fecha.Month).TrimStart() + "/" + SqlFunctions.DateName("day", ci.ci_fecha).Trim(),
+                                     nombre = (ci.Usuario.usu_nombre + " " + ci.Usuario.usu_apellidoPa + " " + ci.Usuario.usu_apellidoMa),
+                                     fechaOrden = ci.ci_fecha,
+                                     total = totalPaginas
+                                 }).OrderBy(c => c.fechaOrden).Skip((pagina - 1) * registrosPagina).Take(registrosPagina);
+                return Json(respuesta.ToList(), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = (from ci in db.CasaInventario where ci.ci_articulo_id == id select ci).Count();
+                }
+                int totalPaginas = (int)Math.Ceiling((double)(from ci in db.CasaInventario where ci.ci_articulo_id == id select ci).Count() / registrosPagina);
+
+                var respuesta = (from ci in db.CasaInventario
+                                 where ci.ci_articulo_id == id
+                                 select new
+                                 {
+                                     descripcion = ci.Corretaje.Crt_Direccion,
+                                     tipo = "Salida",
+                                     cantidad = ci.ci_cantidadAsignada,
+                                     fecha = SqlFunctions.DateName("year", ci.ci_fecha).Trim() + "/" + SqlFunctions.StringConvert((double)ci.ci_fecha.Month).TrimStart() + "/" + SqlFunctions.DateName("day", ci.ci_fecha).Trim(),
+                                     nombre = (ci.Usuario.usu_nombre + " " + ci.Usuario.usu_apellidoPa),
+                                     fechaOrden = ci.ci_fecha,
+                                     total = totalPaginas
+                                 }).OrderBy(c => c.fechaOrden).Skip((pagina - 1) * registrosPagina).Take(registrosPagina);
+
+                //.Union(from e in db.Existencias where e.ext_art_id == id select new{ descripcion = ("Inventario"), tipo = "Entrada", cantidad =  }))
+                return Json(respuesta.ToList(), JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

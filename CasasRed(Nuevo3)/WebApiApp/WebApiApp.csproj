@@ -247,7 +247,6 @@
     <Compile Include="Controllers\CorretajesController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
     <Compile Include="Controllers\GastosContaduriasController.cs" />
-    <Compile Include="Controllers\GastosController.cs" />
     <Compile Include="Controllers\GestionsController.cs" />
     <Compile Include="Controllers\HabilitacionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

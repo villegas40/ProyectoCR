@@ -11,20 +11,35 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/themes/base/css")
+    <link href="~/Content/Print/print.css" rel="stylesheet" />
     <!--Footer-->
     <link href="~/Content/customcss/sticky-footer.css" rel="stylesheet" />
     <!--Iconos-->
     <link href="~/Content/fontawsome/css/fontawesome-all.css" rel="stylesheet" />
-
 </head>
 <body>
-    <main role="main" style="padding-top: 20px;">
-        <a class="navbar-brand"><img src="~/Media/logo-casas-red.png" height="55" width="70"></a>
-        <div class="body-content" id="ContenidoImprimir">
-               
+    <main role="main" class="body-content margenesPrint" style="padding-top: 20px;">
+        <div>
+            <div class="card-title text-center"><h4>@ViewBag.Title</h4><hr /></div>
+            <a class="navbar-brand"><img src="~/Media/logo-casas-red.png" height="55" width="70"></a>
+            <div class="cabecero">
+                <div class="form-inline float-left">
+                    <label>Creado por:</label>
+                    <input class="form-control" value="@Session["NombreCompleto"].ToString()" readonly />
+                </div>
+                <div class="form-inline ">
+                    <label>Fecha:</label>
+                    <input class="form-control" id="fechaR" value="" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="" id="ContenidoImprimir">
         </div>
     </main>
+    <script>
+    var dt = new Date();
+    document.getElementById('fechaR').setAttribute('value',dt.toLocaleString());
+    </script>
 </body>
-
 </html>
 

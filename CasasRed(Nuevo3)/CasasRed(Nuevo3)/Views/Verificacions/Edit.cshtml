@@ -33,7 +33,7 @@
     <br />
 
     <h5>Cliente: @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Nombre) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidopa) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidoma)</h5>
-    @if (Model.Cliente.Vndr_Nombre != null)
+    @if (Model.Cliente.Id_Vendedor != null)
     {
         <h5>Asesor: @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Nombre) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidopa) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidoma)</h5>
     }

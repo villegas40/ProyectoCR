@@ -187,6 +187,12 @@
                                                 @Html.EditorFor(model => model.Crt_Cliente_Nombre, new { htmlAttributes = new { @class = "form-control data", @id = "nombre" } })
                                                 @Html.ValidationMessageFor(model => model.Crt_Cliente_Nombre, "", new { @class = "text-danger" })
                                             </div>
+                                            <!--Usuario-->
+                                            <div class="col-12 ">
+                                                <label for="Id_Usuario">Id Usuario</label>
+                                                @Html.EditorFor(model => model.Id_Usuario, new { htmlAttributes = new { @class = "form-control data", @id = "Id_Usuario", @type = "hidden" } })
+                                                @Html.ValidationMessageFor(model => model.Id_Usuario, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-6 col-lg-4">

@@ -12,15 +12,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CalificacionVendedor">
+      <EntityTypeMapping TypeName="CasasRedModel.CalificacionVendedor">
+        <MappingFragment StoreEntitySet="CalificacionVendedor">
+          <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="DVndr_Puntaje" ColumnName="DVndr_Puntaje" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CasaInventario">
+      <EntityTypeMapping TypeName="CasasRedModel.CasaInventario">
+        <MappingFragment StoreEntitySet="CasaInventario">
+          <ScalarProperty Name="ci_articulo_id" ColumnName="ci_articulo_id" />
+          <ScalarProperty Name="ci_usuario_id" ColumnName="ci_usuario_id" />
+          <ScalarProperty Name="ci_fecha" ColumnName="ci_fecha" />
+          <ScalarProperty Name="ci_cantidadAsignada" ColumnName="ci_cantidadAsignada" />
+          <ScalarProperty Name="ci_corretaje_id" ColumnName="ci_corretaje_id" />
+          <ScalarProperty Name="ci_Id" ColumnName="ci_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Cliente">
       <EntityTypeMapping TypeName="CasasRedModel.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
           <ScalarProperty Name="Grlal_Folio" ColumnName="Grlal_Folio" />
           <ScalarProperty Name="Gral_ProgresoForm" ColumnName="Gral_ProgresoForm" />
-          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
-          <ScalarProperty Name="Vndr_Apellidoma" ColumnName="Vndr_Apellidoma" />
-          <ScalarProperty Name="Vndr_Apellidopa" ColumnName="Vndr_Apellidopa" />
-          <ScalarProperty Name="Vndr_Nombre" ColumnName="Vndr_Nombre" />
           <ScalarProperty Name="Gral_Fechaalta" ColumnName="Gral_Fechaalta" />
           <ScalarProperty Name="Cyg_No_identificacoion" ColumnName="Cyg_No_identificacoion" />
           <ScalarProperty Name="Cyg_Identificacion" ColumnName="Cyg_Identificacion" />
@@ -68,10 +89,47 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Comentarios">
+      <EntityTypeMapping TypeName="CasasRedModel.Comentarios">
+        <MappingFragment StoreEntitySet="Comentarios">
+          <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+          <ScalarProperty Name="Cmt_Fecha" ColumnName="Cmt_Fecha" />
+          <ScalarProperty Name="Cmt_Nota" ColumnName="Cmt_Nota" />
+          <ScalarProperty Name="Cmt_Titulo" ColumnName="Cmt_Titulo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comision">
+      <EntityTypeMapping TypeName="CasasRedModel.Comision">
+        <MappingFragment StoreEntitySet="Comision">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contaduria">
+      <EntityTypeMapping TypeName="CasasRedModel.Contaduria">
+        <MappingFragment StoreEntitySet="Contaduria">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Cnt_CFE" ColumnName="Cnt_CFE" />
+          <ScalarProperty Name="Cnt_CESPT" ColumnName="Cnt_CESPT" />
+          <ScalarProperty Name="Cnt_Tramites" ColumnName="Cnt_Tramites" />
+          <ScalarProperty Name="Cnt_Vigilancia" ColumnName="Cnt_Vigilancia" />
+          <ScalarProperty Name="Cnt_Material" ColumnName="Cnt_Material" />
+          <ScalarProperty Name="Cnt_M_Preguntar" ColumnName="Cnt_M_Preguntar" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Corretaje">
       <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
         <MappingFragment StoreEntitySet="Corretaje">
           <ScalarProperty Name="Crt_FechaAlta" ColumnName="Crt_FechaAlta" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
           <ScalarProperty Name="Crt_ProgresoForm" ColumnName="Crt_ProgresoForm" />
           <ScalarProperty Name="Crt_Obervaciones" ColumnName="Crt_Obervaciones" />
           <ScalarProperty Name="Crt_Status_Muestra" ColumnName="Crt_Status_Muestra" />
@@ -121,6 +179,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DetallesComision">
+      <EntityTypeMapping TypeName="CasasRedModel.DetallesComision">
+        <MappingFragment StoreEntitySet="DetallesComision">
+          <ScalarProperty Name="DCms_TipoCom" ColumnName="DCms_TipoCom" />
+          <ScalarProperty Name="DCms_Monto" ColumnName="DCms_Monto" />
+          <ScalarProperty Name="Id_Comision" ColumnName="Id_Comision" />
+          <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Existencias">
       <EntityTypeMapping TypeName="CasasRedModel.Existencias">
         <MappingFragment StoreEntitySet="Existencias">
@@ -135,12 +204,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GastosContaduria">
+      <EntityTypeMapping TypeName="CasasRedModel.GastosContaduria">
+        <MappingFragment StoreEntitySet="GastosContaduria">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="GstCon_Fecha" ColumnName="GstCon_Fecha" />
+          <ScalarProperty Name="GstCon_Descripcion" ColumnName="GstCon_Descripcion" />
+          <ScalarProperty Name="GstCon_Monto" ColumnName="GstCon_Monto" />
+          <ScalarProperty Name="GstCon_Concepto" ColumnName="GstCon_Concepto" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Gestion">
       <EntityTypeMapping TypeName="CasasRedModel.Gestion">
         <MappingFragment StoreEntitySet="Gestion">
-          <ScalarProperty Name="Gtn_ProgresoForm" ColumnName="Gtn_ProgresoForm" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
           <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Gtn_ProgresoForm" ColumnName="Gtn_ProgresoForm" />
+          <ScalarProperty Name="Gtm_Aviso_Susp" ColumnName="Gtm_Aviso_Susp" />
+          <ScalarProperty Name="Gtn_Taller" ColumnName="Gtn_Taller" />
+          <ScalarProperty Name="Gtn_CuentaBancaria" ColumnName="Gtn_CuentaBancaria" />
           <ScalarProperty Name="Gtn_Firma_Escrituras" ColumnName="Gtn_Firma_Escrituras" />
           <ScalarProperty Name="Gtn_Notaria" ColumnName="Gtn_Notaria" />
           <ScalarProperty Name="Gtn_Credito_INFONAVIT" ColumnName="Gtn_Credito_INFONAVIT" />
@@ -174,8 +260,9 @@
     <EntitySetMapping Name="Habilitacion">
       <EntityTypeMapping TypeName="CasasRedModel.Habilitacion">
         <MappingFragment StoreEntitySet="Habilitacion">
-          <ScalarProperty Name="Hbt_ProgresoForm" ColumnName="Hbt_ProgresoForm" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Hbt_ProgresoForm" ColumnName="Hbt_ProgresoForm" />
           <ScalarProperty Name="Hbt_AvisoSusp" ColumnName="Hbt_AvisoSusp" />
           <ScalarProperty Name="Hbt_Pinturas" ColumnName="Hbt_Pinturas" />
           <ScalarProperty Name="Hbt_Break_medidor" ColumnName="Hbt_Break_medidor" />
@@ -202,6 +289,16 @@
           <ScalarProperty Name="Hbt_Chapas" ColumnName="Hbt_Chapas" />
           <ScalarProperty Name="Hbt_Puertas" ColumnName="Hbt_Puertas" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistorialAsignacion">
+      <EntityTypeMapping TypeName="CasasRedModel.HistorialAsignacion">
+        <MappingFragment StoreEntitySet="HistorialAsignacion">
+          <ScalarProperty Name="ha_usuarioEntrego" ColumnName="ha_usuarioEntrego" />
+          <ScalarProperty Name="ha_existencia_id" ColumnName="ha_existencia_id" />
+          <ScalarProperty Name="ha_casaInventario" ColumnName="ha_casaInventario" />
+          <ScalarProperty Name="ha_id" ColumnName="ha_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -239,11 +336,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Vendedor">
+      <EntityTypeMapping TypeName="CasasRedModel.Vendedor">
+        <MappingFragment StoreEntitySet="Vendedor">
+          <ScalarProperty Name="Vndr_Apellidoma" ColumnName="Vndr_Apellidoma" />
+          <ScalarProperty Name="Vndr_Apellidopa" ColumnName="Vndr_Apellidopa" />
+          <ScalarProperty Name="Vndr_Nombre" ColumnName="Vndr_Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Verificacion">
       <EntityTypeMapping TypeName="CasasRedModel.Verificacion">
         <MappingFragment StoreEntitySet="Verificacion">
-          <ScalarProperty Name="Vfn_ProgresoForm" ColumnName="Vfn_ProgresoForm" />
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+          <ScalarProperty Name="Vfn_ProgresoForm" ColumnName="Vfn_ProgresoForm" />
           <ScalarProperty Name="Vfn_Observaciones" ColumnName="Vfn_Observaciones" />
           <ScalarProperty Name="Vfn_Trato_asesor" ColumnName="Vfn_Trato_asesor" />
           <ScalarProperty Name="Vfn_Costo" ColumnName="Vfn_Costo" />
@@ -256,28 +364,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CasaInventario">
-      <EntityTypeMapping TypeName="CasasRedModel.CasaInventario">
-        <MappingFragment StoreEntitySet="CasaInventario">
-          <ScalarProperty Name="ci_articulo_id" ColumnName="ci_articulo_id" />
-          <ScalarProperty Name="ci_usuario_id" ColumnName="ci_usuario_id" />
-          <ScalarProperty Name="ci_fecha" ColumnName="ci_fecha" />
-          <ScalarProperty Name="ci_cantidadAsignada" ColumnName="ci_cantidadAsignada" />
-          <ScalarProperty Name="ci_corretaje_id" ColumnName="ci_corretaje_id" />
-          <ScalarProperty Name="ci_Id" ColumnName="ci_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HistorialAsignacion">
-      <EntityTypeMapping TypeName="CasasRedModel.HistorialAsignacion">
-        <MappingFragment StoreEntitySet="HistorialAsignacion">
-          <ScalarProperty Name="ha_usuarioEntrego" ColumnName="ha_usuarioEntrego" />
-          <ScalarProperty Name="ha_existencia_id" ColumnName="ha_existencia_id" />
-          <ScalarProperty Name="ha_casaInventario" ColumnName="ha_casaInventario" />
-          <ScalarProperty Name="ha_id" ColumnName="ha_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="FotosHabilitacion">
       <EntityTypeMapping TypeName="CasasRedModel.FotosHabilitacion">
         <MappingFragment StoreEntitySet="FotosHabilitacion">
@@ -285,39 +371,6 @@
           <ScalarProperty Name="fh_nombre" ColumnName="fh_nombre" />
           <ScalarProperty Name="fh_archivo" ColumnName="fh_archivo" />
           <ScalarProperty Name="fh_id" ColumnName="fh_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoGasto">
-      <EntityTypeMapping TypeName="CasasRedModel.TipoGasto">
-        <MappingFragment StoreEntitySet="TipoGasto">
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Contaduria">
-      <EntityTypeMapping TypeName="CasasRedModel.Contaduria">
-        <MappingFragment StoreEntitySet="Contaduria">
-          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
-          <ScalarProperty Name="Cnt_Presupuesto" ColumnName="Cnt_Presupuesto" />
-          <ScalarProperty Name="Cnt_Presupuesto_habilitacion" ColumnName="Cnt_Presupuesto_habilitacion" />
-          <ScalarProperty Name="Cnt_Presupuesto_corretaje" ColumnName="Cnt_Presupuesto_corretaje" />
-          <ScalarProperty Name="Cnt_Presupuesto_gestion" ColumnName="Cnt_Presupuesto_gestion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GastosContaduria">
-      <EntityTypeMapping TypeName="CasasRedModel.GastosContaduria">
-        <MappingFragment StoreEntitySet="GastosContaduria">
-          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-          <ScalarProperty Name="Id_Contaduria" ColumnName="Id_Contaduria" />
-          <ScalarProperty Name="Id_TipoGasto" ColumnName="Id_TipoGasto" />
-          <ScalarProperty Name="GstCon_Fecha" ColumnName="GstCon_Fecha" />
-          <ScalarProperty Name="GstCon_Monto" ColumnName="GstCon_Monto" />
-          <ScalarProperty Name="GstCon_Concepto" ColumnName="GstCon_Concepto" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

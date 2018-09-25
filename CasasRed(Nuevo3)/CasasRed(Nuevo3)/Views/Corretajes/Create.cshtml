@@ -67,12 +67,27 @@
                                     @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
                                     <label class="control-label col-md-4" for="Crt_Status">Estatus</label>
                                     <div class="col-md-12">
-                                        @Html.DropDownListFor(model => model.Crt_Status, ViewData["Estatus"] as SelectList, new { @class = "form-control col-12 data", @id = "Crt_Status" })
+                                        @Html.DropDownListFor(model => model.Crt_Status, ViewData["Estatus"]  as SelectList, new { @class = "form-control col-12 data", @id = "Crt_Status" })
                                         @Html.ValidationMessageFor(model => model.Crt_Status, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <!--Status -->
+                                    @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
+                                    <label class="control-label col-md-4" for="Id_Vendedor">Vendedor</label>
+                                    <div class="col-md-12">
+                                        @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Vendedor"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
+                                        @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-12" >
                                 <div class="form-group">

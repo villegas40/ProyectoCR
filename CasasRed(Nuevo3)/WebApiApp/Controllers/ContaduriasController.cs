@@ -122,10 +122,13 @@ namespace WebApiApp.Controllers
 
             Contaduria contaduria_obj = new Contaduria
             {
-                Cnt_Presupuesto = 0,
-                Cnt_Presupuesto_corretaje = 0,
-                Cnt_Presupuesto_gestion = 0,
-                Cnt_Presupuesto_habilitacion = 0,
+
+                Cnt_M_Preguntar = 0,
+                Cnt_Material = 0,
+                Cnt_Tramites = 0,
+                Cnt_Vigilancia = 0,
+                Cnt_CESPT = 0,
+                Cnt_CFE = 0,
                 Id_Corretaje = corretaje_id,
             };
 

@@ -64,8 +64,11 @@
                         "<td>" + json[i].art_descripcion + "</td>" +
                         "<td>" + json[i].fecha + "</td>" +
                         "<td>" + json[i].art_cantidadMinima + "</td>" +
-                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Articulos/Edit/" + json[i].art_id + "\">Editar</a></td><td><a class=\"btn btn-info\" href=\"/Articulos/Details/" + json[i].art_id + "\">Detalles</a></td><td><a class=\"btn btn-danger\" href=\"/Articulos/Delete/" + json[i].art_id + "\">Eliminar</a> </td></tr>"+
-                        "</tr>"
+                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Articulos/Edit/" + json[i].art_id + "\">Editar</a></td>" +
+                        "<td><a class=\"btn btn-info\" href=\"/Articulos/Details/" + json[i].art_id + "\">Detalles</a></td>" +
+                        "<td><a class=\"btn btn-danger\" href=\"/Articulos/Delete/" + json[i].art_id + "\">Eliminar</a> </td>" +
+                        "<td><a class=\"btn btn-success\" href=\"/Articulos/Historial/" + json[i].art_id + "\">Historial</a> </td>" +
+                        "</tr>";
                 }
                 document.getElementById("ctBA").innerHTML = inner
                 document.getElementById("next").textContent = totalPages

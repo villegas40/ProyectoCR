@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="37">
+      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="105">
         <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="14.25" PointY="16.5" />
         <EntityTypeShape EntityType="CasasRedModel.CalificacionVendedor" Width="1.5" PointX="13.5" PointY="21.25" />
         <EntityTypeShape EntityType="CasasRedModel.CasaInventario" Width="1.5" PointX="16.5" PointY="23.875" />
@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="CasasRedModel.Corretaje" Width="1.5" PointX="11.25" PointY="19.25" />
         <EntityTypeShape EntityType="CasasRedModel.DetallesComision" Width="1.5" PointX="15.75" PointY="20.25" />
         <EntityTypeShape EntityType="CasasRedModel.Existencias" Width="1.5" PointX="5.25" PointY="23.75" />
-        <EntityTypeShape EntityType="CasasRedModel.FotosHabilitacion" Width="1.5" PointX="18.75" PointY="32.375" />
         <EntityTypeShape EntityType="CasasRedModel.GastosContaduria" Width="1.5" PointX="13.5" PointY="28" />
         <EntityTypeShape EntityType="CasasRedModel.Gestion" Width="1.5" PointX="24.75" PointY="21.25" />
         <EntityTypeShape EntityType="CasasRedModel.Habilitacion" Width="1.5" PointX="16.5" PointY="27.75" />
@@ -52,13 +51,14 @@
         <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__60A75C0F" />
         <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__619B8048" />
         <AssociationConnector Association="CasasRedModel.FK__Historial__ha_ex__28ED12D1" />
-        <AssociationConnector Association="CasasRedModel.FK_FotosHab_Id" />
         <AssociationConnector Association="CasasRedModel.FK_GastosCasaUsu_Id" />
         <AssociationConnector Association="CasasRedModel.FK_Usuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_HabUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK__Historial__ha_us__29E1370A" />
         <AssociationConnector Association="CasasRedModel.FK_TipoUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_VrfUsu_Id" />
+        <EntityTypeShape EntityType="CasasRedModel.FotosHabilitacion" Width="1.5" PointX="18.75" PointY="32.375" />
+        <AssociationConnector Association="CasasRedModel.FK_FotosHab_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

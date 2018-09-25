@@ -48,16 +48,35 @@
                         <div class="row justify-content-around">
                             <div class="col">
                                 @*<label for="Casa Asignada">Casa Asignada</label>*@
-                                <input type="text" id="Id_Corretaje" name="Id_Corretaje" class="form-control" placeholder="seleccione un articulo" readonly required="" style="float:left;" />
+                                <input type="text" id="Id_Corretaje" name="Id_Corretaje" class="form-control" placeholder="seleccione un casa" readonly required="" style="float:left;" />
                                 <div>
                                     <button style="margin-left: 5px;" title="Buscar Casa" onclick="buscarArticulo(); return false;" data-toggle="modal" data-target="#articuloModal" class="btn btn-sm btn-info"><i class="fas fa-search"></i></button>
                                     @*<button title="Agregar nuevo artículo" onclick="window.open('/Articulos/Create'); return false;" class="btn btn-sm modal-trigger btn-success"><i class="fas fa-plus"></i></button>*@
                                 </div>
                                 @*@Html.DropDownListFor(model => model.Id_Corretaje, ViewData["Posicion"] as SelectList, new { @class = "form-control", @id = "Gral_Fechaalta" })
-                                @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })
-                                @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })*@
+                @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
+
+
+
+                        <div class="row justify-content-around">
+                            <div class="col">
+                                <div class="form-group">
+                                    <!--Status -->
+                                    @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
+                                    <label class="control-label col-md-4" for="Id_Vendedor">Asesor</label>
+                                    <div class="col">
+                                        @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Posicion2"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
+                                        @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
 
                         <div class="row justify-content-around py-3">
                             <div class="col-lg-4">
@@ -330,7 +349,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Buscar articulo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Buscar Casa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
