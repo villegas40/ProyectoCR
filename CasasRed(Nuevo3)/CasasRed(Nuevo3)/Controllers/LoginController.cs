@@ -95,10 +95,12 @@ namespace CasasRed_Nuevo3_.Controllers
             if (tipo == "Administrador")
             {
                 direccion = "Home-Index";
-            } else if (tipo == "Gestion")
+            }
+            else if (tipo == "Gestion")
             {
                 direccion = "Gestions-Index";
-            } else if (tipo == "Corretaje")
+            }
+            else if (tipo == "Corretaje")
             {
                 direccion = "Corretajes-Index";
             }
@@ -114,6 +116,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 direccion = "Verificacions-Index";
             }
+            else if (tipo == "AyudanteGestion") direccion = "Clientes-Index";
             return direccion;
         }
 
@@ -139,6 +142,9 @@ namespace CasasRed_Nuevo3_.Controllers
 
         public void ActualizarVariables()
         {
+            if (Session["UsuarioID"].ToString() != null)
+            {
+
             var user = (from u in db.Usuario join ut in db.TipoUsuario on u.usu_tipo equals ut.Id.ToString() where (u.Id.ToString() == Session["UsuarioID"].ToString()) && u.usu_password == u.usu_password && u.usu_activo == true select new { u, ut }).FirstOrDefault();
             if (user != null)
             {
@@ -163,6 +169,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 Session["Tipo"] = null;
                 Session["Vista"] = null;
                 Session["Controlador"] = null;
+            }
             }
         }
 

@@ -7,45 +7,96 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Asignar Gasto", "Create", new { id = ViewBag.id })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GstCon_Mensualidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GstCon_Vigilancia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GstCon_Otros)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GstCon_Mensualidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GstCon_Vigilancia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GstCon_Otros)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Corretaje.Crt_Status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<div id="printZone" class="margenTopPrint">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Articulo</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th colspan="3">Opciones</th>
+            </tr>
+        </thead>
+        <tbody id="ctCI"></tbody>
+    </table>
+</div>
+<center>
+    <button disabled id="btnPrevious" class="btn btn-default" onclick="paginadoAsignacion(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
+    <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
+    <button disabled id="btnNext" class="btn btn-default" onclick="paginadoAsignacion(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+</center>
 
-</table>
+<script>
+    var id = '@Html.Raw(ViewBag.id)';
+    var pageP = 0;
+    function paginadoAsignacion(page) {
+        if (page == undefined) {
+            pageP = 1;
+        } else {
+            pageP = page;
+        }
+        var totalpaginas = 0;
+        //var rxp = 0;
+        //if (document.getElementById('slcR').value != "Todos") {
+        //    rxp = parseInt(document.getElementById('slcR').value);
+        //}
+        //var filtro = document.getElementById("inpBusqueda").value;
+        var frm = new FormData();
+        frm.append("id", id);
+        frm.append("filtro", "");
+        frm.append("pagina", pageP);
+       // frm.append("registrosPagina", rxp);
+
+        var x = new XMLHttpRequest();
+        x.open("POST", "/GastosContadurias/BuscarGastosAsignado", false);
+        x.addEventListener("load", function (e) {
+            var response = JSON.parse(x.responseText);
+            if (response.length == 0) {
+                pageP = 0;
+                totalpaginas = 0;
+            } else {
+                totalpaginas = response[0].total;
+            }
+
+            document.getElementById("ctCI").innerHTML = "";
+            var inner = "";
+
+            for (var i = 0; i < response.length; i++) {
+                inner += "<tr>" +
+                    "<td>" + response[i].Id_Corretaje + "</td>" +
+                    "<td>" + response[i].Crt_Direccion + "</td>" +
+                    "<td>" + response[i].GstCon_Monto + "</td>" +
+                    "<td>" + response[i].GstCon_Concepto + "</td>" +
+                    "<td>" + response[i].nombre + "</td>" +
+                    "<td><a class=\"btn btn-primary\" href=\"/GastosContadurias/Edit/" + response[i].ci_Id + "\">Editar</a></td>" +
+                    "<td><a class=\"btn btn-info\" href=\"/GastosContadurias/Details/" + response[i].ci_Id + "\">Detalles</a></td>" +
+                    "<td><a class=\"btn btn-danger\" href=\"/GastosContadurias/Delete/" + response[i].ci_Id + "\">Eliminar</a></td>" +
+                    "</tr>";
+            }
+            document.getElementById("ctCI").innerHTML = inner;
+
+            document.getElementById("next").textContent = totalpaginas;
+            if (pageP <= 1) {
+                document.getElementById("previous").textContent = pageP;
+                document.getElementById("btnPrevious").disabled = true;
+                if (pageP = totalpaginas) {
+                    document.getElementById("btnNext").disabled = true;
+                }
+            } else if (pageP == totalpaginas) {
+                document.getElementById("btnPrevious").disabled = false;
+                document.getElementById("btnNext").disabled = true;
+            } else {
+                document.getElementById("btnNext").disabled = false;
+            }
+            document.getElementById("actual").textContent = pageP;
+        });
+        x.send(frm);
+    }
+    paginadoAsignacion();
+
+</script>

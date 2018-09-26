@@ -18,7 +18,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos
         public ActionResult Index()
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -37,7 +37,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Details/5
         public ActionResult Details(string id)
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -65,7 +65,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Create
         public ActionResult Create()
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -88,7 +88,7 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "art_id,art_nombre,art_descripcion,art_cantidadMinima")] Articulos articulos)
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -116,7 +116,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Edit/5
         public ActionResult Edit(string id)
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -174,7 +174,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Articulos/Delete/5
         public ActionResult Delete(string id)
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -204,7 +204,7 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -225,7 +225,7 @@ namespace CasasRed_Nuevo3_.Controllers
 
         public ActionResult Historial(string id)
         {
-            lc.ActualizarVariables();
+            //lc.ActualizarVariables();
             if (Session["Usuario"] == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -257,12 +257,20 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             if (filtro == "")
             {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = db.Articulos.Count();
+                }
                 int totalPaginas = (int)Math.Ceiling((double)db.Articulos.Count() / registrosPagina);
                 var busqueda = (from a in db.Articulos select new { a.art_id, a.art_nombre, a.art_descripcion, fecha = SqlFunctions.DateName("year", a.art_fechaIngreso).Trim() + "/" + SqlFunctions.StringConvert((double)a.art_fechaIngreso.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.art_fechaIngreso).Trim(), a.art_cantidadMinima, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else
             {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = (from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion }).Count();
+                }
                 int totalPaginas = (int)Math.Ceiling((double)(from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion }).Count() / registrosPagina);
                 var busqueda = (from a in db.Articulos where a.art_id.Contains(filtro) || a.art_descripcion.Contains(filtro) || a.art_nombre.Contains(filtro) select new { a.art_id, a.art_nombre, a.art_descripcion, fecha = SqlFunctions.DateName("year", a.art_fechaIngreso).Trim() + "/" + SqlFunctions.StringConvert((double)a.art_fechaIngreso.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.art_fechaIngreso).Trim(), a.art_cantidadMinima, total = totalPaginas }).OrderBy(a => a.art_nombre).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);

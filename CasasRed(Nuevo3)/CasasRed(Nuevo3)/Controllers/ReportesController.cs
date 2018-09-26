@@ -15,5 +15,10 @@ namespace CasasRed_Nuevo3_.Controllers
             return View();
         }
 
+        public ActionResult MultiReport(string titulo = "")
+        {
+            ViewBag.Title = titulo.Replace('-', ' ');
+            return View();
+        }
     }
 }

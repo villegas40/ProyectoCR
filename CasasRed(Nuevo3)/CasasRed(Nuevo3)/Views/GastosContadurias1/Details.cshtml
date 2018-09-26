@@ -1,0 +1,74 @@
+﻿@model CasasRed_Nuevo3_.Models.GastosContaduria
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>GastosContaduria</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.GstCon_Concepto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.GstCon_Concepto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.GstCon_Monto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.GstCon_Monto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.GstCon_Descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.GstCon_Descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.GstCon_Fecha)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.GstCon_Fecha)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Corretaje.Crt_Status)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Usuario.usu_username)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Usuario.usu_username)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

@@ -71,6 +71,24 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else if (Session["Tipo"].ToString() == "Verificacion" || Session["Tipo"].ToString() == "Administrador")
             {
+                //Selectlist calificacion vendedor
+                var calificacion = new SelectList(new []
+                {
+                    new {value = 0, text = "Seleccione una opción...."},
+                    new {value = 1, text= "1"},
+                    new {value = 2, text= "2"},
+                    new {value = 3, text= "3"},
+                    new {value = 4, text= "4"},
+                    new {value = 5, text= "5"},
+                    new {value = 6, text= "6"},
+                    new {value = 7, text= "7"},
+                    new {value = 8, text= "8"},
+                    new {value = 9, text= "9"},
+                    new {value = 10, text= "10"}
+                }, "value", "text", 0);
+
+                ViewData["Calificacion"] = calificacion;
+
                 ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre");
                 return View();
             }
@@ -89,8 +107,27 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
+            //Selectlist calificacion vendedor
+            var calificacion = new SelectList(new[]
+            {
+                    new {value = 0, text = "Seleccione una opción...."},
+                    new {value = 1, text= "1"},
+                    new {value = 2, text= "2"},
+                    new {value = 3, text= "3"},
+                    new {value = 4, text= "4"},
+                    new {value = 5, text= "5"},
+                    new {value = 6, text= "6"},
+                    new {value = 7, text= "7"},
+                    new {value = 8, text= "8"},
+                    new {value = 9, text= "9"},
+                    new {value = 10, text= "10"}
+                }, "value", "text", 0);
+
             if (ModelState.IsValid)
             {
+                //Usuario que modifico
+                verificacion.Id_Usuario = int.Parse(Session["UsuarioID"].ToString());
+
                 verificacion.Vfn_Costo = ((verificacion.Vfn_Costo == null) ? 0 : verificacion.Vfn_Costo);
                 verificacion.Vfn_Observaciones = ((verificacion.Vfn_Observaciones == null) ? "" : verificacion.Vfn_Observaciones);
                 verificacion.Vfn_Persona_fisica = ((verificacion.Vfn_Persona_fisica == null) ? false : verificacion.Vfn_Persona_fisica);
@@ -104,6 +141,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewData["Calificacion"] = calificacion;
             ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
             return View(verificacion);
         }
@@ -111,22 +149,23 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions/Edit/5
         public ActionResult Edit(int? id)
         {
-            //Lista de valor para trato de asesor
-            var valor = new SelectList(new[] {
-                new { value = 0, text = "Seleccione una opción"},
-                new { value = 1, text = "1"},
-                new { value = 2, text = "2" },
-                new { value = 3, text = "3" },
-                new { value = 4, text = "4" },
-                new { value = 5, text = "5" },
-                new { value = 6, text = "6" },
-                new { value = 7, text = "7" },
-                new { value = 8, text = "8" },
-                new { value = 9, text = "9" },
-                new { value = 10, text = "10" }
-            }, "value", "text", 0);
+            //Selectlist calificacion vendedor
+            var calificacion = new SelectList(new[]
+            {
+                    new {value = 0, text = "Seleccione una opción...."},
+                    new {value = 1, text= "1"},
+                    new {value = 2, text= "2"},
+                    new {value = 3, text= "3"},
+                    new {value = 4, text= "4"},
+                    new {value = 5, text= "5"},
+                    new {value = 6, text= "6"},
+                    new {value = 7, text= "7"},
+                    new {value = 8, text= "8"},
+                    new {value = 9, text= "9"},
+                    new {value = 10, text= "10"}
+                }, "value", "text", 0);
 
-            ViewData["Valor"] = valor;
+            ViewData["Calificacion"] = calificacion;
 
             if (id == null)
             {

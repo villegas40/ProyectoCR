@@ -285,7 +285,7 @@ namespace CasasRed_Nuevo3_.Controllers
                     registrosPagina = (int)Math.Ceiling((double)(from e in db.Existencias group e by e.ext_art_id into eGroup select new { item = eGroup.Key, cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count());
                 }
                 var totalPaginas = (int)Math.Ceiling((double)(from e in db.Existencias group e by e.ext_art_id into eGroup select new { item = eGroup.Key, cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count() / registrosPagina);
-                var busqueda = (from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion } into eGroup select new { item = eGroup.Key.ext_art_id, descripcion = eGroup.Key.art_descripcion, cantidad = eGroup.Sum(e => e.ext_cantidadActual), total = totalPaginas }).OrderBy(e => e.item).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion } into eGroup select new { item = eGroup.Key.ext_art_id, descripcion = eGroup.Key.art_descripcion, cantidad = eGroup.Sum(e => e.ext_cantidadActual), precioTotal = eGroup.Sum(e => e.ext_precioUnitario * e.ext_cantidadActual), total = totalPaginas }).OrderBy(e => e.item).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
 
             }
@@ -296,7 +296,7 @@ namespace CasasRed_Nuevo3_.Controllers
                     registrosPagina = (int)Math.Ceiling((double)(from e in db.Existencias group e by e.ext_art_id into eGroup where eGroup.Key.Contains(filtro) select new { item = eGroup.Key, cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count());
                 }
                 var totalPaginas = (int)Math.Ceiling((double)(from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion } into eGroup where eGroup.Key.ext_art_id.Contains(filtro) || eGroup.Key.art_descripcion.Contains(filtro) select new { item = eGroup.Key, cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count() / registrosPagina);
-                var busqueda = (from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion } into eGroup where eGroup.Key.ext_art_id.Contains(filtro) || eGroup.Key.art_descripcion.Contains(filtro) select new { item = eGroup.Key.ext_art_id, descripcion = eGroup.Key.art_descripcion, cantidad = eGroup.Sum(e => e.ext_cantidadActual), total = totalPaginas }).OrderBy(e => e.item).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion } into eGroup where eGroup.Key.ext_art_id.Contains(filtro) || eGroup.Key.art_descripcion.Contains(filtro) select new { item = eGroup.Key.ext_art_id, descripcion = eGroup.Key.art_descripcion, cantidad = eGroup.Sum(e => e.ext_cantidadActual), precioTotal = eGroup.Sum(e => e.ext_precioUnitario * e.ext_cantidadActual) , total = totalPaginas }).OrderBy(e => e.item).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

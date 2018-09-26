@@ -114,7 +114,8 @@
         @*@Html.LabelFor(model => model.Vfn_Trato_asesor, htmlAttributes: new { @class = "control-label col-md-2" })*@
         <label class="control-label col-md-4" for="tratoAsesor">¿Cómo considera que fue el trato del asesor?</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })
+            @*@Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })*@
+            @Html.DropDownListFor(model => model.Vfn_Trato_asesor, ViewData["Calificacion"] as SelectList, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })
             @Html.ValidationMessageFor(model => model.Vfn_Trato_asesor, "", new { @class = "text-danger" })
         </div>
     </div>

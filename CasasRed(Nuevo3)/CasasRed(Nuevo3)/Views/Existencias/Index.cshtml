@@ -29,6 +29,7 @@
                 <th>Artículo</th>
                 <th>Descripción</th>
                 <th>Cantidad Actual</th>
+                <th>Precio promedio</th>
                 <th class="InvisiblePrint">Opciones</th>
             </tr>
         </thead>
@@ -40,7 +41,9 @@
     <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
     <button id="btnNext" class="btn btn-default" onclick="paginadoExistencias(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
 </center>
+<hr />
 <button id="print" class="btn btn-outline-primary" onclick="imprimirBusqueda(document.getElementById('cabeceroPrint'),document.getElementById('printZone'),'Resultados busqueda') "><i class="fas fa-print"></i> Imprimir</button>
+<button id="print" class="btn btn-outline-primary" onclick="imprimirBusquedaMultiples([document.getElementById('cabeceroPrint').innerHTML,document.getElementById('cabeceroPrint').innerHTML],[document.getElementById('printZone').innerHTML,document.getElementById('printZone').innerHTML],['titulo1','titulo2'],'Resultados busqueda') "><i class="fas fa-print"></i> Imprimir Multiple</button>
 <script>
     var printWindow;
     var pageP = 0;
@@ -79,6 +82,7 @@
                 inner += "<tr><td>" + response[i].item + "</td>" +
                     "<td>" + response[i].descripcion + "</td>" +
                     "<td>" + response[i].cantidad + "</td>" +
+                    "<td>" + (parseFloat(response[i].precioTotal) / parseFloat(response[i].cantidad)).toFixed(2) + "</td>" +
                     "<td class=\"InvisiblePrint\"><a class=\"btn btn-info\" href=\"/Existencias/Details/" + response[i].item + "\">Detalles</a></td></tr>"
             }
             document.getElementById("ctExistencias").innerHTML = inner

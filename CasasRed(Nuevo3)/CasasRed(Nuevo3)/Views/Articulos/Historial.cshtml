@@ -2,12 +2,12 @@
     ViewBag.Title = "Artículo > Historial";
     string articulo = ViewBag.Articulo;
 }
-<h2>Historial del articulo @articulo</h2>
-
+<h2 id="tituloH">Historial del articulo @articulo</h2>
+<hr />
 <div id="cabeceroPrint">
     <div class="form-inline mx-sm-3 mb-2 float-left">
         <label>Filtro: </label>
-        <input class="form-control" id="inpBusqueda" onkeyup="paginadoHistorial()" placeholder="Buscar por artículo" />
+        <input class="form-control" id="inpBusqueda" onkeyup="paginadoHistorial()" placeholder="Buscar por direccion" />
     </div>
     <div class="form-inline mx-sm-3 mb-2 float-left">
         <label>Registros por página: </label>
@@ -18,8 +18,8 @@
             <option>Todos</option>
         </select>
     </div>
-    <div class="form-inline mx-sm-3 mb-2 float-left">
-        <label>Registros por página: </label>
+    <div class="form-inline mx-sm-3 mb-2 float-left InvisiblePrint">
+        <label>Movimiento: </label>
         <select id="slcT" class="form-control" onchange="paginadoHistorial()">
             <option>Todos</option>
             <option>Entrada</option>
@@ -46,7 +46,9 @@
     <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
     <button disabled id="btnNext" class="btn btn-default" onclick="paginadoHistorial(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
 </center>
-
+<hr />
+<button id="print" class="btn btn-outline-primary" onclick="imprimirBusqueda(document.getElementById('cabeceroPrint'),document.getElementById('printZone'),document.getElementById('tituloH').textContent) "><i class="fas fa-print"></i> Imprimir</button>
+@Html.ActionLink("Regresar al inventario", "Index", null, new { @class = "btn btn-outline-secondary" })
 <script>
     var id = '@Html.Raw(ViewBag.id)';
     var pageP = 0;
