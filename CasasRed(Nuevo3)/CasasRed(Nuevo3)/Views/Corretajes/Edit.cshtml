@@ -150,7 +150,8 @@
                                             @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
                                             <label class="control-label col-md-4" for="estatus">Estatus</label>
                                             <div class="col-md-12">
-                                                @Html.EditorFor(model => model.Crt_Status, new { htmlAttributes = new { @class = "form-control col-12 data", @id = "estatus" } })
+                                                @Html.DropDownListFor(model => model.Crt_Status, ViewData["Estatus"] as SelectList, new { @class = "form-control data", @id = "Crt_Status" })
+                                               
                                                 @Html.ValidationMessageFor(model => model.Crt_Status, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -159,15 +160,15 @@
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label class="control-label col-md-4" for="Gral_Fechaalta">Fecha de Alta</label>
-                                            <div class="col-md-12">
+                                            <label class="control-label col-md-4" for="Gral_Fechaalta" style="display:none">Fecha de Alta</label>
+                                            <div class="col-md-12" style="display:none">
                                                 @if (Model.Crt_FechaAlta.HasValue)
                                                 {
                                                     @Html.EditorFor(model => model.Crt_FechaAlta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker", @Value = Model.Crt_FechaAlta.Value.ToString("yyyy/MM/dd") } })
                                                 }
                                                 else
                                                 {
-                                                    @Html.EditorFor(model => model.Crt_FechaAlta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker", @type = "date" } })
+                                                    @Html.EditorFor(model => model.Crt_FechaAlta, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
                                                 }
                                                 @Html.ValidationMessageFor(model => model.Crt_FechaAlta, "", new { @class = "text-danger" })
                                             </div>
@@ -189,7 +190,7 @@
                                             </div>
                                             <!--Usuario-->
                                             <div class="col-12 ">
-                                                <label for="Id_Usuario">Id Usuario</label>
+                                                <label for="Id_Usuario" style="display:none">Id Usuario</label>
                                                 @Html.EditorFor(model => model.Id_Usuario, new { htmlAttributes = new { @class = "form-control data", @id = "Id_Usuario", @type = "hidden" } })
                                                 @Html.ValidationMessageFor(model => model.Id_Usuario, "", new { @class = "text-danger" })
                                             </div>
@@ -234,7 +235,7 @@
                                                 }
                                                 else
                                                 {
-                                                    @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control data", @type = "date" } })
+                                                    @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control data", @id = "fechanac" } })
                                                 }
                                                 @Html.ValidationMessageFor(model => model.Crt_Fec_Nac, "", new { @class = "text-danger" })
                                             </div>
@@ -290,6 +291,16 @@
                                             </div>
                                         </div>
 
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            @*Html.LabelFor(model => model.Crt_Tel_Trabajo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                            <div class="col-12">
+                                                <label for="teltrabajo">Número de Seguro Social</label>
+                                                @Html.EditorFor(model => model.Crt_Nss, new { htmlAttributes = new { @class = "form-control data", @id = "numss" } })
+                                                @Html.ValidationMessageFor(model => model.Crt_Nss, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -502,7 +513,7 @@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
                                                     @*@Html.TextBoxFor(model => model.Crt_Ine_Titu.Value, new { @class = "custom-control-input data", @id = "customCheck1", @type = "checkbox", @oninput = "this.value = this.checked; resetCheckbox();" })*@
-                                                    <input id="checkbox1" class="custom-control-input data" name="Crt_Ine_Titu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Ine_Titu.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="checkbox1" class="custom-control-input data" name="Crt_Ine_Titu" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_Ine_Titu.Value ? "checked=\"checked\"" : "") />
                                                     <label class="custom-control-label" for="checkbox1">Credencial del titular</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_Ine_Titu, "", new { @class = "text-danger" })
                                                 </div>
@@ -513,7 +524,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    <input id="customCheck3" class="custom-control-input data" name="Crt_Ine_Conyu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Ine_Conyu.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck3" class="custom-control-input data" name="Crt_Ine_Conyu" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_Ine_Conyu.Value ? "checked=\"checked\"" : "") />
                                                     <label class="custom-control-label" for="customCheck3">Credencial Conyuge</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_Ine_Conyu, "", new { @class = "text-danger" })
                                                 </div>
@@ -524,7 +535,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    <input id="customCheck4" class="custom-control-input data" name="Crt_ActaNacTitu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaNacTitu.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck4" class="custom-control-input data" name="Crt_ActaNacTitu" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaNacTitu.Value ? "checked=\"checked\"" : "") />
                                                     <label class="custom-control-label" for="customCheck4">Acta de necimiento titular</label>
                                                     @Html.ValidationMessageFor(model => model.Crt_ActaNacTitu, "", new { @class = "text-danger" })
                                                 </div>
@@ -538,7 +549,7 @@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    <input id="customCheck5" class="custom-control-input data" name="Crt_ActaNacConyu" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaNacConyu.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck5" class="custom-control-input data" name="Crt_ActaNacConyu" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaNacConyu.Value ? "checked=\"checked\"" : "") />
 
                                                     @*  @Html.TextBoxFor(model => model.Crt_ActaNacConyu.Value, new { @class = "custom-control-input data", @id = "customCheck5", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck5">Acta de nacimiento conyuge</label>
@@ -551,7 +562,7 @@
                                         <div class="custom-control custom-checkbox">
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    <input id="customCheck6" class="custom-control-input data" name="Crt_ActaMatr" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaMatr.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck6" class="custom-control-input data" name="Crt_ActaMatr" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_ActaMatr.Value ? "checked=\"checked\"" : "") />
 
                                                     @* @Html.TextBoxFor(model => model.Crt_ActaMatr.Value, new { @class = "custom-control-input data", @id = "customCheck6", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck6">Acta de matrimonio</label>
@@ -566,7 +577,7 @@
                                             @*<label>Acuerdo</label>*@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    <input id="customCheck7" class="custom-control-input data" name="Crt_EscrCert" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_EscrCert.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck7" class="custom-control-input data" name="Crt_EscrCert" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_EscrCert.Value ? "checked=\"checked\"" : "") />
 
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
                                                     @* @Html.TextBoxFor(model => model.Crt_EscrCert.Value, new { @class = "custom-control-input data", @id = "customCheck7", @type = "checkbox", @oninput = "this.value = this.checked" })*@
@@ -583,7 +594,7 @@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    <input id="customCheck8" class="custom-control-input data" name="Crt_Acuerdo" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Acuerdo.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck8" class="custom-control-input data" name="Crt_Acuerdo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_Acuerdo.Value ? "checked=\"checked\"" : "") />
 
                                                     @* @Html.TextBoxFor(model => model.Crt_Acuerdo.Value, new { @class = "custom-control-input data", @id = "customCheck8", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck8">Acuerdo</label>
@@ -598,7 +609,7 @@
                                             @*<label>Acuerdo</label>*@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
-                                                    <input id="customCheck9" class="custom-control-input data" name="Crt_CartaDesPre" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_CartaDesPre.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck9" class="custom-control-input data" name="Crt_CartaDesPre" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_CartaDesPre.Value ? "checked=\"checked\"" : "") />
 
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
                                                     @*  @Html.TextBoxFor(model => model.Crt_CartaDesPre.Value, new { @class = "custom-control-input data", @id = "customCheck9", @type = "checkbox", @oninput = "this.value = this.checked" })*@
@@ -613,7 +624,7 @@
                                             <div class="col-md-10">
                                                 <div class="checkbox">
                                                     @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                                    <input id="customCheck10" class="custom-control-input data" name="Crt_Escritura_Simple" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Crt_Escritura_Simple.Value ? "checked=\"checked\"" : "") />
+                                                    <input id="customCheck10" class="custom-control-input data" name="Crt_Escritura_Simple" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Crt_Escritura_Simple.Value ? "checked=\"checked\"" : "") />
 
                                                     @*  @Html.TextBoxFor(model => model.Crt_Escritura_Simple, new { @class = "custom-control-input data", @id = "customCheck10", @type = "checkbox", @oninput = "this.value = this.checked" })*@
                                                     <label class="custom-control-label" for="customCheck10">Escritura simple</label>
@@ -827,12 +838,28 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+
+        if ($('#fechanac').prop('type') != 'date') {
+            $('#fechanac').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'mm/dd/yyyy',
+            })
+           
+        }
+
+        if ($('#datepicker').prop('type') != 'date') {
+            $('#datepicker').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'yyyy/mm/dd'
+            });
+        }
+
         //Si se tiene fecha y se quiere editar al borrarla completamente convierte el input en un date
         function funcionDate() {
             var x = document.getElementById("fechanac");

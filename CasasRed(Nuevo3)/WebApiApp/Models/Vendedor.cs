@@ -21,6 +21,7 @@ namespace WebApiApp.Models
             this.Cliente = new HashSet<Cliente>();
             this.Corretaje = new HashSet<Corretaje>();
             this.DetallesComision = new HashSet<DetallesComision>();
+            this.VendedorAsig = new HashSet<VendedorAsig>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,7 @@ namespace WebApiApp.Models
         public virtual ICollection<Corretaje> Corretaje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesComision> DetallesComision { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VendedorAsig> VendedorAsig { get; set; }
     }
 }

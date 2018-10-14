@@ -15,32 +15,43 @@ namespace CasasRed_Nuevo3_.Controllers
     public class GerenteController : Controller
     {
         private CasasRedEntities db = new CasasRedEntities();
-
+        LoginController lc = new LoginController();
         // GET: Gerente
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            var gen = new FooViewModel();
-            gen.gestions = db.Gestion.ToList();
-            gen.corretajes = db.Corretaje.ToList();
-            List<string> nombres = new List<string>();
-            List<int?> ids = new List<int?>();
-          
-            var ge = ((from g in db.Gestion select new { g.Id_Corretaje, g.Cliente.Gral_Nombre }).ToList());
-
-
-
-            foreach (var XD in ge)
+            if (Session["Usuario"] == null)
             {
-               nombres.Add(XD.Gral_Nombre);
-               ids.Add(XD.Id_Corretaje);
+                return RedirectToAction("Index", "Home");
             }
+            else if (Session["Tipo"].ToString() == "Administrador")
+            {
+                var gen = new FooViewModel();
+                gen.gestions = db.Gestion.ToList();
+                gen.corretajes = db.Corretaje.ToList();
+                List<string> nombres = new List<string>();
+                List<int?> ids = new List<int?>();
 
-            //ViewBag.test = (from g in db.Gestion select new {g.Id_Corretaje, g.Cliente.Gral_Nombre}).ToList();
-            ViewBag.listanombres = nombres;
-            ViewBag.listaids = ids;
+                var ge = ((from g in db.Gestion select new { g.Id_Corretaje, g.Cliente.Gral_Nombre }).ToList());
 
-            return View(gen);
-            
+
+
+                foreach (var XD in ge)
+                {
+                    nombres.Add(XD.Gral_Nombre);
+                    ids.Add(XD.Id_Corretaje);
+                }
+
+                //ViewBag.test = (from g in db.Gestion select new {g.Id_Corretaje, g.Cliente.Gral_Nombre}).ToList();
+                ViewBag.listanombres = nombres;
+                ViewBag.listaids = ids;
+
+                return View(gen);
+            }
+            else
+            {
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }            
         }
         public class FooViewModel
         {
@@ -62,41 +73,20 @@ namespace CasasRed_Nuevo3_.Controllers
 
         public ActionResult DeleteDetails(int?idc,int? idg)
         {
-            if (idc == null && idg == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            if (idg == 0)
+            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
             {
-                DetailsViewModel kappa1 = new DetailsViewModel();
-                kappa1.corretajes.Add(db.Corretaje.Find(idc));
-                kappa1.habilitacions = (db.Habilitacion.ToList());
-                return View(kappa1);
+                return View(db.Articulos.ToList());
             }
-
-            DetailsViewModel kappa = new DetailsViewModel();
-
-            kappa.corretajes.Add(db.Corretaje.Find(idc));
-            kappa.gestions.Add(db.Gestion.Find(idg));
-            kappa.verificacions = (db.Verificacion.ToList());
-            kappa.habilitacions = (db.Habilitacion.ToList());
-
-            var xd = ((from x in db.Verificacion select new { x.Id, x.Vfn_Trato_asesor, x.Id_Cliente }).ToList());
-
-            List<int?> idv = new List<int?>();
-            List<int?> vfntrato = new List<int?>();
-            List<int?> IDclien = new List<int?>();
-            foreach (var test3 in xd)
+            else
             {
-                idv.Add(test3.Id);
-                vfntrato.Add(test3.Vfn_Trato_asesor);
-                IDclien.Add(test3.Id_Cliente);
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
-            ViewBag.idvs = idv;
-            ViewBag.vfntratos = vfntrato;
-            ViewBag.idcliente = IDclien;
-
-            return View(kappa);
+            
         }
 
         // GET: Clientes/Delete/5
@@ -135,7 +125,7 @@ namespace CasasRed_Nuevo3_.Controllers
             Cliente cliente = db.Cliente.Find(id);
             db.Cliente.Remove(cliente);
             db.SaveChanges();
-            return RedirectToAction("/Index");
+            return Redirect("/Gerente/Index");
         }
 
         // GET: Corretajes/Delete/5
@@ -174,7 +164,7 @@ namespace CasasRed_Nuevo3_.Controllers
             Corretaje corretaje = db.Corretaje.Find(id);
             db.Corretaje.Remove(corretaje);
             db.SaveChanges();
-            return RedirectToAction("/Index");
+            return Redirect("/Gerente/Index");
         }
 
 
@@ -208,6 +198,7 @@ namespace CasasRed_Nuevo3_.Controllers
             List<int?> idv = new List<int?>();
             List<int?> vfntrato = new List<int?>();
             List<int?> IDclien = new List<int?>();
+
             foreach (var test3 in xd)
             {
                 idv.Add(test3.Id);
@@ -225,6 +216,17 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes/Edit/5
         public ActionResult Editc(int? id)
         {
+
+            //Estatus de la casa
+            var estatus = new SelectList(new[] {
+                new { value = "No seleccionado", text = "Selecciona una opción.."},
+                new { value = "Venta", text = "Venta" },
+                new { value = "Disponible", text = "Disponible" },
+                new {value = "Cancelado" , text ="Cancelado"},
+                new {value = "Firmado" , text = "Firmado"}
+            }, "value", "text", 0);
+
+
             var posicion = new SelectList(new[] {
                 new { value = 0, text = "Selecciona una opción.."},
                 new { value = 1, text = "Soltero" },
@@ -234,15 +236,8 @@ namespace CasasRed_Nuevo3_.Controllers
             }, "value", "text", 0);
 
             ViewData["Posicion"] = posicion;
-
-            //Estatus de la casa
-            var estatus = new SelectList(new[] {
-                new { value = 0, text = "Selecciona una opción.."},
-                new { value = 1, text = "Venta" },
-                new { value = 2, text = "Disponible" },
-            }, "value", "text", 0);
-
             ViewData["Estatus"] = estatus;
+
 
 
             if (id == null)
@@ -330,11 +325,12 @@ namespace CasasRed_Nuevo3_.Controllers
             corretaje.Crt_Obervaciones = (corretaje.Crt_Obervaciones == null) ? "" : corretaje.Crt_Obervaciones;
 
 
+
             if (ModelState.IsValid)
             {
                 db.Entry(corretaje).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("/Index");
+                return Redirect("/Gerente/Index");
             }
             return View(corretaje);
         }
@@ -343,18 +339,31 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Gestions/Edit/5
         public ActionResult Editg(int? id)
         {
-            if (id == null)
+            if (Session["Usuario"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "Home");
             }
-            Gestion gestion = db.Gestion.Find(id);
-            if (gestion == null)
+            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
             {
-                return HttpNotFound();
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Gestion gestion = db.Gestion.Find(id);
+                if (gestion == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", gestion.Id_Cliente);
+                ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gestion.Id_Corretaje);
+                return View(gestion);
             }
-            ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", gestion.Id_Cliente);
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gestion.Id_Corretaje);
-            return View(gestion);
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         // POST: Gestions/Edit/5
@@ -362,44 +371,57 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editg([Bind(Include = "Id,Gtn_Escrituras,Gtn_Planta_Cartografica,Gtn_Predial,Gtn_Recibo_Luz,Gtn_Recibo_Agua,Gtn_Acta_Nacimiento,Gtn_IFE_Copia,Gtn_Sol_Ret_Ifo,Gtn_Cert_Hip,Gtn_Cert_Fiscal,Gtn_Sol_Estado,Gtn_Junta_URBI,Gtn_Agua_Pago_Inf,Gtn_Cert_Cartogr,Gtn_No_Oficial,Gtn_Avaluo,Gtn_CT_Banco,Gtn_Aviso_Suspension,Gtn_Formato_Infonavit,Gtn_Fotos_Propiedad,Gtn_Evaluo_Contacto,Gtn_Planeacion_Fianza,Gtn_Urbanizacion,Gtn_Credito_INFONAVIT,Gtn_Notaria,Gtn_Firma_Escrituras,Gtm_Aviso_Susp,Id_Corretaje,Id_Cliente,Gtn_ProgresoForm")] Gestion gestion)
+        public ActionResult Editg([Bind(Include = "Id,Gtn_Escrituras,Gtn_Planta_Cartografica,Gtn_Predial,Gtn_Recibo_Luz,Gtn_Recibo_Agua,Gtn_Acta_Nacimiento,Gtn_IFE_Copia,Gtn_Sol_Ret_Ifo,Gtn_Cert_Hip,Gtn_Cert_Fiscal,Gtn_Sol_Estado,Gtn_Junta_URBI,Gtn_Agua_Pago_Inf,Gtn_Cert_Cartogr,Gtn_No_Oficial,Gtn_Avaluo,Gtn_CT_Banco,Gtn_Aviso_Suspension,Gtn_Formato_Infonavit,Gtn_Fotos_Propiedad,Gtn_Evaluo_Contacto,Gtn_Planeacion_Fianza,Gtn_Urbanizacion,Gtn_Credito_INFONAVIT,Gtn_Notaria,Gtn_Firma_Escrituras,Gtm_Aviso_Susp,Id_Corretaje,Id_Cliente,Gtn_ProgresoForm,Id_Usuario")] Gestion gestion)
         {
-            gestion.Gtn_Escrituras = ((gestion.Gtn_Escrituras == null) ? false : gestion.Gtn_Escrituras);
-            gestion.Gtn_Planta_Cartografica = ((gestion.Gtn_Planta_Cartografica == null) ? false : gestion.Gtn_Planta_Cartografica);
-            gestion.Gtn_Predial = ((gestion.Gtn_Predial == null) ? false : gestion.Gtn_Predial);
-            gestion.Gtn_Recibo_Luz = ((gestion.Gtn_Recibo_Luz == null) ? false : gestion.Gtn_Recibo_Luz);
-            gestion.Gtn_Recibo_Agua = ((gestion.Gtn_Recibo_Agua == null) ? false : gestion.Gtn_Recibo_Agua);
-            gestion.Gtn_Acta_Nacimiento = ((gestion.Gtn_Acta_Nacimiento == null) ? false : gestion.Gtn_Acta_Nacimiento);
-            gestion.Gtn_IFE_Copia = ((gestion.Gtn_IFE_Copia == null) ? false : gestion.Gtn_IFE_Copia);
-            gestion.Gtn_Sol_Ret_Ifo = ((gestion.Gtn_Sol_Ret_Ifo == null) ? false : gestion.Gtn_Sol_Ret_Ifo);
-            gestion.Gtn_Cert_Hip = ((gestion.Gtn_Cert_Hip == null) ? false : gestion.Gtn_Cert_Hip);
-            gestion.Gtn_Cert_Fiscal = ((gestion.Gtn_Cert_Fiscal == null) ? false : gestion.Gtn_Cert_Fiscal);
-            gestion.Gtn_Sol_Estado = ((gestion.Gtn_Sol_Estado == null) ? false : gestion.Gtn_Sol_Estado);
-            gestion.Gtn_Junta_URBI = ((gestion.Gtn_Junta_URBI == null) ? false : gestion.Gtn_Junta_URBI);
-            gestion.Gtn_Agua_Pago_Inf = ((gestion.Gtn_Agua_Pago_Inf == null) ? false : gestion.Gtn_Agua_Pago_Inf);
-            gestion.Gtn_Cert_Cartogr = ((gestion.Gtn_Cert_Cartogr == null) ? false : gestion.Gtn_Cert_Cartogr);
-            gestion.Gtn_No_Oficial = ((gestion.Gtn_No_Oficial == null) ? false : gestion.Gtn_No_Oficial);
-            gestion.Gtn_Avaluo = ((gestion.Gtn_Avaluo == null) ? false : gestion.Gtn_Avaluo);
-            gestion.Gtn_CT_Banco = ((gestion.Gtn_CT_Banco == null) ? false : gestion.Gtn_CT_Banco);
-            gestion.Gtn_Aviso_Suspension = ((gestion.Gtn_Aviso_Suspension == null) ? false : gestion.Gtn_Aviso_Suspension);
-            gestion.Gtn_Formato_Infonavit = ((gestion.Gtn_Formato_Infonavit == null) ? false : gestion.Gtn_Formato_Infonavit);
-            gestion.Gtn_Fotos_Propiedad = ((gestion.Gtn_Fotos_Propiedad == null) ? false : gestion.Gtn_Fotos_Propiedad);
-            gestion.Gtn_Evaluo_Contacto = ((gestion.Gtn_Evaluo_Contacto == null) ? false : gestion.Gtn_Evaluo_Contacto);
-            gestion.Gtn_Planeacion_Fianza = ((gestion.Gtn_Planeacion_Fianza == null) ? false : gestion.Gtn_Planeacion_Fianza);
-            gestion.Gtn_Urbanizacion = ((gestion.Gtn_Urbanizacion == null) ? false : gestion.Gtn_Urbanizacion);
-            gestion.Gtn_Credito_INFONAVIT = ((gestion.Gtn_Credito_INFONAVIT == null) ? false : gestion.Gtn_Credito_INFONAVIT);
-            gestion.Gtn_Notaria = ((gestion.Gtn_Notaria == null) ? false : gestion.Gtn_Notaria);
-            gestion.Gtn_Firma_Escrituras = ((gestion.Gtn_Firma_Escrituras == null) ? false : gestion.Gtn_Firma_Escrituras);
-
-            if (ModelState.IsValid)
+            if (Session["Usuario"] == null)
             {
-                db.Entry(gestion).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("/Index");
+                return RedirectToAction("Index", "Home");
             }
-            ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", gestion.Id_Cliente);
-            ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gestion.Id_Corretaje);
-            return View(gestion);
+            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
+            {
+                gestion.Gtn_Escrituras = ((gestion.Gtn_Escrituras == null) ? false : gestion.Gtn_Escrituras);
+                gestion.Gtn_Planta_Cartografica = ((gestion.Gtn_Planta_Cartografica == null) ? false : gestion.Gtn_Planta_Cartografica);
+                gestion.Gtn_Predial = ((gestion.Gtn_Predial == null) ? false : gestion.Gtn_Predial);
+                gestion.Gtn_Recibo_Luz = ((gestion.Gtn_Recibo_Luz == null) ? false : gestion.Gtn_Recibo_Luz);
+                gestion.Gtn_Recibo_Agua = ((gestion.Gtn_Recibo_Agua == null) ? false : gestion.Gtn_Recibo_Agua);
+                gestion.Gtn_Acta_Nacimiento = ((gestion.Gtn_Acta_Nacimiento == null) ? false : gestion.Gtn_Acta_Nacimiento);
+                gestion.Gtn_IFE_Copia = ((gestion.Gtn_IFE_Copia == null) ? false : gestion.Gtn_IFE_Copia);
+                gestion.Gtn_Sol_Ret_Ifo = ((gestion.Gtn_Sol_Ret_Ifo == null) ? false : gestion.Gtn_Sol_Ret_Ifo);
+                gestion.Gtn_Cert_Hip = ((gestion.Gtn_Cert_Hip == null) ? false : gestion.Gtn_Cert_Hip);
+                gestion.Gtn_Cert_Fiscal = ((gestion.Gtn_Cert_Fiscal == null) ? false : gestion.Gtn_Cert_Fiscal);
+                gestion.Gtn_Sol_Estado = ((gestion.Gtn_Sol_Estado == null) ? false : gestion.Gtn_Sol_Estado);
+                gestion.Gtn_Junta_URBI = ((gestion.Gtn_Junta_URBI == null) ? false : gestion.Gtn_Junta_URBI);
+                gestion.Gtn_Agua_Pago_Inf = ((gestion.Gtn_Agua_Pago_Inf == null) ? false : gestion.Gtn_Agua_Pago_Inf);
+                gestion.Gtn_Cert_Cartogr = ((gestion.Gtn_Cert_Cartogr == null) ? false : gestion.Gtn_Cert_Cartogr);
+                gestion.Gtn_No_Oficial = ((gestion.Gtn_No_Oficial == null) ? false : gestion.Gtn_No_Oficial);
+                gestion.Gtn_Avaluo = ((gestion.Gtn_Avaluo == null) ? false : gestion.Gtn_Avaluo);
+                gestion.Gtn_CT_Banco = ((gestion.Gtn_CT_Banco == null) ? false : gestion.Gtn_CT_Banco);
+                gestion.Gtn_Aviso_Suspension = ((gestion.Gtn_Aviso_Suspension == null) ? false : gestion.Gtn_Aviso_Suspension);
+                gestion.Gtn_Formato_Infonavit = ((gestion.Gtn_Formato_Infonavit == null) ? false : gestion.Gtn_Formato_Infonavit);
+                gestion.Gtn_Fotos_Propiedad = ((gestion.Gtn_Fotos_Propiedad == null) ? false : gestion.Gtn_Fotos_Propiedad);
+                gestion.Gtn_Evaluo_Contacto = ((gestion.Gtn_Evaluo_Contacto == null) ? false : gestion.Gtn_Evaluo_Contacto);
+                gestion.Gtn_Planeacion_Fianza = ((gestion.Gtn_Planeacion_Fianza == null) ? false : gestion.Gtn_Planeacion_Fianza);
+                gestion.Gtn_Urbanizacion = ((gestion.Gtn_Urbanizacion == null) ? false : gestion.Gtn_Urbanizacion);
+                gestion.Gtn_Credito_INFONAVIT = ((gestion.Gtn_Credito_INFONAVIT == null) ? false : gestion.Gtn_Credito_INFONAVIT);
+                gestion.Gtn_Notaria = ((gestion.Gtn_Notaria == null) ? false : gestion.Gtn_Notaria);
+                gestion.Gtn_Firma_Escrituras = ((gestion.Gtn_Firma_Escrituras == null) ? false : gestion.Gtn_Firma_Escrituras);
+
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(gestion).State = EntityState.Modified;
+                         db.SaveChanges();
+                        return Redirect("/Gerente/Index");
+                     }
+                ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", gestion.Id_Cliente);
+                ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", gestion.Id_Corretaje);
+                return View(gestion);
+            }
+            else
+            {
+                LoginController lc = new LoginController();
+                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+            }
         }
 
         /*EDITAR HABILITACION */
@@ -452,7 +474,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edith([Bind(Include = "Id,Hbt_Puertas,Hbt_Chapas,Hbt_Marcos_puertas,Hbt_Bisagras,Hbt_Taza,Hbt_Lavamanos,Hbt_Bastago,Hbt_Chapeton,Hbt_Maneral,Hbt_Regadera_completa,Hbt_Kit_lavamanos,Hbt_Kit_taza,Hbt_Rosetas,Hbt_Apagador_sencillo,Hbt_Conector_sencillo,Hbt_Apagador_doble,Hbt_Conector_apagador,Hbt_Domo,Hbt_Ventanas,Hbt_Cableado,Hbt_Calibre_cableado,Hbt_Break_interior,Hbt_Break_medidor,Hbt_Pinturas,Hbt_AvisoSusp,Id_Corretaje, Hbt_ProgresoForm")] Habilitacion habilitacion)
+        public ActionResult Edith([Bind(Include = "Id,Hbt_Puertas,Hbt_Chapas,Hbt_Marcos_puertas,Hbt_Bisagras,Hbt_Taza,Hbt_Lavamanos,Hbt_Bastago,Hbt_Chapeton,Hbt_Maneral,Hbt_Regadera_completa,Hbt_Kit_lavamanos,Hbt_Kit_taza,Hbt_Rosetas,Hbt_Apagador_sencillo,Hbt_Conector_sencillo,Hbt_Apagador_doble,Hbt_Conector_apagador,Hbt_Domo,Hbt_Ventanas,Hbt_Cableado,Hbt_Calibre_cableado,Hbt_Break_interior,Hbt_Break_medidor,Hbt_Pinturas,Hbt_AvisoSusp,Id_Corretaje, Hbt_ProgresoForm,Id_Usuario,Hbt_StatusCasa")] Habilitacion habilitacion)
         {
             habilitacion.Hbt_Puertas = (habilitacion.Hbt_Puertas == null) ? false : habilitacion.Hbt_Puertas;
             habilitacion.Hbt_Chapas = (habilitacion.Hbt_Chapas == null) ? false : habilitacion.Hbt_Chapas;
@@ -483,7 +505,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 db.Entry(habilitacion).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("/Index");
+                return Redirect("/Gerente/Index");
             }
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Status", habilitacion.Id_Corretaje);
             return View(habilitacion);
@@ -522,11 +544,30 @@ namespace CasasRed_Nuevo3_.Controllers
             if (continuar == true)
             {
 
+
                 Verificacion verificacion = db.Verificacion.Find(idv);
                 if (verificacion == null)
                 {
                     return HttpNotFound();
                 }
+                //Selectlist calificacion vendedor
+                var calificacion = new SelectList(new[]
+                {
+                    new {value = 0, text = "Seleccione una opción...."},
+                    new {value = 1, text= "1"},
+                    new {value = 2, text= "2"},
+                    new {value = 3, text= "3"},
+                    new {value = 4, text= "4"},
+                    new {value = 5, text= "5"},
+                    new {value = 6, text= "6"},
+                    new {value = 7, text= "7"},
+                    new {value = 8, text= "8"},
+                    new {value = 9, text= "9"},
+                    new {value = 10, text= "10"}
+                }, "value", "text", 0);
+
+                ViewData["Calificacion"] = calificacion;
+
                 ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
                 return View(verificacion);
             }
@@ -542,8 +583,9 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editv([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm")] Verificacion verificacion)
+        public ActionResult Editv([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
+            CalificacionVendedor calificacionVendedor = new CalificacionVendedor();
             if (verificacion.Vfn_Persona_fisica == null) verificacion.Vfn_Persona_fisica = false;
             if (verificacion.Vfn_Visto_persona == null) verificacion.Vfn_Visto_persona = false;
             if (verificacion.Vfn_Tiempo_estimado == null) verificacion.Vfn_Tiempo_estimado = false;
@@ -553,7 +595,15 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 db.Entry(verificacion).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("/Index");
+                //Guardar la calificacion del vendedor asignado a cliente
+                if (verificacion.Cliente.Id_Vendedor.HasValue != false)
+                {
+                    calificacionVendedor.Id_Vendedor = verificacion.Cliente.Id_Vendedor;
+                    calificacionVendedor.DVndr_Puntaje = verificacion.Vfn_Trato_asesor;
+                    db.CalificacionVendedor.Add(calificacionVendedor);
+                    db.SaveChanges();
+                }
+                return Redirect("/Gerente/Index");
             }
             ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
             return View(verificacion);
@@ -613,13 +663,13 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editconta([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Gastos,Id_GastosContaduria,Id_Corretaje")] Contaduria contaduria)
+        public ActionResult Editconta([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje,Id_Usuario,Cnt_DevMensualidad")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(contaduria).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("/Index");
+                return Redirect("/Gerente/Index");
             }
             //ViewBag.Id_Gastos = new SelectList(db.Gastos, "Id", "Gst_Concepto", contaduria.Id_Gastos); <--------------------------------------------Jose Aqui Mero
             //ViewBag.Id_GastosContaduria = new SelectList(db.GastosContaduria, "Id", "Id", contaduria.Id_GastosContaduria); <--------------------------------------------Jose Aqui Mero

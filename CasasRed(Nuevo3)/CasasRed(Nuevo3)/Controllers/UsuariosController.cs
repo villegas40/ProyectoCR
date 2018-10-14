@@ -107,11 +107,15 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (db.Usuario.AsNoTracking().Where(x => x.usu_username == usuario.usu_username) == null)
+                    {
+
                     usuario.Id_TipoUsiario = Convert.ToInt32(usuario.usu_tipo);
                     usuario.usu_alta = DateTime.Now;
                     db.Usuario.Add(usuario);
                     db.SaveChanges();
                     return RedirectToAction("Index");
+                    }
                 }
 
                 //ViewBag.Id = new SelectList(db.TipoUsuario, "Id", "tipusu_descricion", usuario.Id);
@@ -291,15 +295,15 @@ namespace CasasRed_Nuevo3_.Controllers
             else{
                 if (username != "")
                 {
-            var us = (from u in db.Usuario where u.usu_username == username select u).FirstOrDefault();
-            if (us != null)
-            {
-                existe = true;
-            }
+                    var us = (from u in db.Usuario where u.usu_username.ToLower() == username.ToLower() select u).FirstOrDefault();
+                    if (us != null)
+                    {
+                        existe = true;
+                    }
                 }
                 else if (correo != "")
                 {
-                    var us = (from u in db.Usuario where u.usu_correo == username select u).FirstOrDefault();
+                    var us = (from u in db.Usuario where u.usu_correo == correo.Trim() select u).FirstOrDefault();
                     if (us != null)
                     {
                         existe = true;

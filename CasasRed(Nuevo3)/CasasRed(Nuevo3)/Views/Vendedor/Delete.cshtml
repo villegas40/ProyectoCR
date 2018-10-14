@@ -1,0 +1,51 @@
+﻿@model CasasRed_Nuevo3_.Models.Vendedor
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <center>
+        <h3>Estas seguro que deseas borrar a este asesor?</h3>
+        <table class=" table tab-content  table-responsive-lg" >
+            <thead>
+                <tr>
+                    <td>Nombre </td>
+                    <td>Apellido paterno</td>
+                    <td>Apellido materno</td>
+                </tr>
+               
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayName(Model.Vndr_Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayName(Model.Vndr_Apellidopa)
+                    </td> 
+                    <td>
+                        @Html.DisplayName(Model.Vndr_Apellidoma)
+
+                    </td>
+               </tr>
+            </tbody>
+        </table>
+  <br />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Confirmar borrado" class="btn btn-default" />               
+            </div>
+
+        }
+
+
+    </center>
+    <div>
+        <a href='javascript:history.go(-1)'>Regresar</a>
+    </div>
+</div>
+

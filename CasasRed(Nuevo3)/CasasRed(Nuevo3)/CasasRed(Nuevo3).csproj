@@ -213,6 +213,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\AsignarVendedorController.cs" />
     <Compile Include="Controllers\CasaInventariosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ComentarioController.cs" />
@@ -228,11 +229,13 @@
     <Compile Include="Controllers\HabilitacionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NotificacionController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\TipoUsuariosController.cs" />
     <Compile Include="Controllers\UbicacionesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Controllers\VerificacionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -297,6 +300,9 @@
     <Compile Include="Models\HistorialAsignacion.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notificaciones.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoUsuario.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
@@ -307,6 +313,9 @@
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vendedor.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendedorAsig.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Verificacion.cs">
@@ -323,6 +332,45 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\customcss\sticky-footer-navbar.css" />
     <Content Include="Content\customcss\sticky-footer.css" />
+    <Content Include="Content\datepicker\css\datepicker.css" />
+    <Content Include="Content\datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.bg.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.ca.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.cs.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.da.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.de.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.el.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.es.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.fi.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.fr.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.he.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.hr.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.id.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.is.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.it.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.ja.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.kr.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.lt.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.lv.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.ms.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.nl.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.pl.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.pt-BR.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.pt.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.ro.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.rs-latin.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.rs.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.ru.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.sk.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.sl.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.sv.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.sw.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.th.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.tr.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.uk.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="Content\datepicker\js\locales\bootstrap-datepicker.zh-TW.js" />
     <Content Include="Content\fontawsome\css\fa-brands.css" />
     <Content Include="Content\fontawsome\css\fa-brands.min.css" />
     <Content Include="Content\fontawsome\css\fa-regular.css" />
@@ -441,6 +489,8 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Global\funcionesGlobales.js" />
+    <Content Include="Scripts\Global\Notificacion.js" />
+    <Content Include="Scripts\Global\sw.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -581,15 +631,24 @@
     <Content Include="Views\Comentario\Index.cshtml" />
     <Content Include="Views\Comentario\Create.cshtml" />
     <Content Include="Views\Reportes\MultiReport.cshtml" />
+    <Content Include="Views\Comentario\Delete.cshtml" />
     <Content Include="Views\GastosContadurias1\Create.cshtml" />
     <Content Include="Views\GastosContadurias1\Delete.cshtml" />
     <Content Include="Views\GastosContadurias1\Details.cshtml" />
     <Content Include="Views\GastosContadurias1\Edit.cshtml" />
     <Content Include="Views\GastosContadurias1\Index.cshtml" />
+    <Content Include="Views\Vendedor\Index.cshtml" />
+    <Content Include="Views\Vendedor\Create.cshtml" />
+    <Content Include="Views\Vendedor\Edith.cshtml" />
+    <Content Include="Views\Vendedor\Delete.cshtml" />
+    <Content Include="Views\AsignarVendedor\Index.cshtml" />
+    <Content Include="Views\AsignarVendedor\Create.cshtml" />
+    <Content Include="Views\AsignarVendedor\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Correo\" />
+    <Folder Include="Views\Notificacion\" />
     <Folder Include="Views\Sms\" />
   </ItemGroup>
   <ItemGroup>

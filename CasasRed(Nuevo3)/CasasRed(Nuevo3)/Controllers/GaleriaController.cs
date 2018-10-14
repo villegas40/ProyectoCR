@@ -22,34 +22,37 @@ namespace CasasRed_Nuevo3_.Controllers
             }
 
             DetailsViewModel FOTOS = new DetailsViewModel();
-            int? idfotos = 0;
+          //  int? idfotos = 0;
             
             FOTOS.fotoshabilitacion = db.FotosHabilitacion.ToList();
-            FOTOS.habilitacions = db.Habilitacion.ToList();
-
-            foreach (var item in FOTOS.fotoshabilitacion)
-            {
-                if (item.fh_habilitacion == idhabilitacion)
-                {
-                    idfotos = item.fh_id;
-                }
-            }
-          
-            FOTOS.habilitacions.Clear();
             FOTOS.habilitacions.Add(db.Habilitacion.Find(idhabilitacion));
+
+            //foreach (var item in FOTOS.fotoshabilitacion)
+            //{
+            //    if (item.fh_habilitacion == idhabilitacion)
+            //    {
+            //        idfotos = item.fh_id;
+            //    }
+            //}
+          
+            //FOTOS.habilitacions.Clear();
+            //FOTOS.habilitacions.Add(db.Habilitacion.Find(idhabilitacion));
 
             List<string> fnombre = new List<string>();
             List<string> farchivo = new List<string>();
             List<int?> fid = new List<int?>();
-            var cfotos = ((from f in db.FotosHabilitacion select new {f.fh_habilitacion, f.fh_nombre, f.fh_archivo }).ToList());
+            List<int?> ids = new List<int?>();
+
+            var cfotos = ((from f in db.FotosHabilitacion select new {f.fh_id,f.fh_habilitacion, f.fh_nombre, f.fh_archivo }).ToList());
 
             foreach (var item in cfotos)
             {
+                ids.Add(item.fh_id);
                 fid.Add(item.fh_habilitacion);
                 fnombre.Add(item.fh_nombre);
                 farchivo.Add(item.fh_archivo);
             }
-
+            ViewBag.IDS = ids;
             ViewBag.listfid = fid;
             ViewBag.listfhnombre = fnombre;
             ViewBag.listfharchivo = farchivo;
@@ -111,20 +114,26 @@ namespace CasasRed_Nuevo3_.Controllers
 
         }
         //Terminar metodos
-       public ActionResult Delete(int? idfoto)
+       public ActionResult Delete(int? idfoto,int? idhabi)
         {
             if (idfoto == 0 || idfoto == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View();
+            FotosHabilitacion fotosHabilitacion = db.FotosHabilitacion.Find(idfoto);
+
+
+            return View(fotosHabilitacion);
         }
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int? idfoto)
+        public ActionResult DeleteConfirmed(int? idfoto,int? idhabi)
         {
-            return View();
+            FotosHabilitacion fotosHabilitacion = db.FotosHabilitacion.Find(idfoto);
+            db.FotosHabilitacion.Remove(fotosHabilitacion);
+            db.SaveChanges();
+            return Redirect("/Galeria/index" + "?idhabilitacion=" + idhabi);
         }
 
     }

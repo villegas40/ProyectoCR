@@ -23,20 +23,23 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Existencias/5
+        [Route("api/Existencias/{id}")]
         [ResponseType(typeof(Existencias))]
-        public IHttpActionResult GetExistencias(int id)
+        public IHttpActionResult GetExistencias(string id)
         {
             Existencias existencias = db.Existencias.Find(id);
             if (existencias == null)
             {
                 return NotFound();
             }
-
-            return Ok(existencias);
+            //Regresar la lista de existencias por articulo
+            List<Existencias> existenciass = (from e in db.Existencias where e.ext_art_id == id select e).ToList();
+            return Ok(existenciass);
         }
 
         // PUT: api/Existencias/5
         [ResponseType(typeof(void))]
+        [Route("api/Existencias/{id}")]
         public IHttpActionResult PutExistencias(int id, Existencias existencias)
         {
             if (!ModelState.IsValid)
@@ -86,6 +89,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Existencias/5
+        [Route("api/Existencias/{id}")]
         [ResponseType(typeof(Existencias))]
         public IHttpActionResult DeleteExistencias(int id)
         {
@@ -113,6 +117,61 @@ namespace WebApiApp.Controllers
         private bool ExistenciasExists(int id)
         {
             return db.Existencias.Count(e => e.Id == id) > 0;
+        }
+
+
+        //Metodo Detalles de Dani
+        [Route("api/Existencias/Detalles/{id}")]
+        [ResponseType(typeof(Existencias))]
+        public IHttpActionResult GetDetalle(int? id)
+        {
+            Existencias existencias = db.Existencias.Find(id);
+            if (existencias == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(existencias);
+        }
+
+        [Route("api/Existencias/Detalles")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutDetalle(Existencias existencias, int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //if (id != existencias.Id)
+            //{
+            //    return BadRequest();
+            //}
+            //Hace consulta y le asigna los valores faltantes de existencias 
+            Existencias ex = db.Existencias.AsNoTracking().Where(x => x.Id == existencias.Id).First();
+            existencias.ext_cantidadActual = ex.ext_cantidadActual;
+            existencias.ext_fechaAgregado = ex.ext_fechaAgregado;
+            existencias.ext_usuarioAgrego = ex.ext_usuarioAgrego;
+
+            db.Entry(existencias).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ExistenciasExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

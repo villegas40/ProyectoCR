@@ -9,56 +9,32 @@
 <div>
     <h4>Gastos</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Gst_Concepto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gst_Concepto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gst_Monto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gst_Monto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gst_Fecha)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gst_Fecha)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gst_Coment)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gst_Coment)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.usu_username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.usu_username)
-        </dd>
-
-    </dl>
+    <table class="table table-bordered">
+        <tr>
+            <th>Concepto</th>
+            <td>@Html.DisplayFor(model => model.Gst_Concepto)</td>
+        </tr>
+        <tr>
+            <th>Monto</th>
+            <td>@Html.DisplayFor(model => model.Gst_Monto)</td>
+        </tr>
+        <tr>
+            <th>Fecha</th>
+            <td>@Html.DisplayFor(model => model.Gst_Fecha)</td>
+        </tr>
+        <tr>
+            <th>Comentario</th>
+            <td>@Html.DisplayFor(model => model.Gst_Coment)</td>
+        </tr>
+        <tr>
+            <th>Estatus</th>
+            <td>@Html.DisplayFor(model => model.Corretaje.Crt_Status)</td>
+        </tr>
+        <tr>
+            <th>Nombre de usuario</th>
+            <td>@Html.DisplayFor(model => model.Usuario.usu_username)</td>
+        </tr>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

@@ -7,38 +7,25 @@
     <div>
         <h4>CasaInventario</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Artículo
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.ci_articulo_id)
-            </dd>
-            <dt>
-                Cantidad asignada
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ci_cantidadAsignada)
-            </dd>
-    
-            <dt>
-                Fecha 
-            </dt>
-    
-            <dd>
-                @Model.ci_fecha.ToShortDateString()
-            </dd>
-            <dt>
-                Usuario asigno
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Usuario.usu_username)
-            </dd>
-    
-        </dl>
-    </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Artículo</th>
+                <td>@Html.DisplayFor(model => model.ci_articulo_id)</td>
+            </tr>
+            <tr>
+                <th>Cantidad asignada</th>
+                <td>@Html.DisplayFor(model => model.ci_cantidadAsignada)</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>@Model.ci_fecha.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <th>Usuario asigno</th>
+                <td>@Html.DisplayFor(model => model.Usuario.usu_username)</td>
+            </tr>
+        </table>
+</div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ci_Id }) | @Html.ActionLink("Regresar", "Index", new { id = Model.ci_corretaje_id }, new { @class= "btn btn-outline-secundary" })
     </p>

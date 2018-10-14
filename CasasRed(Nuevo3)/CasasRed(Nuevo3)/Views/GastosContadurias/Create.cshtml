@@ -25,24 +25,40 @@
             <div class="form-group">
                 @if (tipo == "Corretaje")
                 {
-                <!--Select List Corretaje-->
-                @*@Html.LabelFor(model => model.GstCon_Concepto, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label for="GstCon_Concepto">Concepto</label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.GstCon_Concepto, ViewData["Corretaje"] as SelectList, new { htmlAttributes = new { @class = "form-control", @id = "GstCon_Concepto" } })
-                    @*@Html.EditorFor(model => model.GstCon_Concepto, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.ValidationMessageFor(model => model.GstCon_Concepto, "", new { @class = "text-danger" })
-                </div>
+                    <!--Select List Corretaje-->
+                    @*@Html.LabelFor(model => model.GstCon_Concepto, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label for="GstCon_Concepto">Concepto</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.GstCon_Concepto, ViewData["Corretaje"] as SelectList, new { @class = "form-control", @id = "GstCon_Concepto" })
+                        @*@Html.EditorFor(model => model.GstCon_Concepto, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.ValidationMessageFor(model => model.GstCon_Concepto, "", new { @class = "text-danger" })
+                    </div>
                 }
                 else if (tipo == "Gestion")
                 {
-                <!--Select List Gestion-->
-                @*@Html.LabelFor(model => model.GstCon_Concepto, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label for="GstCon_Concepto">Concepto</label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.GstCon_Concepto, ViewData["Gestion"] as SelectList ,new { htmlAttributes = new { @class = "form-control", @id = "GstCon_Concepto" } })
-                    @Html.ValidationMessageFor(model => model.GstCon_Concepto, "", new { @class = "text-danger" })
-                </div>
+                    <!--Select List Gestion-->
+                    @*@Html.LabelFor(model => model.GstCon_Concepto, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label for="GstCon_Concepto">Concepto</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.GstCon_Concepto, ViewData["Gestion"] as SelectList, new { @class = "form-control", @id = "GstCon_Concepto" })
+                        @Html.ValidationMessageFor(model => model.GstCon_Concepto, "", new { @class = "text-danger" })
+                    </div>
+                }
+                else if (tipo == "Contador")
+                {
+                    <label for="GstCon_Concepto">Concepto</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.GstCon_Concepto, ViewData["Contador"] as SelectList, new { @class = "form-control", @id = "GstCon_Concepto" })
+                        @Html.ValidationMessageFor(model => model.GstCon_Concepto, "", new { @class = "text-danger" })
+                    </div>
+                }
+                else if (tipo == "Administrador")
+                {
+                    <label for="GstCon_Concepto">Concepto</label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.GstCon_Concepto, ViewData["Administrador"] as SelectList, new { @class = "form-control", @id = "GstCon_Concepto" })
+                        @Html.ValidationMessageFor(model => model.GstCon_Concepto, "", new { @class = "text-danger" })
+                    </div>
                 }
             </div>
 
@@ -64,14 +80,14 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                @*@Html.LabelFor(model => model.GstCon_Fecha, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.GstCon_Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
                 <label for="GstCon_Fecha">Fecha</label>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.GstCon_Fecha, new { htmlAttributes = new { @class = "form-control", @id = "GstCon_Fecha" } })
                     @Html.ValidationMessageFor(model => model.GstCon_Fecha, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Id_Corretaje, "Id_Corretaje", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -96,14 +112,14 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Asignar Gasto" class="btn btn-default" />
                 </div>
             </div>
         </div>
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Regresar", "Index")
     </div>
 </body>
 </html>

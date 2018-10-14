@@ -5,6 +5,7 @@
     List<string> CMT_TITULOS = ViewBag.CMT_TITULOS;
     List<string> COMENTARIOS = ViewBag.COMENTARIOS;
     List<int?> IDCLIENTES = ViewBag.IDCLIENTES;
+    List<int?> IDS = ViewBag.IDS;
     int idcli = 0;
 }
 @foreach (var item in Model.clientes)
@@ -53,7 +54,7 @@
                 @COMENTARIOS[i]
             </td>
             <td>
-                <a href="www.facebook.com" class="far fa-trash-alt"></a>
+                <a href="/Comentario/Delete?idcomentario=@IDS[i]&idcliente=@idcli" class="far fa-trash-alt"></a>
             </td>
         </tr>
          }
@@ -61,6 +62,6 @@
     </tbody>
     </table>
     <div>
-        <a href='javascript:history.go(-1)'>Regresar</a>
+        <a href='/Clientes/Index'>Regresar</a>
     </div>
 </div>

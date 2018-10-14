@@ -122,40 +122,53 @@ namespace WebApiApp.Controllers
         public void CreateGestions(int cliente_id, int corretaje_id)
         {
             CasasRedEntities CS = new CasasRedEntities();
-            Gestion gestion_obj = new Gestion
-            {
-                Gtn_Acta_Nacimiento = false,
-                Gtn_Agua_Pago_Inf = false,
-                Gtn_Aviso_Suspension = false,
-                Gtn_Avaluo = false,
-                Gtn_Cert_Cartogr = false,
-                Gtn_Cert_Fiscal = false,
-                Gtn_Cert_Hip = false,
-                Gtn_Credito_INFONAVIT = false,
-                Gtn_CT_Banco = false,
-                Gtn_Escrituras = false,
-                Gtn_Evaluo_Contacto = false,
-                Gtn_Firma_Escrituras = false,
-                Gtn_Formato_Infonavit = false,
-                Gtn_Fotos_Propiedad = false,
-                Gtn_IFE_Copia = false,
-                Gtn_Junta_URBI = false,
-                Gtn_Notaria = false,
-                Gtn_No_Oficial = false,
-                Gtn_Planeacion_Fianza = false,
-                Gtn_Planta_Cartografica = false,
-                Gtn_Predial = false,
-                Gtn_Recibo_Agua = false,
-                Gtn_Recibo_Luz = false,
-                Gtn_Sol_Estado = false,
-                Gtn_Sol_Ret_Ifo = false,
-                Gtn_Urbanizacion = false,
-                Id_Cliente = cliente_id,
-                Id_Corretaje = corretaje_id
-            };
 
-            CS.Gestion.Add(gestion_obj);
-            CS.SaveChanges();
+            //Consulta para buscar las casas existentes en la base de datos
+            var gestio = (from a in db.Gestion where corretaje_id == a.Id_Corretaje select a).FirstOrDefault();
+
+            //Si es distinto a null entonces la casa si esta registrada en gestion
+            if (gestio != null)
+            {
+                gestio.Id_Cliente = cliente_id;
+                db.SaveChanges();
+            }
+            else
+            {
+                Gestion gestion_obj = new Gestion
+                {
+                    Gtn_Acta_Nacimiento = false,
+                    Gtn_Agua_Pago_Inf = false,
+                    Gtn_Aviso_Suspension = false,
+                    Gtn_Avaluo = false,
+                    Gtn_Cert_Cartogr = false,
+                    Gtn_Cert_Fiscal = false,
+                    Gtn_Cert_Hip = false,
+                    Gtn_Credito_INFONAVIT = false,
+                    Gtn_CT_Banco = false,
+                    Gtn_Escrituras = false,
+                    Gtn_Evaluo_Contacto = false,
+                    Gtn_Firma_Escrituras = false,
+                    Gtn_Formato_Infonavit = false,
+                    Gtn_Fotos_Propiedad = false,
+                    Gtn_IFE_Copia = false,
+                    Gtn_Junta_URBI = false,
+                    Gtn_Notaria = false,
+                    Gtn_No_Oficial = false,
+                    Gtn_Planeacion_Fianza = false,
+                    Gtn_Planta_Cartografica = false,
+                    Gtn_Predial = false,
+                    Gtn_Recibo_Agua = false,
+                    Gtn_Recibo_Luz = false,
+                    Gtn_Sol_Estado = false,
+                    Gtn_Sol_Ret_Ifo = false,
+                    Gtn_Urbanizacion = false,
+                    Id_Cliente = cliente_id,
+                    Id_Corretaje = corretaje_id
+                };
+
+                CS.Gestion.Add(gestion_obj);
+                CS.SaveChanges();
+            }
         }
     }
 }

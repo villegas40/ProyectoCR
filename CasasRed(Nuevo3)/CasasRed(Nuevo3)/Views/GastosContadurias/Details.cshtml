@@ -1,50 +1,229 @@
-﻿@model CasasRed_Nuevo3_.Models.GastosContaduria
+﻿@model CasasRed_Nuevo3_.Controllers.GastosContaduriasController.DetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Index";
+    //general
+    List<int?> IDS = ViewBag.IDS;
+    List<String> GSTCON_CONCE = ViewBag.GSTCON_CONCE;
+    List<decimal?> GSTCON_MONTO = ViewBag.GSTCON_MONTO;
+    List<String> GSTCON_DESCRIPCION = ViewBag.GSTCON_DESCRIPCION;
+    List<DateTime?> GSTCON_FECHA = ViewBag.GSTCON_FECHA;
+    List<int?> IDSCORRETAJE = ViewBag.IDSCORRETAJE;
+    List<int?> IDSUSUARIOS = ViewBag.IDSUSUARIOS;
+    //corretaje
+    List<int?> IDSC = ViewBag.IDSC;
+    List<String> GSTCON_CONCEC = ViewBag.GSTCON_CONCEC;
+    List<decimal?> GSTCON_MONTOC = ViewBag.GSTCON_MONTOC;
+    List<String> GSTCON_DESCRIPCIONC = ViewBag.GSTCON_DESCRIPCIONC;
+    List<DateTime?> GSTCON_FECHAC = ViewBag.GSTCON_FECHAC;
+    List<int?> IDSCORRETAJEC = ViewBag.IDSCORRETAJEC;
+    List<int?> IDSUSUARIOSC = ViewBag.IDSUSUARIOSC;
+
+    //gestion
+    List<int?> IDSG = ViewBag.IDSG;
+    List<String> GSTCON_CONCEG = ViewBag.GSTCON_CONCEG;
+    List<decimal?> GSTCON_MONTOG = ViewBag.GSTCON_MONTOG;
+    List<String> GSTCON_DESCRIPCIONG = ViewBag.GSTCON_DESCRIPCIONG;
+    List<DateTime?> GSTCON_FECHAG = ViewBag.GSTCON_FECHAG;
+    List<int?> IDSCORRETAJEG = ViewBag.IDSCORRETAJEG;
+    List<int?> IDSUSUARIOSG = ViewBag.IDSUSUARIOSG;
+    //Administrador
+    List<int?> IDSA = ViewBag.IDSA;
+    List<String> GSTCON_CONCEA = ViewBag.GSTCON_CONCEA;
+    List<decimal?> GSTCON_MONTOA = ViewBag.GSTCON_MONTOA;
+    List<String> GSTCON_DESCRIPCIONA = ViewBag.GSTCON_DESCRIPCIONA;
+    List<DateTime?> GSTCON_FECHAA = ViewBag.GSTCON_FECHAA;
+    List<int?> IDSCORRETAJEA = ViewBag.IDSCORRETAJEA;
+    List<int?> IDSUSUARIOSA = ViewBag.IDSUSUARIOSA;
+
+
+
+    int idcontaduria = 0;
+    decimal? sumat = 0;
+    decimal? sumag = 0;
+    decimal? sumac = 0;
+    decimal? sumaa = 0;
+}
+@foreach (var item in Model.contadurias)
+{
+    idcontaduria = item.Id;
 }
 
-<h2>Details</h2>
+<h2>Gastos contaduria del registro @idcontaduria</h2>
+<div class="container">
+   <center>
+     <div class="row">
+         <div class="col">
+    <table class="table tab-content table-responsive-lg">
+    <thead>
+        <tr>
+            <td>Gasto Asignado</td>
+        </tr>
+        <tr>
+            <td>
+                Concepto 
+            </td>
+            <td>
+               Gasto
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.contadurias)
+        {
+            <tr>
+                <td>
+                    Prguntar:
+                </td>
+                <td>
+                   
+                    $ @item.Cnt_M_Preguntar
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Material:
+                </td>
+                <td>
+                    $ @ViewBag.GastoMaterial
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    CFE
+                </td>
+                <td>
+                    $@item.Cnt_CFE
+                </td>
+            </tr>
+            <tr>
+                <td>CESPT</td>
+                <td>
+                    $@item.Cnt_CESPT
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Devolucion mensual
+                </td>
+                <td>
+                    $@item.Cnt_DevMensualidad
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tramites
+                </td>
+                <td>
+                    $@item.Cnt_Tramites
+                </td>
+            </tr>
+            <tr>
+                <td>Vigilancia</td>
+                <td>
+                    $@item.Cnt_Vigilancia
+                </td>
+            </tr>
+        }
+    </tbody>
+        
+    </table>
+       </div>
+         <div class="col">
+             <table class="table tab-content table-responsive-lg">
+                 <thead>
+                     <tr>
+                         <td>
+                             Gasto real
+                         </td>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     @foreach (var item in Model.contadurias)
+                     {
+                         idcontaduria = item.Id;
+                         for (int i = 0; i < IDS.Count; i++)
+                         {
+                             if (item.Id_Corretaje == IDSCORRETAJE[i])
+                             {
+                                 sumat = sumat + GSTCON_MONTO[i];
+                             }
+                         }
+                         <tr>
+                     <td>Administrador</td>
+                     
+                         @for (int i = 0; i < IDSA.Count; i++)
+                         {
+                             if (item.Id_Corretaje == IDSCORRETAJEA[i])
+                             {
+                                 sumaa = sumaa + GSTCON_MONTOA[i];
+                                 
+                                 <td>
+                                         @GSTCON_CONCEA[i] :
+                                        $ @GSTCON_MONTOA[i]
+                                </td>
+                             }
+                         }
+                             <td>
+                                $ @sumaa
+                             </td>
+                     </tr>
+                         
+                         <tr><td>Corretaje</td>
+                        @for (int i = 0; i < IDSC.Count; i++)
+                         {
+                             if (item.Id_Corretaje == IDSCORRETAJEC[i])
+                             {
+                                 sumac = sumac + GSTCON_MONTOC[i];
+                              
+                                     <td>
+                                         @GSTCON_CONCEC[i] :
+                                        $ @GSTCON_MONTOC[i]
+                                     </td>
+                                
 
-<div>
-    <h4>GastosContaduria</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.GstCon_Mensualidad)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.GstCon_Mensualidad)
-        </dd>
+                             }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GstCon_Vigilancia)
-        </dt>
+                         }
+                      <td>$ @sumac</td>
+                     </tr>
+                        
+                         <tr><td>Gestion</td>
+                         @for (int i = 0; i < IDSG.Count; i++)
+                         {
+                             if (item.Id_Corretaje == IDSCORRETAJEG[i])
+                             {
+                                 sumag = sumag + GSTCON_MONTOG[i];
+                                
+                                     <td>
+                                         @GSTCON_CONCEG[i] :
+                                        $ @GSTCON_MONTOG[i]
+                                     </td>
+                             
 
-        <dd>
-            @Html.DisplayFor(model => model.GstCon_Vigilancia)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GstCon_Otros)
-        </dt>
+                             }
+                         }
+                     <td>@sumag</td>
+                     </tr>
+                        
+                         <tr>
+                             <td>
+                                 Suma total: $ @sumat
+                             </td></tr>
+                         
+                     }
+                 </tbody>
+             
 
-        <dd>
-            @Html.DisplayFor(model => model.GstCon_Otros)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
-        </dd>
-
-    </dl>
+             </table>
+         </div>
+  </div>
+       
+</center>
+    <div>
+        <a href='/Contadurias/index'>Regresar</a>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

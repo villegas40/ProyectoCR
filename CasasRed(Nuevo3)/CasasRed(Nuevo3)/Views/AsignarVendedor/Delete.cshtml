@@ -1,0 +1,54 @@
+﻿@model CasasRed_Nuevo3_.Controllers.AsignarVendedorController.DetailsViewModel
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h2>Seguro que deseas desasignar al asesor?</h2>
+    <table class="table tab-content table-responsive-lg">
+        <thead>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    Apellidos
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach (var item in Model.vendedorAsigs)
+                {
+                    foreach (var item2 in Model.vendedors)
+                    {
+                        if (item2.Id == item.Id_Vendedor)
+                        {
+                            <td>
+                                @item2.Vndr_Nombre
+                            </td>
+                            <td>
+                                @item2.Vndr_Apellidopa @item2.Vndr_Apellidoma
+                            </td>
+                            break;
+                        }
+                    }
+                }
+            </tr>
+        </tbody>
+    </table>
+</center>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Confirmar borrado" class="btn btn-default" />
+    </div>
+
+}
+
+<div>
+    <a href='javascript:history.go(-1)'>Regresar</a>
+</div>

@@ -9,24 +9,16 @@
 <div>
     <h4>TipoUsuario</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.tipusu_descricion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tipusu_descricion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.usu_nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.usu_nombre)
-        </dd>
-
-    </dl>
+    <table class="table table-bordered">
+        <tr>
+            <th>Descripción</th>
+            <td>@Html.DisplayFor(model => model.tipusu_descricion)</td>
+        </tr>
+        <tr>
+            <th>Nombre de usuario</th>
+            <td>@Html.DisplayFor(model => model.Usuario.usu_nombre)</td>
+        </tr>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

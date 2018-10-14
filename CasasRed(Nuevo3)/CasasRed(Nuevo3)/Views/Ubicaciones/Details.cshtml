@@ -8,20 +8,16 @@
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Código
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ubi_codigo)
-        </dd>
-        <dt>
-            Descrición
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ubi_descripcion)
-        </dd>
-    </dl>
+    <table class="table table-bordered">
+        <tr>
+            <th>Código</th>
+            <td>@Html.DisplayFor(model => model.ubi_codigo)</td>
+        </tr>
+        <tr>
+            <th>Descrición</th>
+            <td>@Html.DisplayFor(model => model.ubi_descripcion)</td>
+        </tr>
+    </table>
     <hr />
 </div>
 <p>

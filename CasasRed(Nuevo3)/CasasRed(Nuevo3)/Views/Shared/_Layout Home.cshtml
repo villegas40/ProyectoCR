@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string msn = (Session["Mensaje"] != null) ? Session["Mensaje"].ToString() : "";
+    string tipMsn = (Session["TipoMensaje"] != null) ? Session["TipoMensaje"].ToString() : "";
+    Session["Mensaje"] = null;
+    Session["TipoMensaje"] = null;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -58,10 +64,11 @@
                                     <a class="dropdown-item" href="/Habilitacions">Habilitacion</a>
                                     <a class="dropdown-item" href="/Verificacions">Verificacion</a>
                                     <hr />
+                                    <a class="dropdown-item" href="/Vendedor/Index">Asesores</a>
                                     <a class="dropdown-item" href="/Existencias">Inventario</a>
                                     <a class="dropdown-item" href="/Articulos">Artículos</a>
                                     <a class="dropdown-item" href="/Ubicaciones">Ubicaciones</a>
-
+                                    
                                 }
                                 else if (Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Contabilidad")
                                 {
@@ -108,7 +115,25 @@
     </nav>
     <!--Little hacklife B)-->
     <div class="container">
+        @if (msn != "")
+        {
+            if (tipMsn.ToLower() != "error")
+            {
+                <div class="alert alert-success alert-dismissible container body-content" style="opacity:0.93; position:fixed; z-index:1;">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @msn
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger alert-dismissible container body-content" style="opacity:0.93; position:fixed; z-index:1;">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @msn
+                </div>
+            }
+        }
         <style>
+
             body {
                 background-image: url('/Media/background2.jpg');
                 background-repeat: no-repeat;
@@ -118,7 +143,8 @@
         </style>
     </div>
 
-    <div class="container body-content"  style="margin-top:50px;">
+    <div class="container body-content" style="margin-top:50px;">
+       
         <main role="main">
             @RenderBody()
         </main>

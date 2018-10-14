@@ -112,6 +112,7 @@
     <EntitySetMapping Name="Contaduria">
       <EntityTypeMapping TypeName="CasasRedModel.Contaduria">
         <MappingFragment StoreEntitySet="Contaduria">
+          <ScalarProperty Name="Cnt_DevMensualidad" ColumnName="Cnt_DevMensualidad" />
           <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
           <ScalarProperty Name="Cnt_CFE" ColumnName="Cnt_CFE" />
@@ -127,6 +128,7 @@
     <EntitySetMapping Name="Corretaje">
       <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
         <MappingFragment StoreEntitySet="Corretaje">
+          <ScalarProperty Name="Crt_Nss" ColumnName="Crt_Nss" />
           <ScalarProperty Name="Crt_FechaAlta" ColumnName="Crt_FechaAlta" />
           <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
@@ -260,6 +262,8 @@
     <EntitySetMapping Name="Habilitacion">
       <EntityTypeMapping TypeName="CasasRedModel.Habilitacion">
         <MappingFragment StoreEntitySet="Habilitacion">
+          <ScalarProperty Name="Hbt_FchEntrega" ColumnName="Hbt_FchEntrega" />
+          <ScalarProperty Name="Hbt_StatusCasa" ColumnName="Hbt_StatusCasa" />
           <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
           <ScalarProperty Name="Hbt_ProgresoForm" ColumnName="Hbt_ProgresoForm" />
@@ -371,6 +375,29 @@
           <ScalarProperty Name="fh_nombre" ColumnName="fh_nombre" />
           <ScalarProperty Name="fh_archivo" ColumnName="fh_archivo" />
           <ScalarProperty Name="fh_id" ColumnName="fh_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendedorAsig">
+      <EntityTypeMapping TypeName="CasasRedModel.VendedorAsig">
+        <MappingFragment StoreEntitySet="VendedorAsig">
+          <ScalarProperty Name="VndAsig_Departamento" ColumnName="VndAsig_Departamento" />
+          <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+          <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notificaciones">
+      <EntityTypeMapping TypeName="CasasRedModel.Notificaciones">
+        <MappingFragment StoreEntitySet="Notificaciones">
+          <ScalarProperty Name="Not_mostrada" ColumnName="Not_mostrada" />
+          <ScalarProperty Name="Not_leida" ColumnName="Not_leida" />
+          <ScalarProperty Name="Not_idVinculado" ColumnName="Not_idVinculado" />
+          <ScalarProperty Name="Not_descripcion" ColumnName="Not_descripcion" />
+          <ScalarProperty Name="Not_titutlo" ColumnName="Not_titutlo" />
+          <ScalarProperty Name="Not_usuario_id" ColumnName="Not_usuario_id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,8 +1,24 @@
-﻿
+﻿@model CasasRed_Nuevo3_.Models.FotosHabilitacion
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <center>
+        <h2>Estas seguro que quieres borrar la foto?</h2>
+        <div>
+            <img src="@Url.Content(Model.fh_archivo)" width="150" alt="foto" id="myImg" />
+        </div>
+    </center>
 
-<h2>Delete</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirmar borrado" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+
+</div>

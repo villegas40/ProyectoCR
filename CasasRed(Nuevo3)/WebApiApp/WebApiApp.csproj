@@ -241,21 +241,30 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\CalificacionVendedorsController.cs" />
+    <Compile Include="Controllers\CasaInventarios1Controller.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\ComentariosController.cs" />
+    <Compile Include="Controllers\ComisionsController.cs" />
     <Compile Include="Controllers\ContaduriasController.cs" />
     <Compile Include="Controllers\CorreoController.cs" />
     <Compile Include="Controllers\CorretajesController.cs" />
+    <Compile Include="Controllers\DetallesComisionsController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
     <Compile Include="Controllers\GastosContaduriasController.cs" />
     <Compile Include="Controllers\GestionsController.cs" />
     <Compile Include="Controllers\HabilitacionsController.cs" />
+    <Compile Include="Controllers\HistorialAsignacionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NotificacionesController.cs" />
     <Compile Include="Controllers\SmsController.cs" />
     <Compile Include="Controllers\TipoUsuariosController.cs" />
     <Compile Include="Controllers\UbicacionesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VendedorAsigsController.cs" />
+    <Compile Include="Controllers\VendedorsController.cs" />
     <Compile Include="Controllers\VerificacionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -320,6 +329,9 @@
     <Compile Include="Models\HistorialAsignacion.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notificaciones.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TipoUsuario.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
@@ -330,6 +342,9 @@
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vendedor.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendedorAsig.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Verificacion.cs">

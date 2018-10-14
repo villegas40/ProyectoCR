@@ -3,8 +3,8 @@
     var selects = document.getElementsByTagName('select');
     for (var l = 0; l < inputs.length; l++) {
         if (inputs[l].getAttribute("type") == "text") {
-        inputs[l].setAttribute('value', inputs[l].value);
-        inputs[l].setAttribute("readonly", true);
+            inputs[l].setAttribute('value', inputs[l].value);
+            inputs[l].setAttribute("readonly", true);
         }
     }
     for (var o = 0; o < selects.length; o++) {
@@ -56,7 +56,7 @@ function generarReporteMultiple(url, nombre, titulos, contenidos, cabeceros) {
         $(printWindow.document).ready(function () {
             var cuerpo = ""
             for (var i = 0; i < contenidos.length; i++) {
-                cuerpo += '<hr /><div class="card-title text-center"><h4>' + titulos[i] + '</h4><hr /></div> <div class="cabecero">' + cabeceros[i] + "</div><div>" + contenidos[i] +"</div>";
+                cuerpo += '<hr /><div class="card-title text-center"><h4>' + titulos[i] + '</h4><hr /></div> <div class="cabecero">' + cabeceros[i] + "</div><div>" + contenidos[i] + "</div>";
             }
             $(printWindow.document.body.children[0].children[1]).html(cuerpo);
             printWindow.document.close();

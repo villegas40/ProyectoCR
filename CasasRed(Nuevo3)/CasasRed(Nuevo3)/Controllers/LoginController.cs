@@ -40,25 +40,36 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = (from u in db.Usuario join ut in db.TipoUsuario on u.usu_tipo equals ut.Id.ToString() where (u.usu_username == usr.usu_username || usr.usu_username == u.usu_correo ) && u.usu_password == usr.usu_password && u.usu_activo == true select new { u, ut }).FirstOrDefault();
-                if (user != null)
+                try
                 {
-                    Session["UsuarioID"] = user.u.Id;
-                    Session["Usuario"] = user.u.usu_username;
-                    Session["Nombre"] = user.u.usu_nombre;
-                    Session["ApellidoP"] = user.u.usu_apellidoPa;
-                    Session["ApellidoM"] = user.u.usu_apellidoMa;
-                    Session["NombreCompleto"] = user.u.usu_nombre + " " + user.u.usu_apellidoPa + " " + user.u.usu_apellidoMa;
-                    Session["Tipo"] = user.ut.tipusu_descricion;
-                    string direccion = Redireccionar();
-                    Session["Vista"] = direccion.Split('-')[1];
-                    Session["Controlador"] = direccion.Split('-')[0];
-                    return RedirectToAction(direccion.Split('-')[1], direccion.Split('-')[0]);
+                    var user = (from u in db.Usuario join ut in db.TipoUsuario on u.usu_tipo equals ut.Id.ToString() where (u.usu_username == usr.usu_username || usr.usu_username == u.usu_correo ) && u.usu_password == usr.usu_password && u.usu_activo == true select new { u, ut }).FirstOrDefault();
+                    if (user != null)
+                    {
+                        Session["UsuarioID"] = user.u.Id;
+                        Session["Usuario"] = user.u.usu_username;
+                        Session["Nombre"] = user.u.usu_nombre;
+                        Session["ApellidoP"] = user.u.usu_apellidoPa;
+                        Session["ApellidoM"] = user.u.usu_apellidoMa;
+                        Session["NombreCompleto"] = user.u.usu_nombre + " " + user.u.usu_apellidoPa + " " + user.u.usu_apellidoMa;
+                        Session["Tipo"] = user.ut.tipusu_descricion;
+                        string direccion = Redireccionar();
+                        Session["Vista"] = direccion.Split('-')[1];
+                        Session["Controlador"] = direccion.Split('-')[0];
+                        return RedirectToAction(direccion.Split('-')[1], direccion.Split('-')[0]);
+                    }
+                    else
+                    {
+                        //Session["Mensaje"] = "Error de conexión";
+                        //Session["TipoMensaje"] = "error";
+                        ViewBag.MensajeError = "Contraseña o usuario incorrectos";
+                        ViewBag.usuario = usr.usu_username;
+                        return View();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    ViewBag.MensajeError = "Contraseña o usuario incorrectos";
-                    ViewBag.usuario = usr.usu_username;
+                    Session["Mensaje"] = "Error de conexión";
+                    Session["TipoMensaje"] = "error";
                     return View();
                 }
             }
@@ -116,7 +127,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 direccion = "Verificacions-Index";
             }
-            else if (tipo == "AyudanteGestion") direccion = "Clientes-Index";
+            else if (tipo == "ApoyoGestion") direccion = "Clientes-Index";
             return direccion;
         }
 

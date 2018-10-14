@@ -13,6 +13,7 @@
 
     <div class="form-horizontal">
         <h4>Habilitación</h4>
+        <h4>Habilitación</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -24,13 +25,14 @@
         <!--Campo para el valor de la barra-->
         <div>
             <label for="Gral_ProgresoForm">Progreso</label>
-            @Html.EditorFor(model => model.Hbt_ProgresoForm, new { htmlAttributes = new { @class = "form-control", @id = "progreso"@*, @type = "hidden"*@}
-    })
+            @Html.EditorFor(model => model.Hbt_ProgresoForm, new { htmlAttributes = new { @class = "form-control", @id = "progreso", @type = "hidden" } })
             @Html.ValidationMessageFor(model => model.Hbt_ProgresoForm, "", new { @class = "text-danger" })
         </div>
-        @Html.DisplayFor(modelItem => modelItem.Hbt_ProgresoForm)
 
         <br />
+
+        <h5>Dirección del Inmueble: @Html.DisplayFor(model => model.Corretaje.Crt_Direccion)</h5>
+        <h5>Venderor: @Html.DisplayFor(modelItem => modelItem.Corretaje.Crt_Cliente_Nombre) @Html.DisplayFor(modelItem => modelItem.Corretaje.Crt_Cliente_ApPat) @Html.DisplayFor(modelItem => modelItem.Corretaje.Crt_Cliente_ApMat)</h5>
 
         <div class="container">
             <div class="row">
@@ -41,7 +43,7 @@
                         <div class="col-md-10">
                             <div class="custom-control custom-checkbox">
                                 @*@Html.TextBoxFor(model => model.Hbt_Puertas, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck1" class="custom-control-input data" name="Hbt_Puertas" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Puertas.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck1" class="custom-control-input data" name="Hbt_Puertas" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Puertas.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck1">Puertas</label>
                                 @*@Html.EditorFor(model => model.Hbt_Puertas)*@
                                 @Html.ValidationMessageFor(model => model.Hbt_Puertas, "", new { @class = "text-danger" })
@@ -55,7 +57,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Chapas)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Chapas, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck2", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck2" class="custom-control-input data" name="Hbt_Chapas" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Chapas.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck2" class="custom-control-input data" name="Hbt_Chapas" type="checkbox" value="true" onchange="this.value = this.checked;resetCheckbox();" @(Model.Hbt_Chapas.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck2">Chapas</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Chapas, "", new { @class = "text-danger" })
                             </div>
@@ -68,7 +70,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Marcos_puertas)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Marcos_puertas, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck3" class="custom-control-input data" name="Hbt_Marcos_puertas" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Marcos_puertas.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck3" class="custom-control-input data" name="Hbt_Marcos_puertas" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Marcos_puertas.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck3">Marcos de Puertas</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Marcos_puertas, "", new { @class = "text-danger" })
                             </div>
@@ -81,7 +83,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Bisagras)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Bisagras, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck4", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck4" class="custom-control-input data" name="Hbt_Bisagras" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Bisagras.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck4" class="custom-control-input data" name="Hbt_Bisagras" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Bisagras.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck4">Bisagras</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Bisagras, "", new { @class = "text-danger" })
                             </div>
@@ -94,7 +96,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Taza)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Taza, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck5", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck5" class="custom-control-input data" name="Hbt_Taza" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Taza.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck5" class="custom-control-input data" name="Hbt_Taza" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Taza.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck5">Tazas</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Taza, "", new { @class = "text-danger" })
                             </div>
@@ -107,7 +109,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Lavamanos)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Lavamanos, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck6", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck6" class="custom-control-input data" name="Hbt_Lavamanos" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Lavamanos.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck6" class="custom-control-input data" name="Hbt_Lavamanos" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Lavamanos.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck6">Lavamanos</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Lavamanos, "", new { @class = "text-danger" })
                             </div>
@@ -120,7 +122,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Bastago)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Bastago, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck7", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck7" class="custom-control-input data" name="Hbt_Bastago" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Bastago.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck7" class="custom-control-input data" name="Hbt_Bastago" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Bastago.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck7">Bastago</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Bastago, "", new { @class = "text-danger" })
                             </div>
@@ -133,7 +135,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Chapeton)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Chapeton, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck8", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck8" class="custom-control-input data" name="Hbt_Chapeton" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Chapeton.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck8" class="custom-control-input data" name="Hbt_Chapeton" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Chapeton.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck8">Chapeton</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Chapeton, "", new { @class = "text-danger" })
                             </div>
@@ -146,7 +148,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Maneral)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Maneral, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck9", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck9" class="custom-control-input data" name="Hbt_Maneral" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Maneral.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck9" class="custom-control-input data" name="Hbt_Maneral" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Maneral.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck9">Maneral</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Maneral, "", new { @class = "text-danger" })
                             </div>
@@ -159,7 +161,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Regadera_completa)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Regadera_completa, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck10", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck10" class="custom-control-input data" name="Hbt_Regadera_completa" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Regadera_completa.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck10" class="custom-control-input data" name="Hbt_Regadera_completa" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Regadera_completa.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck10">Regadera Completa</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Regadera_completa, "", new { @class = "text-danger" })
                             </div>
@@ -172,7 +174,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Kit_lavamanos)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Kit_lavamanos, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck11", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck11" class="custom-control-input data" name="Hbt_Kit_lavamanos" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Kit_lavamanos.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck11" class="custom-control-input data" name="Hbt_Kit_lavamanos" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Kit_lavamanos.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck11">Kit Lavamanos</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Kit_lavamanos, "", new { @class = "text-danger" })
                             </div>
@@ -185,7 +187,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Kit_taza)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Kit_taza, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck12", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck12" class="custom-control-input data" name="Hbt_Kit_taza" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Kit_taza.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck12" class="custom-control-input data" name="Hbt_Kit_taza" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Kit_taza.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck12">Kit Taza</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Kit_taza, "", new { @class = "text-danger" })
                             </div>
@@ -198,7 +200,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Rosetas)*@
                                 @Html.TextBoxFor(model => model.Hbt_Rosetas, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck13", @oninput = "this.value = this.checked" })
-                                <input id="customCheck13" class="custom-control-input data" name="Hbt_Rosetas" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Rosetas.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck13" class="custom-control-input data" name="Hbt_Rosetas" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Rosetas.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck13">Rosetas</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Rosetas, "", new { @class = "text-danger" })
                             </div>
@@ -213,7 +215,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Apagador_sencillo)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Apagador_sencillo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck14", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck14" class="custom-control-input data" name="Hbt_Apagador_sencillo" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Apagador_sencillo.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck14" class="custom-control-input data" name="Hbt_Apagador_sencillo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Apagador_sencillo.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck14">Apagador Sencillo</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Apagador_sencillo, "", new { @class = "text-danger" })
                             </div>
@@ -226,7 +228,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Conector_sencillo)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Conector_sencillo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck15", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck15" class="custom-control-input data" name="Hbt_Conector_sencillo" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Conector_sencillo.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck15" class="custom-control-input data" name="Hbt_Conector_sencillo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Conector_sencillo.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck15">Conector Sencillo</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Conector_sencillo, "", new { @class = "text-danger" })
                             </div>
@@ -239,7 +241,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Apagador_doble)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Apagador_doble, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck16", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck16" class="custom-control-input data" name="Hbt_Apagador_doble" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Apagador_doble.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck16" class="custom-control-input data" name="Hbt_Apagador_doble" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Apagador_doble.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck16">Apagador Doble</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Apagador_doble, "", new { @class = "text-danger" })
                             </div>
@@ -252,7 +254,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Conector_apagador)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Conector_apagador, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck17", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck17" class="custom-control-input data" name="Hbt_Conector_apagador" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Conector_apagador.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck17" class="custom-control-input data" name="Hbt_Conector_apagador" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Conector_apagador.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck17">Conector/Apagador</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Conector_apagador, "", new { @class = "text-danger" })
                             </div>
@@ -265,7 +267,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Domo)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Domo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck18", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck18" class="custom-control-input data" name="Hbt_Domo" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Domo.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck18" class="custom-control-input data" name="Hbt_Domo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Domo.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck18">Domo</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Domo, "", new { @class = "text-danger" })
                             </div>
@@ -278,7 +280,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Ventanas)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Ventanas, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck19", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck19" class="custom-control-input data" name="Hbt_Ventanas" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Ventanas.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck19" class="custom-control-input data" name="Hbt_Ventanas" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Ventanas.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck19">Ventanas</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Ventanas, "", new { @class = "text-danger" })
                             </div>
@@ -291,7 +293,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Cableado)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Cableado, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck20", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck20" class="custom-control-input data" name="Hbt_Cableado" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Cableado.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck20" class="custom-control-input data" name="Hbt_Cableado" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Cableado.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck20">Cableado</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Cableado, "", new { @class = "text-danger" })
                             </div>
@@ -313,7 +315,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Break_interior)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Break_interior, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck21", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck21" class="custom-control-input data" name="Hbt_Break_interior" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Break_interior.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck21" class="custom-control-input data" name="Hbt_Break_interior" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Break_interior.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck21">Break Interior</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Break_interior, "", new { @class = "text-danger" })
                             </div>
@@ -326,7 +328,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Break_medidor)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Break_medidor, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck22", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck22" class="custom-control-input data" name="Hbt_Break_medidor" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Break_medidor.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck22" class="custom-control-input data" name="Hbt_Break_medidor" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Break_medidor.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck22">Break Medidor</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Break_medidor, "", new { @class = "text-danger" })
                             </div>
@@ -339,7 +341,7 @@
                             <div class="custom-control custom-checkbox">
                                 @*@Html.EditorFor(model => model.Hbt_Pinturas)*@
                                 @*@Html.TextBoxFor(model => model.Hbt_Pinturas, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck23", @oninput = "this.value = this.checked" })*@
-                                <input id="customCheck23" class="custom-control-input data" name="Hbt_Pinturas" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Pinturas.Value ? "checked=\"checked\"" : "") />
+                                <input id="customCheck23" class="custom-control-input data" name="Hbt_Pinturas" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Hbt_Pinturas.Value ? "checked=\"checked\"" : "") />
                                 <label class="custom-control-label" for="customCheck23">Pinturas</label>
                                 @Html.ValidationMessageFor(model => model.Hbt_Pinturas, "", new { @class = "text-danger" })
                             </div>
@@ -366,7 +368,6 @@
         </div>
     </div>
 }
-
 
 <div>
     <a href='javascript:history.go(-1)'>Regresar</a>
@@ -399,6 +400,7 @@
                 var myFilledDataCount = $('input.data').filter(function () {
                     return $(this).val() === "";
                 }).length;
+
                 var width = ((1 / dataCount) * (dataCount - myFilledDataCount)) * 100;
                 var mydataPercent = Math.round(width) + "%";
                 $(".progress-bar").css("width", mydataPercent);

@@ -27,7 +27,7 @@ namespace CasasRed_Nuevo3_.Controllers
             else if (Session["Tipo"].ToString() == "Corretaje" || Session["Tipo"].ToString() == "Administrador")
             {
                 Corretaje corretaje = new Corretaje();
-                string[] posestatus = new string[] { "Nunguna", "Venta", "Disponible" };
+                string[] posestatus = new string[] { "Ninguna", "Venta", "Disponible","Cancelado","Firmado" };
                 int id = Convert.ToInt16(corretaje.Crt_Status);
                 ViewBag.estatus = posestatus[id];
                 return View(db.Corretaje.ToList());
@@ -85,6 +85,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 new { value = "No seleccionado", text = "Selecciona una opción.."},
                 new { value = "Venta", text = "Venta" },
                 new { value = "Disponible", text = "Disponible" },
+                new {value = "Cancelado",text="Cancelado"},
+                new {value = "Firmado" ,text="Firmado"}
             }, "value", "text", 0);
 
                 var posicion = new SelectList(new[] {
@@ -95,11 +97,14 @@ namespace CasasRed_Nuevo3_.Controllers
                 new { value = 4, text = "Divorciado" }
             }, "value", "text", 0);
 
+
                 ViewBag.Id_Vendedor = new SelectList(db.Vendedor, "Id", "Vndr_Nombre");
                 ViewData["Vendedor"] = ViewBag.Id_Vendedor;
 
                 ViewData["Posicion"] = posicion;
                 ViewData["Estatus"] = estatus;
+           
+                
                 return View();
             }
             else
@@ -118,6 +123,12 @@ namespace CasasRed_Nuevo3_.Controllers
         // public ActionResult Create([Bind(Include = "Id,Crt_Status,Crt_Cliente_Nombre,Crt_Cliente_ApMat,Crt_Cliente_ApPat,Crt_Direccion,Crt_Precio,Crt_Gasto,Crt_Tipo_Vivienda,Crt_Nivel,Crt_Num_Habitaciones,Crt_Planta,Crt_Ano_compra,Crt_Num_Credito_Infonavit,Crt_Saldo_infonavit,Crt_Fec_Nac,Crt_Tel_Celular,Crt_Estado_Civil,Crt_Tel_Casa,Crt_Tel_Trabajo,Crt_Tel_Ref1,Crt_Tel_Ref2,Crt_Tel_Ref,Crt_Recibo_predial_digital,Crt_Clave_Catastral,Crt_Adeudo_predial,Crt_Num_servicio_luz,Crt_Adeudo_luz,Crt_NombreC_Titular_luz,Crt_No_cuenta_agua,Crt_Adeudo_agua,Crt_Ine_Titu,Crt_Ine_Conyu,Crt_Escritura_Simple,Crt_Acuerdo,Crt_ActaNacTitu,Crt_ActaNacConyu,Crt_ActaMatr,Crt_EscrCert,Crt_CartaDesPre,Crt_ReciboLuz,Crt_ReciboAgua,Crt_Otros,Crt_Status_Muestra,Crt_Obervaciones,Crt_GastosServicios")] Corretaje corretaje, HttpPostedFileBase agua, HttpPostedFileBase luz, HttpPostedFileBase predial, HttpPostedFileBase otro)
         public ActionResult Create(Corretaje corretaje, HttpPostedFileBase Crt_ReciboAgua, HttpPostedFileBase Crt_ReciboLuz, HttpPostedFileBase Crt_Recibo_predial_digital, HttpPostedFileBase Crt_Otros)
         {
+            //Obtener los correos de los usuarios de hablitacion y contaduria
+            var usuarios = (from usu in db.Usuario where usu.usu_tipo == "4" || usu.usu_tipo == "5" select new { usu.usu_correo }).ToArray();
+
+            //Crear objeto del controlador de correo para llamar al metodo
+            var correo = new CorreoController();
+
             var a = corretaje.Id;
             int corretaje_id;
             var habilitacion = new Habilitacion();
@@ -128,9 +139,11 @@ namespace CasasRed_Nuevo3_.Controllers
 
             //Select List para estatus de casa
             var estatus = new SelectList(new[] {
-                new { value = "0", text = "Selecciona una opción.."}, //Esto puede ser con 0 o 1
-                new { value = "1", text = "Venta" },
-                new { value = "2", text = "Disponible" },
+                new { value = "No seleccionado", text = "Selecciona una opción.."}, //Esto puede ser con 0 o 1
+                new { value = "Venta", text = "Venta" },
+                new { value = "Disponible", text = "Disponible" },
+                new { value = "Cancelado",text= "Cancelado"},
+                new {value = "Firmado",text = "Firmado"}
             }, "value", "text", 0);
 
 
@@ -194,6 +207,7 @@ namespace CasasRed_Nuevo3_.Controllers
             corretaje.Crt_Adeudo_agua = (corretaje.Crt_Adeudo_agua == null) ? 0 : corretaje.Crt_Adeudo_agua;
             corretaje.Crt_Status_Muestra = (corretaje.Crt_Status_Muestra == null) ? "" : corretaje.Crt_Status_Muestra;
             corretaje.Crt_Obervaciones = (corretaje.Crt_Obervaciones == null) ? "" : corretaje.Crt_Obervaciones;
+            corretaje.Crt_Nss = (corretaje.Crt_Nss == null) ? "" : corretaje.Crt_Nss;
 
             if (ModelState.IsValid)
             {
@@ -203,10 +217,20 @@ namespace CasasRed_Nuevo3_.Controllers
 
                 //Borrar si no sirve
                 corretaje_id = corretaje.Id;
-                //Borrar si no sirve
-                habilitacion_controller.CrearHabilitacion(habilitacion, corretaje_id);
 
+                //Crea registro vacío en habilitación
+                habilitacion_controller.CrearHabilitacion(habilitacion, corretaje_id);
+                //Crea registro vacío en contaduría
                 contaduria_controller.CrearContaduria(contaduria, corretaje_id);
+
+                //Enviar correo de alta de casa a los demás departamentos
+                foreach (var item in usuarios)
+                {
+                    if (item != null)
+                    {
+                        correo.sendMailCorretaje(item.usu_correo);
+                    }
+                }
 
                 return RedirectToAction("Index");
             }
@@ -239,6 +263,16 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Corretajes/Edit/5
         public ActionResult Edit(int? id)
         {
+            //Estatus de la casa
+            var estatus = new SelectList(new[] {
+                new { value = "No seleccionado", text = "Selecciona una opción.."},
+                new { value = "Venta", text = "Venta" },
+                new { value = "Disponible", text = "Disponible" },
+                new {value = "Cancelado" , text ="Cancelado"},
+                new {value = "Firmado" , text = "Firmado"}
+            }, "value", "text", 0);
+
+            
             var posicion = new SelectList(new[] {
                 new { value = 0, text = "Selecciona una opción.."},
                 new { value = 1, text = "Soltero" },
@@ -248,15 +282,8 @@ namespace CasasRed_Nuevo3_.Controllers
             }, "value", "text", 0);
 
             ViewData["Posicion"] = posicion;
-
-            //Estatus de la casa
-            var estatus = new SelectList(new[] {
-                new { value = 0, text = "Selecciona una opción.."},
-                new { value = 1, text = "Venta" },
-                new { value = 2, text = "Disponible" }
-            }, "value", "text", 0);
-
             ViewData["Estatus"] = estatus;
+
 
 
             if (id == null)
@@ -342,7 +369,7 @@ namespace CasasRed_Nuevo3_.Controllers
             corretaje.Crt_Adeudo_agua = (corretaje.Crt_Adeudo_agua == null) ? 0 : corretaje.Crt_Adeudo_agua;
             corretaje.Crt_Status_Muestra = (corretaje.Crt_Status_Muestra == null) ? "" : corretaje.Crt_Status_Muestra;
             corretaje.Crt_Obervaciones = (corretaje.Crt_Obervaciones == null) ? "" : corretaje.Crt_Obervaciones;
-
+            corretaje.Crt_Nss = (corretaje.Crt_Nss == null) ? "" : corretaje.Crt_Nss;
 
             if (ModelState.IsValid)
             {
@@ -435,13 +462,29 @@ namespace CasasRed_Nuevo3_.Controllers
             if (filtro == "")
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Corretaje.Count() / registrosPagina);
-                var busqueda = (from a in db.Corretaje select new { a.Id, a.Crt_Direccion, a.Crt_Ano_compra, a.Crt_Status , cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Corretaje select new { a.Id, a.Crt_Direccion, fecha = SqlFunctions.DateName("year", a.Crt_FechaAlta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Crt_FechaAlta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Crt_FechaAlta).Trim(), a.Crt_Status , cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Corretaje where (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat).Contains(filtro) || a.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Corretaje where (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat).Contains(filtro) || a.Crt_Direccion.Contains(filtro) select new { a.Id, a.Crt_Direccion, fecha = SqlFunctions.DateName("year", a.Crt_FechaAlta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Crt_FechaAlta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Crt_FechaAlta).Trim(), a.Crt_Status, cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult BuscarCorretaje2(string filtro = "", int pagina = 1, int registrosPagina = 15)
+        {
+            if (filtro == "")
+            {
+                int totalPaginas = (int)Math.Ceiling((double)db.Corretaje.Count() / registrosPagina);
+                var busqueda = (from a in db.Corretaje where a.Crt_Status == "Disponible" select new { a.Id, a.Crt_Direccion, a.Crt_Ano_compra, a.Crt_Status, cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else
             {
                 int totalPaginas = (int)Math.Ceiling((double)(from a in db.Corretaje where (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat).Contains(filtro) || a.Crt_Ano_compra.Contains(filtro) || a.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
-                var busqueda = (from a in db.Corretaje where (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat).Contains(filtro) || a.Crt_Ano_compra.Contains(filtro) || a.Crt_Direccion.Contains(filtro) select new { a.Id, a.Crt_Direccion, a.Crt_Ano_compra, a.Crt_Status, cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Corretaje where a.Crt_Status == "Disponible" && (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat).Contains(filtro) || a.Crt_Ano_compra.Contains(filtro) || a.Crt_Direccion.Contains(filtro) select new { a.Id, a.Crt_Direccion, a.Crt_Ano_compra, a.Crt_Status, cliente = (a.Crt_Cliente_Nombre + " " + a.Crt_Cliente_ApPat + " " + a.Crt_Cliente_ApMat), a.Crt_ProgresoForm, total = totalPaginas }).OrderBy(a => a.Crt_Direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

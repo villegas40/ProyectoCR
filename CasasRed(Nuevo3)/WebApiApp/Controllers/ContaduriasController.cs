@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Contadurias/5
+        [Route("api/Contadurias/{id}")]
         [ResponseType(typeof(Contaduria))]
         public IHttpActionResult GetContaduria(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Contadurias/5
+        [Route("api/Contadurias/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutContaduria(int id, Contaduria contaduria)
         {
@@ -86,6 +88,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Contadurias/5
+        [Route("api/Contadurias/{id}")]
         [ResponseType(typeof(Contaduria))]
         public IHttpActionResult DeleteContaduria(int id)
         {
@@ -130,6 +133,7 @@ namespace WebApiApp.Controllers
                 Cnt_CESPT = 0,
                 Cnt_CFE = 0,
                 Id_Corretaje = corretaje_id,
+                Cnt_DevMensualidad = 0
             };
 
             CS.Contaduria.Add(contaduria_obj);

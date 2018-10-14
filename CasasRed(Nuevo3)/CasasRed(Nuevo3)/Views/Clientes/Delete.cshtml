@@ -46,52 +46,52 @@
 
                             <tr>
                                 <th>Fecha de Nacimiento</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Fechanac)</td>
                             </tr>
 
                             <tr>
                                 <th>Lugar de Nacimiento</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Lugarnac)</td>
                             </tr>
 
                             <tr>
                                 <th>No. Seguro Social</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Nss)</td>
                             </tr>
 
                             <tr>
                                 <th>CURP</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Curp)</td>
                             </tr>
 
                             <tr>
                                 <th>RFC</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Rfc)</td>
                             </tr>
 
                             <tr>
                                 <th>Estado civil</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Estado_civil)</td>
                             </tr>
 
                             <tr>
                                 <th>Régimen Matrimonial</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Regimen_matrimonial)</td>
                             </tr>
 
                             <tr>
                                 <th>Ocupación</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Ocupacion)</td>
                             </tr>
 
                             <tr>
                                 <th>Identificación</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_Identificacion)</td>
                             </tr>
 
                             <tr>
                                 <th>Número de Identificación</th>
-                                <td>@Html.DisplayFor(model => model.Gral_Apellidoma)</td>
+                                <td>@Html.DisplayFor(model => model.Gral_No_identificacion)</td>
                             </tr>
                         </table>
                     </div>
@@ -245,7 +245,9 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Confirmar borrado" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <div>
+                <a href='javascript:history.go(-1)'>Regresar</a>
+            </div>
         </div>
     }
 </div>

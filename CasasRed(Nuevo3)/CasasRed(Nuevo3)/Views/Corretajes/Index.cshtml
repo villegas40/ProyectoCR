@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col">
         <p>
-            @Html.ActionLink("Crear nueva casa", "Create")
+            @Html.ActionLink("Registrar Casa", "Create")
         </p>
     </div>
     <div class="col-3">
@@ -24,7 +24,7 @@
             <th scope="col">Cliente</th>
             <th scope="col">Estado</th>
             <th scope="col">Progreso</th>
-            <th scope="col" colspan="3">Opciones</th>
+            <th scope="col" colspan="5">Opciones</th>
         </tr>
     </thead>
     <tbody id="ctBA"></tbody>
@@ -65,12 +65,12 @@
                 for (var i = 0; i < json.length; i++) {
                     inner += "<tr>" +
                         "<td>" + json[i].Crt_Direccion + "</td>" +
-                        "<td>" + json[i].Crt_Ano_compra + "</td>" +
+                        "<td>" + json[i].fecha + "</td>" +
                         "<td>" + json[i].cliente + "</td>" +
-                        "<td>" + json[i].Crt_Status + "</td>" + 
+                        "<td>" + json[i].Crt_Status + "</td>" +
                         "<td>" + json[i].Crt_ProgresoForm + "</td>" +
-                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Corretajes/Edit/" + json[i].Id + "\">Editar</a></td><td><a class=\"btn btn-info\" href=\"/Corretajes/Details/" + json[i].Id + "\">Detalles</a></td><td><a class=\"btn btn-danger\" href=\"/Corretajes/Delete/" + json[i].Id + "\">Eliminar</a> </td><td><a class=\"btn btn-info\" href=\"/GastosContadurias/Index/" + json[i].Id + "\">Asignar Gasto</a></td></tr>" +
-                        "</tr>"
+                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Corretajes/Edit/" + json[i].Id + "\">Editar</a></td><td><a class=\"btn btn-info\" href=\"/Corretajes/Details/" + json[i].Id + "\">Detalles</a></td><td><a class=\"btn btn-danger\" href=\"/Corretajes/Delete/" + json[i].Id + "\">Eliminar</a> </td><td><a class=\"btn btn-info\" href=\"/GastosContadurias/Index/" + json[i].Id + "\">Asignar Gasto</a></td>" +
+                        "<td><a class=\"btn btn-primary\" href=\"/AsignarVendedor/Index?idcorretaje=" + json[i].Id +"&departamento=corretaje"+"\">Asesores</a></td>"+"</tr>"
                 }
                 document.getElementById("ctBA").innerHTML = inner
                 document.getElementById("next").textContent = totalPages

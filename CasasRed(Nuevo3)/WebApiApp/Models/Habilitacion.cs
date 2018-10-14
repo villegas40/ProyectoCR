@@ -49,6 +49,8 @@ namespace WebApiApp.Models
         public Nullable<int> Hbt_ProgresoForm { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
+        public string Hbt_StatusCasa { get; set; }
+        public Nullable<System.DateTime> Hbt_FchEntrega { get; set; }
     
         public virtual Corretaje Corretaje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

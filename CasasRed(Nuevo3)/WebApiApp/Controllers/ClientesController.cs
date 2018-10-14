@@ -93,10 +93,16 @@ namespace WebApiApp.Controllers
             //SMS
             var sms_controller = new SmsController();
 
+            //Folio
+            var foliogenerado = ValidarFolioDuplicado();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            cliente.Gral_Fechaalta = DateTime.Now;
+            cliente.Grlal_Folio = foliogenerado;
 
             db.Cliente.Add(cliente);
             db.SaveChanges();

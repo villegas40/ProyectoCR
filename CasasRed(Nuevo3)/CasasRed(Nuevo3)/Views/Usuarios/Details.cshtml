@@ -9,59 +9,45 @@
 <div>
     <h4>Usuario</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nombre de usuario
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.usu_username)
-        </dd>
-        <dt>
-            Nombre
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usu_nombre) @Html.DisplayFor(model => model.usu_apellidoPa) @Html.DisplayFor(model => model.usu_apellidoMa)
-        </dd>
-        <dt>
-            Correo
-        </dt>
+    <table class="table table-bordered">
+        <tr>
+            <th>Nombre de usuario</th>
+            <td>@Html.DisplayFor(model => model.usu_username)</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>@Html.DisplayFor(model => model.usu_nombre) @Html.DisplayFor(model => model.usu_apellidoPa) @Html.DisplayFor(model => model.usu_apellidoMa)</td>
+        </tr>
+        <tr>
+            <th>
+                Correo
+            </th>
             @if (Model.usu_correo == "")
             {
-        <dd> 
-                No asignado
-        </dd>
+                <td>
+                    No asignado
+                </td>
             }
             else
             {
-                <dd>
-                @Html.DisplayFor(model => model.usu_correo) 
-                </dd>
+                <td>
+                    @Html.DisplayFor(model => model.usu_correo)
+                </td>
             }
-        <dt>
-            Fecha registro
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usu_alta))
-        </dd>
-
-        <dt>
-            Tipo
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoUsuario.tipusu_descricion)
-        </dd>
-
-        <dt>
-            Estado del usuario
-        </dt>
-
-        <dd>
-            @(((bool)Model.usu_activo) ? "Activo" : "Inactivo" )
-        </dd>
-    </dl>
+        </tr>
+        <tr>
+            <th>Fecha registro</th>
+            <td>@Html.DisplayFor(model => model.usu_alta)</td>
+        </tr>
+        <tr>
+            <th>Tipo</th>
+            <td>@Html.DisplayFor(model => model.TipoUsuario.tipusu_descricion)</td>
+        </tr>
+        <tr>
+            <th>Estado del usuario</th>
+            <td>@(((bool)Model.usu_activo) ? "Activo" : "Inactivo" )</td>
+        </tr>
+    </table>
 </div>
 <hr />
 <p>

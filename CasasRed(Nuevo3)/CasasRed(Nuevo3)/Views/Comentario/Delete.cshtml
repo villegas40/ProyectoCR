@@ -1,0 +1,34 @@
+﻿@model CasasRed_Nuevo3_.Models.Comentarios
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <center>
+        <h2>Estas seguro que quieres borrar la nota?</h2>
+        <div>
+            @Html.DisplayName(Model.Cmt_Titulo)
+        </div>
+        <div>
+            @Html.DisplayName(Model.Cmt_Fecha.ToString())
+        </div>
+
+        <div>
+            @Html.DisplayName(Model.Cmt_Nota)
+        </div>
+    </center>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Confirmar borrado" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+
+    <div>
+        <a href='javascript:history.go(-1)'>Regresar</a>
+    </div>
+</div>

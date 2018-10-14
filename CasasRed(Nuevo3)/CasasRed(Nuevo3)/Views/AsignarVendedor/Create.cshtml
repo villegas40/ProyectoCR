@@ -1,0 +1,31 @@
+﻿@model CasasRed_Nuevo3_.Models.VendedorAsig
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "AsignarVendedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<Center>
+    <h3>Asignar Asesor</h3>
+    <p> Por favor seleccione el asesor a agregar</p>
+    <label class="control-label col-md-4" for="Id_Vendedor">Vendedor</label>
+    <div class="col-md-12">
+        @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Vendedor"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
+        @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
+    </div>
+
+    <div class=" d-flex justify-content-end">
+        <!--<input type="submit" value="Create" class="btn btn-primary btn-lg btn-block" />-->
+        <input type="submit" value="Crear" class="btn btn-outline-danger btn-lg btn-block" />
+
+    </div>
+
+</Center>
+
+    <div>
+        <a href='javascript:history.go(-1)'>Regresar</a>
+    </div>
+
+}

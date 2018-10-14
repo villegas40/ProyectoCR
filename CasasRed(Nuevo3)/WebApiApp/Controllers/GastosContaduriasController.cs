@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/GastosContadurias/5
+        [Route("api/GastosContadurias/{id}")]
         [ResponseType(typeof(GastosContaduria))]
         public IHttpActionResult GetGastosContaduria(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/GastosContadurias/5
+        [Route("api/GastosContadurias/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutGastosContaduria(int id, GastosContaduria gastosContaduria)
         {
@@ -86,6 +88,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/GastosContadurias/5
+        [Route("api/GastosContadurias/{id}")]
         [ResponseType(typeof(GastosContaduria))]
         public IHttpActionResult DeleteGastosContaduria(int id)
         {

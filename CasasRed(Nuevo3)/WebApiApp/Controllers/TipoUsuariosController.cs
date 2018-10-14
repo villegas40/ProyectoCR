@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/TipoUsuarios/5
+        [Route("api/TipoUsuarios/{id}")]
         [ResponseType(typeof(TipoUsuario))]
         public IHttpActionResult GetTipoUsuario(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/TipoUsuarios/5
+        [Route("api/TipoUsuarios/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTipoUsuario(int id, TipoUsuario tipoUsuario)
         {
@@ -86,6 +88,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/TipoUsuarios/5
+        [Route("api/TipoUsuarios/{id}")]
         [ResponseType(typeof(TipoUsuario))]
         public IHttpActionResult DeleteTipoUsuario(int id)
         {

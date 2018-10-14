@@ -12,95 +12,371 @@
     <table class="table table-bordered">
         <tr>
             <th>Puertas</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Puertas)</td>
+            <td>
+                @if (Model.Hbt_Puertas != null)
+                {
+                    if ((bool)Model.Hbt_Puertas)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Chapas</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Chapas)</td>
+            <td>
+                @if (Model.Hbt_Chapas != null)
+                {
+                    if ((bool)Model.Hbt_Chapas)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Marcos de puertas</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Marcos_puertas)</td>
+            <td>
+                @if (Model.Hbt_Marcos_puertas != null)
+                {
+                    if ((bool)Model.Hbt_Marcos_puertas)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Bisagras</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Bisagras)</td>
+            <td>
+                @if (Model.Hbt_Bisagras != null)
+                {
+                    if ((bool)Model.Hbt_Bisagras)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
-            <th>Taza</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Taza)</td>
+            <th>Taza Hbt_Taza</th>
+            <td>
+                @if (Model.Hbt_Taza != null)
+                {
+                    if ((bool)Model.Hbt_Taza)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Lavamanos</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Lavamanos)</td>
+            <td>
+                @if (Model.Hbt_Lavamanos != null)
+                {
+                    if ((bool)Model.Hbt_Lavamanos)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Bastago</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Bastago)</td>
+            <td>
+                @if (Model.Hbt_Bastago != null)
+                {
+                    if ((bool)Model.Hbt_Bastago)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Chapeton</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Chapeton)</td>
+            <td>
+                @if (Model.Hbt_Chapeton != null)
+                {
+                    if ((bool)Model.Hbt_Chapeton)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Maneral</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Maneral)</td>
+            <td>
+                @if (Model.Hbt_Maneral != null)
+                {
+                    if ((bool)Model.Hbt_Maneral)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Regadera completa</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Regadera_completa)</td>
+            <td>
+                @if (Model.Hbt_Regadera_completa != null)
+                {
+                    if ((bool)Model.Hbt_Regadera_completa)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Kit lavamanos</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Kit_lavamanos)</td>
+            <td>
+                @if (Model.Hbt_Kit_lavamanos != null)
+                {
+                    if ((bool)Model.Hbt_Kit_lavamanos)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Kit taza</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Kit_taza)</td>
+            <td>
+                @if (Model.Hbt_Kit_taza != null)
+                {
+                    if ((bool)Model.Hbt_Kit_taza)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Rosetas</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Rosetas)</td>
+            <td>
+                @if (Model.Hbt_Rosetas != null)
+                {
+                    if ((bool)Model.Hbt_Rosetas)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Apagador sencillo</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Apagador_sencillo)</td>
+            <td>
+                @if (Model.Hbt_Apagador_sencillo != null)
+                {
+                    if ((bool)Model.Hbt_Apagador_sencillo)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Conector sencillo</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Conector_sencillo)</td>
+            <td>
+                @if (Model.Hbt_Conector_sencillo != null)
+                {
+                    if ((bool)Model.Hbt_Conector_sencillo)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Apagador doble</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Apagador_doble)</td>
+            <td>
+                @if (Model.Hbt_Apagador_doble != null)
+                {
+                    if ((bool)Model.Hbt_Apagador_doble)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Conector apagador</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Conector_apagador)</td>
+            <td>
+                @if (Model.Hbt_Conector_apagador != null)
+                {
+                    if ((bool)Model.Hbt_Conector_apagador)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Domo</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Domo)</td>
+            <td>
+                @if (Model.Hbt_Domo != null)
+                {
+                    if ((bool)Model.Hbt_Domo)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Ventanas</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Ventanas)</td>
+            <td>
+                @if (Model.Hbt_Ventanas != null)
+                {
+                    if ((bool)Model.Hbt_Ventanas)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Cableado</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Cableado)</td>
+            <td>
+                @if (Model.Hbt_Cableado != null)
+                {
+                    if ((bool)Model.Hbt_Cableado)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Interior</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Break_interior)</td>
+            <td>
+                @if (Model.Hbt_Break_interior != null)
+                {
+                    if ((bool)Model.Hbt_Break_interior)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Medidor</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Break_medidor)</td>
+            <td>
+                @if (Model.Hbt_Break_medidor != null)
+                {
+                    if ((bool)Model.Hbt_Break_medidor)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Pinturas</th>
-            <td>@Html.DisplayFor(model => model.Hbt_Pinturas)</td>
+            <td>
+                @if (Model.Hbt_Pinturas != null)
+                {
+                    if ((bool)Model.Hbt_Pinturas)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
             <th>Estatus</th>

@@ -45,5 +45,7 @@ namespace WebApiApp.Models
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Vendedor> Vendedor { get; set; }
         public virtual DbSet<Verificacion> Verificacion { get; set; }
+        public virtual DbSet<VendedorAsig> VendedorAsig { get; set; }
+        public virtual DbSet<Notificaciones> Notificaciones { get; set; }
     }
 }

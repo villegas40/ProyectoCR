@@ -25,6 +25,7 @@ namespace CasasRed_Nuevo3_.Models
             this.Gestion = new HashSet<Gestion>();
             this.Habilitacion = new HashSet<Habilitacion>();
             this.GastosContaduria = new HashSet<GastosContaduria>();
+            this.VendedorAsig = new HashSet<VendedorAsig>();
         }
     
         public int Id { get; set; }
@@ -76,6 +77,7 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<int> Id_Vendedor { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
         public Nullable<System.DateTime> Crt_FechaAlta { get; set; }
+        public string Crt_Nss { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CalificacionVendedor> CalificacionVendedor { get; set; }
@@ -95,5 +97,7 @@ namespace CasasRed_Nuevo3_.Models
         public virtual Vendedor Vendedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GastosContaduria> GastosContaduria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VendedorAsig> VendedorAsig { get; set; }
     }
 }

@@ -22,11 +22,11 @@
     </div>
 
     <div>
-        <label for="Gral_ProgresoForm">Progreso</label>
+        @*<label for="Gral_ProgresoForm">Progreso</label>*@
         @Html.EditorFor(model => model.Gral_ProgresoForm, new { htmlAttributes = new { @class = "form-control data", @id = "progreso", @type="hidden" } })
         @Html.ValidationMessageFor(model => model.Gral_ProgresoForm, "", new { @class = "text-danger" })
     </div>
-    @Html.DisplayFor(modelItem => modelItem.Gral_ProgresoForm)
+    @*@Html.DisplayFor(modelItem => modelItem.Gral_ProgresoForm)*@
     <br />
 
     <div class="container">
@@ -49,23 +49,36 @@
                         <h5>Datos Generales</h5>
 
                         <div class="row justify-content-around">
-                            <div class="col">
-                                <label for="Casa Asignada">Folio</label>
-                                @Html.DropDownListFor(model => model.Grlal_Folio, ViewData["Posicion"] as SelectList, new { @class = "form-control", @id = "Casa Asignada", @type="hidden" })
+                            <div class="col-12">
+
+                                @*@Html.DropDownListFor(model => model.Id_Corretaje, ViewData["Casa"] as SelectList, new { @class = "form-control", @id = "Casa Asignada" })*@
+                                @if (Model.Id_Corretaje.HasValue)
+                                {
+                                    <h5>Casa Asignada - @Html.DisplayFor(model => model.Corretaje.Crt_Direccion)</h5>
+                                    @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control data", @id = "Casa Asignada", @type="hidden" } })
+                                    @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
+                                }
+                                else
+                                {
+                                    <label for="Casa Asignada">No tiene casa asignada</label>
+                                    @Html.DropDownListFor(model => model.Id_Corretaje, ((SelectList)ViewBag.SelectList), new { @class = "form-control", @id = "Casa Asignada" })
+                                    @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
+                                }
+
                                 @*@Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })*@
-                                @Html.ValidationMessageFor(model => model.Grlal_Folio, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col">
-                                <label for="Casa Asignada">Casa Asignada</label>
-                                @Html.DropDownListFor(model => model.Id_Corretaje, ViewData["Posicion"] as SelectList, new { @class = "form-control", @id = "Casa Asignada" })
-                                @*@Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })*@
-                                @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
+
                             </div>
                             <!--Usuario-->
-                            <div class="col-lg-4">
-                                <label for="Id_Usuario">Id Usuario</label>
+                            <div class="col-5">
+                                @*<label for="Id_Usuario">Id Usuario</label>*@
                                 @Html.EditorFor(model => model.Id_Usuario, new { htmlAttributes = new { @class = "form-control data", @id = "Id_Usuario", @type = "hidden" } })
                                 @Html.ValidationMessageFor(model => model.Id_Usuario, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-5">
+                                @*<label for="Casa Asignada">Folio</label>*@
+                                @Html.EditorFor(model => model.Grlal_Folio, new { htmlAttributes = new { @class = "form-control", @id = "Grlal_Folio", @type = "hidden" } })
+                                @*@Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control"} })*@
+                                @Html.ValidationMessageFor(model => model.Grlal_Folio, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -80,22 +93,14 @@
 
                         <div class="row justify-content-around">
                             <div class="col">
-                                <div class="form-group">
-                                    <!--Status -->
-                                    @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
-                                    <label class="control-label col-md-4" for="Id_Vendedor">Asesor</label>
-                                    
-                                        @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Posicion2"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
-                                        @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
-                                    
-                                </div>
+                             
                             </div>
                         </div>
 
                         <div class="row justify-content-around">
                             <div class="col">
-                                <label for="Gral_Fechaalta">Fecha de Alta</label>
-                                @Html.EditorFor(model => model.Gral_Fechaalta, new { htmlAttributes = new { @class = "form-control", @id = "datetimePicker", @Value = Model.Gral_Fechaalta.Value.ToString("yyyy/MM/dd") } })
+                                @*<label for="Gral_Fechaalta">Fecha de Alta</label>*@
+                                @Html.EditorFor(model => model.Gral_Fechaalta, new { htmlAttributes = new { @class = "form-control", @id = "datetimePicker", @Value = Model.Gral_Fechaalta.Value.ToString("yyyy/MM/dd"), @type="hidden" } })
                                 @Html.ValidationMessageFor(model => model.Gral_Fechaalta, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -124,7 +129,7 @@
                                 }
                                 else
                                 {
-                                    @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data", @type = "date" } })
+                                    @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data", @id = "fechanac"@*, @type = "date"*@ } })
                                 }
 
                                 @Html.ValidationMessageFor(model => model.Gral_Fechanac, "", new { @class = "text-danger" })
@@ -152,7 +157,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <label for="Gral_Estado_civil">Estado civil</label>
-                                @Html.EditorFor(model => model.Gral_Estado_civil, new { htmlAttributes = new { @class = "form-control data" } })
+                                @Html.DropDownListFor(model => model.Gral_Estado_civil, ViewData["EstadoCivil"] as SelectList, new { @class = "form-control data" })
                                 @Html.ValidationMessageFor(model => model.Gral_Estado_civil, "", new { @class = "text-danger" })
                             </div>
 
@@ -387,7 +392,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
+                            <input type="submit" value="Guardar" class="btn btn-outline-danger" />
                         </div>
                     </div>
                 </div>
@@ -433,13 +438,18 @@
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-
+        if ($('#fechanac').prop('type') != 'date') {
+            $('#fechanac').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'yyyy/mm/dd'
+            });
+        }
         //$(document.body).css('padding-top', '70px');
 
         //Si se tiene fecha y se quiere editar al borrarla completamente convierte el input en un date

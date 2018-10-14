@@ -87,7 +87,7 @@
         <div class="col-md-10">
 
             <div class="custom-control custom-checkbox">
-                @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked", @required = "", @checked = Model.usu_activo })
+                @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @onchange = "this.value = this.checked", @required = "", @checked = Model.usu_activo })
                 <label class="custom-control-label" for="customCheck1">Usuario Activo</label>
                 @Html.ValidationMessageFor(model => model.usu_activo, "", new { @class = "text-danger" })
             </div>

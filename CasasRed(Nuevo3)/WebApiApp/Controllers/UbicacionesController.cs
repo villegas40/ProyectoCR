@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Ubicaciones/5
+        [Route("api/Ubicaciones/{id}")]
         [ResponseType(typeof(Ubicaciones))]
         public IHttpActionResult GetUbicaciones(int id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Ubicaciones/5
+        [Route("api/Ubicaciones/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUbicaciones(int id, Ubicaciones ubicaciones)
         {
@@ -86,6 +88,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Ubicaciones/5
+        [Route("api/Ubicaciones/{id}")]
         [ResponseType(typeof(Ubicaciones))]
         public IHttpActionResult DeleteUbicaciones(int id)
         {

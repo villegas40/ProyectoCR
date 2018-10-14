@@ -22,11 +22,11 @@
     </div>
 
     <div>
-        <label for="Gral_ProgresoForm">Progreso</label>
+        @*<label for="Gtn_ProgresoForm">Progreso</label>*@
         @Html.EditorFor(model => model.Gtn_ProgresoForm, new { htmlAttributes = new { @class = "form-control data", @id = "progreso", @type = "hidden" } })
         @Html.ValidationMessageFor(model => model.Gtn_ProgresoForm, "", new { @class = "text-danger" })
     </div>
-    @Html.DisplayFor(modelItem => modelItem.Gtn_ProgresoForm)
+    @*@Html.DisplayFor(modelItem => modelItem.Gtn_ProgresoForm)*@
 
     <br />
 
@@ -386,18 +386,18 @@
 
                 <div class="form-group">
                     @*@Html.LabelFor(model => model.Hbt_Calibre_cableado, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <label>Cliente Asignado</label>
+                    @*<label>Cliente Asignado</label>*@
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Id_Cliente, new { htmlAttributes = new { @class = "form-control data" } })
+                        @Html.EditorFor(model => model.Id_Cliente, new { htmlAttributes = new { @class = "form-control data", @type = "hidden" } })
                         @Html.ValidationMessageFor(model => model.Id_Cliente, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @*@Html.LabelFor(model => model.Hbt_Calibre_cableado, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <label>Casa Asignado</label>
+                    @*<label>Casa Asignado</label>*@
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control data" } })
+                        @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control data", @type="hidden"} })
                         @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -415,7 +415,7 @@
 }
 
                 <div>
-                    @Html.ActionLink("Back to List", "Index")
+                    @Html.ActionLink("Regesar", "Index")
                 </div>
 
 @section Scripts {

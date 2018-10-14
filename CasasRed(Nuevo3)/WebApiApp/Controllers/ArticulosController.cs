@@ -23,6 +23,7 @@ namespace WebApiApp.Controllers
         }
 
         // GET: api/Articulos/5
+        [Route("api/Articulos/{id}")]
         [ResponseType(typeof(Articulos))]
         public IHttpActionResult GetArticulos(string id)
         {
@@ -36,6 +37,7 @@ namespace WebApiApp.Controllers
         }
 
         // PUT: api/Articulos/5
+        [Route("api/Articulos/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutArticulos(string id, Articulos articulos)
         {
@@ -79,6 +81,7 @@ namespace WebApiApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            articulos.art_fechaIngreso = DateTime.Now;
             db.Articulos.Add(articulos);
 
             try
@@ -101,6 +104,7 @@ namespace WebApiApp.Controllers
         }
 
         // DELETE: api/Articulos/5
+        [Route("api/Articulos/{id}")]
         [ResponseType(typeof(Articulos))]
         public IHttpActionResult DeleteArticulos(string id)
         {
@@ -129,5 +133,7 @@ namespace WebApiApp.Controllers
         {
             return db.Articulos.Count(e => e.art_id == id) > 0;
         }
+
+
     }
 }

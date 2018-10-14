@@ -22,10 +22,10 @@
     <thead>
         <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Direccion</th>
+            <th scope="col">Casa Asignada</th>
             <th scope="col">Fecha de Alta</th>
             <th scope="col">Progreso</th>
-            <th scope="col" colspan="3" style="text-align:center;">Opciones</th>
+            <th scope="col" colspan="4" style="text-align:center;">Opciones</th>
         </tr>
     </thead>
     <tbody id="ctBA"></tbody>
@@ -73,6 +73,7 @@
                         "<td><a class=\"btn btn-info\" href=\"/Clientes/Details/" + json[i].Id + "\">Detalles</a></td>" +
                         "<td><a class=\"btn btn-danger\" href=\"/Comentario/Index" + '?' + "idcliente=" + json[i].Id + "\">Notas</a> </td>" +
                         "<td><a class=\"btn btn-danger\" href=\"/Clientes/Delete/" + json[i].Id + "\">Eliminar</a> </td>" +
+                        "<td><a class=\"btn btn-primary\" href=\"/AsignarVendedor/Index?idcorretaje=" + json[i].Id_Corretaje + "&departamento=gestion" + "\">Asesores</a></td>"+
                         "</tr>";
                 }
                 document.getElementById("ctBA").innerHTML = inner

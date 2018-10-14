@@ -16,8 +16,8 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="art_id" required="">Código</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.art_id, new { htmlAttributes = new { @class = "form-control", @required = "" } })
-            @Html.ValidationMessageFor(model => model.art_id, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.art_id, new { htmlAttributes = new { @class = "form-control", @required = "", @onkeyup = "comprobarItem(this)" } })
+            @Html.ValidationMessageFor(model => model.art_id, "", new { @class = "text-danger", @id = "msgArti" })
         </div>
     </div>
     <div class="form-group">
@@ -45,10 +45,32 @@
     <hr />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" /> | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-secondary" })
+            <input type="submit" value="Create" onclick=" return correcto;"  class="btn btn-success" /> | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-secondary" })
         </div>
     </div>
 </div>
+<script>
+    var correcto = true
+    function comprobarItem(elm) {
+        var frm = new FormData()
+            var id = elm.value
+        frm.append("articulo", id)
+        var x = new XMLHttpRequest()
+        x.open("POST", "/Articulos/ValidItem", false)
+        x.addEventListener("load", function (e) {
+            var data = JSON.parse(x.responseText)
+            correcto = !data
+
+            if (data == true) {
+                document.getElementById("msgArti").textContent = "Artículo ya registrado.";
+            } else {
+                document.getElementById("msgArti").textContent = "";
+            }
+        });
+        x.send(frm)
+    }
+
+</script>
 }
 
 

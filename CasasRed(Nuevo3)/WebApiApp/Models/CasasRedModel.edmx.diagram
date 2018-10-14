@@ -59,6 +59,11 @@
         <AssociationConnector Association="CasasRedModel.FK__Historial__ha_us__29E1370A" />
         <AssociationConnector Association="CasasRedModel.FK_TipoUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_VrfUsu_Id" />
+        <EntityTypeShape EntityType="CasasRedModel.VendedorAsig" Width="1.5" PointX="12.5" PointY="16.375" />
+        <AssociationConnector Association="CasasRedModel.FK_VndAsigCasa_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_VndAsigVendedor_Id" />
+        <EntityTypeShape EntityType="CasasRedModel.Notificaciones" Width="1.5" PointX="5.25" PointY="35.125" />
+        <AssociationConnector Association="CasasRedModel.FK_NUsuario_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

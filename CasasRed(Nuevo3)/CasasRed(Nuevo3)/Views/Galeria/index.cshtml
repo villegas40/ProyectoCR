@@ -5,6 +5,7 @@
     List<string> listfhnombre = ViewBag.listfhnombre;
     List<string> listfharchivo = ViewBag.listfharchivo;
     List<int?> listfid = ViewBag.listfid;
+    List<int?> IDS = ViewBag.IDS;
     int idhabi = 0;
 }
 
@@ -92,7 +93,6 @@
 <tr>
 
     <th scope="col">@Html.ActionLink("Añadir foto", "Create", new { idhabilitacion = idhabi }, new { @class = "btn btn-info" })</th>
-    <th scope="col">@Html.ActionLink("Eliminar foto","Delete", new {idhabilitacion = idhabi},new {@class = "btn btn-info"})</th>
 </tr>
 
 <br>
@@ -119,7 +119,7 @@
                                     <a>@listfhnombre[i]</a>
                                 </td>
                                 <td>
-                                    <a href="www.facebook.com" class="far fa-trash-alt"></a>
+                                    <a href="/Galeria/Delete?idfoto=@IDS[i]&idhabi=@idhabi" class="far fa-trash-alt"></a>
                                 </td>
                             </tr> 
                         </tbody>
@@ -140,7 +140,7 @@
 <br>
 <br />
 <div>
-    <a href='javascript:history.go(-1)'>Regresar</a>
+    <a href='/Habilitacions/index'>Regresar</a>
 </div>
 
 @section Scripts {

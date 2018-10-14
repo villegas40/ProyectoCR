@@ -107,6 +107,8 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
+            Cliente cliente = new Cliente();
+
             //Selectlist calificacion vendedor
             var calificacion = new SelectList(new[]
             {
@@ -187,6 +189,7 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
+            CalificacionVendedor calificacionVendedor = new CalificacionVendedor();
             if (verificacion.Vfn_Persona_fisica == null) verificacion.Vfn_Persona_fisica = false;
             if (verificacion.Vfn_Visto_persona == null) verificacion.Vfn_Visto_persona = false;
             if (verificacion.Vfn_Tiempo_estimado == null) verificacion.Vfn_Tiempo_estimado = false;
@@ -196,6 +199,15 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 db.Entry(verificacion).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //Guardar la calificacion del vendedor asignado a cliente
+                if (verificacion.Cliente.Id_Vendedor.HasValue != false)
+                {
+                    calificacionVendedor.Id_Vendedor = verificacion.Cliente.Id_Vendedor;
+                    calificacionVendedor.DVndr_Puntaje = verificacion.Vfn_Trato_asesor;
+                    db.CalificacionVendedor.Add(calificacionVendedor);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
@@ -275,7 +287,7 @@ namespace CasasRed_Nuevo3_.Controllers
             if (filtro == "")
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Verificacion.Count() / registrosPagina);
-                var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Corretaje.Vendedor.Vndr_Nombre + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else

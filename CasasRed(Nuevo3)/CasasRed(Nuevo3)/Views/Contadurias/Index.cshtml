@@ -17,7 +17,7 @@
     <thead>
         <tr>
             <th scope="col">Dirección</th>
-            <th scope="col">Vendedor</th>
+            <th scope="col">Asesores Asignados</th>
             <th scope="col">Estatus corretaje</th>
             <th scope="col" colspan="4">Opciones</th>
         </tr>
@@ -60,17 +60,24 @@
                 }
                 var inner = ""
                 for (var i = 0; i < json.length; i++) {
-                    inner += "<tr>" +
-                        "<td>" + json[i].direccion + "</td>" +
-                        "<td>" + json[i].vendedor + "</td>" +
-                        "<td>" + json[i].estatus + "</td>" +
-                        "<td><a class=\"btn btn-primary\" href=\"/Contadurias/Edit/" + json[i].Id + "\">Editar</a></td>" +
-                        "<td><a class=\"btn btn-info\" href=\"/Contadurias/Details/" + json[i].Id + "\">Detalles</a></td>" +
-                        "<td><a class=\"btn btn-danger\" href=\"/Contadurias/Delete/" + json[i].Id + "\">Eliminar</a> </td>" +
-                        ((json[i].corretaje != 0) ? "<td><a class=\"btn btn-success\" href=\"/GastosContadurias/Create/" + json[i].corretaje + "\">Insertar gasto</a></td>" : "<td></td>") +
-                        "</tr>";
+                    var tr = document.createElement("tr")
+                    if (!buscarentablas(json[i].Id, json[i].vendenombre,json[i].vendeapp,json[i].vendeapm)) {
+                        tr.id = json[i].Id
+                        
+                        tr.innerHTML = 
+                            "<td>" + json[i].direccion + "</td>" +
+                        "<td>" + json[i].vendenombre + " "+json[i].vendeapp +" "+json[i].vendeapm+ "</td>" +
+                            "<td>" + json[i].estatus + "</td>" +
+                            "<td><a class=\"btn btn-primary\" href=\"/Contadurias/Edit/" + json[i].Id + "\">Editar</a></td>" +
+                            "<td><a class=\"btn btn-info\" href=\"/GastosContadurias/Details" + '?' + "idcontaduria=" + json[i].Id + "\">Detalles</a></td>" +
+                            "<td><a class=\"btn btn-danger\" href=\"/Contadurias/Delete/" + json[i].Id + "\">Eliminar</a> </td>" +
+                            ((json[i].corretaje != 0) ? "<td><a class=\"btn btn-success\" href=\"/GastosContadurias/Create/" + json[i].corretaje + "\">Insertar gasto</a></td>" : "<td></td>");
+                        document.getElementById("ctBA").appendChild(tr)
+                    }
+
+                   
                 }
-                document.getElementById("ctBA").innerHTML = inner
+                //document.getElementById("ctBA").innerHTML = inner
                 document.getElementById("next").textContent = totalPages
                 if (pageP <= 1) {
                     document.getElementById("previous").textContent = page
@@ -87,6 +94,21 @@
                 document.getElementById("actual").textContent = page
             });
             x.send(frm)
+        }
+
+        function buscarentablas(dato,valor,valor1,valor2) {
+            var encontrado = false
+            var body = document.getElementById('ctBA')
+            var rows = body.childElementCount
+            for (var j = 0; j < rows; j++) {
+                console.log(body.children[j].id)
+                if (dato == body.children[j].id.toString()) {
+                    body.children[j].children[1].textContent += ", " + valor +" "+valor1+" "+ valor2;
+                    encontrado = true
+                    break
+                }
+            }
+            return encontrado;
         }
         buscarContaduria()
     </script>

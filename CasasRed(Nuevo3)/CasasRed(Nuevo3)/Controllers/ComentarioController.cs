@@ -41,17 +41,19 @@ namespace CasasRed_Nuevo3_.Controllers
             List<String> cmt_titulo = new List<string>();
             List<String> Comentario = new List<string>();
             List<int?> idclientes = new List<int?>();
+            List<int?> IDS = new List<int?>();
 
-
-            var Ccomentario = ((from c in db.Comentarios select new { c.Cmt_Nota, c.Cmt_Titulo, c.Id_Cliente }).ToList());
+            var Ccomentario = ((from c in db.Comentarios select new { c.Id,c.Cmt_Nota, c.Cmt_Titulo, c.Id_Cliente }).ToList());
 
             foreach (var item in Ccomentario)
             {
+                IDS.Add(item.Id);
                 cmt_titulo.Add(item.Cmt_Titulo);
                 Comentario.Add(item.Cmt_Nota);
                 idclientes.Add(item.Id_Cliente);
             }
 
+            ViewBag.IDS = IDS;
             ViewBag.CMT_TITULOS = cmt_titulo;
             ViewBag.COMENTARIOS = Comentario;
             ViewBag.IDCLIENTES = idclientes;
@@ -102,22 +104,27 @@ namespace CasasRed_Nuevo3_.Controllers
         }
 
         //Terminar metodos
-        public ActionResult Delete(int? idcomentario)
+        public ActionResult Delete(int? idcomentario,int? idcliente)
         {
             if (idcomentario == 0 || idcomentario == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Comentarios comentarios = db.Comentarios.Find(idcomentario);
 
 
-            return View();
+
+            return View(comentarios);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? idcomentario)
+        public ActionResult DeleteConfirmed(int? idcomentario,int? idcliente)
         {
-            return View();
+            Comentarios comentarios = db.Comentarios.Find(idcomentario);
+            db.Comentarios.Remove(comentarios);
+            db.SaveChanges();
+            return Redirect("/Comentario/index" + "?idcliente=" + idcliente);
         }
 
         public ActionResult Edit(int? idcomentario)

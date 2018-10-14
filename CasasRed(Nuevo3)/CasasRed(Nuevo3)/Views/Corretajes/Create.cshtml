@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
+
 }
 
 <h2 style="margin-top:20px;">Create</h2>
@@ -52,6 +53,8 @@
                     <a class="list-group-item list-group-item-action list-group-item-light" data-toggle="list" href="#elemento6" role="tab" aria-controls="elemento6">
                         <i class="fas fa-user-friends fa-2x"></i> Datos de referencia
                     </a>
+
+ 
                 </div>
             </div>
             <!-- Formulario derecha-->
@@ -67,7 +70,7 @@
                                     @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
                                     <label class="control-label col-md-4" for="Crt_Status">Estatus</label>
                                     <div class="col-md-12">
-                                        @Html.DropDownListFor(model => model.Crt_Status, ViewData["Estatus"]  as SelectList, new { @class = "form-control col-12 data", @id = "Crt_Status" })
+                                        @Html.DropDownListFor(model => model.Crt_Status, ViewData["Estatus"] as SelectList, new { @class = "form-control col-12 data", @id = "Crt_Status" })
                                         @Html.ValidationMessageFor(model => model.Crt_Status, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -79,21 +82,21 @@
                                 <div class="form-group">
                                     <!--Status -->
                                     @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
-                                    <label class="control-label col-md-4" for="Id_Vendedor">Vendedor</label>
+                                    @*<label class="control-label col-md-4" for="Id_Vendedor">Vendedor</label>
                                     <div class="col-md-12">
                                         @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Vendedor"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
                                         @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
-                            <div class="col-12" >
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label class="control-label col-md-4" for="datepicker">Fecha de Alta</label>
+                                    @*<label class="control-label col-md-4" for="datepicker">Fecha de Alta</label>*@
                                     <div class="col-md-12">
-                                        @Html.EditorFor(model => model.Crt_FechaAlta, new { htmlAttributes = new { @class = "form-control data", @id = "datepicker" } })
+                                        @Html.EditorFor(model => model.Crt_FechaAlta, new { htmlAttributes = new { @class = "form-control data", @id = "datepicker", @type="hidden" } })
                                         @Html.ValidationMessageFor(model => model.Crt_FechaAlta, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -141,7 +144,7 @@
                                     @*Html.LabelFor(model => model.Crt_Fec_Nac, htmlAttributes: new { @class = "control-label" })*@
                                     <div class="col-12">
                                         <label for="datepicker">Fecha de nacimiento</label>
-                                        @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control data", @type = "date" } })
+                                        @Html.EditorFor(model => model.Crt_Fec_Nac, new { htmlAttributes = new { @class = "form-control data"@*, @type = "date"*@, @id="dp1" } })
                                         @Html.ValidationMessageFor(model => model.Crt_Fec_Nac, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -186,6 +189,16 @@
                                         <label for="teltrabajo">Telefono de trabajo</label>
                                         @Html.EditorFor(model => model.Crt_Tel_Trabajo, new { htmlAttributes = new { @class = "form-control data", @id = "teltrabajo" } })
                                         @Html.ValidationMessageFor(model => model.Crt_Tel_Trabajo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    @*Html.LabelFor(model => model.Crt_Tel_Trabajo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-12">
+                                        <label for="teltrabajo">Número de Seguro Social</label>
+                                        @Html.EditorFor(model => model.Crt_Nss, new { htmlAttributes = new { @class = "form-control data", @id = "numss" } })
+                                        @Html.ValidationMessageFor(model => model.Crt_Nss, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +285,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">                         
+                        <div class="row">
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     @*Html.LabelFor(model => model.Crt_Clave_Catastral, htmlAttributes: new { @class = "control-label col-md-2" })*@
@@ -396,7 +409,7 @@
                                 <div class="custom-control custom-checkbox">
                                     <div class="col-md-10">
                                         <div class="checkbox">
-                                            @Html.TextBoxFor(model => model.Crt_Ine_Titu, new { @class = "custom-control-input data", @id = "customCheck2", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_Ine_Titu, new { @class = "custom-control-input data", @id = "customCheck2", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck2">Credencial del titular</label>
                                             @Html.ValidationMessageFor(model => model.Crt_Ine_Titu, "", new { @class = "text-danger" })
                                         </div>
@@ -407,7 +420,7 @@
                                 <div class="custom-control custom-checkbox">
                                     <div class="col-md-10">
                                         <div class="checkbox">
-                                            @Html.TextBoxFor(model => model.Crt_Ine_Conyu, new { @class = "custom-control-input data", @id = "customCheck3", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_Ine_Conyu, new { @class = "custom-control-input data", @id = "customCheck3", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck3">Credencial Conyuge</label>
                                             @Html.ValidationMessageFor(model => model.Crt_Ine_Conyu, "", new { @class = "text-danger" })
                                         </div>
@@ -418,7 +431,7 @@
                                 <div class="custom-control custom-checkbox">
                                     <div class="col-md-10">
                                         <div class="checkbox">
-                                            @Html.TextBoxFor(model => model.Crt_ActaNacTitu, new { @class = "custom-control-input data", @id = "customCheck4", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_ActaNacTitu, new { @class = "custom-control-input data", @id = "customCheck4", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck4">Acta de necimiento titular</label>
                                             @Html.ValidationMessageFor(model => model.Crt_ActaNacTitu, "", new { @class = "text-danger" })
                                         </div>
@@ -432,7 +445,7 @@
                                     <div class="col-md-10">
                                         <div class="checkbox">
                                             @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                            @Html.TextBoxFor(model => model.Crt_ActaNacConyu, new { @class = "custom-control-input data", @id = "customCheck5", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_ActaNacConyu, new { @class = "custom-control-input data", @id = "customCheck5", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck5">Acta de nacimiento conyuge</label>
                                             @Html.ValidationMessageFor(model => model.Crt_ActaNacConyu, "", new { @class = "text-danger" })
                                         </div>
@@ -443,7 +456,7 @@
                                 <div class="custom-control custom-checkbox">
                                     <div class="col-md-10">
                                         <div class="checkbox">
-                                            @Html.TextBoxFor(model => model.Crt_ActaMatr, new { @class = "custom-control-input data", @id = "customCheck6", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_ActaMatr, new { @class = "custom-control-input data", @id = "customCheck6", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck6">Acta de matrimonio</label>
                                             @Html.ValidationMessageFor(model => model.Crt_ActaMatr, "", new { @class = "text-danger" })
                                         </div>
@@ -457,7 +470,7 @@
                                     <div class="col-md-10">
                                         <div class="checkbox">
                                             @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                            @Html.TextBoxFor(model => model.Crt_EscrCert, new { @class = "custom-control-input data", @id = "customCheck7", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_EscrCert, new { @class = "custom-control-input data", @id = "customCheck7", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck7">Escritura certificada</label>
                                             @Html.ValidationMessageFor(model => model.Crt_EscrCert, "", new { @class = "text-danger" })
                                         </div>
@@ -471,7 +484,7 @@
                                     <div class="col-md-10">
                                         <div class="checkbox">
                                             @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                            @Html.TextBoxFor(model => model.Crt_Acuerdo, new { @class = "custom-control-input data", @id = "customCheck8", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_Acuerdo, new { @class = "custom-control-input data", @id = "customCheck8", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck8">Acuerdo</label>
                                             @Html.ValidationMessageFor(model => model.Crt_Acuerdo, "", new { @class = "text-danger" })
                                         </div>
@@ -485,7 +498,7 @@
                                     <div class="col-md-10">
                                         <div class="checkbox">
                                             @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                            @Html.TextBoxFor(model => model.Crt_CartaDesPre, new { @class = "custom-control-input data", @id = "customCheck9", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_CartaDesPre, new { @class = "custom-control-input data", @id = "customCheck9", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck9">Carta de desbloqueo de predial</label>
                                             @Html.ValidationMessageFor(model => model.Crt_CartaDesPre, "", new { @class = "text-danger" })
                                         </div>
@@ -499,7 +512,7 @@
                                     <div class="col-md-10">
                                         <div class="checkbox">
                                             @*Html.EditorFor(model => model.Crt_Acuerdo)*@
-                                            @Html.TextBoxFor(model => model.Crt_Escritura_Simple, new { @class = "custom-control-input data", @id = "customCheck10", @type = "checkbox", @oninput = "this.value = this.checked" })
+                                            @Html.TextBoxFor(model => model.Crt_Escritura_Simple, new { @class = "custom-control-input data", @id = "customCheck10", @type = "checkbox", @onchange = "this.value = this.checked" })
                                             <label class="custom-control-label" for="customCheck10">Escritura simple</label>
                                             @Html.ValidationMessageFor(model => model.Crt_Escritura_Simple, "", new { @class = "text-danger" })
                                         </div>
@@ -535,7 +548,7 @@
                                         @Html.EditorFor(model => model.Crt_ReciboAgua, new { htmlAttributes = new { @class = "form-control data", @id = "agua", @type = "file", @name = "Crt_ReciboAgua" } })
                                         @Html.ValidationMessageFor(model => model.Crt_ReciboAgua, "", new { @class = "text-danger" })
                                         @*<label for="telefonoR">Recibo de Agua</label>
-                                            <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
+                            <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
                                     </div>
                                 </div>
                             </div>
@@ -548,7 +561,7 @@
                                         @Html.EditorFor(model => model.Crt_ReciboLuz, new { htmlAttributes = new { @class = "form-control data", @id = "luz", @type = "file", @name = "Crt_ReciboLuz" } })
                                         @Html.ValidationMessageFor(model => model.Crt_ReciboLuz, "", new { @class = "text-danger" })
                                         @*<label for="telefonoR">Recibo de Luz</label>
-                                            <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
+                            <input type="file" name="adjunto" accept=".pdf,.jpg,.png">*@
                                     </div>
                                 </div>
                             </div>
@@ -585,7 +598,7 @@
                                     @*Html.LabelFor(model => model.Crt_Obervaciones, htmlAttributes: new { @class = "control-label" })*@
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.Crt_Obervaciones, new { htmlAttributes = new { @class = "form-control col-12", @placeholder = "Observaciones" } })
-                                            @Html.ValidationMessageFor(model => model.Crt_Obervaciones, "", new { @class = "text-danger" })*@
+                            @Html.ValidationMessageFor(model => model.Crt_Obervaciones, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
                             </div>
@@ -647,7 +660,7 @@
                                     @*Html.LabelFor(model => model.Gtn_Gastos, htmlAttributes: new { @class = "control-label col-md-2" })*@
                                     <div class="col-md-10">
                                         @*@Html.EditorFor(model => model.Gtn_Gastos, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gastos" } })
-                                            @Html.ValidationMessageFor(model => model.Gtn_Gastos, "", new { @class = "text-danger" })*@
+                            @Html.ValidationMessageFor(model => model.Gtn_Gastos, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
                             </div>
@@ -665,6 +678,10 @@
                             </div>
                         </div>
                     </div><!-- Fin tap 6-->
+          
+
+                 
+
                 </div>
             </div>
         </div>
@@ -687,7 +704,7 @@
 
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar", "Index")
 </div>
 
 @section Scripts {
@@ -697,9 +714,17 @@
         //    $("#datepicker").datepicker();
         //});
 
-        //$(function () {
-        //    $("#datepicker2").datepicker();
+        //$('#dp1').datepicker({
+        //    format: 'mm-dd-yyyy',
+        //    todayBtn: 'linked'
         //});
+        if ($('#dp1').prop('type') != 'date') {
+            $('#dp1').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'yyyy/mm/dd'
+            });
+        }
+        
 
         //Fecha por default
         $(document).ready(function () {

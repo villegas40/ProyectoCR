@@ -49,6 +49,8 @@ namespace CasasRed_Nuevo3_.Models
         public Nullable<int> Hbt_ProgresoForm { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
+        public string Hbt_StatusCasa { get; set; }
+        public Nullable<System.DateTime> Hbt_FchEntrega { get; set; }
     
         public virtual Corretaje Corretaje { get; set; }
         public virtual Usuario Usuario { get; set; }

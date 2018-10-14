@@ -19,12 +19,17 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             var client = new Client(creds: new Nexmo.Api.Request.Credentials
             {
-                ApiKey = "9565a1b8",
-                ApiSecret = "c9ZGXHvI2ghr7dq7"
+                //mias:9565a1b8,c9ZGXHvI2ghr7dq7
+                //casasred: 12dc61d8,cHhWZ0gmeqUicCyg
+                ApiKey = "12dc61d8",
+                ApiSecret = "cHhWZ0gmeqUicCyg"
             });
             /* https://www.nexmo.com/ 
                 Credenciales de acceso:
                         email: drokemx@gmail.com
+                        clave: Hola123$$
+
+                        email: casasredposventa@gmail.com
                         clave: Hola123$$
 
             */

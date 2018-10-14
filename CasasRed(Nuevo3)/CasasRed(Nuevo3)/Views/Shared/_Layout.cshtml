@@ -1,9 +1,10 @@
 ﻿@{ 
-    //string fun = Session["Vista"].ToString();
-    //string con = Session["Controlador"].ToString();
-    string fun = "";
-    string con = "";
-
+    string fun = (Session["Vista"] != null)? Session["Vista"].ToString() : "";
+    string con = (Session["Controlador"] != null)?Session["Controlador"].ToString():"";
+    string msn = (Session["Mensaje"] != null) ? Session["Mensaje"].ToString() : "";
+    string tipMsn = (Session["TipoMensaje"] != null) ? Session["TipoMensaje"].ToString() : "";
+    Session["Mensaje"] = null;
+    Session["TipoMensaje"] = null;
 }
 <!DOCTYPE html>
 <html>
@@ -15,16 +16,19 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/themes/base/css")
     <!--Footer-->
+    <script src="~/Scripts/Global/Notificacion.js"></script>
     <link href="~/Content/customcss/sticky-footer.css" rel="stylesheet" />
     <!--Iconos-->
     <link href="~/Content/fontawsome/css/fontawesome-all.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+    <!--Datepicker-->
+    @*<link href="~/Content/datepicker/css/datepicker.css" rel="stylesheet" />*@
 
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
     <style>
-
         .navbar {
             background-image: url('/Media/background2.jpg');
         }
@@ -47,19 +51,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                @*<li class="nav-item active">
-                        @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Acerca de Nosotros", "About", "Home", null, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })
-                    </li>*@
                 @if (Session["Usuario"] != null)
                 {
                     <li class="nav-item active">
-                        @Html.ActionLink("Inicio", @fun, con, null, new { @class = "nav-link" })
+                        @Html.ActionLink("Inicio", @fun, @con, null, new { @class = "nav-link" })
                     </li>
                     if (Session["Tipo"].ToString() == "Administrador" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Gestion")
                     {
@@ -79,6 +74,7 @@
                                     <a class="dropdown-item" href="/Habilitacions">Habilitacion</a>
                                     <a class="dropdown-item" href="/Verificacions">Verificacion</a>
                                     <hr />
+                                    <a class="dropdown-item" href="/Vendedor/Index">Asesores</a>
                                     <a class="dropdown-item" href="/Existencias">Inventario</a>
                                     <a class="dropdown-item" href="/Articulos">Artículos</a>
                                     <a class="dropdown-item" href="/Ubicaciones">Ubicaciones</a>
@@ -127,6 +123,23 @@
         </div>
     </nav>
     <div class="container body-content" style="margin-top: 100px;">
+        @if (msn != "")
+        {
+            if (tipMsn.ToLower() != "error")
+            {
+                <div class="alert alert-success alert-dismissible container body-content" style="opacity:0.93; position:fixed; z-index:1;">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @msn
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger alert-dismissible container body-content" style="opacity:0.93; position:fixed; z-index:1;">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @msn
+                </div>
+            }
+        }
         <main role="main">
             @RenderBody()
         </main>
@@ -140,6 +153,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
+    @*<script src="~/Content/datepicker/js/bootstrap-datepicker.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

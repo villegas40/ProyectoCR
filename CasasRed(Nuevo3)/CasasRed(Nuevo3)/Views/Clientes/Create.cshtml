@@ -22,10 +22,10 @@
 
     <div>
         <label for="Gral_ProgresoForm">Progreso</label>
-        @Html.EditorFor(model => model.Gral_ProgresoForm, new { htmlAttributes = new { @class = "form-control data", @id = "progreso" } })
+        @Html.EditorFor(model => model.Gral_ProgresoForm, new { htmlAttributes = new { @class = "form-control data", @id = "progreso", @type="hidden" } })
         @Html.ValidationMessageFor(model => model.Gral_ProgresoForm, "", new { @class = "text-danger" })
     </div>
-    @Html.DisplayFor(modelItem => modelItem.Gral_ProgresoForm)
+    @*@Html.DisplayFor(modelItem => modelItem.Gral_ProgresoForm)*@
 
     <br />
     <div class="container">
@@ -66,11 +66,11 @@
                                 <div class="form-group">
                                     <!--Status -->
                                     @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
-                                    <label class="control-label col-md-4" for="Id_Vendedor">Asesor</label>
+                                    @*<label class="control-label col-md-4" for="Id_Vendedor">Asesor</label>
                                     <div class="col">
                                         @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Posicion2"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
                                         @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
 
                             <div class="col-lg-4">
                                 <label for="Gral_Fechanac">Fecha de Nacimiento</label>
-                                @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data", @type = "date" } })
+                                @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data"@*, @type = "date"*@, @id="pd1" } })
                                 @Html.ValidationMessageFor(model => model.Gral_Fechanac, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-lg-5">
@@ -123,7 +123,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <label for="Gral_Estado_civil">Estado civil</label>
-                                @Html.EditorFor(model => model.Gral_Estado_civil, new { htmlAttributes = new { @class = "form-control data" } })
+                                @Html.DropDownListFor(model => model.Gral_Estado_civil, ViewData["EstadoCivil"] as SelectList ,new  { @class = "form-control data"  })
                                 @Html.ValidationMessageFor(model => model.Gral_Estado_civil, "", new { @class = "text-danger" })
                             </div>
 
@@ -380,12 +380,20 @@
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar", "Index")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+
+        if ($('#pd1').prop('type') != 'date') {
+            $('#pd1').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'yyyy/mm/dd'
+            });
+        }
+
         //Fecha por default
         $(document).ready(function () {
             var now = new Date();
@@ -425,7 +433,7 @@
             frm.append("pagina", page)
 
             var x = new XMLHttpRequest()
-            x.open("POST", "/Corretajes/BuscarCorretaje")
+            x.open("POST", "/Corretajes/BuscarCorretaje2")
             x.addEventListener("load", function (e) {
                 var json = JSON.parse(x.responseText)
                 document.getElementById("ctBA").innerHTML = ""

@@ -10,10 +10,12 @@ GO
 CREATE TABLE Corretaje(
 	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
 	Crt_Status VARCHAR(20),
+	Crt_FechaAlta DATE,
 	Crt_Cliente_Nombre VARCHAR(15),
 	Crt_Cliente_ApMat VARCHAR(15),
 	Crt_Cliente_ApPat VARCHAR(15),
 	Crt_Direccion VARCHAR(100),
+	Crt_Nss VARCHAR(11),
 	Crt_Precio VARCHAR(20),
 	Crt_Gasto VARCHAR(10),  /*NI IDEA*/
 	Crt_Tipo_Vivienda VARCHAR(15),	/*<<<<<En esta parte pidio poder seleccionar entre Casa o Departamento, si es casa que aparezcan opciones de cuantas habitaciones, 
@@ -141,6 +143,7 @@ CREATE TABLE Cliente(
 
 
 /*Departamento de Gestion*/
+--CASCADE si borra la casa
 CREATE TABLE Gestion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	Gtn_Escrituras BIT,
@@ -182,7 +185,7 @@ CREATE TABLE Gestion(
 	CONSTRAINT FK_Crt_Id
 		FOREIGN KEY (Id_Corretaje)
 		REFERENCES Corretaje(Id)
-		ON DELETE SET NULL,
+		ON DELETE CASCADE,
 	--El comprador de la casa 
 	CONSTRAINT FK_Cliente_Id --Quitar (Pensar mas)
 		FOREIGN KEY (Id_Cliente)
@@ -193,6 +196,7 @@ CREATE TABLE Gestion(
 		REFERENCES Usuario(Id)
 		ON DELETE SET NULL,
 );
+
  
 /*Departamento de Verificacion*/
 CREATE TABLE Verificacion(
@@ -247,6 +251,8 @@ CREATE TABLE Habilitacion(
 	Hbt_Break_medidor BIT,
 	Hbt_Pinturas BIT,
 	Hbt_AvisoSusp BIT,
+	Hbt_StatusCasa VARCHAR(25),
+	Hbt_FchEntrega DATE,
 	Hbt_ProgresoForm INT,
 	Id_Corretaje int,
 	Id_Usuario INT,
@@ -287,6 +293,7 @@ CREATE TABLE Usuario (
 		ON DELETE CASCADE
 );
 
+DROP TABLE Contaduria
 /*Nueva tabla de contaduria*/
 CREATE TABLE Contaduria(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -296,7 +303,7 @@ CREATE TABLE Contaduria(
 	Cnt_Tramites DECIMAL(18,4), -- Tramites Posiblemente Borrar
 	Cnt_CESPT DECIMAL(18,4), -- Posiblemente Borrar
 	Cnt_CFE DECIMAL(18,4), --Corretaje posiblemente borrar
-	--Cnt_DevMensualidad DECIMAL(18,4), --No
+	Cnt_DevMensualidad DECIMAL(18,4), --No
 	--Cnt_Otros DECIMAL(18,4), --No
 	Id_Corretaje int,
 	Id_Usuario INT,
@@ -413,13 +420,12 @@ CREATE TABLE FotosHabilitacion(
 	fh_id INT IDENTITY(1,1) PRIMARY KEY,
 	fh_archivo VARCHAR(MAX) NOT NULL,
 	fh_nombre VARCHAR(200) NOT NULL,
-	fh_habilitacion INT 
+	fh_habilitacion INT, 
 	CONSTRAINT FK_FotosHab_Id
 		FOREIGN KEY (fh_habilitacion)
 		REFERENCES Habilitacion(Id) 
 		ON DELETE CASCADE
 )
-
 
 --Nuevas Tablas
 /*Nueva tabla de Vendedor*/
@@ -489,6 +495,37 @@ CREATE TABLE Comentarios(
 		ON DELETE CASCADE
 )
 
+CREATE TABLE Notificaciones(
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Not_usuario_id INT,
+    Not_titutlo VARCHAR(25),
+    Not_descripcion VARCHAR(250),
+    Not_idVinculado VARCHAR(50),
+    Not_leida BIT default 0,
+    Not_mostrada BIT default 0,
+    
+    CONSTRAINT FK_NUsuario_Id
+        FOREIGN KEY (Not_usuario_id)
+        REFERENCES Usuario(ID)
+        ON DELETE CASCADE
+)
+
+--CASCADE
+CREATE TABLE VendedorAsig(
+Id INT IDENTITY(1,1) PRIMARY KEY,
+Id_Vendedor INT,
+Id_Corretaje INT,
+VndAsig_Departamento VARCHAR(50),
+CONSTRAINT FK_VndAsigVendedor_Id
+		FOREIGN KEY (Id_Vendedor)
+		REFERENCES Vendedor(Id)
+		ON DELETE SET NULL,
+CONSTRAINT FK_VndAsigCasa_Id
+		FOREIGN KEY (Id_Corretaje)
+		REFERENCES Corretaje(Id)
+		ON DELETE CASCADE,		 
+)
+
 /*Campos agregados a gestion*/
 --ALTER TABLE Gestion
 --ADD Gtn_CuentaBancaria BIT, Gtn_Taller BIT;
@@ -501,8 +538,10 @@ TRUNCATE TABLE Habilitacion
 TRUNCATE TABLE Contaduria
 TRUNCATE TABLE GastosContaduria
 TRUNCATE TABLE FotosHabilitacion
-TRUNCATE TABLE HistorialAsignacion
-TRUNCATE TABLE CasaInventario
+TRUNCATE TABLE Comentarios
+TRUNCATE TABLE DetallesComision
+TRUNCATE TABLE Comision
+TRUNCATE TABLE VendedorAsig
 
 
 DROP TABLE Corretaje
@@ -513,23 +552,37 @@ DROP TABLE Habilitacion
 DROP TABLE Contaduria
 DROP TABLE GastosContaduria
 DROP TABLE FotosHabilitacion
+DROP TABLE GastosContaduria
+DROP TABLE Comentarios
+DROP TABLE DetallesComision
+DROP TABLE Comision
+DROP TABLE VendedorAsig
+
+--Sin constraint
 DROP TABLE HistorialAsignacion
 DROP TABLE CasaInventario
-DROP TABLE GastosContaduria
+DROP TABLE Articulos
+DROP TABLE Ubicaciones
+DROP TABLE Existencias
 
+TRUNCATE TABLE HistorialAsignacion
+TRUNCATE TABLE CasaInventario
+TRUNCATE TABLE Articulos
+TRUNCATE TABLE Ubicaciones
+TRUNCATE TABLE Existencias
 
 --Eliminar Constraints
 ALTER TABLE Corretaje
 DROP CONSTRAINT FK_CrtVendedor_Id, FK_CrtUsuario_Id; 
 
 ALTER TABLE Cliente
-DROP CONSTRAINT FK_CrtCasa_Id , FK_CrtVendedor_Id, FK_GralUsuario_Id;
+DROP CONSTRAINT FK_CrtCasa_Id , FK_GralVendedor_Id, FK_GralUsuario_Id;
 
 ALTER TABLE Gestion
 DROP CONSTRAINT FK_Crt_Id, FK_Cliente_Id, FK_Usuario_Id;
 
 ALTER TABLE Verificacion
-DROP CONSTRAINT FK_GtnCli_Id  , FK_GtnUsu_Id;
+DROP CONSTRAINT FK_GtnCli_Id, FK_VrfUsu_Id;
 
 ALTER TABLE Habilitacion
 DROP CONSTRAINT FK_CrtHab_Id  , FK_HabUsuario_Id;
@@ -554,6 +607,23 @@ DROP CONSTRAINT FK_DCmsComision_Id, FK_DCmsVendedor_Id;
 
 ALTER TABLE Comentarios 
 DROP CONSTRAINT FK_ComentClie_Id;
+Truncate table Comentarios
+
+ALTER TABLE VendedorAsig 
+DROP CONSTRAINT FK_VndAsigVendedor_Id,FK_VndAsigCasa_Id;
 
 ALTER TABLE FotosHabilitacion 
 DROP CONSTRAINT FK_FotosHab_Id;
+
+--Cosas que no sé para que funcionan
+ALTER TABLE Usuario 
+ADD CONSTRAINT FK_TipoUsuario_Id 
+	FOREIGN KEY (Id_TipoUsiario)
+		REFERENCES TipoUsuario(Id)
+		ON DELETE SET NULL 
+
+ALTER TABLE Comentarios 
+ADD CONSTRAINT FK_ComentClie_Id 
+	FOREIGN KEY (Id_Cliente)
+		REFERENCES Cliente(Id)
+		ON DELETE CASCADE 

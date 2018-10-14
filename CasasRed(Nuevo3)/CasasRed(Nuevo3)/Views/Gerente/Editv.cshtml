@@ -17,11 +17,6 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <!--Campo del ID de relacion-->
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Id_Cliente, new { htmlAttributes = new { @class = "form-control data", @id = "tiempo" } })
-            @Html.ValidationMessageFor(model => model.Id_Cliente, "", new { @class = "text-danger" })
-        </div>
 
         <div class="progress">
             <div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: @Html.DisplayFor(model => model.Vfn_ProgresoForm)%">@Html.DisplayFor(model => model.Vfn_ProgresoForm)% Completado</div>
@@ -30,156 +25,223 @@
         <!--Campo para el valor de la barra-->
         <div>
             <label for="Gral_ProgresoForm">Progreso</label>
-            @Html.EditorFor(model => model.Vfn_ProgresoForm, new { htmlAttributes = new { @class = "form-control", @id = "progreso"@*, @type = "hidden"*@}
+            @Html.EditorFor(model => model.Vfn_ProgresoForm, new { htmlAttributes = new { @class = "form-control", @id = "progreso", @type = "hidden"}
     })
             @Html.ValidationMessageFor(model => model.Vfn_ProgresoForm, "", new { @class = "text-danger" })
         </div>
-        @Html.DisplayFor(modelItem => modelItem.Vfn_ProgresoForm)
 
         <br />
+        <div id="cabeceroPrint">
 
-
-
-        <h4>Cliente: @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Nombre)</h4>
-
-        <br />
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Persona_fisica, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            @*<label>¿Conoce la ubicación físicamente del inmueble?6649710940</label>*@
-            <div class="col-md-10">
-                <div class="custom-control custom-checkbox">
-                    @*@Html.EditorFor(model => model.Vfn_Persona_fisica)*@
-                    @*@Html.TextBoxFor(model => model.Vfn_Persona_fisica, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked; resetCheckbox();" })*@
-                    <input id="customCheck1" class="custom-control-input data" name="Vfn_Persona_fisica" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Persona_fisica.Value ? "checked=\"checked\"" : "") />
-                    <label class="custom-control-label" for="customCheck1">Conoce la ubicación físicamente del inmueble</label>
-                    @Html.ValidationMessageFor(model => model.Vfn_Persona_fisica, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Visto_persona, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                <div class="custom-control custom-checkbox">
-                    @*@Html.EditorFor(model => model.Vfn_Visto_persona)*@
-                    @*@Html.TextBoxFor(model => model.Vfn_Visto_persona, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck2", @oninput = "this.value = this.checked; resetCheckbox();" })*@
-                    <input id="customCheck2" class="custom-control-input data" name="Vfn_Visto_persona" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Visto_persona.Value ? "checked=\"checked\"" : "") />
-                    <label class="custom-control-label" for="customCheck2">La ha visto por dentro personalmente</label>
-                    @Html.ValidationMessageFor(model => model.Vfn_Visto_persona, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Tiempo_estimado, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                <div class="custom-control custom-checkbox">
-                    @*@Html.EditorFor(model => model.Vfn_Tiempo_estimado)*@
-                    @*@Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked; resetCheckbox();" })*@
-                    <input id="customCheck3" class="custom-control-input data" name="Vfn_Tiempo_estimado" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Tiempo_estimado.Value ? "checked=\"checked\"" : "") />
-                    <label class="custom-control-label" for="customCheck3">Le dijo el tiempo estimado de entrega y firma</label>
-                    @Html.ValidationMessageFor(model => model.Vfn_Tiempo_estimado, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Tiempo_estimado, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                <div class="custom-control custom-checkbox">
-                    @*@Html.EditorFor(model => model.Vfn_Tiempo_estimado)*@
-                    @*@Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked" })
-                        <label class="custom-control-label" for="customCheck3">¿Le dijo el tiempo estimado de entrega y firma?</label>
-                        @Html.ValidationMessageFor(model => model.Vfn_Tiempo_estimado, "", new { @class = "text-danger" })*@
-                    <p>Si la respuesta es no, se le debe explicar al cliente que el mínimo de espera es un mes, pero depende de cada caso en particular.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Tiempo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-4" for="tiempo">¿Qué tiempo le dijo el vendedor?</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vfn_Tiempo, new { htmlAttributes = new { @class = "form-control data", @id = "tiempo" } })
-                @Html.ValidationMessageFor(model => model.Vfn_Tiempo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Tiene_costo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <div class="col-md-10">
-                <div class="custom-control custom-checkbox">
-                    @*@Html.EditorFor(model => model.Vfn_Tiene_costo)*@
-                    @*@Html.TextBoxFor(model => model.Vfn_Tiene_costo, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck4", @oninput = "this.value = this.checked; resetCheckbox();" })*@
-                    <input id="customCheck4" class="custom-control-input data" name="Vfn_Tiene_costo" type="checkbox" value="true" oninput="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Tiene_costo.Value ? "checked=\"checked\"" : "") />
-                    <label class="custom-control-label" for="customCheck4">Le comentó el asesor que el proceso de trámite tiene un costo</label>
-                    @Html.ValidationMessageFor(model => model.Vfn_Tiene_costo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Costo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-4" for="campoPrecio">¿Cuál es el precio que le comentó el asesor?</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vfn_Costo, new { htmlAttributes = new { @class = "form-control data", @id = "campoPrecio", @placeholder = "$0.00" } })
-                @Html.ValidationMessageFor(model => model.Vfn_Costo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Trato_asesor, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-4" for="tratoAsesor">¿Cómo considera que fue el trato del asesor?</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })
-                @Html.ValidationMessageFor(model => model.Vfn_Trato_asesor, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Vfn_Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-12" for="comentarios">¿Tiene alguna observación o crítica constructiva sobre la empresa y/o el vendedor?</label>
-            @*<textarea class="form-control col-8" rows="3">   </textarea>*@
-            @Html.EditorFor(model => model.Vfn_Observaciones, new
+            <h5>Cliente: @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Nombre) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidopa) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidoma)</h5>
+            @if (Model.Cliente.Id_Vendedor != null)
             {
-                htmlAttributes = new
-                {
-                    @class = "form-control data",@*@type="textarea", @rows="3" ,*@@id = "comentarios"
-                }
-            })
-            @Html.ValidationMessageFor(model => model.Vfn_Observaciones, "", new { @class = "text-danger" })
+                <h5>Asesor: @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Nombre) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidopa) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidoma)</h5>
+            }
+            else
+            {
+                <h5>No tiene un asesor asignado</h5>
+            }
+            @if (Model.Cliente.Gral_Ref_nombre1 != null)
+            {
+                <h6> Referencia 1: @Html.DisplayFor(model => model.Cliente.Gral_Ref_nombre1) - @Html.DisplayFor(model => model.Cliente.Gral_Ref_cel_1)</h6>
+            }
+            @if (Model.Cliente.Gral_Ref_nombre2 != null)
+            {
+                <h6> Referencia 2: @Html.DisplayFor(model => model.Cliente.Gral_Ref_nombre2) - @Html.DisplayFor(model => model.Cliente.Gral_Ref_cel_2)</h6>
+            }
+            @if (Model.Cliente.Gral_Ref_nombre2 == null && Model.Cliente.Gral_Ref_nombre1 == null)
+            {
+                <h6>No cuenta con referencias.</h6>
+            }
+        </div>
 
+        <br />
+        <div id="printZone">
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Persona_fisica, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                @*<label>¿Conoce la ubicación físicamente del inmueble?6649710940</label>*@
+                <div class="col-md-10">
+                    <label>¿Conoce la ubicación físicamente del inmueble?</label>
+                    <div class="custom-control custom-radio">
+                        @*@Html.EditorFor(model => model.Vfn_Persona_fisica)*@
+                        @*@Html.TextBoxFor(model => model.Vfn_Persona_fisica, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked; resetCheckbox();" })*@
+                        @*<input id="customCheck1" class="custom-control-input data" name="Vfn_Persona_fisica" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Persona_fisica.Value ? "checked=\"checked\"" : "") />*@
+                        <input type="radio" id="customRadio1" name="Vfn_Persona_fisica" class="custom-control-input data" value="" onchange="Valor();" @(Model.Vfn_Persona_fisica.Value ? "checked=\"checked\"" : "")>
+                        <label id="label1" class="custom-control-label" for="customRadio1">Sí</label>
+                        @*<label class="custom-control-label" for="customCheck1">Conoce la ubicación físicamente del inmueble</label>*@
+                        @Html.ValidationMessageFor(model => model.Vfn_Persona_fisica, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio2" name="Vfn_Persona_fisica" class="custom-control-input" value="" onchange="Valor();" @(Model.Vfn_Persona_fisica.Value == false ? "checked=\"checked\"" : "")>
+                        <label id="label2" class="custom-control-label" for="customRadio2">No</label>
+                        @Html.ValidationMessageFor(model => model.Vfn_Persona_fisica, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Visto_persona, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    <label>¿La ha visto por dentro personalmente?</label>
+                    <div class="custom-control custom-radio">
+                        @*@Html.EditorFor(model => model.Vfn_Visto_persona)*@
+                        @*@Html.TextBoxFor(model => model.Vfn_Visto_persona, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck2", @oninput = "this.value = this.checked; resetCheckbox();" })*@
+                        @*<input id="customCheck2" class="custom-control-input data" name="Vfn_Visto_persona" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Visto_persona.Value ? "checked=\"checked\"" : "") />*@
+                        <input type="radio" id="customRadio3" name="Vfn_Visto_persona" class="custom-control-input data" value="" onchange="Valor(); resetCheckbox();" @(Model.Vfn_Visto_persona.Value ? "checked=\"checked\"" : "")>
+                        <label id="label3" class="custom-control-label" for="customRadio3">Sí</label>
+                        @Html.ValidationMessageFor(model => model.Vfn_Visto_persona, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio4" name="Vfn_Visto_persona" class="custom-control-input" value="" onchange="Valor();" @(Model.Vfn_Visto_persona.Value == false ? "checked=\"checked\"" : "")>
+                        <label id="label4" class="custom-control-label" for="customRadio4">No</label>
+                        @Html.ValidationMessageFor(model => model.Vfn_Persona_fisica, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Tiempo_estimado, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    <label>¿Le dijo el tiempo estimado de entrega y firma?</label>
+                    <div class="custom-control custom-radio">
+                        @*@Html.EditorFor(model => model.Vfn_Tiempo_estimado)*@
+                        @*@Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked; resetCheckbox();" })*@
+                        @*<input id="customCheck3" class="custom-control-input data" name="Vfn_Tiempo_estimado" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Tiempo_estimado.Value ? "checked=\"checked\"" : "") />*@
+                        <input type="radio" id="customRadio5" name="Vfn_Tiempo_estimado" class="custom-control-input data" value="" onchange="Valor();" @(Model.Vfn_Tiempo_estimado.Value ? "checked=\"checked\"" : "")>
+                        <label id="label5" class="custom-control-label" for="customRadio5">Sí</label>
+                        @Html.ValidationMessageFor(model => model.Vfn_Tiempo_estimado, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio6" name="Vfn_Tiempo_estimado" class="custom-control-input" value="" onchange="Valor();" @(Model.Vfn_Tiempo_estimado.Value == false ? "checked=\"checked\"" : "")>
+                        <label id="label6" class="custom-control-label" for="customRadio6">No</label>
+                        @Html.ValidationMessageFor(model => model.Vfn_Persona_fisica, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Tiempo_estimado, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    <div class="custom-control custom-checkbox">
+                        @*@Html.EditorFor(model => model.Vfn_Tiempo_estimado)*@
+                        @*@Html.TextBoxFor(model => model.Vfn_Tiempo_estimado, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked" })
+                            <label class="custom-control-label" for="customCheck3">¿Le dijo el tiempo estimado de entrega y firma?</label>
+                            @Html.ValidationMessageFor(model => model.Vfn_Tiempo_estimado, "", new { @class = "text-danger" })*@
+                        <p>Si la respuesta es no, se le debe explicar al cliente que el mínimo de espera es un mes, pero depende de cada caso en particular.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Tiempo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="tiempo">¿Qué tiempo le dijo el vendedor?</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Vfn_Tiempo, new { htmlAttributes = new { @class = "form-control data", @id = "tiempo" } })
+                    @Html.ValidationMessageFor(model => model.Vfn_Tiempo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Tiene_costo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    <label>¿Le comentó el asesor que el proceso de trámite tiene un costo?</label>
+                    <div class="custom-control custom-radio">
+                        @*@Html.EditorFor(model => model.Vfn_Tiene_costo)*@
+                        @*@Html.TextBoxFor(model => model.Vfn_Tiene_costo, new { @class = "custom-control-input data", @type = "checkbox", @id = "customCheck4", @oninput = "this.value = this.checked; resetCheckbox();" })*@
+                        @*<input id="customCheck4" class="custom-control-input data" name="Vfn_Tiene_costo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Vfn_Tiene_costo.Value ? "checked=\"checked\"" : "") />*@
+                        <input type="radio" id="customRadio7" name="Vfn_Tiene_costo" class="custom-control-input data" value="" onchange="Valor();" @(Model.Vfn_Tiene_costo.Value ? "checked=\"checked\"" : "")>
+                        <label id="label7" class="custom-control-label" for="customRadio7">Sí</label>
+                        @Html.ValidationMessageFor(model => model.Vfn_Tiene_costo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio8" name="Vfn_Tiene_costo" class="custom-control-input" value="" onchange="Valor();" @(Model.Vfn_Tiene_costo.Value == false ? "checked=\"checked\"" : "")>
+                        <label id="label8" class="custom-control-label" for="customRadio8">No</label>
+                        @Html.ValidationMessageFor(model => model.Vfn_Persona_fisica, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Costo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="campoPrecio">¿Cuál es el precio que le comentó el asesor?</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Vfn_Costo, new { htmlAttributes = new { @class = "form-control data", @id = "campoPrecio", @placeholder = "$0.00" } })
+                    @Html.ValidationMessageFor(model => model.Vfn_Costo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Trato_asesor, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-4" for="Vfn_Trato_asesor">¿Cómo considera que fue el trato del asesor?</label>
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })*@
+                    @Html.DropDownListFor(model => model.Vfn_Trato_asesor, ViewData["Calificacion"] as SelectList, new { @class = "form-control", @id = "Vfn_Trato_asesor" })
+                    @Html.ValidationMessageFor(model => model.Vfn_Trato_asesor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <!--ID-->
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Costo, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                @*<label class="control-label col-md-4" for="campoPrecio" type="hidden">Id Cliente</label>*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Id_Cliente, new { htmlAttributes = new { @class = "form-control data", @id = "tiempo", @type = "hidden" } })
+                    @Html.ValidationMessageFor(model => model.Id_Cliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.Vfn_Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-12" for="comentarios">¿Tiene alguna observación o crítica constructiva sobre la empresa y/o el vendedor?</label>
+                @*<textarea class="form-control col-8" rows="3">   </textarea>*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Vfn_Observaciones, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control data",@*@type="textarea", @rows="3" ,*@@id = "comentarios"
+                        }
+                    })
+                    @Html.ValidationMessageFor(model => model.Vfn_Observaciones, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                @*<input type="submit" value="Create" class="btn btn-default" />*@
-                <p class="text-right"><button type="submit" class="btn btn-outline-danger">Guardar</button></p>
+                <p class="text-right"><button type="submit" class="btn btn-outline-danger">Guardar</button></p> | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-secondary" })
             </div>
         </div>
     </div>
 }
+<button id="print" class="btn btn-outline-primary" onclick="imprimirBusqueda(document.getElementById('cabeceroPrint'),document.getElementById('printZone'),document.getElementById('tituloH').textContent) "><i class="fas fa-print"></i> Imprimir</button>
 
-    <div>
-        <a href='javascript:history.go(-1)'>Regresar</a>
-    </div>
+
+<div>
+    <a href='javascript:history.go(-1)'>Regresar</a>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        (document.body).setAttribute("onload", "resetCheckbox();");
+        (document.body).setAttribute("onload", "resetCheckbox();Valor();");
 
         function resetCheckbox() {
             var checkBox = document.getElementsByTagName("input");
             var variable = [];
             for (var i = 0; i < checkBox.length; i++) {
-                if (checkBox[i].getAttribute("type") == "checkbox") {
+                if (checkBox[i].getAttribute("type") == "radio") {
                     variable.push(checkBox[i])
                 }
             }
             for (var i = 0; i < variable.length; i++) {
                 if (variable[i].checked == false) {
                     variable[i].value = "";
+
                 }
             }
         }
@@ -190,6 +252,7 @@
                 var myFilledDataCount = $('input.data').filter(function () {
                     return $(this).val() === "";
                 }).length;
+
                 var width = ((1 / dataCount) * (dataCount - myFilledDataCount)) * 100;
                 var mydataPercent = Math.round(width) + "%";
                 $(".progress-bar").css("width", mydataPercent);
@@ -200,5 +263,88 @@
                 x.setAttribute('value', Math.round(width));
             });
         });
+
+        //Para los checks
+        function Valor() {
+            var a = document.getElementById("customRadio1");
+            var b = document.getElementById("customRadio2");
+            var c = document.getElementById("customRadio3");
+            var d = document.getElementById("customRadio4");
+            var e = document.getElementById("customRadio5");
+            var f = document.getElementById("customRadio6");
+            var g = document.getElementById("customRadio7");
+            var h = document.getElementById("customRadio8");
+
+            var label1 = document.getElementById("label1");
+            var label2 = document.getElementById("label2");
+            var label3 = document.getElementById("label3");
+            var label4 = document.getElementById("label4");
+            var label5 = document.getElementById("label5");
+            var label6 = document.getElementById("label6");
+            var label7 = document.getElementById("label7");
+            var label8 = document.getElementById("label8");
+
+
+            if (a.checked) {
+                a.value = "true";
+                b.value = "";
+
+                label1.classList.remove("InvisiblePrint");
+                label2.classList.add("InvisiblePrint");
+            }
+            else if (b.checked) {
+                a.value = "";
+                b.value = "false";
+
+                label1.classList.add("InvisiblePrint");
+                label2.classList.remove("InvisiblePrint");
+            }
+
+            if (c.checked) {
+                c.value = "true";
+                d.value = "";
+
+                label3.classList.remove("InvisiblePrint");
+                label4.classList.add("InvisiblePrint");
+            }
+            else if (d.checked) {
+                c.value = "";
+                d.value = "false";
+
+                label3.classList.add("InvisiblePrint");
+                label4.classList.remove("InvisiblePrint");
+            }
+
+            if (e.checked) {
+                e.value = "true";
+                f.value = "";
+
+                label5.classList.remove("InvisiblePrint");
+                label6.classList.add("InvisiblePrint");
+            }
+            else if (f.checked) {
+                e.value = "";
+                f.value = "false";
+
+                label5.classList.add("InvisiblePrint");
+                label6.classList.remove("InvisiblePrint");
+            }
+
+            if (g.checked) {
+                g.value = "true";
+                h.value = "";
+
+                label7.classList.remove("InvisiblePrint");
+                label8.classList.add("InvisiblePrint");
+            }
+            else if (h.checked) {
+                g.value = "";
+                h.value = "false";
+
+                label7.classList.add("InvisiblePrint");
+                label8.classList.remove("InvisiblePrint");
+            }
+        }
+
     </script>
 }

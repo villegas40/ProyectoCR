@@ -23,7 +23,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
+            else if (Session["Tipo"].ToString() == "ApoyoGestion" || Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
             {
                 var cliente = db.Cliente.Include(c => c.Corretaje).Include(c => c.Verificacion).Include(c => c.Vendedor);
                 return View(cliente.ToList());
@@ -44,7 +44,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
+            else if (Session["Tipo"].ToString() == "ApoyoGestion" || Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
             {
                 if (id == null)
                 {
@@ -77,15 +77,24 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
+            else if (Session["Tipo"].ToString() == "ApoyoGestion" || Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
             {
                 ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion");
+
+                var estadocivil = new SelectList(new[] {
+                    new {value = "No seleccionado", text = "Seleccione una opción..."},
+                    new {value = "Soltero", text = "Soltero"},
+                    new {value = "Casado", text = "Casado"},
+                    new {value = "Divorsiado", text = "Divorsiado"},
+                    new { value = "Viudo", text = "Viudo" }
+                }, "value", "text", 0);
 
                 ViewData["Posicion"] = ViewBag.Id_Corretaje;
 
                 ViewBag.Id_Vendedor = new SelectList(db.Vendedor, "Id", "Vndr_Nombre");
                 ViewData["Posicion2"] = ViewBag.Id_Vendedor;
 
+                ViewData["EstadoCivil"] = estadocivil;
                 return View();
             }
             else
@@ -129,11 +138,14 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Vndr_Nombre,Vndr_Apellidopa,Vndr_Apellidoma,Id_Corretaje,Gral_ProgresoForm,Grlal_Folio,Id_Vendedor,Id_Usuario")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Id_Corretaje,Gral_ProgresoForm,Grlal_Folio,Id_Vendedor,Id_Usuario")] Cliente cliente)
         {
             int cliente_id;
             int corretaje_id;
             string telefono, correo;
+
+            //Obtener los correos de los usuarios de hablitacion y contaduria
+            var usuarios = (from usu in db.Usuario where usu.usu_tipo == "2" || usu.usu_tipo == "6" select new { usu.usu_correo }).ToArray();
 
             var gestion_controller = new GestionsController();
             var gestion = new Gestion();
@@ -146,13 +158,13 @@ namespace CasasRed_Nuevo3_.Controllers
             var sms = new SmsController();
             var correo_controlador = new CorreoController();
 
-            //Select List de las casas
-            //var listaCasas = db.Corretaje.ToList().Select(x => new SelectListItem {
-            //    Value = x.Id.ToString(),
-            //    Text = x.Crt_Direccion
-            //});
-            //var listaCasas = db.Corretaje.ToList();
-            //SelectList listItems = new SelectList(listaCasas, "Id");
+            var estadocivil = new SelectList(new[] {
+                    new {value = "No seleccionado", text = "Seleccione una opción..."},
+                    new {value = "Soltero", text = "Soltero"},
+                    new {value = "Casado", text = "Casado"},
+                    new {value = "Divorsiado", text = "Divorsiado"},
+                    new { value = "Viudo", text = "Viudo" }
+                }, "value", "text", 0);
 
             if (ModelState.IsValid)
             {
@@ -177,20 +189,35 @@ namespace CasasRed_Nuevo3_.Controllers
                 }
 
                 verificacion_controller.VerfificacionCreate(verificacion, cliente_id);
+
+               
                 gestion_controller.GestionCrear(gestion, cliente_id, corretaje_id);
 
+                //Si el cliente es eliminado esto hace que se le asigne un nuevo cliente y aparezca en gestion
+                //Gestion gs = db.Gestion.Find(cliente.Id_Corretaje); <---- Ver  despues
+                //gs.Id_Cliente = cliente.Id;
+                //db.Enrty(gs).State = EntityState.Modified
+                //db.SaveChanges();
 
                 //sms.SendSms(telefono); Comentado porque gasta dinero
                 if (cliente.Gral_Correo != null)
                 {
                     correo_controlador.sendmail(correo);
                 }
-                
+
+                //Enviar correo de alta de casa a los demás departamentos
+                foreach (var item in usuarios)
+                {
+                    if (item != null)
+                    {
+                        correo_controlador.sendMailGestion(item.usu_correo);
+                    }
+                }
 
                 return RedirectToAction("Index");
             }
 
-            
+            ViewData["EstadoCivil"] = estadocivil;
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion", cliente.Id_Corretaje);
             ViewData["Posicion"] = ViewBag.Id_Corretaje;
 
@@ -203,6 +230,30 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Clientes/Edit/5
         public ActionResult Edit(int? id)
         {
+            //Obteber las casas disponibles para 
+            var casas = (from c in db.Corretaje where c.Crt_Status == "Disponible" select new { c.Id, c.Crt_Direccion }).ToList();
+
+            var dictionary = new Dictionary<int, string>();
+
+            dictionary.Add(0, "No asignado");
+            foreach (var item in casas)
+            {
+                dictionary.Add(item.Id, item.Crt_Direccion);
+            }
+
+            ViewBag.SelectList = new SelectList(dictionary, "Key", "Value", 0);
+
+
+            var estadocivil = new SelectList(new[] {
+                    new {value = "No seleccionado", text = "Seleccione una opción..."},
+                    new {value = "Soltero", text = "Soltero"},
+                    new {value = "Casado", text = "Casado"},
+                    new {value = "Divorsiado", text = "Divorsiado"},
+                    new { value = "Viudo", text = "Viudo" }
+                }, "value", "text", 0);
+
+           
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -212,11 +263,13 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion", cliente.Id_Corretaje);
 
             ViewBag.Id_Vendedor = new SelectList(db.Vendedor, "Id", "Vndr_Nombre", cliente.Id_Vendedor);
             ViewData["Posicion2"] = ViewBag.Id_Vendedor;
-
+            ViewData["EstadoCivil"] = estadocivil;
+            ViewData["Posicion3"] = ViewBag.Id_Corretaje;
             return View(cliente);
         }
 
@@ -225,19 +278,62 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Vndr_Nombre,Vndr_Apellidopa,Vndr_Apellidoma,Id_Corretaje,Gral_ProgresoForm,Id_Usuario")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Id_Corretaje,Gral_ProgresoForm,Id_Usuario, Grlal_Folio,Id_Vendedor")] Cliente cliente)
         {
+            //SelectList para seleccionar casa
+            //List<SelectListItem> idCasa = new List<SelectListItem>();
+            //var casas = (from c in db.Corretaje where c.Crt_Status == "Disponible" select new { c.Id, c.Crt_Direccion }).ToList();
+            //idCasa.Add(new SelectListItem { Text = "Seleccione una opción...", Value = "" });
+            //foreach (var item in casas)
+            //{
+            //    idCasa.Add(new SelectListItem { Text = item.Crt_Direccion, Value = item.Id.ToString() });
+            //}
+            //var select = new SelectList(idCasa, "value", "text", 0);
+            //ViewData["Casa"] = select;
+
+            var estadocivil = new SelectList(new[] {
+                    new {value = "No seleccionado", text = "Seleccione una opción..."},
+                    new {value = "Soltero", text = "Soltero"},
+                    new {value = "Casado", text = "Casado"},
+                    new {value = "Divorsiado", text = "Divorsiado"},
+                    new { value = "Viudo", text = "Viudo" }
+                }, "value", "text", 0);
+
+            //Que guarde nulo en el campo de corretaje
+            if (cliente.Id_Corretaje != null)
+            {
+                cliente.Id_Corretaje = (cliente.Id_Corretaje == 0) ? null : cliente.Id_Corretaje;
+            }
+             
+
             if (ModelState.IsValid)
             {
                 db.Entry(cliente).State = EntityState.Modified;
                 db.SaveChanges();
+
+                if (cliente.Id_Corretaje != null)
+                {
+                    Corretaje cr = db.Corretaje.Find(cliente.Id_Corretaje);
+                    cr.Crt_Status = "Venta";
+                    db.SaveChanges();
+                    //Si el cliente es eliminado esto hace que se le asigne un nuevo cliente y aparezca en gestion
+                    //Gestion gs = db.Gestion.Find(cliente.Id_Corretaje); <---- Ver  despues
+                    //gs.Id_Cliente = cliente.Id;
+                    //db.Enrty(gs).State = EntityState.Modified
+                    //db.SaveChanges();
+
+                }
+
                 return RedirectToAction("Index");
             }
+
+            
+
             ViewBag.Id_Corretaje = new SelectList(db.Corretaje, "Id", "Crt_Direccion", cliente.Id_Corretaje);
 
             ViewBag.Id_Vendedor = new SelectList(db.Vendedor, "Id", "Vndr_Nombre", cliente.Id_Vendedor);
             ViewData["Posicion2"] = ViewBag.Id_Vendedor;
-
+            ViewData["EstadoCivil"] = estadocivil;
             return View(cliente);
         }
 
@@ -248,7 +344,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
+            else if (Session["Tipo"].ToString() == "ApoyoGestion" || Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
             {
                 if (id == null)
                 {
@@ -275,6 +371,14 @@ namespace CasasRed_Nuevo3_.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Cliente cliente = db.Cliente.Find(id);
+
+            if (cliente.Id_Corretaje != null)
+            {
+                Corretaje cr = db.Corretaje.Find(cliente.Id_Corretaje);
+                cr.Crt_Status = "Disponible";
+                db.SaveChanges();
+            }
+
             db.Cliente.Remove(cliente);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -294,13 +398,13 @@ namespace CasasRed_Nuevo3_.Controllers
             if (filtro == "")
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Cliente.Count() / registrosPagina);
-                var busqueda = (from a in db.Cliente select new { progeso = a.Gral_ProgresoForm, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Cliente select new { progeso = a.Gral_ProgresoForm,a.Id_Corretaje,a.Id, direccion = (a.Corretaje.Crt_Direccion == null) ? "Casa no asignada" :a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else
             {
                 int totalPaginas = (int)Math.Ceiling((double)(from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
-                var busqueda = (from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select new { progeso = a.Gral_ProgresoForm, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select new { progeso = a.Gral_ProgresoForm,a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

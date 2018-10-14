@@ -89,7 +89,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje,Id_Usuario")] Contaduria contaduria)
+        public ActionResult Create([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje,Id_Usuario,Cnt_DevMensualidad")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje,Id_Usuario")] Contaduria contaduria)
+        public ActionResult Edit([Bind(Include = "Id,Cnt_Presupuesto_gestion,Cnt_Presupuesto_corretaje,Cnt_Presupuesto_habilitacion,Cnt_Presupuesto,Id_Corretaje,Id_Usuario,Cnt_DevMensualidad")] Contaduria contaduria)
         {
             if (ModelState.IsValid)
             {
@@ -198,6 +198,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 Cnt_Vigilancia = 0,
                 Cnt_CESPT = 0,
                 Cnt_CFE = 0,
+                Cnt_DevMensualidad = 0,
                 Id_Corretaje = corretaje_id //Para saber a que casa esta asociado el gasto
             };
 
@@ -212,8 +213,11 @@ namespace CasasRed_Nuevo3_.Controllers
             if (filtro == "")
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Contaduria.Count() / registrosPagina);
-                var busqueda = (from a in db.Contaduria select new { a.Id, direccion = ((a.Id_Corretaje != null)? a.Corretaje.Crt_Direccion : "Sin asignar"), vendedor = ((a.Id_Corretaje != null)?(a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat): "Sin asignar"), estatus = ((a.Id_Corretaje != null)? a.Corretaje.Crt_Status : "--"), corretaje = ((a.Id_Corretaje != null)?a.Corretaje.Id : 0), total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Contaduria join v in db.VendedorAsig on a.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { idven = ((algo.Id_Vendedor !=null)? algo.Id_Vendedor : 0),vendenombre = ((algoo.Vndr_Nombre!=null)? algoo.Vndr_Nombre: "Sin asignar" ),vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"),vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Id, direccion = ((a.Id_Corretaje != null)? a.Corretaje.Crt_Direccion : "Sin asignar"), vendedor = ((a.Id_Corretaje != null)?(a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat): "Sin asignar"), estatus = ((a.Id_Corretaje != null)? a.Corretaje.Crt_Status : "--"), corretaje = ((a.Id_Corretaje != null)?a.Corretaje.Id : 0), total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+               // var busqueda = (from a in db.Contaduria select new { a.Id, direccion = ((a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "Sin asignar"), vendedor = ((a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "Sin asignar"), estatus = ((a.Id_Corretaje != null) ? a.Corretaje.Crt_Status : "--"), corretaje = ((a.Id_Corretaje != null) ? a.Corretaje.Id : 0), total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
+
             }
             else
             {

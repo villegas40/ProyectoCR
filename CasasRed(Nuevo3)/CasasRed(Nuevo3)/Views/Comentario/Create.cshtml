@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
 <div class="container">
-    
+    <center>
     <div>
         <label for="titulonota">Titulo de la nota</label>
         @Html.EditorFor(model => model.Cmt_Titulo, new { htmlAttributes = new { @class = "form-control data", @id = "titulonota" } })
@@ -22,7 +22,7 @@
         @Html.ValidationMessageFor(model => model.Cmt_Nota, "", new { @class = "text-danger" })
 
     </div>
-
+   </center>
     <div class=" d-flex justify-content-end">
         <!--<input type="submit" value="Create" class="btn btn-primary btn-lg btn-block" />-->
         <input type="submit" value="Create" class="btn btn-outline-danger btn-lg btn-block" />

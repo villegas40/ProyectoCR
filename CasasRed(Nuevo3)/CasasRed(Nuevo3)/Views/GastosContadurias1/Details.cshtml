@@ -15,57 +15,33 @@
     <div>
         <h4>GastosContaduria</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.GstCon_Concepto)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.GstCon_Concepto)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.GstCon_Monto)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.GstCon_Monto)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.GstCon_Descripcion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.GstCon_Descripcion)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.GstCon_Fecha)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.GstCon_Fecha)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Corretaje.Crt_Status)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Usuario.usu_username)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Usuario.usu_username)
-            </dd>
-    
-        </dl>
-    </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>Concepto</th>
+                <td>@Html.DisplayFor(model => model.GstCon_Concepto)</td>
+            </tr>
+            <tr>
+                <th>Monto</th>
+                <td>@Html.DisplayFor(model => model.GstCon_Monto)</td>
+            </tr>
+            <tr>
+                <th>Descripción</th>
+                <td>@Html.DisplayFor(model => model.GstCon_Descripcion)</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>@Html.DisplayFor(model => model.GstCon_Fecha)</td>
+            </tr>
+            <tr>
+                <th>Estatus</th>
+                <td>@Html.DisplayFor(model => model.Corretaje.Crt_Status)</td>
+            </tr>
+            <tr>
+                <th>Nombre de usuario</th>
+                <td>@Html.DisplayFor(model => model.Usuario.usu_username)</td>
+            </tr>
+        </table>
+</div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")

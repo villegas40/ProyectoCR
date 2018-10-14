@@ -1,0 +1,57 @@
+﻿@model CasasRed_Nuevo3_.Controllers.VendedorController.DetailsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center><h3>Lista de vendedores</h3></center>
+    <right>
+        <th scope="col">@Html.ActionLink("Añadir Vendedor", "Create", new { @class = "btn btn-info" })</th>
+    </right>
+<br />
+<div class="container">
+    <table class="table table-responsive-lg">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>Nombre</td>
+                <td>Apellido Paterno</td>
+                <td>Apellido Materno</td>
+                <td>Opciones</td>
+            </tr>
+        </thead>
+        <tbody>
+       @foreach (var item in Model.vendedors)
+       {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Vndr_Nombre
+                </td>
+                <td>
+                    @item.Vndr_Apellidopa
+                </td>
+                @if(@item.Vndr_Apellidoma == null || @item.Vndr_Apellidoma == " ")
+                {
+                <td>
+                   n/a
+                </td>
+                }
+                else
+                {
+                <td>
+                    @item.Vndr_Apellidoma
+                </td>
+                }
+                <td>
+                    <a href="/Vendedor/Edith?id=@item.Id" class="fas fa-user-edit"></a>
+                    <a href="/Vendedor/Delete?id=@item.Id" class="far fa-trash-alt"></a>
+
+                </td>
+            </tr>
+       }
+        </tbody>
+    </table>
+</div>
+

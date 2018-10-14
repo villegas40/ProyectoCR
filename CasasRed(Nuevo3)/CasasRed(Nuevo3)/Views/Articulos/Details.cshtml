@@ -9,39 +9,28 @@
 <div>
     <h4>Articulos</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Código
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.art_id)
-        </dd>
-        <dt>
-            Nombre
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.art_nombre)
-        </dd>
-        <dt>
-            Descripción
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.art_descripcion)
-        </dd>
-        <dt>
-            Fecha de registro
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.art_fechaIngreso)
-        </dd>
-        <dt>
-            Cantidad mínima
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.art_cantidadMinima)
-        </dd>
-    </dl>
-    <hr />
+    <table class="table table-bordered">
+        <tr>
+            <th>Código</th>
+            <td>@Html.DisplayFor(model => model.art_id)</td>
+        </tr>
+        <tr>
+            <th> Nombre</th>
+            <td>@Html.DisplayFor(model => model.art_nombre)</td>
+        </tr>
+        <tr>
+            <th>Descripción</th>
+            <td>@Html.DisplayFor(model => model.art_descripcion)</td>
+        </tr>
+        <tr>
+            <th>Fecha de registro</th>
+            <td>@Html.DisplayFor(model => model.art_fechaIngreso)</td>
+        </tr>
+        <tr>
+            <th>Cantidad mínima</th>
+            <td>@Html.DisplayFor(model => model.art_cantidadMinima)</td>
+        </tr></table>
+            <hr />
 </div>
 <p>
     @Html.ActionLink("Editar", "Edit", new { id = Model.art_id }, new { @class = "btn btn-info" }) | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-danger" })

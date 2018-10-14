@@ -28,6 +28,7 @@ namespace CasasRed_Nuevo3_.Models
             this.Habilitacion = new HashSet<Habilitacion>();
             this.HistorialAsignacion = new HashSet<HistorialAsignacion>();
             this.Verificacion = new HashSet<Verificacion>();
+            this.Notificaciones = new HashSet<Notificaciones>();
         }
     
         public int Id { get; set; }
@@ -65,5 +66,7 @@ namespace CasasRed_Nuevo3_.Models
         public virtual TipoUsuario TipoUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Verificacion> Verificacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notificaciones> Notificaciones { get; set; }
     }
 }

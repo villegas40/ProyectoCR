@@ -1,0 +1,79 @@
+﻿@model CasasRed_Nuevo3_.Controllers.AsignarVendedorController.DetailsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    List<int?> IDS = ViewBag.IDS;
+    List<int?> IDSCORRETAJE = ViewBag.IDSCORRETAJE;
+    List<int?> IDSVENDEDOR = ViewBag.IDSVENDEDOR;
+    List<string> DEPARTAMENTOS = ViewBag.DEPARTAMENTOS;
+    int? idcorretaje = ViewBag.idreal;
+    string departamento = ViewBag.DEPARTAMENTO;
+    
+}
+
+
+<center><h2>Asesores asignados para la casa</h2></center>
+<tr>
+    <th scope="col">@Html.ActionLink("Asignar Asesor", "Create", new { idcorretaje = idcorretaje,departamento = departamento}, new { @class = "btn btn-info" })</th>
+</tr>
+
+<br>
+<br />
+
+
+<div class="container">
+    <table class="table tab-content table-responsive-lg">
+        <thead>
+            <tr>
+                <td>
+                    Nombre Asesor
+                </td>
+                <td>
+                    Apellidos Asesor
+                </td>
+                <td>
+                    Opciones
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.vendedors)
+            {
+                for (int i = 0; i < IDS.Count; i++)
+                {
+                    <tr>
+
+                        @if (IDSVENDEDOR[i] == item.Id && idcorretaje == IDSCORRETAJE[i] && DEPARTAMENTOS[i] == departamento)
+                        {
+                            <td>
+                                @item.Vndr_Nombre
+                            </td>
+                            <td>
+                                @item.Vndr_Apellidopa @item.Vndr_Apellidoma
+                            </td>
+                            <td>
+
+                                <a href="/AsignarVendedor/Delete?id=@IDS[i]" class="far fa-trash-alt"></a>
+                            </td>
+                        }
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    @if (Session["Tipo"].ToString() == "Administrador" || Session["Tipo"].ToString() == "Gestion")
+    {
+        <div>
+            <a href='/Clientes/Index'>Regresar</a>
+        </div>
+    }
+    else
+    {
+        <div>
+            <a href='/Corretajes/Index'>Regresar</a>
+        </div>
+    }
+</div>

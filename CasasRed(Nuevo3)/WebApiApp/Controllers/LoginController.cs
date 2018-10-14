@@ -16,23 +16,23 @@ namespace WebApiApp.Controllers
     {
         private CasasRedEntities db = new CasasRedEntities();
         // GET api/<controller>
-        public IEnumerable<string> Get(string status)
-        {
-            if (db != null)
-            {
+        //public IEnumerable<string> Get(string status)
+        //{
+        //    if (db != null)
+        //    {
 
-            }
-            return new string[] { "status", "aceptado" };
-        }
+        //    }
+        //    return new string[] { "status", "aceptado" };
+        //}
 
         // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/<controller>
-        [Route("api/Usuarios/Login")]
+        [Route("api/Login")]
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult PostLogin(Loginuser loginuser)
         {
@@ -54,14 +54,14 @@ namespace WebApiApp.Controllers
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        //public void Delete(int id)
+        //{
+        //}
 
         public string Redireccionar(string tipo = "")
         {
@@ -94,6 +94,7 @@ namespace WebApiApp.Controllers
             {
                 direccion = "Verificacions-Index";
             }
+            else if (tipo == "ApoyoGestion") direccion = "Clientes-Index";
             return direccion;
         }
     }

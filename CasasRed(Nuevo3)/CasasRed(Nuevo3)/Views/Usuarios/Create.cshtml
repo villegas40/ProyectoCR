@@ -16,7 +16,7 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="usuarioNombre">Nombre de usuario</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @id = "userName", @required = "", @onkeyup= "comprobarUsuario()" } })
+            @Html.EditorFor(model => model.usu_username, new { htmlAttributes = new { @class = "form-control", @id = "userName", @required = "", @onkeyup= "comprobarUsuario(this, undefined)" } })
             @Html.ValidationMessageFor(model => model.usu_username, "", new { @class = "text-danger", @id="AdvertenciaUsername" })
         </div>
     </div>
@@ -31,8 +31,8 @@
     <div class="form-group">
         <label class="control-label col-md-2" for="usuarioNombre">Correo</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.usu_correo, new { htmlAttributes = new { @class = "form-control", @id = "email", @required = "", @onkeyup = "comprobarUsuario(this)" } })
-            @Html.ValidationMessageFor(model => model.usu_correo, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.usu_correo, new { htmlAttributes = new { @class = "form-control", @id = "email", @required = "", @onkeyup = "comprobarUsuario(undefined, this)" } })
+            @Html.ValidationMessageFor(model => model.usu_correo, "", new { @class = "text-danger", @id = "AdvertenciaCorreo" })
         </div>
     </div>
 
@@ -63,7 +63,7 @@
         <label class="control-label col-md-2" for="usuarioTipo">Tipo de Usuario</label>
         <div class="col-md-10">
             <select class="form-control" id="selectTipo" oninput="document.getElementById('usuarioTipo').value = document.getElementById('selectTipo').children[document.getElementById('selectTipo').selectedIndex].id;">
-                <option id="">---</option>
+                <option id="" selected disabled>---</option>
     @for (int i = 0; i < @ListaD.Count; i++)
     { 
         <option id="@ListaI[i]">@ListaD[i]</option>
@@ -76,7 +76,7 @@
     <div class="form-group">
         <div class="col-md-10">
             <div class="custom-control custom-checkbox">
-                @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked", @required = "" })
+                @Html.TextBoxFor(model => model.usu_activo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @onchange = "this.value = this.checked", @required = "" })
                 <label class="custom-control-label" for="customCheck1">Usuario Activo</label>
                 @Html.ValidationMessageFor(model => model.usu_activo, "", new { @class = "text-danger" })
             </div>
@@ -97,14 +97,14 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script>
     var correcto = true
-    function comprobarUsuario(elm) {
+    function comprobarUsuario(elm, elm2) {
         var frm = new FormData()
-        if (elm != undefined) {
-           var id = elm.value
+        if (elm2 != undefined) {
+            var id = elm2.value
             frm.append("correo", id)
         } else {
-            var id = document.getElementById("userName").value
-        frm.append("username", id)
+            var id = elm.value
+            frm.append("username", id)
         }
         var x = new XMLHttpRequest()
         x.open("POST", "/Usuarios/ComprobarUsuarios", false)
@@ -112,9 +112,17 @@
             var data = JSON.parse(x.responseText)
             correcto = !data
             if (data) {
-                
+                if (elm2 != undefined) {
+                    document.getElementById("AdvertenciaCorreo").textContent = "Correo ya registrado.";
+                } else {
+                    document.getElementById("AdvertenciaUsername").textContent = "Usuario existente.";
+                }
             } else {
-                
+                if (elm2 != undefined) {
+                    document.getElementById("AdvertenciaCorreo").textContent = "";
+                } else {
+                    document.getElementById("AdvertenciaUsername").textContent = "";
+                }
             }
         });
         x.send(frm)

@@ -20,7 +20,7 @@ namespace CasasRed_Nuevo3_.Controllers
         {
             SmtpClient client = new SmtpClient();
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("drokemx@gmail.com", "clave");
+            client.Credentials = new NetworkCredential("casasredposventa@gmail.com", "casasred123");
             client.Port = 587;
             client.Host = "smtp.gmail.com";
             client.EnableSsl = true;

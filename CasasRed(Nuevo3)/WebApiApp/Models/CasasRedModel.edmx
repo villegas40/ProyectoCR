@@ -118,6 +118,7 @@
           <Property Name="Cnt_Tramites" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Cnt_CESPT" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Cnt_CFE" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Cnt_DevMensualidad" Type="decimal" Precision="18" Scale="4" />
           <Property Name="Id_Corretaje" Type="int" />
           <Property Name="Id_Usuario" Type="int" />
         </EntityType>
@@ -127,10 +128,12 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Crt_Status" Type="varchar" MaxLength="20" />
+          <Property Name="Crt_FechaAlta" Type="date" />
           <Property Name="Crt_Cliente_Nombre" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Cliente_ApMat" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Cliente_ApPat" Type="varchar" MaxLength="15" />
           <Property Name="Crt_Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Crt_Nss" Type="varchar" MaxLength="11" />
           <Property Name="Crt_Precio" Type="varchar" MaxLength="20" />
           <Property Name="Crt_Gasto" Type="varchar" MaxLength="10" />
           <Property Name="Crt_Tipo_Vivienda" Type="varchar" MaxLength="15" />
@@ -287,6 +290,8 @@
           <Property Name="Hbt_Break_medidor" Type="bit" />
           <Property Name="Hbt_Pinturas" Type="bit" />
           <Property Name="Hbt_AvisoSusp" Type="bit" />
+          <Property Name="Hbt_StatusCasa" Type="varchar" MaxLength="25" />
+          <Property Name="Hbt_FchEntrega" Type="date" />
           <Property Name="Hbt_ProgresoForm" Type="int" />
           <Property Name="Id_Corretaje" Type="int" />
           <Property Name="Id_Usuario" Type="int" />
@@ -299,6 +304,18 @@
           <Property Name="ha_casaInventario" Type="int" />
           <Property Name="ha_existencia_id" Type="int" Nullable="false" />
           <Property Name="ha_usuarioEntrego" Type="int" />
+        </EntityType>
+        <EntityType Name="Notificaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Not_usuario_id" Type="int" />
+          <Property Name="Not_titutlo" Type="varchar" MaxLength="25" />
+          <Property Name="Not_descripcion" Type="varchar" MaxLength="250" />
+          <Property Name="Not_idVinculado" Type="varchar" MaxLength="50" />
+          <Property Name="Not_leida" Type="bit" />
+          <Property Name="Not_mostrada" Type="bit" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -340,6 +357,15 @@
           <Property Name="Vndr_Apellidopa" Type="varchar" MaxLength="40" />
           <Property Name="Vndr_Apellidoma" Type="varchar" MaxLength="40" />
         </EntityType>
+        <EntityType Name="VendedorAsig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Vendedor" Type="int" />
+          <Property Name="Id_Corretaje" Type="int" />
+          <Property Name="VndAsig_Departamento" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Verificacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -357,7 +383,7 @@
           <Property Name="Id_Cliente" Type="int" />
           <Property Name="Id_Usuario" Type="int" />
         </EntityType>
-        <Association Name="FK__CasaInven__ci_ar__2334397B">
+        <Association Name="FK__CasaInven__ci_ar__7BB05806">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
           <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -369,7 +395,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CasaInven__ci_co__24285DB4">
+        <Association Name="FK__CasaInven__ci_co__7CA47C3F">
           <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="1" />
           <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -381,7 +407,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CasaInven__ci_us__251C81ED">
+        <Association Name="FK__CasaInven__ci_us__7D98A078">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -393,7 +419,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Existenci__ext_a__5EBF139D">
+        <Association Name="FK__Existenci__ext_a__75035A77">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -405,7 +431,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Existenci__ext_u__60A75C0F">
+        <Association Name="FK__Existenci__ext_u__76EBA2E9">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -417,7 +443,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Existenci__ext_u__619B8048">
+        <Association Name="FK__Existenci__ext_u__77DFC722">
           <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="*" />
           <ReferentialConstraint>
@@ -429,7 +455,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__ha_ca__27F8EE98">
+        <Association Name="FK__Historial__ha_ca__04459E07">
           <End Role="CasaInventario" Type="Self.CasaInventario" Multiplicity="0..1" />
           <End Role="HistorialAsignacion" Type="Self.HistorialAsignacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -441,7 +467,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__ha_ex__28ED12D1">
+        <Association Name="FK__Historial__ha_ex__0539C240">
           <End Role="Existencias" Type="Self.Existencias" Multiplicity="1" />
           <End Role="HistorialAsignacion" Type="Self.HistorialAsignacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -453,7 +479,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Historial__ha_us__29E1370A">
+        <Association Name="FK__Historial__ha_us__062DE679">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="HistorialAsignacion" Type="Self.HistorialAsignacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -542,7 +568,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Crt_Id">
-          <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1" />
+          <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Gestion" Type="Self.Gestion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Corretaje">
@@ -749,15 +777,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TipoUsuario_Id">
-          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+        <Association Name="FK_NUsuario_Id">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notificaciones" Type="Self.Notificaciones" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TipoUsuario">
+            <Principal Role="Usuario">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="Id_TipoUsiario" />
+            <Dependent Role="Notificaciones">
+              <PropertyRef Name="Not_usuario_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -770,6 +800,32 @@
             </Principal>
             <Dependent Role="Gestion">
               <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VndAsigCasa_Id">
+          <End Role="Corretaje" Type="Self.Corretaje" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VendedorAsig" Type="Self.VendedorAsig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corretaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendedorAsig">
+              <PropertyRef Name="Id_Corretaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VndAsigVendedor_Id">
+          <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="0..1" />
+          <End Role="VendedorAsig" Type="Self.VendedorAsig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendedorAsig">
+              <PropertyRef Name="Id_Vendedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -803,44 +859,46 @@
           <EntitySet Name="Gestion" EntityType="Self.Gestion" Schema="adminDani" store:Type="Tables" />
           <EntitySet Name="Habilitacion" EntityType="Self.Habilitacion" Schema="adminDani" store:Type="Tables" />
           <EntitySet Name="HistorialAsignacion" EntityType="Self.HistorialAsignacion" Schema="adminDani" store:Type="Tables" />
+          <EntitySet Name="Notificaciones" EntityType="Self.Notificaciones" Schema="adminDani" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="adminDani" store:Type="Tables" />
           <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" Schema="adminDani" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="adminDani" store:Type="Tables" />
           <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="adminDani" store:Type="Tables" />
+          <EntitySet Name="VendedorAsig" EntityType="Self.VendedorAsig" Schema="adminDani" store:Type="Tables" />
           <EntitySet Name="Verificacion" EntityType="Self.Verificacion" Schema="adminDani" store:Type="Tables" />
-          <AssociationSet Name="FK__CasaInven__ci_ar__2334397B" Association="Self.FK__CasaInven__ci_ar__2334397B">
+          <AssociationSet Name="FK__CasaInven__ci_ar__7BB05806" Association="Self.FK__CasaInven__ci_ar__7BB05806">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="CasaInventario" EntitySet="CasaInventario" />
           </AssociationSet>
-          <AssociationSet Name="FK__CasaInven__ci_co__24285DB4" Association="Self.FK__CasaInven__ci_co__24285DB4">
+          <AssociationSet Name="FK__CasaInven__ci_co__7CA47C3F" Association="Self.FK__CasaInven__ci_co__7CA47C3F">
             <End Role="Corretaje" EntitySet="Corretaje" />
             <End Role="CasaInventario" EntitySet="CasaInventario" />
           </AssociationSet>
-          <AssociationSet Name="FK__CasaInven__ci_us__251C81ED" Association="Self.FK__CasaInven__ci_us__251C81ED">
+          <AssociationSet Name="FK__CasaInven__ci_us__7D98A078" Association="Self.FK__CasaInven__ci_us__7D98A078">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="CasaInventario" EntitySet="CasaInventario" />
           </AssociationSet>
-          <AssociationSet Name="FK__Existenci__ext_a__5EBF139D" Association="Self.FK__Existenci__ext_a__5EBF139D">
+          <AssociationSet Name="FK__Existenci__ext_a__75035A77" Association="Self.FK__Existenci__ext_a__75035A77">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
-          <AssociationSet Name="FK__Existenci__ext_u__60A75C0F" Association="Self.FK__Existenci__ext_u__60A75C0F">
+          <AssociationSet Name="FK__Existenci__ext_u__76EBA2E9" Association="Self.FK__Existenci__ext_u__76EBA2E9">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
-          <AssociationSet Name="FK__Existenci__ext_u__619B8048" Association="Self.FK__Existenci__ext_u__619B8048">
+          <AssociationSet Name="FK__Existenci__ext_u__77DFC722" Association="Self.FK__Existenci__ext_u__77DFC722">
             <End Role="Ubicaciones" EntitySet="Ubicaciones" />
             <End Role="Existencias" EntitySet="Existencias" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__ha_ca__27F8EE98" Association="Self.FK__Historial__ha_ca__27F8EE98">
+          <AssociationSet Name="FK__Historial__ha_ca__04459E07" Association="Self.FK__Historial__ha_ca__04459E07">
             <End Role="CasaInventario" EntitySet="CasaInventario" />
             <End Role="HistorialAsignacion" EntitySet="HistorialAsignacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__ha_ex__28ED12D1" Association="Self.FK__Historial__ha_ex__28ED12D1">
+          <AssociationSet Name="FK__Historial__ha_ex__0539C240" Association="Self.FK__Historial__ha_ex__0539C240">
             <End Role="Existencias" EntitySet="Existencias" />
             <End Role="HistorialAsignacion" EntitySet="HistorialAsignacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__Historial__ha_us__29E1370A" Association="Self.FK__Historial__ha_us__29E1370A">
+          <AssociationSet Name="FK__Historial__ha_us__062DE679" Association="Self.FK__Historial__ha_us__062DE679">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="HistorialAsignacion" EntitySet="HistorialAsignacion" />
           </AssociationSet>
@@ -932,13 +990,21 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Habilitacion" EntitySet="Habilitacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_TipoUsuario_Id" Association="Self.FK_TipoUsuario_Id">
-            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+          <AssociationSet Name="FK_NUsuario_Id" Association="Self.FK_NUsuario_Id">
             <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Notificaciones" EntitySet="Notificaciones" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Id" Association="Self.FK_Usuario_Id">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Gestion" EntitySet="Gestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VndAsigCasa_Id" Association="Self.FK_VndAsigCasa_Id">
+            <End Role="Corretaje" EntitySet="Corretaje" />
+            <End Role="VendedorAsig" EntitySet="VendedorAsig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VndAsigVendedor_Id" Association="Self.FK_VndAsigVendedor_Id">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="VendedorAsig" EntitySet="VendedorAsig" />
           </AssociationSet>
           <AssociationSet Name="FK_VrfUsu_Id" Association="Self.FK_VrfUsu_Id">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1106,6 +1172,20 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Verificacion" EntitySet="Verificacion" />
           </AssociationSet>
+          <EntitySet Name="VendedorAsig" EntityType="CasasRedModel.VendedorAsig" />
+          <AssociationSet Name="FK_VndAsigCasa_Id" Association="CasasRedModel.FK_VndAsigCasa_Id">
+            <End Role="Corretaje" EntitySet="Corretaje" />
+            <End Role="VendedorAsig" EntitySet="VendedorAsig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VndAsigVendedor_Id" Association="CasasRedModel.FK_VndAsigVendedor_Id">
+            <End Role="Vendedor" EntitySet="Vendedor" />
+            <End Role="VendedorAsig" EntitySet="VendedorAsig" />
+          </AssociationSet>
+          <EntitySet Name="Notificaciones" EntityType="CasasRedModel.Notificaciones" />
+          <AssociationSet Name="FK_NUsuario_Id" Association="CasasRedModel.FK_NUsuario_Id">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Notificaciones" EntitySet="Notificaciones" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Articulos">
           <Key>
@@ -1242,6 +1322,7 @@
           <Property Name="Id_Usuario" Type="Int32" />
           <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_CasaCorretaje_Id" FromRole="Contaduria" ToRole="Corretaje" />
           <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_CntUsuario_Id" FromRole="Contaduria" ToRole="Usuario" />
+          <Property Name="Cnt_DevMensualidad" Type="Decimal" Precision="18" Scale="4" />
         </EntityType>
         <EntityType Name="Corretaje">
           <Key>
@@ -1305,6 +1386,9 @@
           <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_CrtUsuario_Id" FromRole="Corretaje" ToRole="Usuario" />
           <NavigationProperty Name="Vendedor" Relationship="CasasRedModel.FK_CrtVendedor_Id" FromRole="Corretaje" ToRole="Vendedor" />
           <NavigationProperty Name="GastosContaduria" Relationship="CasasRedModel.FK_GastosCasa_Id" FromRole="Corretaje" ToRole="GastosContaduria" />
+          <Property Name="Crt_FechaAlta" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="VendedorAsig" Relationship="CasasRedModel.FK_VndAsigCasa_Id" FromRole="Corretaje" ToRole="VendedorAsig" />
+          <Property Name="Crt_Nss" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DetallesComision">
           <Key>
@@ -1437,6 +1521,8 @@
           <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_CrtHab_Id" FromRole="Habilitacion" ToRole="Corretaje" />
           <NavigationProperty Name="FotosHabilitacion" Relationship="CasasRedModel.FK_FotosHab_Id" FromRole="Habilitacion" ToRole="FotosHabilitacion" />
           <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_HabUsuario_Id" FromRole="Habilitacion" ToRole="Usuario" />
+          <Property Name="Hbt_StatusCasa" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Hbt_FchEntrega" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="HistorialAsignacion">
           <Key>
@@ -1494,6 +1580,7 @@
           <NavigationProperty Name="HistorialAsignacion" Relationship="CasasRedModel.FK__Historial__ha_us__29E1370A" FromRole="Usuario" ToRole="HistorialAsignacion" />
           <NavigationProperty Name="TipoUsuario" Relationship="CasasRedModel.FK_TipoUsuario_Id" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Verificacion" Relationship="CasasRedModel.FK_VrfUsu_Id" FromRole="Usuario" ToRole="Verificacion" />
+          <NavigationProperty Name="Notificaciones" Relationship="CasasRedModel.FK_NUsuario_Id" FromRole="Usuario" ToRole="Notificaciones" />
         </EntityType>
         <EntityType Name="Vendedor">
           <Key>
@@ -1507,6 +1594,7 @@
           <NavigationProperty Name="Cliente" Relationship="CasasRedModel.FK_GralVendedor_Id" FromRole="Vendedor" ToRole="Cliente" />
           <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_CrtVendedor_Id" FromRole="Vendedor" ToRole="Corretaje" />
           <NavigationProperty Name="DetallesComision" Relationship="CasasRedModel.FK_DCmsVendedor_Id" FromRole="Vendedor" ToRole="DetallesComision" />
+          <NavigationProperty Name="VendedorAsig" Relationship="CasasRedModel.FK_VndAsigVendedor_Id" FromRole="Vendedor" ToRole="VendedorAsig" />
         </EntityType>
         <EntityType Name="Verificacion">
           <Key>
@@ -1957,6 +2045,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VendedorAsig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Vendedor" Type="Int32" />
+          <Property Name="Id_Corretaje" Type="Int32" />
+          <Property Name="VndAsig_Departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Corretaje" Relationship="CasasRedModel.FK_VndAsigCasa_Id" FromRole="VendedorAsig" ToRole="Corretaje" />
+          <NavigationProperty Name="Vendedor" Relationship="CasasRedModel.FK_VndAsigVendedor_Id" FromRole="VendedorAsig" ToRole="Vendedor" />
+        </EntityType>
+        <Association Name="FK_VndAsigCasa_Id">
+          <End Type="CasasRedModel.Corretaje" Role="Corretaje" Multiplicity="0..1" />
+          <End Type="CasasRedModel.VendedorAsig" Role="VendedorAsig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corretaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendedorAsig">
+              <PropertyRef Name="Id_Corretaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VndAsigVendedor_Id">
+          <End Type="CasasRedModel.Vendedor" Role="Vendedor" Multiplicity="0..1" />
+          <End Type="CasasRedModel.VendedorAsig" Role="VendedorAsig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VendedorAsig">
+              <PropertyRef Name="Id_Vendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Notificaciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Not_usuario_id" Type="Int32" />
+          <Property Name="Not_titutlo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Not_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Not_idVinculado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Not_leida" Type="Boolean" />
+          <Property Name="Not_mostrada" Type="Boolean" />
+          <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_NUsuario_Id" FromRole="Notificaciones" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_NUsuario_Id">
+          <End Type="CasasRedModel.Usuario" Role="Usuario" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CasasRedModel.Notificaciones" Role="Notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notificaciones">
+              <PropertyRef Name="Not_usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2074,6 +2224,7 @@
           <EntitySetMapping Name="Contaduria">
             <EntityTypeMapping TypeName="CasasRedModel.Contaduria">
               <MappingFragment StoreEntitySet="Contaduria">
+                <ScalarProperty Name="Cnt_DevMensualidad" ColumnName="Cnt_DevMensualidad" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
                 <ScalarProperty Name="Cnt_CFE" ColumnName="Cnt_CFE" />
@@ -2089,6 +2240,8 @@
           <EntitySetMapping Name="Corretaje">
             <EntityTypeMapping TypeName="CasasRedModel.Corretaje">
               <MappingFragment StoreEntitySet="Corretaje">
+                <ScalarProperty Name="Crt_Nss" ColumnName="Crt_Nss" />
+                <ScalarProperty Name="Crt_FechaAlta" ColumnName="Crt_FechaAlta" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
                 <ScalarProperty Name="Crt_ProgresoForm" ColumnName="Crt_ProgresoForm" />
@@ -2231,6 +2384,8 @@
           <EntitySetMapping Name="Habilitacion">
             <EntityTypeMapping TypeName="CasasRedModel.Habilitacion">
               <MappingFragment StoreEntitySet="Habilitacion">
+                <ScalarProperty Name="Hbt_FchEntrega" ColumnName="Hbt_FchEntrega" />
+                <ScalarProperty Name="Hbt_StatusCasa" ColumnName="Hbt_StatusCasa" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
                 <ScalarProperty Name="Hbt_ProgresoForm" ColumnName="Hbt_ProgresoForm" />
@@ -2331,6 +2486,29 @@
                 <ScalarProperty Name="Vfn_Tiempo_estimado" ColumnName="Vfn_Tiempo_estimado" />
                 <ScalarProperty Name="Vfn_Visto_persona" ColumnName="Vfn_Visto_persona" />
                 <ScalarProperty Name="Vfn_Persona_fisica" ColumnName="Vfn_Persona_fisica" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VendedorAsig">
+            <EntityTypeMapping TypeName="CasasRedModel.VendedorAsig">
+              <MappingFragment StoreEntitySet="VendedorAsig">
+                <ScalarProperty Name="VndAsig_Departamento" ColumnName="VndAsig_Departamento" />
+                <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
+                <ScalarProperty Name="Id_Vendedor" ColumnName="Id_Vendedor" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notificaciones">
+            <EntityTypeMapping TypeName="CasasRedModel.Notificaciones">
+              <MappingFragment StoreEntitySet="Notificaciones">
+                <ScalarProperty Name="Not_mostrada" ColumnName="Not_mostrada" />
+                <ScalarProperty Name="Not_leida" ColumnName="Not_leida" />
+                <ScalarProperty Name="Not_idVinculado" ColumnName="Not_idVinculado" />
+                <ScalarProperty Name="Not_descripcion" ColumnName="Not_descripcion" />
+                <ScalarProperty Name="Not_titutlo" ColumnName="Not_titutlo" />
+                <ScalarProperty Name="Not_usuario_id" ColumnName="Not_usuario_id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
