@@ -26,8 +26,5 @@ namespace WebApiApp.Models
         public Nullable<int> Vfn_ProgresoForm { get; set; }
         public Nullable<int> Id_Cliente { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
-    
-        public virtual Cliente Cliente { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

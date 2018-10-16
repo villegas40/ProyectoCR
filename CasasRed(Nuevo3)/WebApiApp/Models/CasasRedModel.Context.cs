@@ -40,12 +40,12 @@ namespace WebApiApp.Models
         public virtual DbSet<Gestion> Gestion { get; set; }
         public virtual DbSet<Habilitacion> Habilitacion { get; set; }
         public virtual DbSet<HistorialAsignacion> HistorialAsignacion { get; set; }
+        public virtual DbSet<Notificaciones> Notificaciones { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Vendedor> Vendedor { get; set; }
-        public virtual DbSet<Verificacion> Verificacion { get; set; }
         public virtual DbSet<VendedorAsig> VendedorAsig { get; set; }
-        public virtual DbSet<Notificaciones> Notificaciones { get; set; }
+        public virtual DbSet<Verificacion> Verificacion { get; set; }
     }
 }

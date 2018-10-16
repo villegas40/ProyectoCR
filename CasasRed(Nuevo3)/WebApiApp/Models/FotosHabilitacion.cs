@@ -18,7 +18,5 @@ namespace WebApiApp.Models
         public string fh_archivo { get; set; }
         public string fh_nombre { get; set; }
         public Nullable<int> fh_habilitacion { get; set; }
-    
-        public virtual Habilitacion Habilitacion { get; set; }
     }
 }

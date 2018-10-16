@@ -19,7 +19,5 @@ namespace WebApiApp.Models
         public string Cmt_Nota { get; set; }
         public Nullable<System.DateTime> Cmt_Fecha { get; set; }
         public Nullable<int> Id_Cliente { get; set; }
-    
-        public virtual Cliente Cliente { get; set; }
     }
 }

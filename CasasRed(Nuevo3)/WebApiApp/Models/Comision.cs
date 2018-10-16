@@ -14,19 +14,8 @@ namespace WebApiApp.Models
     
     public partial class Comision
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Comision()
-        {
-            this.DetallesComision = new HashSet<DetallesComision>();
-        }
-    
         public int Id { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
-    
-        public virtual Corretaje Corretaje { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesComision> DetallesComision { get; set; }
     }
 }

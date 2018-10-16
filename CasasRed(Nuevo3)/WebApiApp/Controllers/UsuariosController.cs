@@ -15,7 +15,8 @@ namespace WebApiApp.Controllers
     public class UsuariosController : ApiController
     {
         private CasasRedEntities db = new CasasRedEntities();
-
+        Usuario usu = new Usuario();
+       
         // GET: api/Usuarios
         public IQueryable<Usuario> GetUsuario()
         {

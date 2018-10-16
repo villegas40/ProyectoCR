@@ -19,8 +19,5 @@ namespace WebApiApp.Models
         public Nullable<int> Id_Comision { get; set; }
         public Nullable<decimal> DCms_Monto { get; set; }
         public string DCms_TipoCom { get; set; }
-    
-        public virtual Comision Comision { get; set; }
-        public virtual Vendedor Vendedor { get; set; }
     }
 }

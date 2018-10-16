@@ -18,8 +18,5 @@ namespace WebApiApp.Models
         public Nullable<int> Id_Vendedor { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public string VndAsig_Departamento { get; set; }
-    
-        public virtual Corretaje Corretaje { get; set; }
-        public virtual Vendedor Vendedor { get; set; }
     }
 }

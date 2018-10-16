@@ -14,12 +14,6 @@ namespace WebApiApp.Models
     
     public partial class Existencias
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Existencias()
-        {
-            this.HistorialAsignacion = new HashSet<HistorialAsignacion>();
-        }
-    
         public int Id { get; set; }
         public string ext_art_id { get; set; }
         public Nullable<decimal> ext_cantidad { get; set; }
@@ -28,11 +22,5 @@ namespace WebApiApp.Models
         public Nullable<System.DateTime> ext_fechaAgregado { get; set; }
         public Nullable<int> ext_usuarioAgrego { get; set; }
         public Nullable<int> ext_ubicacion { get; set; }
-    
-        public virtual Articulos Articulos { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        public virtual Ubicaciones Ubicaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HistorialAsignacion> HistorialAsignacion { get; set; }
     }
 }

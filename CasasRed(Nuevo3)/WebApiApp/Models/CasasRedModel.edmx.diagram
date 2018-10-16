@@ -4,34 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="55a4f8d1e5194f768c30074b1da51939" Name="Diagram1" ZoomLevel="29">
-        <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="5.25" PointY="15.5" />
-        <EntityTypeShape EntityType="CasasRedModel.CalificacionVendedor" Width="1.5" PointX="10.5" PointY="31.25" />
-        <EntityTypeShape EntityType="CasasRedModel.CasaInventario" Width="1.5" PointX="7.5" PointY="19.875" />
-        <EntityTypeShape EntityType="CasasRedModel.Cliente" Width="1.5" PointX="13.5" PointY="19.625" />
-        <EntityTypeShape EntityType="CasasRedModel.Comentarios" Width="1.5" PointX="15.75" PointY="37.625" />
-        <EntityTypeShape EntityType="CasasRedModel.Comision" Width="1.5" PointX="10.5" PointY="24.25" />
-        <EntityTypeShape EntityType="CasasRedModel.Contaduria" Width="1.5" PointX="7.5" PointY="23.75" />
-        <EntityTypeShape EntityType="CasasRedModel.Corretaje" Width="1.5" PointX="5.25" PointY="19.25" />
-        <EntityTypeShape EntityType="CasasRedModel.DetallesComision" Width="1.5" PointX="15.75" PointY="18.25" />
-        <EntityTypeShape EntityType="CasasRedModel.Existencias" Width="1.5" PointX="8.25" PointY="27.75" />
-        <EntityTypeShape EntityType="CasasRedModel.FotosHabilitacion" Width="1.5" PointX="9.75" PointY="14.375" />
-        <EntityTypeShape EntityType="CasasRedModel.GastosContaduria" Width="1.5" PointX="10.5" PointY="20" />
-        <EntityTypeShape EntityType="CasasRedModel.Gestion" Width="1.5" PointX="15.75" PointY="21.25" />
-        <EntityTypeShape EntityType="CasasRedModel.Habilitacion" Width="1.5" PointX="7.5" PointY="11.75" />
-        <EntityTypeShape EntityType="CasasRedModel.HistorialAsignacion" Width="1.5" PointX="10.5" PointY="27.25" />
-        <EntityTypeShape EntityType="CasasRedModel.TipoUsuario" Width="1.5" PointX="0.75" PointY="24.625" />
-        <EntityTypeShape EntityType="CasasRedModel.Ubicaciones" Width="1.5" PointX="6" PointY="32.5" />
-        <EntityTypeShape EntityType="CasasRedModel.Usuario" Width="1.5" PointX="3" PointY="22.625" />
-        <EntityTypeShape EntityType="CasasRedModel.Vendedor" Width="1.5" PointX="3" PointY="19.125" />
-        <EntityTypeShape EntityType="CasasRedModel.Verificacion" Width="1.5" PointX="18.75" PointY="23.5" />
-        <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_ar__2334397B" />
-        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_a__5EBF139D" />
+      <Diagram DiagramId="55a4f8d1e5194f768c30074b1da51939" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="4.375" PointY="2.875" />
+        <EntityTypeShape EntityType="CasasRedModel.CalificacionVendedor" Width="1.5" PointX="20.875" PointY="14.75" />
+        <EntityTypeShape EntityType="CasasRedModel.CasaInventario" Width="1.5" PointX="6.625" PointY="4.375" />
+        <EntityTypeShape EntityType="CasasRedModel.Cliente" Width="1.5" PointX="17.875" PointY="4.125" />
+        <EntityTypeShape EntityType="CasasRedModel.Comentarios" Width="1.5" PointX="20.125" PointY="22.125" />
+        <EntityTypeShape EntityType="CasasRedModel.Comision" Width="1.5" PointX="9.625" PointY="8.75" />
+        <EntityTypeShape EntityType="CasasRedModel.Contaduria" Width="1.5" PointX="14.875" PointY="8.25" />
+        <EntityTypeShape EntityType="CasasRedModel.Corretaje" Width="1.5" PointX="12.625" PointY="3.5" />
+        <EntityTypeShape EntityType="CasasRedModel.DetallesComision" Width="1.5" PointX="14.875" PointY="4.625" />
+        <EntityTypeShape EntityType="CasasRedModel.Existencias" Width="1.5" PointX="6.625" PointY="8.25" />
+        <EntityTypeShape EntityType="CasasRedModel.FotosHabilitacion" Width="1.5" PointX="17.125" PointY="16.875" />
+        <EntityTypeShape EntityType="CasasRedModel.GastosContaduria" Width="1.5" PointX="14.875" PointY="0.5" />
+        <EntityTypeShape EntityType="CasasRedModel.Gestion" Width="1.5" PointX="20.125" PointY="5.75" />
+        <EntityTypeShape EntityType="CasasRedModel.Habilitacion" Width="1.5" PointX="14.875" PointY="13.125" />
+        <EntityTypeShape EntityType="CasasRedModel.HistorialAsignacion" Width="1.5" PointX="8.875" PointY="5.375" />
+        <EntityTypeShape EntityType="CasasRedModel.Notificaciones" Width="1.5" PointX="7.75" PointY="21.875" />
+        <EntityTypeShape EntityType="CasasRedModel.TipoUsuario" Width="1.5" PointX="2.125" PointY="9.125" />
+        <EntityTypeShape EntityType="CasasRedModel.Ubicaciones" Width="1.5" PointX="4.375" PointY="14" />
+        <EntityTypeShape EntityType="CasasRedModel.Usuario" Width="1.5" PointX="4.375" PointY="7" />
+        <EntityTypeShape EntityType="CasasRedModel.Vendedor" Width="1.5" PointX="10.375" PointY="12.5" />
+        <EntityTypeShape EntityType="CasasRedModel.VendedorAsig" Width="1.5" PointX="20.875" PointY="2.75" />
+        <EntityTypeShape EntityType="CasasRedModel.Verificacion" Width="1.5" PointX="23.125" PointY="8" />
+        <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_ar__7BB05806" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_a__75035A77" />
         <AssociationConnector Association="CasasRedModel.FK_DVndrCorretaje_Id" />
         <AssociationConnector Association="CasasRedModel.FK_DVndrVendedor_Id" />
-        <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_co__24285DB4" />
-        <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_us__251C81ED" />
-        <AssociationConnector Association="CasasRedModel.FK__Historial__ha_ca__27F8EE98" />
+        <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_co__7CA47C3F" />
+        <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_us__7D98A078" />
+        <AssociationConnector Association="CasasRedModel.FK__Historial__ha_ca__04459E07" />
         <AssociationConnector Association="CasasRedModel.FK_Cliente_Id" />
         <AssociationConnector Association="CasasRedModel.FK_ComentClie_Id" />
         <AssociationConnector Association="CasasRedModel.FK_CrtCasa_Id" />
@@ -48,22 +50,20 @@
         <AssociationConnector Association="CasasRedModel.FK_CrtUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_CrtVendedor_Id" />
         <AssociationConnector Association="CasasRedModel.FK_GastosCasa_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_VndAsigCasa_Id" />
         <AssociationConnector Association="CasasRedModel.FK_DCmsVendedor_Id" />
-        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__60A75C0F" />
-        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__619B8048" />
-        <AssociationConnector Association="CasasRedModel.FK__Historial__ha_ex__28ED12D1" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__76EBA2E9" />
+        <AssociationConnector Association="CasasRedModel.FK__Existenci__ext_u__77DFC722" />
+        <AssociationConnector Association="CasasRedModel.FK__Historial__ha_ex__0539C240" />
         <AssociationConnector Association="CasasRedModel.FK_FotosHab_Id" />
         <AssociationConnector Association="CasasRedModel.FK_GastosCasaUsu_Id" />
         <AssociationConnector Association="CasasRedModel.FK_Usuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_HabUsuario_Id" />
-        <AssociationConnector Association="CasasRedModel.FK__Historial__ha_us__29E1370A" />
+        <AssociationConnector Association="CasasRedModel.FK__Historial__ha_us__062DE679" />
+        <AssociationConnector Association="CasasRedModel.FK_NUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_TipoUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_VrfUsu_Id" />
-        <EntityTypeShape EntityType="CasasRedModel.VendedorAsig" Width="1.5" PointX="12.5" PointY="16.375" />
-        <AssociationConnector Association="CasasRedModel.FK_VndAsigCasa_Id" />
         <AssociationConnector Association="CasasRedModel.FK_VndAsigVendedor_Id" />
-        <EntityTypeShape EntityType="CasasRedModel.Notificaciones" Width="1.5" PointX="5.25" PointY="35.125" />
-        <AssociationConnector Association="CasasRedModel.FK_NUsuario_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

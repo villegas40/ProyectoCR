@@ -18,9 +18,5 @@ namespace WebApiApp.Models
         public Nullable<int> ha_casaInventario { get; set; }
         public int ha_existencia_id { get; set; }
         public Nullable<int> ha_usuarioEntrego { get; set; }
-    
-        public virtual CasaInventario CasaInventario { get; set; }
-        public virtual Existencias Existencias { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

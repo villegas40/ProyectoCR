@@ -18,8 +18,5 @@ namespace WebApiApp.Models
         public Nullable<decimal> DVndr_Puntaje { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Vendedor { get; set; }
-    
-        public virtual Corretaje Corretaje { get; set; }
-        public virtual Vendedor Vendedor { get; set; }
     }
 }

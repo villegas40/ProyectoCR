@@ -44,7 +44,7 @@
                         @Html.ValidationMessageFor(model => model.GstCon_Concepto, "", new { @class = "text-danger" })
                     </div>
                 }
-                else if (tipo == "Contador")
+                else if (tipo == "Contabilidad")
                 {
                     <label for="GstCon_Concepto">Concepto</label>
                     <div class="col-md-10">
@@ -118,8 +118,20 @@
         </div>
     }
 
-    <div>
-        @Html.ActionLink("Regresar", "Index")
-    </div>
+        <div>
+            @if (tipo == "Corretaje")
+            {
+                @Html.ActionLink("Regresar", "Index", "Corretajes")
+            }
+            else if (tipo == "Gestion")
+            {
+                @Html.ActionLink("Regresar", "Index", "Gestions")
+            }
+            else if (tipo == "Contabilidad")
+            {
+                @Html.ActionLink("Regresar", "Index", "Contadurias")
+            }
+
+        </div>
 </body>
 </html>

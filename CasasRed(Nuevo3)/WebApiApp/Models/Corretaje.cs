@@ -14,26 +14,14 @@ namespace WebApiApp.Models
     
     public partial class Corretaje
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Corretaje()
-        {
-            this.CalificacionVendedor = new HashSet<CalificacionVendedor>();
-            this.CasaInventario = new HashSet<CasaInventario>();
-            this.Cliente = new HashSet<Cliente>();
-            this.Comision = new HashSet<Comision>();
-            this.Contaduria = new HashSet<Contaduria>();
-            this.Gestion = new HashSet<Gestion>();
-            this.Habilitacion = new HashSet<Habilitacion>();
-            this.GastosContaduria = new HashSet<GastosContaduria>();
-            this.VendedorAsig = new HashSet<VendedorAsig>();
-        }
-    
         public int Id { get; set; }
         public string Crt_Status { get; set; }
+        public Nullable<System.DateTime> Crt_FechaAlta { get; set; }
         public string Crt_Cliente_Nombre { get; set; }
         public string Crt_Cliente_ApMat { get; set; }
         public string Crt_Cliente_ApPat { get; set; }
         public string Crt_Direccion { get; set; }
+        public string Crt_Nss { get; set; }
         public string Crt_Precio { get; set; }
         public string Crt_Gasto { get; set; }
         public string Crt_Tipo_Vivienda { get; set; }
@@ -76,28 +64,5 @@ namespace WebApiApp.Models
         public Nullable<int> Crt_ProgresoForm { get; set; }
         public Nullable<int> Id_Vendedor { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
-        public Nullable<System.DateTime> Crt_FechaAlta { get; set; }
-        public string Crt_Nss { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CalificacionVendedor> CalificacionVendedor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CasaInventario> CasaInventario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Cliente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comision> Comision { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contaduria> Contaduria { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gestion> Gestion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Habilitacion> Habilitacion { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        public virtual Vendedor Vendedor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GastosContaduria> GastosContaduria { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VendedorAsig> VendedorAsig { get; set; }
     }
 }

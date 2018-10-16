@@ -21,11 +21,8 @@ namespace WebApiApp.Models
         public Nullable<decimal> Cnt_Tramites { get; set; }
         public Nullable<decimal> Cnt_CESPT { get; set; }
         public Nullable<decimal> Cnt_CFE { get; set; }
+        public Nullable<decimal> Cnt_DevMensualidad { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
-        public Nullable<decimal> Cnt_DevMensualidad { get; set; }
-    
-        public virtual Corretaje Corretaje { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

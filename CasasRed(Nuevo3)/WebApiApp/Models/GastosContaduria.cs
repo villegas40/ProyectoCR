@@ -21,8 +21,5 @@ namespace WebApiApp.Models
         public Nullable<System.DateTime> GstCon_Fecha { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
-    
-        public virtual Corretaje Corretaje { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }

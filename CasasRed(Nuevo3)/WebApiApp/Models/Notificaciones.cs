@@ -21,7 +21,5 @@ namespace WebApiApp.Models
         public string Not_idVinculado { get; set; }
         public Nullable<bool> Not_leida { get; set; }
         public Nullable<bool> Not_mostrada { get; set; }
-    
-        public virtual Usuario Usuario { get; set; }
     }
 }

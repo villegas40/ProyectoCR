@@ -14,17 +14,8 @@ namespace WebApiApp.Models
     
     public partial class Ubicaciones
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ubicaciones()
-        {
-            this.Existencias = new HashSet<Existencias>();
-        }
-    
         public int ubi_id { get; set; }
         public string ubi_codigo { get; set; }
         public string ubi_descripcion { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Existencias> Existencias { get; set; }
     }
 }
