@@ -1,7 +1,7 @@
 ﻿@model CasasRed_Nuevo3_.Controllers.GerenteController.FooViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    ViewBag.Title = "Gerente";
     //   var test1 = ViewBag.test;
     List<string> nombre = ViewBag.listanombres;
     List<int?> ids = ViewBag.listaids;
@@ -70,7 +70,7 @@
             <th scope="col">Comprador</th>
             <th scope="col">Status</th>
             <th scope="col">Progreso </th>
-            <th scope="col">Opciones</th>
+            <th scope="col" colspan="2">Opciones</th>
         </tr>
     </thead>
     <tbody id="registros">
@@ -124,7 +124,7 @@
                     inner += "<tr><td>" + response[i].corre + "</td>" + "<td>" + response[i].dire +
                         "</td>" + "<td>" + response[i].Cliente + " " + response[i].clienteapp + " " + response[i].clienteapm + "</td>" + "<td>" + response[i].compra + " " + response[i].compraapp + " " + response[i].compraapm + "</td>"
                         + "<td>" + response[i].status + "</td>" + "<td>" + " <div class=\"progress\"><div id = \"bar\" class=\"progress-bar progress-bar-striped bg-danger\" role = \"progressbar\" aria - valuenow=\"75\" aria - valuemin=\"0\" aria - valuemax=\"100\" style = \"width:" + progresogeneral + "%\" ></div ></div >" + "</td>"
-                        + "<td>" + "<a href=\"Details" + '?' + "idc=" + idc + "&" + "idg=" + idg + "\"class=\"btn btn-info\">Detalles</a>" + "<a href=\"DeleteDetails" + '?' + "idc=" + response[i].corre + "&" + "idg=" + response[i].idg + "\"class=\"btn btn-info\">Eliminar</a></td>" + "</tr>"
+                        + "<td>" + "<a href=\"Details" + '?' + "idc=" + idc + "&" + "idg=" + idg + "\"class=\"btn btn-info\">Detalles</a></td>" + "<td><a href=\"DeleteDetails" + '?' + "idc=" + response[i].corre + "&" + "idg=" + idg + "\"class=\"btn btn-info\">Eliminar</a></td>" + "</tr>"
                 }
                 document.getElementById("registros").innerHTML = inner
 

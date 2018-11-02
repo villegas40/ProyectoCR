@@ -70,7 +70,7 @@
                             "<td>" + json[i].estatus + "</td>" +
                             "<td><a class=\"btn btn-primary\" href=\"/Contadurias/Edit/" + json[i].Id + "\">Editar</a></td>" +
                             "<td><a class=\"btn btn-info\" href=\"/GastosContadurias/Details" + '?' + "idcontaduria=" + json[i].Id + "\">Detalles</a></td>" +
-                            "<td><a class=\"btn btn-danger\" href=\"/Contadurias/Delete/" + json[i].Id + "\">Eliminar</a> </td>" +
+                            
                             ((json[i].corretaje != 0) ? "<td><a class=\"btn btn-success\" href=\"/GastosContadurias/Create/" + json[i].corretaje + "\">Insertar gasto</a></td>" : "<td></td>");
                         document.getElementById("ctBA").appendChild(tr)
                     }

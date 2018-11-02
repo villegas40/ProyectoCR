@@ -301,6 +301,30 @@ namespace CasasRed_Nuevo3_.Controllers
             }
         }
 
+        public JsonResult BuscarExistenciasUbicacion(string filtro = "", int pagina = 1, int registrosPagina = 15)
+        {
+            if (filtro == "")
+            {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = (int)Math.Ceiling((double)(from e in db.Existencias group e by new { e.ext_art_id, e.ext_ubicacion } into eGroup where eGroup.Sum(ex => ex.ext_cantidadActual) > 0 select new { item = eGroup.Key, ubi = eGroup.Key.ext_ubicacion ,cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count());
+                }
+                var totalPaginas = (int)Math.Ceiling((double)(from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion, e.ext_ubicacion } into eGroup where eGroup.Sum(ex => ex.ext_cantidadActual) > 0 select new { item = eGroup.Key, cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count() / registrosPagina);
+                var busqueda = (from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion, e.ext_ubicacion, e.Ubicaciones.ubi_codigo } into eGroup where eGroup.Sum(ex => ex.ext_cantidadActual) > 0 select new { item = eGroup.Key.ext_art_id, ubiID = eGroup.Key.ext_ubicacion, ubi = eGroup.Key.ubi_codigo, descripcion = eGroup.Key.art_descripcion, cantidad = eGroup.Sum(e => e.ext_cantidadActual), precioTotal = eGroup.Sum(e => e.ext_precioUnitario * e.ext_cantidadActual), total = totalPaginas }).OrderBy(e => e.item).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                if (registrosPagina == 0)
+                {
+                    registrosPagina = (int)Math.Ceiling((double)(from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion, e.ext_ubicacion } into eGroup where eGroup.Key.ext_art_id.Contains(filtro) || eGroup.Key.art_descripcion.Contains(filtro) && eGroup.Sum(ex => ex.ext_cantidadActual) > 0 select new { item = eGroup.Key, ubi = eGroup.Key.ext_ubicacion, cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count());
+                }
+                var totalPaginas = (int)Math.Ceiling((double)(from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion, e.ext_ubicacion } into eGroup where eGroup.Key.ext_art_id.Contains(filtro) || eGroup.Key.art_descripcion.Contains(filtro) select new { item = eGroup.Key, ubi = eGroup.Key.ext_ubicacion, cantidad = eGroup.Sum(e => e.ext_cantidadActual) }).Count() / registrosPagina);
+                var busqueda = (from e in db.Existencias group e by new { e.ext_art_id, e.Articulos.art_descripcion, e.ext_ubicacion, e.Ubicaciones.ubi_codigo } into eGroup where eGroup.Key.ext_art_id.Contains(filtro) || eGroup.Key.art_descripcion.Contains(filtro) && eGroup.Sum(ex => ex.ext_cantidadActual) > 0 select new { item = eGroup.Key.ext_art_id, descripcion = eGroup.Key.art_descripcion, ubiID = eGroup.Key.ext_ubicacion, ubi = eGroup.Key.ubi_codigo, cantidad = eGroup.Sum(e => e.ext_cantidadActual), precioTotal = eGroup.Sum(e => e.ext_precioUnitario * e.ext_cantidadActual), total = totalPaginas }).OrderBy(e => e.item).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult UsuarioDetalle(int usu)
         {
             var usuario = (from u in db.Usuario where u.Id == usu select u.usu_username).FirstOrDefault();

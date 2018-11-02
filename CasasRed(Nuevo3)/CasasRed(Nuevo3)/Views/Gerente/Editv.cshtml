@@ -1,10 +1,10 @@
 ﻿@model CasasRed_Nuevo3_.Models.Verificacion
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Verificación > Editar";
 }
 
-<h2 style="margin-top:20px;">Edit</h2>
+<h2 id="tituloH" @*style="margin-top:20px;"*@>Editar</h2>
 
 
 @using (Html.BeginForm())
@@ -25,8 +25,7 @@
         <!--Campo para el valor de la barra-->
         <div>
             <label for="Gral_ProgresoForm">Progreso</label>
-            @Html.EditorFor(model => model.Vfn_ProgresoForm, new { htmlAttributes = new { @class = "form-control", @id = "progreso", @type = "hidden"}
-    })
+            @Html.EditorFor(model => model.Vfn_ProgresoForm, new { htmlAttributes = new { @class = "form-control", @id = "progreso", @type = "hidden" } })
             @Html.ValidationMessageFor(model => model.Vfn_ProgresoForm, "", new { @class = "text-danger" })
         </div>
 
@@ -34,9 +33,9 @@
         <div id="cabeceroPrint">
 
             <h5>Cliente: @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Nombre) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidopa) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidoma)</h5>
-            @if (Model.Cliente.Id_Vendedor != null)
+            @if (@ViewBag.Vendedor != null)
             {
-                <h5>Asesor: @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Nombre) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidopa) @Html.DisplayFor(modelItem => modelItem.Cliente.Gral_Apellidoma)</h5>
+                <h5>Asesor: @ViewBag.Vendedor </h5>
             }
             else
             {
@@ -173,12 +172,19 @@
 
             <div class="form-group">
                 @*@Html.LabelFor(model => model.Vfn_Trato_asesor, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <label class="control-label col-md-4" for="Vfn_Trato_asesor">¿Cómo considera que fue el trato del asesor?</label>
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })*@
-                    @Html.DropDownListFor(model => model.Vfn_Trato_asesor, ViewData["Calificacion"] as SelectList, new { @class = "form-control", @id = "Vfn_Trato_asesor" })
-                    @Html.ValidationMessageFor(model => model.Vfn_Trato_asesor, "", new { @class = "text-danger" })
-                </div>
+                @if (@ViewBag.Vendedor != null)
+                {
+                    <label class="control-label col-md-4" for="Vfn_Trato_asesor">¿Cómo considera que fue el trato del asesor?</label>
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.Vfn_Trato_asesor, new { htmlAttributes = new { @class = "form-control data", @id = "tratoAsesor" } })*@
+                        @Html.DropDownListFor(model => model.Vfn_Trato_asesor, ViewData["Calificacion"] as SelectList, new { @class = "form-control", @id = "Vfn_Trato_asesor" })
+                        @Html.ValidationMessageFor(model => model.Vfn_Trato_asesor, "", new { @class = "text-danger" })
+                    </div>
+                }
+                else
+                {
+                    <label class="control-label col-md-4" for="Vfn_Trato_asesor"></label>
+                }
             </div>
 
 
@@ -219,8 +225,6 @@
     </div>
 }
 <button id="print" class="btn btn-outline-primary" onclick="imprimirBusqueda(document.getElementById('cabeceroPrint'),document.getElementById('printZone'),document.getElementById('tituloH').textContent) "><i class="fas fa-print"></i> Imprimir</button>
-
-
 <div>
     <a href='javascript:history.go(-1)'>Regresar</a>
 </div>

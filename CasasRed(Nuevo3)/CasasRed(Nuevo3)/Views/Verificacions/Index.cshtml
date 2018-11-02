@@ -67,16 +67,23 @@
                 }
                 var inner = ""
                 for (var i = 0; i < json.length; i++) {
-                    inner += "<tr>" +
-                        "<td>" + json[i].cliente + "</td>" +
-                        "<td>" + json[i].asesor + "</td>" +
-                        '<td><div class="progress"><div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: ' + json[i].Vfn_ProgresoForm + '%">' + json[i].Vfn_ProgresoForm + '% Completado</div></div></td>' +
-                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Verificacions/Edit/" + json[i].Id + "\">Editar</a></td>" +
-                        "<td><a class=\"btn btn-info\" href=\"/Verificacions/Details/" + json[i].Id + "\">Detalles</a></td>" +
-                        "<td><a class=\"btn btn-danger\" href=\"/Verificacions/Delete/" + json[i].Id + "\">Eliminar</a> </td></tr>" +
-                        "</tr>";
+                    var tr = document.createElement("tr")
+                    if (!buscarentablas(json[i].Id, json[i].vendenombre, json[i].vendeapp, json[i].vendeapm)) {
+                        tr.id = json[i].Id
+
+                        tr.innerHTML =
+                            "<td>" + json[i].cliente + "</td>" +
+                            "<td>" + json[i].vendenombre + " " + json[i].vendeapp + " " + json[i].vendeapm + "</td>" +
+                            '<td><div class="progress"><div id="bar" class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: ' + json[i].Vfn_ProgresoForm + '%">' + json[i].Vfn_ProgresoForm + '% Completado</div></div></td>' +
+                            "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Verificacions/Edit/" + json[i].Id + "\">Editar</a></td>" +
+                            "<td><a class=\"btn btn-info\" href=\"/Verificacions/Details/" + json[i].Id + "\">Detalles</a></td>"; //+
+                            //"<td><a class=\"btn btn-danger\" href=\"/Verificacions/Delete/" + json[i].Id + "\">Eliminar</a> </td></tr>";
+
+                        document.getElementById("ctBA").appendChild(tr)
+                    }
+            
                 }
-                document.getElementById("ctBA").innerHTML = inner
+                //document.getElementById("ctBA").innerHTML = inner
                 document.getElementById("next").textContent = totalPages
                 if (pageP <= 1) {
                     document.getElementById("previous").textContent = page
@@ -94,6 +101,22 @@
             });
             x.send(frm)
         }
+
+        function buscarentablas(dato, valor, valor1, valor2) {
+            var encontrado = false
+            var body = document.getElementById('ctBA')
+            var rows = body.childElementCount
+            for (var j = 0; j < rows; j++) {
+                console.log(body.children[j].id)
+                if (dato == body.children[j].id.toString()) {
+                    body.children[j].children[1].textContent += ", " + valor + " " + valor1 + " " + valor2;
+                    encontrado = true
+                    break
+                }
+            }
+            return encontrado;
+        }
+
         buscarVerificacion()
     </script>
 }

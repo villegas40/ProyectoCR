@@ -5,35 +5,70 @@
 }
 
 <center><h2 style="margin-top:20px;">Departamento de Gestión</h2></center>
-
 <div class="row">
-    <div class="col">
-        <input id="txtBusquedaA" class="form-control" style="margin-bottom:5px;" placeholder="Buscar por dirección o por cliente " onkeyup="buscarGestion()" />
+    <div class="col-sm-1">
+        <a>Mes:</a>
     </div>
-</div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <select class="form-control" id="opmes" oninput="buscarGestion()">
+                <option value="00" selected>Todos</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-1">
+        <a>Año:</a>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <select class="form-control" id="opano" oninput="buscarGestion()">
+                <option value="00" selected>Todos</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+            </select>
+        </div>
+    </div>
+ 
+        <div class="col">
+            <input id="txtBusquedaA" class="form-control" style="margin-bottom:5px;" placeholder="Buscar por dirección o por cliente " onkeyup="buscarGestion()" />
+        </div>
+ </div>
 
-<table class="table table-striped table-responsive-lg">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Dirección</th>
-            <th scope="col">Estatus</th>
-            <th scope="col">Porcentaje</th>
-            <th colspan="4" scope="col">Opciones</p></th>
-        </tr>
-    </thead>
-    <tbody id="ctBA"></tbody>
-</table>
-<center>
-    <button disabled class="btn btn-default" id="btnPrevious" onclick="buscarGestion(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
-    <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
-    <button disabled class="btn btn-default" id="btnNext" onclick="buscarGestion(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
-</center>
+    <table class="table table-striped table-responsive-lg">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Porcentaje</th>
+                <th colspan="4" scope="col">Opciones</p></th>
+            </tr>
+        </thead>
+        <tbody id="ctBA"></tbody>
+    </table>
+    <center>
+        <button disabled class="btn btn-default" id="btnPrevious" onclick="buscarGestion(parseInt(pageP) - 1)"><i class="fas fa-caret-left"></i></button>
+        <label id="previous"></label><label> - <label id="actual"></label> - </label><label id="next"></label>
+        <button disabled class="btn btn-default" id="btnNext" onclick="buscarGestion(parseInt(pageP) + 1)"><i class="fas fa-caret-right"></i></button>
+    </center>
 
 
-@section Scripts {
-    <script>
+    @section Scripts {
+        <script>
         $(document.body).css('padding-top', '70px');
 
         var pageP = 1
@@ -43,10 +78,14 @@
                 page = 1
             }
             pageP = page
+            var filtrom = document.getElementById("opmes").value;
+            var filtroa = document.getElementById("opano").value;
             var filtro = document.getElementById("txtBusquedaA").value
             var frm = new FormData()
             frm.append("filtro", filtro)
             frm.append("pagina", page)
+            frm.append("mes", filtrom);
+            frm.append("ano", filtroa);
 
             var x = new XMLHttpRequest()
             x.open("POST", "/Gestions/BuscarGestion", false);
@@ -68,7 +107,7 @@
                         "<td>" + json[i].casa + "</td>" +
                         "<td>" + json[i].Crt_Status + "</td>" +
                         "<td>" + json[i].Gtn_ProgresoForm + "%" +"</td>" +
-                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Gestions/Edit/" + json[i].Id + "\">Editar</a></td><td><a class=\"btn btn-info\" href=\"/Gestions/Details/" + json[i].Id + "\">Detalles</a></td><td><a class=\"btn btn-danger\" href=\"/Gestions/Delete/" + json[i].Id + "\">Eliminar</a> </td><td><a class=\"btn btn-info\" href=\"/GastosContadurias/Index/" + json[i].Id_Corretaje + "\">Asignar Gasto</a></td></tr>" +
+                        "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Gestions/Edit/" + json[i].Id + "\">Editar</a></td><td><a class=\"btn btn-info\" href=\"/Gestions/Details/" + json[i].Id + "\">Detalles</a></td>@*<td><a class=\"btn btn-danger\" href=\"/Gestions/Delete/" + json[i].Id + "\">Eliminar</a> </td>*@<td><a class=\"btn btn-info\" href=\"/GastosContadurias/Index/" + json[i].Id_Corretaje + "\">Asignar Gasto</a></td></tr>" +
                         "</tr>"
                 }
                 document.getElementById("ctBA").innerHTML = inner
@@ -90,5 +129,5 @@
             x.send(frm)
         }
         buscarGestion()
-    </script>
-}
+        </script>
+    }

@@ -73,9 +73,7 @@
                     "<td>" + response[i].GstCon_Monto + "</td>" +
                     "<td>" + response[i].GstCon_Concepto + "</td>" +
                     "<td>" + response[i].nombre + "</td>" +
-                    "<td><a class=\"btn btn-primary\" href=\"/GastosContadurias/Edit/" + response[i].ci_Id + "\">Editar</a></td>" +
-                    "<td><a class=\"btn btn-info\" href=\"/GastosContadurias/Details/" + response[i].ci_Id + "\">Detalles</a></td>" +
-                    "<td><a class=\"btn btn-danger\" href=\"/GastosContadurias/Delete/" + response[i].ci_Id + "\">Eliminar</a></td>" +
+                    "<td><a class=\"btn btn-danger\" href=\"/GastosContadurias/Delete/" + response[i].Id + "\">Eliminar</a></td>" +
                     "</tr>";
             }
             document.getElementById("ctCI").innerHTML = inner;

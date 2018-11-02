@@ -37,6 +37,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-danger" id="list-contac-list" data-toggle="list" href="#list-contac" role="tab" aria-controls="contac">Contacto</a>
                     <a class="list-group-item list-group-item-action list-group-item-light" id="list-DR-list" data-toggle="list" href="#list-DR" role="tab" aria-controls="DR">Datos de Referencia</a>
                     <a class="list-group-item list-group-item-action list-group-item-danger" id="list-DC-list" data-toggle="list" href="#list-DC" role="tab" aria-controls="DC">Datos de Cónyuge</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-IF-list" data-toggle="list" href="#list-IF"role="tab"aria-controls="IF">Cuenta Infonavit</a>
                 </div>
             </div>
             <div class="col-8">
@@ -60,23 +61,28 @@
                         </div>
 
 
-
+                        <!--Creo que no sirve para nada-->
                         <div class="row justify-content-around">
                             <div class="col">
                                 <div class="form-group">
                                     <!--Status -->
                                     @*Html.LabelFor(model => model.Crt_Status, htmlAttributes: new { @class = "control-label" })*@
                                     @*<label class="control-label col-md-4" for="Id_Vendedor">Asesor</label>
-                                    <div class="col">
-                                        @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Posicion2"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
-                                        @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
-                                    </div>*@
+                    <div class="col">
+                        @Html.DropDownListFor(model => model.Id_Vendedor, ViewData["Posicion2"] as SelectList, new { @class = "form-control col-12 data", @id = "Id_Vendedor" })
+                        @Html.ValidationMessageFor(model => model.Id_Vendedor, "", new { @class = "text-danger" })
+                    </div>*@
                                 </div>
                             </div>
                         </div>
 
-
-
+                        <div class="row justify-content-around">
+                            <div class="col">                                
+                                <label for="Gral_Nombre">No. Expediente Interno</label>
+                                @Html.EditorFor(model => model.Gral_NoExpediente, new { htmlAttributes = new { @class = "form-control data" } })
+                                @Html.ValidationMessageFor(model => model.Gral_NoExpediente, "", new { @class = "text-danger" })                               
+                            </div>
+                        </div>
 
                         <div class="row justify-content-around py-3">
                             <div class="col-lg-4">
@@ -97,7 +103,7 @@
 
                             <div class="col-lg-4">
                                 <label for="Gral_Fechanac">Fecha de Nacimiento</label>
-                                @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data"@*, @type = "date"*@, @id="pd1" } })
+                                @Html.EditorFor(model => model.Gral_Fechanac, new { htmlAttributes = new { @class = "form-control data"@*, @type = "date"*@,@id = "pd1"}})
                                 @Html.ValidationMessageFor(model => model.Gral_Fechanac, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-lg-5">
@@ -123,7 +129,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <label for="Gral_Estado_civil">Estado civil</label>
-                                @Html.DropDownListFor(model => model.Gral_Estado_civil, ViewData["EstadoCivil"] as SelectList ,new  { @class = "form-control data"  })
+                                @Html.DropDownListFor(model => model.Gral_Estado_civil, ViewData["EstadoCivil"] as SelectList, new { @class = "form-control data" })
                                 @Html.ValidationMessageFor(model => model.Gral_Estado_civil, "", new { @class = "text-danger" })
                             </div>
 
@@ -326,6 +332,23 @@
                                 <label for="Cyg_No_identificacoion">Número de Identificación</label>
                                 @Html.EditorFor(model => model.Cyg_No_identificacoion, new { htmlAttributes = new { @class = "form-control data" } })
                                 @Html.ValidationMessageFor(model => model.Cyg_No_identificacoion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    @*DATOS DE CUENTA INFONAVIT*@
+                    <div class="tab-pane fade" id="list-IF" role="tabpanel" aria-labelledby="list-IF-list">
+                        <h5>Datos de Cuenta Infonavit</h5>
+                        <div class="row justify-content-around py-3">
+                            <div class="col-lg-6">
+                                <label for="Gral_CuentaInfonavit">Cuenta infonavit</label>
+                                @Html.EditorFor(model => model.Gral_CuentaInfonavit, new { htmlAttributes = new { @class = "form-control data" } })
+                                @Html.ValidationMessageFor(model => model.Gral_CuentaInfonavit, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="Gral_ClaveInfonavit">Clave cuenta infonavit</label>
+                                @Html.EditorFor(model => model.Gral_ClaveInfonavit, new { htmlAttributes = new { @class = "form-control data" } })
+                                @Html.ValidationMessageFor(model => model.Gral_ClaveInfonavit, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

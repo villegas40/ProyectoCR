@@ -382,6 +382,37 @@
             <th>Estatus</th>
             <td>@Html.DisplayFor(model => model.Corretaje.Crt_Status)</td>
         </tr>
+        <tr>
+            <td>Fecha de Entrega</td>
+            <td>
+                @if (Model.Hbt_FchEntrega != null)
+                {
+                    @Html.DisplayFor(model => model.Hbt_FchEntrega)
+                }
+                else
+                {
+                     <p>Aun sin fecha</p>
+                }
+
+            </td>
+          
+        </tr>
+        <tr>
+            <td>
+                Estatus de entrega
+            </td>
+            <td>
+                @if (Model.Hbt_StatusCasa != null)
+                {
+                    @Html.DisplayFor(model => model.Hbt_StatusCasa)
+
+                }
+                else
+                {
+                    <p>Sin entregar</p>
+                }
+            </td>
+        </tr>
     </table>
 </div>
 <p>

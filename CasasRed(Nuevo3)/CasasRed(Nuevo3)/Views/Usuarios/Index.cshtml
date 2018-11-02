@@ -71,7 +71,10 @@
                     "<td>" + response[i].desc + "</td>" +
                     "<td>" + response[i].estatus + "</td>" +
                     "<td>" + response[i].fecha + "</td>" +
-                    "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Usuarios/Edit/" + response[i].Id + "\">Editar</a></td><td><a class=\"btn btn-info\" href=\"/Usuarios/Details/" + response[i].Id + "\">Detalles</a></td><td><a class=\"btn btn-danger\" href=\"/Usuarios/Delete/" + response[i].Id + "\">Eliminar</a></td></tr>"
+                    "<td class=\"InvisiblePrint\"><a class=\"btn btn-primary\" href=\"/Usuarios/Edit/" + response[i].Id + "\">Editar</a></td>" +
+                    "<td><a class=\"btn btn-info\" href=\"/Usuarios/Details/" + response[i].Id + "\">Detalles</a></td>" +
+                    ((response[i].usu_username != "administrador") ? "<td><a class=\"btn btn-danger\" href=\"/Usuarios/Delete/" + response[i].Id + "\">Eliminar</a></td>" : "<td></td>")
+                    + "</tr>";
             }
             document.getElementById("ctU").innerHTML = inner
 

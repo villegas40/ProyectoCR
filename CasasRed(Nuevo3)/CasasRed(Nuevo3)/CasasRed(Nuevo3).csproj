@@ -214,6 +214,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
     <Compile Include="Controllers\AsignarVendedorController.cs" />
+    <Compile Include="Controllers\CalificacionVendedorsController.cs" />
     <Compile Include="Controllers\CasaInventariosController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ComentarioController.cs" />
@@ -222,7 +223,6 @@
     <Compile Include="Controllers\CorretajesController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
     <Compile Include="Controllers\GaleriaController.cs" />
-    <Compile Include="Controllers\GastosContadurias1Controller.cs" />
     <Compile Include="Controllers\GastosContaduriasController.cs" />
     <Compile Include="Controllers\GerenteController.cs" />
     <Compile Include="Controllers\GestionsController.cs" />
@@ -301,6 +301,9 @@
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Notificaciones.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Recordatorio.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoUsuario.cs">
@@ -644,6 +647,12 @@
     <Content Include="Views\AsignarVendedor\Index.cshtml" />
     <Content Include="Views\AsignarVendedor\Create.cshtml" />
     <Content Include="Views\AsignarVendedor\Delete.cshtml" />
+    <Content Include="Views\CalificacionVendedors\Create.cshtml" />
+    <Content Include="Views\CalificacionVendedors\Delete.cshtml" />
+    <Content Include="Views\CalificacionVendedors\Details.cshtml" />
+    <Content Include="Views\CalificacionVendedors\Edit.cshtml" />
+    <Content Include="Views\CalificacionVendedors\Index.cshtml" />
+    <Content Include="Views\Vendedor\Calificaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

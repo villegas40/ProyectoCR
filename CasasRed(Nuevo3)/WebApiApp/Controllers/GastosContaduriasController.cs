@@ -97,7 +97,7 @@ namespace WebApiApp.Controllers
             {
                 return NotFound();
             }
-
+            gastosContaduria.GstCon_Fecha = DateTime.Now;
             db.GastosContaduria.Remove(gastosContaduria);
             db.SaveChanges();
 

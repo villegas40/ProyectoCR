@@ -81,6 +81,9 @@ namespace WebApiApp.Controllers
             int cliente_id, corretaje_id;
             string correo, telefono;
 
+            //Obtener los correos de los usuarios de hablitacion y contaduria
+            var usuarios = (from usu in db.Usuario where usu.usu_tipo == "2" || usu.usu_tipo == "6" select new { usu.usu_correo }).ToArray();
+
             //Objeto de Gestion
             var gestion_controller = new GestionsController();
 
@@ -113,11 +116,35 @@ namespace WebApiApp.Controllers
                                                        //telefono = cliente.Gral_Celular.ToString();
                                                        //correo = cliente.Gral_Correo;
 
+            correo = cliente.Gral_Correo;
+
+            //Actualizar status de la casa
+            if (cliente.Id_Corretaje != null)
+            {
+                Corretaje cr = db.Corretaje.Find(cliente.Id_Corretaje);
+                cr.Crt_Status = "Venta";
+                db.SaveChanges();
+            }
+
             //Funciones
             gestion_controller.CreateGestions(cliente_id, corretaje_id);
             verificacion_controller.CreateVerificacions(cliente_id);
             //sms_controller.SendSms(telefono); Estan comentadas porque cuestan dinero xd
-            //correo_controller.sendmail(correo);
+
+            //Llamado de función para enviar correo
+            if (cliente.Gral_Correo != null || cliente.Gral_Correo != "")
+            {
+                correo_controller.sendmail(correo);
+            }
+
+            //Enviar correo de alta de casa a los demás departamentos
+            foreach (var item in usuarios)
+            {
+                if (item != null)
+                {
+                    correo_controller.sendMailGestion(item.usu_correo);
+                }
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = cliente.Id }, cliente);
 
@@ -161,6 +188,14 @@ namespace WebApiApp.Controllers
             if (cliente == null)
             {
                 return NotFound();
+            }
+
+            //Actualizar el status de la casa
+            if (cliente.Id_Corretaje != null)
+            {
+                Corretaje cr = db.Corretaje.Find(cliente.Id_Corretaje);
+                cr.Crt_Status = "Disponible";
+                db.SaveChanges();
             }
 
             db.Cliente.Remove(cliente);

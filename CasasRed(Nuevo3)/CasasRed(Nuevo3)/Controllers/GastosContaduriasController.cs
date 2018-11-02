@@ -42,6 +42,8 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: GastosContadurias/Details/5
         public ActionResult Details(int? idcontaduria)
         {
+            //Perdon por mis listas , para soporte $$ skype: jose.armando316 
+
             if (idcontaduria == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -104,6 +106,16 @@ namespace CasasRed_Nuevo3_.Controllers
             List<int?> IDSCORRETAJEA = new List<int?>();
             List<int?> IDSUAURIOSA = new List<int?>();
 
+            //Listas para contaduria
+            List<int?> IDSCC = new List<int?>();
+            List<String> GSTCON_CONCECC = new List<string>();
+            List<decimal?> GSTCON_MONTOCC = new List<decimal?>();
+            List<String> GSTCON_DESCRIPCIONCC = new List<string>();
+            List<DateTime?> GSTCON_FECHACC = new List<DateTime?>();
+            List<int?> IDSCORRETAJECC = new List<int?>();
+            List<int?> IDSUAURIOSCC = new List<int?>();
+
+
             //Listas para inventarios
             //ic.ci_Id,ic.ci_articulo_id,ic.ci_cantidadAsignada,ic.ci_corretaje_id,e.ext_precioUnitario
             List<int?> IDCI = new List<int?>();
@@ -138,7 +150,7 @@ namespace CasasRed_Nuevo3_.Controllers
                               IDSCORRETAJEG.Add(item.Id_Corretaje);
                               IDSUAURIOSG.Add(item.Id_Usuario);
                         }
-                        else if (item2.tipusu_descricion == "corretaje") 
+                        else if (item2.tipusu_descricion == "Corretaje") 
                         {
                             IDSC.Add(item.Id);
                             GSTCON_CONCEC.Add(item.GstCon_Concepto);
@@ -147,6 +159,16 @@ namespace CasasRed_Nuevo3_.Controllers
                             GSTCON_FECHAC.Add(item.GstCon_Fecha);
                             IDSCORRETAJEC.Add(item.Id_Corretaje);
                             IDSUAURIOSC.Add(item.Id_Usuario);
+                        }
+                        else if(item2.tipusu_descricion=="Contabilidad")
+                        {
+                            IDSCC.Add(item.Id);
+                            GSTCON_CONCECC.Add(item.GstCon_Concepto);
+                            GSTCON_MONTOCC.Add(item.GstCon_Monto);
+                            GSTCON_DESCRIPCIONCC.Add(item.GstCon_Descripcion);
+                            GSTCON_FECHACC.Add(item.GstCon_Fecha);
+                            IDSCORRETAJECC.Add(item.Id_Corretaje);
+                            IDSUAURIOSCC.Add(item.Id_Usuario);
                         }
                         else
                         {
@@ -161,12 +183,17 @@ namespace CasasRed_Nuevo3_.Controllers
                     }
                 }
             }
+
             //Inventario desgloce ? , asi como total del inventario
             //var Usuarios = (from u in db.Usuario join t in db.TipoUsuario on u.Id_TipoUsiario equals t.Id select new { u.Id, t.tipusu_descricion }).ToList();
-            var Inventarios = (from ic in db.CasaInventario join e in db.Existencias on ic.ci_articulo_id equals e.ext_art_id where ic.ci_corretaje_id == idcorretaje select new {ic.ci_Id,ic.ci_articulo_id,ic.ci_cantidadAsignada,ic.ci_corretaje_id,e.ext_precioUnitario}).ToList();
+            var Inventarios = (from ic in db.CasaInventario 
+                               join ha in db.HistorialAsignacion on ic.ci_Id equals ha.ha_casaInventario
+                               join e in db.Existencias on ha.ha_existencia_id equals e.Id
+                               where ic.ci_corretaje_id == idcorretaje
+                               select new { ic.ci_Id, ic.ci_articulo_id, ic.ci_cantidadAsignada, ic.ci_corretaje_id, e.ext_precioUnitario }).ToList();
             decimal preciototal = 0;
             foreach (var item in Inventarios)
-            {
+            {  
                 preciototal += (decimal)item.ext_precioUnitario * item.ci_cantidadAsignada;
                 IDCI.Add(item.ci_Id);
                 CI_ARTICULO_ID.Add(item.ci_articulo_id);
@@ -175,7 +202,14 @@ namespace CasasRed_Nuevo3_.Controllers
                 EXT_PRECIOUNITARIO.Add(item.ext_precioUnitario);                
             }
 
-            //Hacer las viewbag de todas las listas >:V
+            //Inventario
+            ViewBag.PRECIOTOTAL = preciototal;
+            ViewBag.IDCI = IDCI;
+            ViewBag.CIR_ARTICULO_ID = CI_ARTICULO_ID;
+            ViewBag.CI_CANTIDADASIGNADA = CI_CANTIDADASIGNADA;
+            ViewBag.CI_CORRETAJE_ID = CI_CORRETAJE_ID;
+            ViewBag.EXT_PRECIOUNITARIO = EXT_PRECIOUNITARIO;
+
             
             //GESTION
             ViewBag.IDSG = IDSG;
@@ -194,7 +228,17 @@ namespace CasasRed_Nuevo3_.Controllers
             ViewBag.GSTCON_FECHAC = GSTCON_FECHAC;
             ViewBag.IDSCORRETAJEC = IDSCORRETAJEC;
             ViewBag.IDSUSUARIOSC = IDSUAURIOSC;
+
+            //Contabilidad
             
+            ViewBag.IDSCC = IDSCC;
+            ViewBag.GSTCON_CONCECC = GSTCON_CONCECC;
+            ViewBag.GSTCON_MONTOCC = GSTCON_MONTOCC;
+            ViewBag.GSTCON_DESCRIPCIONCC = GSTCON_DESCRIPCIONCC;
+            ViewBag.GSTCON_FECHACC = GSTCON_FECHACC;
+            ViewBag.IDSCORRETAJECC = IDSCORRETAJECC;
+            ViewBag.IDSUSUARIOSCC = IDSUAURIOSCC;
+
             //Administrador
             ViewBag.IDSA= IDSA;
             ViewBag.GSTCON_CONCEA = GSTCON_CONCEA;
@@ -240,6 +284,7 @@ namespace CasasRed_Nuevo3_.Controllers
             public List<Habilitacion> habilitacions = new List<Habilitacion>();
             public List<Usuario> usuarios = new List<Usuario>();
             public List<TipoUsuario> tipoUsuarios = new List<TipoUsuario>();
+            
             //Inventario
             public List<CasaInventario> casaInventarios = new List<CasaInventario>();
             public List<Existencias> existencias = new List<Existencias>();
@@ -255,7 +300,7 @@ namespace CasasRed_Nuevo3_.Controllers
 
             //Selectlist conceptos de Corretaje
             var listaCorr = new SelectList(new[] {
-                new {value = "No seleccionado", text = "Seleccione un concepto...."},
+                new {value = "-", text = "Seleccione un concepto...."},
                 new {value = "CESPT", text = "CESPT"},
                 new {value = "CFE", text = "CFE"},
                 new {value = "Otros", text = "Otros"}
@@ -263,31 +308,32 @@ namespace CasasRed_Nuevo3_.Controllers
 
             //Selectlist conceptos de Gestion
             var listaGest= new SelectList(new[] {
-                new {value = "No seleccionado", text = "Seleccione un concepto...."},
+                new {value = "-", text = "Seleccione un concepto...."},
                 new {value = "Escrituras", text = "Escrituras"},
                 new {value = "Planta Cartográfica", text = "Planta Cartográfica"},
                 new {value = "Acta de Nacimiento", text = "Acta de Nacimiento"},
-                new {value = "Solicitud de Retención de Infonavit", text = "Solicitud de Retención de Infonavit"},
+                new {value = "Número Oficial", text = "Solicitud de Retención de Infonavit"},
                 new {value = "Certificado de Hipoteca", text = "Certificado de Hipoteca"},
                 new {value = "Certificado de Fiscal", text = "Certificado de Fiscal"},
-                new {value = "Sol Estado", text = "Sol Estado"},
+                new {value = "Solicitud Estado", text = "Solicitud Estado"},
                 new {value = "Junta URBI", text = "Junta URBI"},
                 new {value = "Certificado Cartográfico", text = "Certificado Cartográfico"},
                 new {value = "Avalúo", text = "Avalúo"},
                 new {value = "Notaría", text = "Notaría"},
                 new {value = "Firma Escituras", text = "Firma Escituras"},
+                new {value = "Gestión Infonavit", text = "Gestión Infonavit"},
                 new {value = "Otros", text = "Otros"}
             }, "value", "text", 0);
 
             //Selectlist Administrador
             var listaAdmin = new SelectList(new[] {
-                new {value = "No seleccionado", text = "Seleccione un concepto...."},
+                new {value = "-", text = "Seleccione un concepto...."},
                 new {value = "CESPT", text = "CESPT"},
                 new {value = "CFE", text = "CFE"},
                 new {value = "Escrituras", text = "Escrituras"},
                 new {value = "Planta Cartográfica", text = "Planta Cartográfica"},
                 new {value = "Acta de Nacimiento", text = "Acta de Nacimiento"},
-                new {value = "Solicitud de Retención de Infonavit", text = "Solicitud de Retención de Infonavit"},
+                new {value = "Número Oficial", text = "Solicitud de Retención de Infonavit"},
                 new {value = "Certificado de Hipoteca", text = "Certificado de Hipoteca"},
                 new {value = "Certificado de Fiscal", text = "Certificado de Fiscal"},
                 new {value = "Sol Estado", text = "Sol Estado"},
@@ -296,6 +342,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 new {value = "Avalúo", text = "Avalúo"},
                 new {value = "Notaría", text = "Notaría"},
                 new {value = "Firma Escituras", text = "Firma Escituras"},
+                new {value = "Gestión Infonavit", text = "Gestión Infonavit"},
                 new {value = "Otros", text = "Otros"}
             }, "value", "text", 0);
 
@@ -304,7 +351,7 @@ namespace CasasRed_Nuevo3_.Controllers
                 new {value = "No seleccionado", text = "Seleccione un concepto...."},
                 new {value = "Vigilancia", text = "Vigilancia"},
                 new {value = "Devol. Mensualidades", text = "Devol. Mensualidades"},
-                new {value = "M.", text = "M."},
+                new {value = "Mano de Obra", text = "Mano de Obra"},
                 new {value = "Otros", text = "Otros"}
             }, "value", "text", 0);
 
@@ -417,9 +464,10 @@ namespace CasasRed_Nuevo3_.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             GastosContaduria gastosContaduria = db.GastosContaduria.Find(id);
+            int? idc = gastosContaduria.Id_Corretaje;
             db.GastosContaduria.Remove(gastosContaduria);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/GastosContadurias/Index/" + idc);
         }
 
         protected override void Dispose(bool disposing)

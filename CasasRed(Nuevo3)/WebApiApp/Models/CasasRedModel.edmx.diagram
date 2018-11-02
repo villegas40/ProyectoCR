@@ -4,11 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="55a4f8d1e5194f768c30074b1da51939" Name="Diagram1" ZoomLevel="55">
+      <Diagram DiagramId="55a4f8d1e5194f768c30074b1da51939" Name="Diagram1" ZoomLevel="41">
         <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="4.375" PointY="2.875" />
         <EntityTypeShape EntityType="CasasRedModel.CalificacionVendedor" Width="1.5" PointX="20.875" PointY="14.75" />
         <EntityTypeShape EntityType="CasasRedModel.CasaInventario" Width="1.5" PointX="6.625" PointY="4.375" />
-        <EntityTypeShape EntityType="CasasRedModel.Cliente" Width="1.5" PointX="17.875" PointY="4.125" />
         <EntityTypeShape EntityType="CasasRedModel.Comentarios" Width="1.5" PointX="20.125" PointY="22.125" />
         <EntityTypeShape EntityType="CasasRedModel.Comision" Width="1.5" PointX="9.625" PointY="8.75" />
         <EntityTypeShape EntityType="CasasRedModel.Contaduria" Width="1.5" PointX="14.875" PointY="8.25" />
@@ -34,12 +33,6 @@
         <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_co__7CA47C3F" />
         <AssociationConnector Association="CasasRedModel.FK__CasaInven__ci_us__7D98A078" />
         <AssociationConnector Association="CasasRedModel.FK__Historial__ha_ca__04459E07" />
-        <AssociationConnector Association="CasasRedModel.FK_Cliente_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_ComentClie_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_CrtCasa_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_GralUsuario_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_GralVendedor_Id" />
-        <AssociationConnector Association="CasasRedModel.FK_GtnCli_Id" />
         <AssociationConnector Association="CasasRedModel.FK_CmsCorretaje_Id" />
         <AssociationConnector Association="CasasRedModel.FK_CmsUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_DCmsComision_Id" />
@@ -64,6 +57,16 @@
         <AssociationConnector Association="CasasRedModel.FK_TipoUsuario_Id" />
         <AssociationConnector Association="CasasRedModel.FK_VrfUsu_Id" />
         <AssociationConnector Association="CasasRedModel.FK_VndAsigVendedor_Id" />
+        <EntityTypeShape EntityType="CasasRedModel.Cliente" Width="1.5" PointX="17.875" PointY="3" />
+        <AssociationConnector Association="CasasRedModel.FK_Cliente_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_ComentClie_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_CrtCasa_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_GralUsuario_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_GralVendedor_Id" />
+        <AssociationConnector Association="CasasRedModel.FK_GtnCli_Id" />
+        <EntityTypeShape EntityType="CasasRedModel.Recordatorio" Width="1.5" PointX="25.375" PointY="8.625" />
+        <AssociationConnector Association="CasasRedModel.FK_RcdGestion" />
+        <AssociationConnector Association="CasasRedModel.FK_RcdUsuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

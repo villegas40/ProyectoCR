@@ -1,0 +1,33 @@
+﻿@model CasasRed_Nuevo3_.Models.Vendedor
+
+@{
+    ViewBag.Title = "Asesores > Calificaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Calificaciones</h2>
+<center><h3>Calificacion de Vendedores</h3></center>
+
+<br />
+<div class="container">
+    <table class="table table-bordered table-responsive-lg">
+        <thead>
+            <tr>
+                <td><b>Vendedor</b></td>
+                <td><b>Calificación</b></td>
+            </tr>
+        </thead>
+        <tbody>
+           
+           @foreach (var item in ViewBag.Vendedores)
+           {
+            <tr>
+                <td>@item.Vendedor</td>
+                <td>@item.Calificacion</td>
+            </tr>
+           }
+            
+        </tbody>
+    </table>
+
+</div>

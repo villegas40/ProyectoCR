@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CasasRed_Nuevo3_.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -78,6 +79,12 @@ namespace WebApiApp.Controllers
         {
             int corretaje_id;
 
+            //Objeto para acceder a los metodos de correo
+            var correo_controller = new CorreoController();
+
+            //Obtener los correos de los usuarios de hablitacion y contaduria
+            var usuarios = (from usu in db.Usuario where usu.usu_tipo == "4" || usu.usu_tipo == "5" select new { usu.usu_correo }).ToArray();
+
             //Habilitacion
             //var habilitacion = new Habilitacion();
             var habilitacion_controller = new HabilitacionsController();
@@ -91,7 +98,8 @@ namespace WebApiApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            //Borrar si no sirve
+            //Fecha de alta del la casa al sistema
+            corretaje.Crt_FechaAlta = DateTime.Now;
 
             db.Corretaje.Add(corretaje);
             db.SaveChanges();
@@ -102,6 +110,15 @@ namespace WebApiApp.Controllers
             //Funciones
             habilitacion_controller.CreateHabilitacions(corretaje_id);
             contadiria_controller.CreateContadurias(corretaje_id);
+
+            //Enviar correo de alta de casa a los demás departamentos
+            foreach (var item in usuarios)
+            {
+                if (item != null)
+                {
+                    correo_controller.sendMailCorretaje(item.usu_correo);
+                }
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = corretaje.Id }, corretaje);
         }

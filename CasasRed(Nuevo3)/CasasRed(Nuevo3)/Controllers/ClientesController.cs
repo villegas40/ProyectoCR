@@ -138,7 +138,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Id_Corretaje,Gral_ProgresoForm,Grlal_Folio,Id_Vendedor,Id_Usuario")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Id_Corretaje,Gral_ProgresoForm,Grlal_Folio,Id_Vendedor,Id_Usuario,Gral_CuentaInfonavit,Gral_ClaveInfonavit,Gral_NoExpediente")] Cliente cliente)
         {
             int cliente_id;
             int corretaje_id;
@@ -278,7 +278,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Id_Corretaje,Gral_ProgresoForm,Id_Usuario, Grlal_Folio,Id_Vendedor")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "Id,Gral_Nombre,Gral_Apellidopa,Gral_Apellidoma,Gral_Fechanac,Gral_Nss,Gral_Curp,Gral_Rfc,Gral_Lugarnac,Gral_Calle,Gral_Numero,Gral_Cp,Gral_Colonia,Gral_Municipio,Gral_Estado,Gral_Celular,Gral_Tel_casa,Gral_Estado_civil,Gral_Regimen_matrimonial,Gral_Ocupacion,Gral_Teltrabajo,Gral_Correo,Gral_Identificacion,Gral_No_identificacion,Gral_Ref_nombre1,Gral_Ref_cel_1,Gral_Ref_nombre2,Gral_Ref_cel_2,Cyg_Nombre,Cyg_Apellidopa,Cyg_Apellidoma,Gyg_Fechanac,Cyg_Nss,Cyg_Curp,Cyg_Rfc,Cyg_Lugarnac,Cyg_Celular,Cyg_Tel_casa,Cyg_Ocupacion,Cyg_Tel_trabajo,Cyg_Correo,Cyg_Identificacion,Cyg_No_identificacoion,Gral_Fechaalta,Id_Corretaje,Gral_ProgresoForm,Id_Usuario, Grlal_Folio,Id_Vendedor,Gral_CuentaInfonavit,Gral_ClaveInfonavit,Gral_NoExpediente")] Cliente cliente)
         {
             //SelectList para seleccionar casa
             //List<SelectListItem> idCasa = new List<SelectListItem>();
@@ -393,18 +393,55 @@ namespace CasasRed_Nuevo3_.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult BuscarCliente(string filtro = "", int pagina = 1, int registrosPagina = 15)
+        public JsonResult BuscarCliente(string filtro = "", int pagina = 1, int registrosPagina = 15,int mes = 0,int ano = 0)
         {
-            if (filtro == "")
+            //todos
+            if (filtro == "" && mes == 0 && ano == 0)
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Cliente.Count() / registrosPagina);
                 var busqueda = (from a in db.Cliente select new { progeso = a.Gral_ProgresoForm,a.Id_Corretaje,a.Id, direccion = (a.Corretaje.Crt_Direccion == null) ? "Casa no asignada" :a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
-            else
+            //solo filtro
+            else if(filtro != "" && mes == 0 && ano == 0)
             {
                 int totalPaginas = (int)Math.Ceiling((double)(from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
-                var busqueda = (from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select new { progeso = a.Gral_ProgresoForm,a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) || a.Gral_Fechaalta.Value.Month.Equals(mes) select new { progeso = a.Gral_ProgresoForm,a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //solo mes sin año y sin filtro
+            else if(mes != 0 && filtro == "" && ano == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) || a.Gral_Fechaalta.Value.Month.Equals(mes) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Cliente where a.Gral_Fechaalta.Value.Month.Equals(mes) select new { progeso = a.Gral_ProgresoForm, a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //solo ano sin mes y sin filtro
+            else if (ano != 0 && filtro=="" && mes == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) || a.Gral_Fechaalta.Value.Month.Equals(mes) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Cliente where a.Gral_Fechaalta.Value.Year.Equals(ano) select new { progeso = a.Gral_ProgresoForm, a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //ano y filtro sin mes 
+            else if(ano != 0 && filtro !="" && mes == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) || a.Gral_Fechaalta.Value.Month.Equals(mes) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Cliente where ((a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro)) && a.Gral_Fechaalta.Value.Year.Equals(ano) select new { progeso = a.Gral_ProgresoForm, a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //mes y filtro sin a;o
+            else if(filtro != "" && mes != 0 && ano == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) || a.Gral_Fechaalta.Value.Month.Equals(mes) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Cliente where ((a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro)) && a.Gral_Fechaalta.Value.Month.Equals(mes) select new { progeso = a.Gral_ProgresoForm, a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //todos juntos <3
+            else
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Cliente where (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) || a.Gral_Fechaalta.Value.Month.Equals(mes) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Cliente where ((a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro)) && a.Gral_Fechaalta.Value.Month.Equals(mes) && a.Gral_Fechaalta.Value.Year.Equals(ano) select new { progeso = a.Gral_ProgresoForm, a.Id_Corretaje, a.Id, direccion = a.Corretaje.Crt_Direccion, cliente = (a.Gral_Nombre + " " + a.Gral_Apellidopa + " " + a.Gral_Apellidoma), fecha = SqlFunctions.DateName("year", a.Gral_Fechaalta).Trim() + "/" + SqlFunctions.StringConvert((double)a.Gral_Fechaalta.Value.Month).TrimStart() + "/" + SqlFunctions.DateName("day", a.Gral_Fechaalta).Trim(), total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

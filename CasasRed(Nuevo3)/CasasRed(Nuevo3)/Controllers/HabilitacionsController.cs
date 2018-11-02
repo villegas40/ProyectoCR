@@ -120,6 +120,7 @@ namespace CasasRed_Nuevo3_.Controllers
 
             if (ModelState.IsValid)
             {
+                habilitacion.Hbt_FechaAlta = DateTime.Now;
                 db.Habilitacion.Add(habilitacion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -268,7 +269,8 @@ namespace CasasRed_Nuevo3_.Controllers
                 Hbt_Ventanas = false,
                 Id_Corretaje = corretaje_id,
                 Hbt_ProgresoForm = 0,
-                Hbt_Cableado = false
+                Hbt_Cableado = false,
+                Hbt_FechaAlta = DateTime.Now,
             };
 
             CS.Habilitacion.Add(hab_obj);

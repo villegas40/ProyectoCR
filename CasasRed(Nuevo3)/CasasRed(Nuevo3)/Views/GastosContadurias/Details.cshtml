@@ -18,6 +18,14 @@
     List<DateTime?> GSTCON_FECHAC = ViewBag.GSTCON_FECHAC;
     List<int?> IDSCORRETAJEC = ViewBag.IDSCORRETAJEC;
     List<int?> IDSUSUARIOSC = ViewBag.IDSUSUARIOSC;
+    //Contabilidad
+    List<int?> IDSCC = ViewBag.IDSCC;
+    List<String> GSTCON_CONCECC = ViewBag.GSTCON_CONCECC;
+    List<decimal?> GSTCON_MONTOCC = ViewBag.GSTCON_MONTOCC;
+    List<String> GSTCON_DESCRIPCIONCC = ViewBag.GSTCON_DESCRIPCIONCC;
+    List<DateTime?> GSTCON_FECHACC = ViewBag.GSTCON_FECHACC;
+    List<int?> IDSCORRETAJECC = ViewBag.IDSCORRETAJECC;
+    List<int?> IDSUSUARIOSCC = ViewBag.IDSUSUARIOSCC;
 
     //gestion
     List<int?> IDSG = ViewBag.IDSG;
@@ -35,21 +43,37 @@
     List<DateTime?> GSTCON_FECHAA = ViewBag.GSTCON_FECHAA;
     List<int?> IDSCORRETAJEA = ViewBag.IDSCORRETAJEA;
     List<int?> IDSUSUARIOSA = ViewBag.IDSUSUARIOSA;
-
+    //Inventario
+    List<int?> IDCI = ViewBag.IDCI;
+    List<string>CIR_ARTICULO_ID = ViewBag.CIR_ARTICULO_ID;
+    List<decimal>CI_CANTIDADASIGNADA = ViewBag.CI_CANTIDADASIGNADA;
+    List<int?>CI_CORRETAJE_ID = ViewBag.CI_CORRETAJE_ID;
+    List<decimal?> EXT_PRECIOUNITARIO = ViewBag.EXT_PRECIOUNITARIO;
 
 
     int idcontaduria = 0;
+    decimal? sumainventario = ViewBag.PRECIOTOTAL;
     decimal? sumat = 0;
     decimal? sumag = 0;
     decimal? sumac = 0;
+    decimal? sumacc = 0;
     decimal? sumaa = 0;
+
 }
 @foreach (var item in Model.contadurias)
 {
     idcontaduria = item.Id;
+    //@ViewBag.GastoMaterial   AQUI ESTA EL GASTO TOTAL DEL MATERIAL
 }
 
+
 <h2>Gastos contaduria del registro @idcontaduria</h2>
+<style>
+    ul {
+        text-align: left;
+    }
+   
+</style>
 <div class="container">
    <center>
      <div class="row">
@@ -57,7 +81,8 @@
     <table class="table tab-content table-responsive-lg">
     <thead>
         <tr>
-            <td>Gasto Asignado</td>
+      <td>Gasto Asignado</td>
+            <td></td>
         </tr>
         <tr>
             <td>
@@ -73,11 +98,11 @@
         {
             <tr>
                 <td>
-                    Prguntar:
+                    Preguntar:
                 </td>
                 <td>
                    
-                    $ @item.Cnt_M_Preguntar
+                    $ @item.Cnt_M_Preguntar.Value.ToString("N2")
                 </td>
             </tr>
             <tr>
@@ -85,7 +110,7 @@
                     Material:
                 </td>
                 <td>
-                    $ @ViewBag.GastoMaterial
+                    $ @item.Cnt_Material.Value.ToString("N2")
                 </td>
             </tr>
             <tr>
@@ -93,13 +118,13 @@
                     CFE
                 </td>
                 <td>
-                    $@item.Cnt_CFE
+                    $@item.Cnt_CFE.Value.ToString("N2")
                 </td>
             </tr>
             <tr>
                 <td>CESPT</td>
                 <td>
-                    $@item.Cnt_CESPT
+                    $@item.Cnt_CESPT.Value.ToString("N2")
                 </td>
             </tr>
             <tr>
@@ -107,7 +132,7 @@
                     Devolucion mensual
                 </td>
                 <td>
-                    $@item.Cnt_DevMensualidad
+                    $@item.Cnt_DevMensualidad.Value.ToString("N2")
                 </td>
             </tr>
             <tr>
@@ -115,13 +140,13 @@
                     Tramites
                 </td>
                 <td>
-                    $@item.Cnt_Tramites
+                    $@item.Cnt_Tramites.Value.ToString("N2")
                 </td>
             </tr>
             <tr>
                 <td>Vigilancia</td>
                 <td>
-                    $@item.Cnt_Vigilancia
+                    $@item.Cnt_Vigilancia.Value.ToString("N2")
                 </td>
             </tr>
         }
@@ -130,95 +155,109 @@
     </table>
        </div>
          <div class="col">
-             <table class="table tab-content table-responsive-lg">
-                 <thead>
-                     <tr>
-                         <td>
-                             Gasto real
-                         </td>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     @foreach (var item in Model.contadurias)
+             <b><p>Gasto Real</p></b>
+             <b><p>Administrador</p></b>
+             @foreach (var item in Model.contadurias)
+             {
+                 idcontaduria = item.Id;
+                 for (int i = 0; i < IDS.Count; i++)
+                 {
+                     if (item.Id_Corretaje == IDSCORRETAJE[i])
                      {
-                         idcontaduria = item.Id;
-                         for (int i = 0; i < IDS.Count; i++)
-                         {
-                             if (item.Id_Corretaje == IDSCORRETAJE[i])
-                             {
-                                 sumat = sumat + GSTCON_MONTO[i];
-                             }
-                         }
-                         <tr>
-                     <td>Administrador</td>
-                     
-                         @for (int i = 0; i < IDSA.Count; i++)
-                         {
-                             if (item.Id_Corretaje == IDSCORRETAJEA[i])
-                             {
-                                 sumaa = sumaa + GSTCON_MONTOA[i];
-                                 
-                                 <td>
-                                         @GSTCON_CONCEA[i] :
-                                        $ @GSTCON_MONTOA[i]
-                                </td>
-                             }
-                         }
-                             <td>
-                                $ @sumaa
-                             </td>
-                     </tr>
-                         
-                         <tr><td>Corretaje</td>
-                        @for (int i = 0; i < IDSC.Count; i++)
-                         {
-                             if (item.Id_Corretaje == IDSCORRETAJEC[i])
-                             {
-                                 sumac = sumac + GSTCON_MONTOC[i];
-                              
-                                     <td>
-                                         @GSTCON_CONCEC[i] :
-                                        $ @GSTCON_MONTOC[i]
-                                     </td>
-                                
-
-
-                             }
-
-                         }
-                      <td>$ @sumac</td>
-                     </tr>
-                        
-                         <tr><td>Gestion</td>
-                         @for (int i = 0; i < IDSG.Count; i++)
-                         {
-                             if (item.Id_Corretaje == IDSCORRETAJEG[i])
-                             {
-                                 sumag = sumag + GSTCON_MONTOG[i];
-                                
-                                     <td>
-                                         @GSTCON_CONCEG[i] :
-                                        $ @GSTCON_MONTOG[i]
-                                     </td>
-                             
-
-
-                             }
-                         }
-                     <td>@sumag</td>
-                     </tr>
-                        
-                         <tr>
-                             <td>
-                                 Suma total: $ @sumat
-                             </td></tr>
-                         
+                         sumat = sumat + GSTCON_MONTO[i];
                      }
-                 </tbody>
-             
+                 }
 
-             </table>
-         </div>
+                 <ul>
+                     @for (int i = 0; i < IDSA.Count; i++)
+                     {
+                         if (item.Id_Corretaje == IDSCORRETAJEA[i])
+                         {
+                             sumaa = sumaa + GSTCON_MONTOA[i];
+
+
+                             <li>
+                                 @GSTCON_CONCEA[i] :
+                                 $ @GSTCON_MONTOA[i].Value.ToString("N2")
+                             </li>
+                         }
+                     }
+                 </ul>
+                 <p>Subtotal: $@sumaa.Value.ToString("N2")</p>
+                <b> <p>Corretaje</p></b>
+                 <ul>
+                     @for (int i = 0; i < IDSC.Count; i++)
+                     {
+                         if (item.Id_Corretaje == IDSCORRETAJEC[i])
+                         {
+                             sumac = sumac + GSTCON_MONTOC[i];
+
+                             <li>
+                                 @GSTCON_CONCEC[i] :
+                                 $ @GSTCON_MONTOC[i].Value.ToString("N2")
+                             </li>
+
+
+                         }
+
+                     }
+                 </ul>
+                 <p>Subtotal: $ @sumac.Value.ToString("N2")</p>
+                 <b><p>Gestion</p></b>
+                 <ul>
+                     @for (int i = 0; i < IDSG.Count; i++)
+                     {
+                         if (item.Id_Corretaje == IDSCORRETAJEG[i])
+                         {
+                             sumag = sumag + GSTCON_MONTOG[i];
+
+                             <li>
+                                 @GSTCON_CONCEG[i] :
+                                 $ @GSTCON_MONTOG[i].Value.ToString("N2")
+                             </li>
+
+
+
+                         }
+                     }
+                 </ul>
+                 <p>Subtotal: $ @sumag.Value.ToString("N2")</p>
+                 <b><p>Contabilidad</p></b>
+                 <ul>
+                     @for (int i = 0; i < IDSCC.Count; i++)
+                     {
+                         if (item.Id_Corretaje == IDSCORRETAJECC[i])
+                         {
+                             sumacc = sumacc + GSTCON_MONTOCC[i];
+                             <li>
+                                 @GSTCON_CONCECC[i] : $ @GSTCON_MONTOCC[i].Value.ToString("N2")
+                             </li>
+                         }
+                     }
+                 </ul>
+                 <p>Subtotal: $@sumacc.Value.ToString("N2")</p>
+
+
+                 <b><p>Inventario</p></b>
+                 <ul>
+                     @for (int i = 0; i < IDCI.Count; i++)
+                     {
+                         if (item.Id_Corretaje == CI_CORRETAJE_ID[i])
+                         {
+                             <li>
+                                 @CIR_ARTICULO_ID[i] :(@CI_CANTIDADASIGNADA[i].ToString("N")) $@EXT_PRECIOUNITARIO[i].Value.ToString("N2")
+                             </li>
+                         }
+                     }
+                 </ul>
+                 <p>Subtotal: @sumainventario.Value.ToString("N2")</p>
+                 sumat = sumat + sumainventario;
+
+             }
+
+
+             <b><p>       Suma total: $ @sumat.Value.ToString("N2")</p></b>
+</div>
   </div>
        
 </center>

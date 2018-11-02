@@ -73,20 +73,39 @@ namespace CasasRed_Nuevo3_.Controllers
 
         public ActionResult DeleteDetails(int?idc,int? idg)
         {
-            if (Session["Usuario"] == null)
+            if (idc == null && idg == null)
             {
-                return RedirectToAction("Index", "Home");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else if (Session["Tipo"].ToString() == "Gestion" || Session["Tipo"].ToString() == "Administrador")
+            if (idg == 0)
             {
-                return View(db.Articulos.ToList());
+                DetailsViewModel kappa1 = new DetailsViewModel();
+                kappa1.corretajes.Add(db.Corretaje.Find(idc));
+                kappa1.habilitacions = (db.Habilitacion.ToList());
+                return View(kappa1);
             }
-            else
+            DetailsViewModel kappa = new DetailsViewModel();
+            kappa.corretajes.Add(db.Corretaje.Find(idc));
+            kappa.gestions.Add(db.Gestion.Find(idg));
+            kappa.verificacions = (db.Verificacion.ToList());
+            kappa.habilitacions = db.Habilitacion.ToList();
+            var xd = ((from x in db.Verificacion select new { x.Id, x.Vfn_Trato_asesor, x.Id_Cliente }).ToList());
+
+            List<int?> idv = new List<int?>();
+            List<int?> vfntrato = new List<int?>();
+            List<int?> IDclien = new List<int?>();
+            foreach (var test3 in xd)
             {
-                string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
-                return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
+                idv.Add(test3.Id);
+                vfntrato.Add(test3.Vfn_Trato_asesor);
+                IDclien.Add(test3.Id_Cliente);
             }
-            
+
+            ViewBag.idvs = idv;
+            ViewBag.vfntratos = vfntrato;
+            ViewBag.idcliente = IDclien;
+            return View(kappa);
+
         }
 
         // GET: Clientes/Delete/5
@@ -474,7 +493,7 @@ namespace CasasRed_Nuevo3_.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edith([Bind(Include = "Id,Hbt_Puertas,Hbt_Chapas,Hbt_Marcos_puertas,Hbt_Bisagras,Hbt_Taza,Hbt_Lavamanos,Hbt_Bastago,Hbt_Chapeton,Hbt_Maneral,Hbt_Regadera_completa,Hbt_Kit_lavamanos,Hbt_Kit_taza,Hbt_Rosetas,Hbt_Apagador_sencillo,Hbt_Conector_sencillo,Hbt_Apagador_doble,Hbt_Conector_apagador,Hbt_Domo,Hbt_Ventanas,Hbt_Cableado,Hbt_Calibre_cableado,Hbt_Break_interior,Hbt_Break_medidor,Hbt_Pinturas,Hbt_AvisoSusp,Id_Corretaje, Hbt_ProgresoForm,Id_Usuario,Hbt_StatusCasa")] Habilitacion habilitacion)
+        public ActionResult Edith([Bind(Include = "Id,Hbt_Puertas,Hbt_Chapas,Hbt_Marcos_puertas,Hbt_Bisagras,Hbt_Taza,Hbt_Lavamanos,Hbt_Bastago,Hbt_Chapeton,Hbt_Maneral,Hbt_Regadera_completa,Hbt_Kit_lavamanos,Hbt_Kit_taza,Hbt_Rosetas,Hbt_Apagador_sencillo,Hbt_Conector_sencillo,Hbt_Apagador_doble,Hbt_Conector_apagador,Hbt_Domo,Hbt_Ventanas,Hbt_Cableado,Hbt_Calibre_cableado,Hbt_Break_interior,Hbt_Break_medidor,Hbt_Pinturas,Hbt_AvisoSusp,Id_Corretaje, Hbt_ProgresoForm,Id_Usuario,Hbt_StatusCasa,Hbt_StatusCasa,Hbt_FchEntrega")] Habilitacion habilitacion)
         {
             habilitacion.Hbt_Puertas = (habilitacion.Hbt_Puertas == null) ? false : habilitacion.Hbt_Puertas;
             habilitacion.Hbt_Chapas = (habilitacion.Hbt_Chapas == null) ? false : habilitacion.Hbt_Chapas;
@@ -543,13 +562,20 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             if (continuar == true)
             {
+                //Linq para mostrar asesor asignado
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : null), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : null), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " ") }).ToList();
 
-
-                Verificacion verificacion = db.Verificacion.Find(idv);
-                if (verificacion == null)
+                foreach (var item in busqueda)
                 {
-                    return HttpNotFound();
+                    if (item.vendenombre != null)
+                    {
+                        if (item.Id == id)
+                        {
+                            ViewBag.Vendedor += item.vendenombre + " " + item.vendeapp + " " + item.vendeapm + "," + " ";
+                        }
+                    }
                 }
+
                 //Selectlist calificacion vendedor
                 var calificacion = new SelectList(new[]
                 {
@@ -568,6 +594,12 @@ namespace CasasRed_Nuevo3_.Controllers
 
                 ViewData["Calificacion"] = calificacion;
 
+                Verificacion verificacion = db.Verificacion.Find(idv);
+                if (verificacion == null)
+                {
+                    return HttpNotFound();
+                }
+ 
                 ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
                 return View(verificacion);
             }
@@ -585,7 +617,12 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Editv([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
+            int puntaje, vendedor_id;
             CalificacionVendedor calificacionVendedor = new CalificacionVendedor();
+            CalificacionVendedorsController calificacionVendedorsController;
+
+            var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : null), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : null), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), casa = a.Cliente.Id_Corretaje }).ToList();
+
             if (verificacion.Vfn_Persona_fisica == null) verificacion.Vfn_Persona_fisica = false;
             if (verificacion.Vfn_Visto_persona == null) verificacion.Vfn_Visto_persona = false;
             if (verificacion.Vfn_Tiempo_estimado == null) verificacion.Vfn_Tiempo_estimado = false;
@@ -595,13 +632,21 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 db.Entry(verificacion).State = EntityState.Modified;
                 db.SaveChanges();
-                //Guardar la calificacion del vendedor asignado a cliente
-                if (verificacion.Cliente.Id_Vendedor.HasValue != false)
+
+                //var corretaje_id = from a in db.Verificacion where a.Id_Cliente == a.Cliente.Id select new {corretaje = a.Cliente.Id_Corretaje };
+                puntaje = verificacion.Vfn_Trato_asesor.Value;
+
+                foreach (var item in busqueda)
                 {
-                    calificacionVendedor.Id_Vendedor = verificacion.Cliente.Id_Vendedor;
-                    calificacionVendedor.DVndr_Puntaje = verificacion.Vfn_Trato_asesor;
-                    db.CalificacionVendedor.Add(calificacionVendedor);
-                    db.SaveChanges();
+                    if (item.vendenombre != null)
+                    {
+                        if (item.Id == verificacion.Id)
+                        {
+                            vendedor_id = item.idven.Value;
+                            calificacionVendedorsController = new CalificacionVendedorsController();
+                            calificacionVendedorsController.CalificacionVendedor(item.casa.Value, puntaje, vendedor_id);
+                        }
+                    }
                 }
                 return Redirect("/Gerente/Index");
             }

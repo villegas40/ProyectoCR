@@ -251,6 +251,7 @@
     <Compile Include="Controllers\CorretajesController.cs" />
     <Compile Include="Controllers\DetallesComisionsController.cs" />
     <Compile Include="Controllers\ExistenciasController.cs" />
+    <Compile Include="Controllers\FotosHabilitacionsController.cs" />
     <Compile Include="Controllers\GastosContaduriasController.cs" />
     <Compile Include="Controllers\GestionsController.cs" />
     <Compile Include="Controllers\HabilitacionsController.cs" />
@@ -330,6 +331,9 @@
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Notificaciones.cs">
+      <DependentUpon>CasasRedModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Recordatorio.cs">
       <DependentUpon>CasasRedModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoUsuario.cs">

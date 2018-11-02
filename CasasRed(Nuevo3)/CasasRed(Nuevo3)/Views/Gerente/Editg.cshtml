@@ -121,7 +121,7 @@
                                 @*@Html.EditorFor(model => model.Gtn_IFE_Copia)*@
                                 @*@Html.TextBoxFor(model => model.Gtn_IFE_Copia, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck7", @oninput = "this.value = this.checked" })*@
                                 <input id="customCheck7" class="custom-control-input data" name="Gtn_IFE_Copia" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_IFE_Copia.Value ? "checked=\"checked\"" : "") />
-                                <label class="custom-control-label" for="customCheck7">Copia del IFE</label>
+                                <label class="custom-control-label" for="customCheck7">Copia del IFE al 200%</label>
                                 @Html.ValidationMessageFor(model => model.Gtn_IFE_Copia, "", new { @class = "text-danger" })
                             </div>
                         </div>

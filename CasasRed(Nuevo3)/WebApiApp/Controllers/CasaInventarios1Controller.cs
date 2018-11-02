@@ -80,7 +80,8 @@ namespace WebApiApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            //Fecha por Default
+            casaInventario.ci_fecha = DateTime.Now;
             db.CasaInventario.Add(casaInventario);
             db.SaveChanges();
 

@@ -1,0 +1,51 @@
+﻿@model CasasRed_Nuevo3_.Models.CalificacionVendedor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CalificacionVendedor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DVndr_Puntaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DVndr_Puntaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Vendedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Vendedor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Corretaje.Crt_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Corretaje.Crt_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendedor.Vndr_Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendedor.Vndr_Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

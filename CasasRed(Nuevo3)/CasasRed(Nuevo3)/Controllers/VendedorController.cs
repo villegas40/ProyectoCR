@@ -23,7 +23,6 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else if (Session["Tipo"].ToString() == "Corretaje" || Session["Tipo"].ToString() == "Administrador" || Session["Tipo"].ToString() == "Gestion")
             {
-
                 DetailsViewModel VENDEDORES = new DetailsViewModel();
 
                 VENDEDORES.vendedors = db.Vendedor.ToList();
@@ -36,6 +35,30 @@ namespace CasasRed_Nuevo3_.Controllers
                 return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
             }
            
+        }
+
+
+        //Regresar Vendedores
+        public ActionResult Calificaciones()
+        {
+            //Select Trabajador.nombre, (AVG(CalTrabajador.calificacion)) from Trabajador join CalTrabajador 
+            //On CalTrabajador.id_trabajador = Trabajador.id Group By Trabajador.nombre
+            var calificaciones = (from c in db.CalificacionVendedor join v in db.Vendedor on c.Id_Vendedor equals v.Id group c by v.Vndr_Nombre + " " + v.Vndr_Apellidopa + " " + v.Vndr_Apellidoma into grp
+                                  select new CalificacionesViewModel {
+                                    Vendedor = grp.Key,
+                                    Calificacion = grp.Average(ed => ed.DVndr_Puntaje).Value
+                                }).ToList();
+
+            ViewBag.Vendedores = calificaciones;
+
+            return View();
+        }
+
+        //ModelView para Calificacion de vendedor
+        public class CalificacionesViewModel
+        {
+            public string Vendedor { get; set; }
+            public decimal Calificacion { get; set; }
         }
 
         public class DetailsViewModel

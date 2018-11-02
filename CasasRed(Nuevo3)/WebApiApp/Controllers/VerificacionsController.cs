@@ -41,6 +41,8 @@ namespace WebApiApp.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutVerificacion(int id, Verificacion verificacion)
         {
+            int puntaje, vendedor_id;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -128,7 +130,9 @@ namespace WebApiApp.Controllers
                 Vfn_Persona_fisica = false,
                 Vfn_Tiempo_estimado = false,
                 Vfn_Tiene_costo = false,
-                Vfn_Visto_persona = false
+                Vfn_Visto_persona = false,
+                Vfn_ProgresoForm = 0,
+                Vfn_Trato_asesor = 0,
             };
 
             CS.Verificacion.Add(verificacion_obj);

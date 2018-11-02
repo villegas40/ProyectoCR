@@ -82,12 +82,12 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 //Select List para estatus de casa
                 var estatus = new SelectList(new[] {
-                new { value = "No seleccionado", text = "Selecciona una opción.."},
+                new { value = "-", text = "Selecciona una opción.."},
                 new { value = "Venta", text = "Venta" },
                 new { value = "Disponible", text = "Disponible" },
                 new {value = "Cancelado",text="Cancelado"},
                 new {value = "Firmado" ,text="Firmado"}
-            }, "value", "text", 0);
+                }, "value", "text", 0);
 
                 var posicion = new SelectList(new[] {
                 new { value = 0, text = "Selecciona una opción.."},
@@ -95,12 +95,19 @@ namespace CasasRed_Nuevo3_.Controllers
                 new { value = 2, text = "Casado" },
                 new { value = 3, text = "Viudo" },
                 new { value = 4, text = "Divorciado" }
-            }, "value", "text", 0);
+                }, "value", "text", 0);
+
+                var vivienda = new SelectList(new[] {
+                    new {value = "-", text = "Seleccione una opción"},
+                    new {value = "Casa", text = "Casa"},
+                    new {value = "Departamento", text = "Departamento"}                
+                }, "value", "text", 0);
 
 
                 ViewBag.Id_Vendedor = new SelectList(db.Vendedor, "Id", "Vndr_Nombre");
                 ViewData["Vendedor"] = ViewBag.Id_Vendedor;
 
+                ViewData["Vivienda"] = vivienda;
                 ViewData["Posicion"] = posicion;
                 ViewData["Estatus"] = estatus;
            
@@ -281,10 +288,15 @@ namespace CasasRed_Nuevo3_.Controllers
                 new { value = 4, text = "Divorciado" }
             }, "value", "text", 0);
 
+            var vivienda = new SelectList(new[] {
+                    new {value = "-", text = "Seleccione una opción"},
+                    new {value = "Casa", text = "Casa"},
+                    new {value = "Departamento", text = "Departamento"}
+                }, "value", "text", 0);
+
+            ViewData["Vivienda"] = vivienda;
             ViewData["Posicion"] = posicion;
             ViewData["Estatus"] = estatus;
-
-
 
             if (id == null)
             {

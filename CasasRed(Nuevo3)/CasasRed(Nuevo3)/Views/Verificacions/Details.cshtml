@@ -1,101 +1,185 @@
 ﻿@model CasasRed_Nuevo3_.Models.Verificacion
 @{
-    ViewBag.Title = "Verificació > Detalles";
+    ViewBag.Title = "Verificación > Detalles";
 }
 
-<h2>Detalles</h2>
+<!-- En el de verificacion en el metodo de details poner el linq de editar -->
+
+<h2 id="tituloH">Detalles</h2>
 
 <div>
     <h4>Verificación</h4>
     <hr />
-    <table class="table table-bordered">
-        <tr>
-            <th>Conoce la ubicación físicamente del inmueble</th>
-            <td>
-                @if (Model.Vfn_Persona_fisica != null)
-                {
-                    if ((bool)Model.Vfn_Persona_fisica){<span class="fas fa-check"></span>}else{<span class="fas fa-times"></span>}
-                }
-                else
-                {
-                    <span class="fas fa-times"></span>
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>La ha visto por dentro personalmente</th>
-            <td>
-                @if (Model.Vfn_Visto_persona != null)
-                {
-                    if ((bool)Model.Vfn_Visto_persona)
-                    {<span class="fas fa-check"></span>}
+
+    <div id="cabeceroPrint">
+        <h5>Cliente: @Html.DisplayFor(model => model.Cliente.Gral_Nombre) @Html.DisplayFor(model => model.Cliente.Gral_Apellidopa) @Html.DisplayFor(model => model.Cliente.Gral_Apellidoma)</h5>
+        <br>
+        @if (@ViewBag.Vendedor != null)
+        {
+            <h5>Asesor: @ViewBag.Vendedor</h5>
+        }
+
+        else
+        {
+            <h5>No tiene asesor asignado.</h5>
+        }
+
+        @if (Model.Cliente.Gral_Ref_nombre1 != null)
+        {
+            <h6> Referencia 1: @Html.DisplayFor(model => model.Cliente.Gral_Ref_nombre1) - @Html.DisplayFor(model => model.Cliente.Gral_Ref_cel_1)</h6>
+        }
+
+        @if (Model.Cliente.Gral_Ref_nombre2 != null)
+        {
+            <h6> Referencia 2: @Html.DisplayFor(model => model.Cliente.Gral_Ref_nombre2) - @Html.DisplayFor(model => model.Cliente.Gral_Ref_cel_2)</h6>
+        }
+
+        @if (Model.Cliente.Gral_Ref_nombre2 == null && Model.Cliente.Gral_Ref_nombre1 == null)
+        {
+            <h6>No cuenta con referencias.</h6>
+        }
+    </div>
+    <div id="printZone">
+        <table class="table table-bordered">
+            <tr>
+                <th>¿Conoce la ubicación físicamente del inmueble?</th>
+                <td>
+                    @if (Model.Vfn_Persona_fisica != null)
+                    {
+                        <!-- if ((bool)Model.Vfn_Persona_fisica){<span class="fas fa-check"></span>}else{<span class="fas fa-times"></span>} -->
+                        <p>Sí</p>
+                    }
                     else
-                    {<span class="fas fa-times"></span>}
-                }
-                else
-                {
-                    <span class="fas fa-times"></span>
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>Le dijo el tiempo estimado de entrega y firma</th>
-            <td>
-                @if (Model.Vfn_Tiempo_estimado != null)
-                {
-                    if ((bool)Model.Vfn_Tiempo_estimado)
-                    {<span class="fas fa-check"></span>}
+                    {
+                        <!-- <span class="fas fa-times"></span> -->
+                        <p>No</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>La ha visto por dentro personalmente</th>
+                <td>
+                    @if (Model.Vfn_Visto_persona != null)
+                    {
+                        <!-- if ((bool)Model.Vfn_Visto_persona)
+                        {<span class="fas fa-check"></span>}
+                        else
+                        {<span class="fas fa-times"></span>} -->
+                        <p>Sí</p>
+                    }
                     else
-                    {<span class="fas fa-times"></span>}
-                }
-                else
-                {
-                    <span class="fas fa-times"></span>
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>¿Qué tiempo le dijo el vendedor?</th>
-            <td>@Html.DisplayFor(model => model.Vfn_Tiempo)</td>
-        </tr>
-        <tr>
-            <th>Le comentó el asesor que el proceso de trámite tiene un costo</th>
-            <td>
-                @if (Model.Vfn_Tiene_costo != null)
-                {
-                    if ((bool)Model.Vfn_Tiene_costo)
-                    {<span class="fas fa-check"></span>}
+                    {
+                        <!-- <span class="fas fa-times"></span> -->
+                        <p>No</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>Le dijo el tiempo estimado de entrega y firma</th>
+                <td>
+                    @if (Model.Vfn_Tiempo_estimado != null)
+                    {
+                        <!-- if ((bool)Model.Vfn_Tiempo_estimado)
+                        {<span class="fas fa-check"></span>}
+                        else
+                        {<span class="fas fa-times"></span>} -->
+                        <p>Sí</p>
+                    }
                     else
-                    {<span class="fas fa-times"></span>}
-                }
-                else
-                {
-                    <span class="fas fa-times"></span>
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>¿Cuál es el precio que le comentó el asesor?</th>
-            <td>@Html.DisplayFor(model => model.Vfn_Costo)</td>
-        </tr>
-        <tr>
-            <th>¿Cómo considera que fue el trato del asesor?</th>
-            <td>@Html.DisplayFor(model => model.Vfn_Trato_asesor)</td>
-        </tr>
-        <tr>
-            <th>¿Tiene alguna observación o crítica constructiva sobre la empresa y/o el vendedor?</th>
-            <td>@Html.DisplayFor(model => model.Vfn_Observaciones)</td>
-        </tr>
-    </table>
+                    {
+                        <!-- <span class="fas fa-times"></span> -->
+                        <p>No</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>¿Qué tiempo le dijo el vendedor?</th>
+                <td>
+                    @if (Model.Vfn_Tiempo != null)
+                    {
+                        @Html.DisplayFor(model => model.Vfn_Tiempo)
+                    }
+                    else
+                    {
+                        <p>No fue notificado.</p>
+                    }
+
+
+                </td>
+            </tr>
+            <tr>
+                <th>Le comentó el asesor que el proceso de trámite tiene un costo</th>
+                <td>
+                    @if (Model.Vfn_Tiene_costo != null)
+                    {
+                        <!-- if ((bool)Model.Vfn_Tiene_costo)
+                        {<span class="fas fa-check"></span>}
+                        else
+                        {<span class="fas fa-times"></span>} -->
+                        <p>Sí</p>
+                    }
+                    else
+                    {
+                        <!-- <span class="fas fa-times"></span> -->
+                        <p>No</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>¿Cuál es el precio que le comentó el asesor?</th>
+                <td>
+                    @if (Model.Vfn_Costo != null)
+                    {
+                        @Html.DisplayFor(model => model.Vfn_Costo)
+                    }
+                    else
+                    {
+                        <p>No fue notificado.</p>
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <th>¿Cómo considera que fue el trato del asesor?</th>
+                <td>
+                    @if (Model.Vfn_Trato_asesor != null)
+                    {
+                        @Html.DisplayFor(model => model.Vfn_Trato_asesor)
+                    }
+                    else
+                    {
+                        <p>No ha sido notificado.</p>
+                    }
+
+                </td>
+            </tr>
+            <tr>
+                <th>¿Tiene alguna observación o crítica constructiva sobre la empresa y/o el vendedor?</th>
+                <td>
+                    @if (Model.Vfn_Observaciones != null)
+                    {
+                        @Html.DisplayFor(model => model.Vfn_Observaciones)
+                    }
+                    else
+                    {
+                        <p>Sin observaciones.</p>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 <hr />
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class="btn btn-primary" }) | @Html.ActionLink("Regresar", "Index", null, new { @class= "btn btn-outline-secondary" })
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) | @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-secondary" })
 </p>
+
+<button id="print" class="btn btn-outline-primary" onclick="imprimirBusqueda(document.getElementById('cabeceroPrint'),document.getElementById('printZone'),document.getElementById('tituloH').textContent) "><i class="fas fa-print"></i> Imprimir</button>
+
 @*
 
-@section Scripts {
-    <script>
-        $(document.body).css('padding-top', '70px');
-    </script>
-}*@
+    @section Scripts {
+        <script>
+            $(document.body).css('padding-top', '70px');
+        </script>
+    }*@

@@ -20,6 +20,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light" id="list-DR-list" data-toggle="list" href="#list-DR" role="tab" aria-controls="DR">Datos de Referencia</a>
                     <a class="list-group-item list-group-item-action list-group-item-danger" id="list-DC-list" data-toggle="list" href="#list-DC" role="tab" aria-controls="DC">Datos de Cónyuge</a>
                     <a class="list-group-item list-group-item-action list-group-item-light" id="list-folio-list" data-toggle="list" href="#list-folio" role="tab" aria-controls="fl">Folio del cliente</a> 
+                    <a class="list-group-item list-group-item-action list-group-item-danger"id="list-IF-list"data-toggle="list"href="#list-IF"role="tab"aria-controls="IF">Cuenta Infonavit</a>
                 </div>
             </div>
             <div class="col-8">
@@ -252,19 +253,33 @@
                                     Folio asignado al cliente
                                 </tr>
                             </thead>
-                             <tbody>
-                                 <tr>
-                                     <td>
-                                         Folio:
-                                     </td>
-                                     <td>
-                                         @Html.DisplayFor(model=> model.Grlal_Folio)
-                                     </td>
-                                 </tr>
-                             </tbody>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Folio:
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => model.Grlal_Folio)
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
-                
+                    @*DATOS DE CUENTA INFONAVIT*@
+                    <div class="tab-pane fade" id="list-IF" role="tabpanel" aria-labelledby="list-IF-list">
+                        <h5>Datos de Cuenta Infonavit</h5>
+                        <div class="row justify-content-around py-3">
+                            <div class="col-lg-6">
+                                <label for="Gral_CuentaInfonavit">Cuenta infonavit</label>
+                                @Html.DisplayFor(model => model.Gral_CuentaInfonavit, new { htmlAttributes = new { @class = "form-control data" } })
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="Gral_ClaveInfonavit">Clave cuenta infonavit</label>
+                                @Html.DisplayFor(model => model.Gral_ClaveInfonavit, new { htmlAttributes = new { @class = "form-control data" } })
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

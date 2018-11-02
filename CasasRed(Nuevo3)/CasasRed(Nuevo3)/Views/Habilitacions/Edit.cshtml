@@ -347,7 +347,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <label for="Hbt_FchEntrega">Fecha de Entrega</label>
+                        @Html.EditorFor(model => model.Hbt_FchEntrega, new { htmlAttributes = new { @class = "form-control data"@*, @type = "date"*@,
+@id = "pd1"
+}
+})
+                        @Html.ValidationMessageFor(model => model.Hbt_FchEntrega, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <label for="Hbt_StatusCasa">Status de entrega</label>
+                        @Html.EditorFor(model => model.Hbt_StatusCasa, new { htmlAttributes = new { @class = "form-control data" } })
+                        @Html.ValidationMessageFor(model => model.Hbt_StatusCasa, "", new { @class = "text-danger" })
 
+                    </div>
+                </div>
                 <div class="form-group">
                     <label>Casa Asignada</label>
                     <div class="col-md-10">
@@ -376,6 +393,23 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 <script>
+
+
+    if ($('#pd1').prop('type') != 'date') {
+        $('#pd1').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'yyyy/mm/dd'
+        });
+    }
+
+    //Fecha por default
+    $(document).ready(function () {
+        var now = new Date();
+        var today = now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate();
+        $('#datepicker').val(today);
+
+    });
+
     //$(document.body).css('padding-top', '70px');
     (document.body).setAttribute("onload", "resetCheckbox();");
 

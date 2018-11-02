@@ -12,6 +12,7 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="invisible"><input type="text" id="ubicacion" name="ubicacion" /></div>
         <div class="form-group">
             <div class="col-md-10">
                 <input class="form-control" name="ci_corretaje_id" value="@corretaje" style="display:none;" />
@@ -46,7 +47,7 @@
 }
 
 <div class="modal fade" id="articuloModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Buscar articulo</h5>
@@ -61,6 +62,7 @@
                         <tr>
                             <th>Código</th>
                             <th>Descripción</th>
+                            <th>Ubicación</th>
                             <th>Cantidad dispobible</th>
                             <th style="text-align: center;">Seleccionar</th>
                         </tr>
@@ -96,7 +98,7 @@
             frm.append("pagina", page)
 
             var x = new XMLHttpRequest()
-            x.open("POST", "/Existencias/BuscarExistencias")
+            x.open("POST", "/Existencias/BuscarExistenciasUbicacion")
             x.addEventListener("load", function (e) {
                 var json = JSON.parse(x.responseText)
                 document.getElementById("ctBA").innerHTML = ""
@@ -112,6 +114,7 @@
                     inner += "<tr>" +
                         "<td>" + json[i].item + "</td>" +
                         "<td>" + json[i].descripcion + "</td>" +
+                        "<td id=\"" + json[i].ubiID + "\">" + json[i].ubi + "</td>" +
                         "<td>" + json[i].cantidad + "</td>" +
                         "<td style=\"text-align: center;\" onmouseover=\"sobreRow(this)\" onmouseout=\"fueraRow(this)\" onclick=\"seleccionarArt(this)\"  data-dismiss=\"modal\"><i class=\"fa fa-circle text-info\"></i></td>" +
                         "</tr>"
@@ -138,7 +141,8 @@
         function seleccionarArt(itm) {
             document.getElementById("ci_articulo_id").value = itm.parentNode.children[0].textContent
             document.getElementById("ci_cantidadAsignada").value = 1;
-            document.getElementById("ci_cantidadAsignada").setAttribute("max",itm.parentNode.children[1].textContent)
+            document.getElementById("ci_cantidadAsignada").setAttribute("max", itm.parentNode.children[3].textContent)
+            document.getElementById("ubicacion").value = itm.parentNode.children[2].id;
         }
         function sobreRow(elm) {
             elm.children[0].className = "fa fa-check-circle text-success"

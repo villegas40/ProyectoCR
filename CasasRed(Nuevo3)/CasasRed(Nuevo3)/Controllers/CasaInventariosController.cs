@@ -103,12 +103,13 @@ namespace CasasRed_Nuevo3_.Controllers
                
             if (ModelState.IsValid)
             {
+                int ubi = Convert.ToInt32(Request.Form["ubicacion"]);
                 casaInventario.ci_fecha = DateTime.Now;
                 casaInventario.ci_usuario_id = Convert.ToInt32(Session["UsuarioID"].ToString());
                 db.CasaInventario.Add(casaInventario);
                 db.SaveChanges();
                 decimal cantidadRestante = casaInventario.ci_cantidadAsignada;
-                List<Existencias> ex = db.Existencias.Select(x => x).Where(x => x.ext_art_id == casaInventario.ci_articulo_id).Where(x=> x.ext_cantidadActual>0).OrderBy(e => e.ext_fechaAgregado).ToList();
+                List<Existencias> ex = db.Existencias.Select(x => x).Where(x => x.ext_art_id == casaInventario.ci_articulo_id).Where(x=> x.ext_cantidadActual>0 && x.ext_ubicacion == ubi).OrderBy(e => e.ext_fechaAgregado).ToList();
                 foreach (Existencias item in ex)
                 {
                     if (cantidadRestante == 0)
@@ -156,16 +157,20 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 if (id == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                    return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
                 }
                 CasaInventario casaInventario = db.CasaInventario.Find(id);
                 if (casaInventario == null)
                 {
-                    return HttpNotFound();
+                    string redireccion = lc.Redireccionar(Session["Tipo"].ToString());
+                    return RedirectToAction(redireccion.Split('-')[1], redireccion.Split('-')[0]);
                 }
                 else
                 {
-                    ViewBag.Max = (from e in db.Existencias where e.ext_art_id == casaInventario.ci_articulo_id select e.ext_cantidadActual).Sum();
+                    var exs = (from ha in db.HistorialAsignacion where ha.ha_casaInventario == id select ha.ha_existencia_id).FirstOrDefault();
+                    var ubi = db.Existencias.Find(exs).ext_ubicacion;
+                    ViewBag.Max = (from e in db.Existencias where e.ext_art_id == casaInventario.ci_articulo_id && ubi == e.ext_ubicacion select e.ext_cantidadActual).Sum();
                     ViewBag.Max += casaInventario.ci_cantidadAsignada;
                     ViewBag.Max = Convert.ToString(ViewBag.Max);
                 }
@@ -195,6 +200,7 @@ namespace CasasRed_Nuevo3_.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    int ubic = 0;
                     CasaInventario ci = db.CasaInventario.AsNoTracking().Where(x => x.ci_Id == casaInventario.ci_Id).FirstOrDefault();
                     decimal diferencia = ci.ci_cantidadAsignada - casaInventario.ci_cantidadAsignada;
                     List<Existencias> le = new List<Existencias>();
@@ -214,6 +220,10 @@ namespace CasasRed_Nuevo3_.Controllers
                             if (ex.ext_cantidad >= diferencia)
                             {
                                 Existencias ex1 = db.Existencias.Find(ex.Id);
+                                if (ubic == 0)
+                                {
+                                    ubic = (int)ex1.ext_ubicacion;
+                                }
                                 ex1.ext_cantidadActual = ex1.ext_cantidadActual + diferencia;
                                 diferencia = 0;
                                 db.SaveChanges();
@@ -221,6 +231,10 @@ namespace CasasRed_Nuevo3_.Controllers
                             else
                             {
                                 Existencias ex1 = db.Existencias.Find(ex.Id);
+                                if (ubic == 0)
+                                {
+                                    ubic = (int)ex1.ext_ubicacion;
+                                }
                                 ex1.ext_cantidadActual = ex1.ext_cantidad;
                                 diferencia = diferencia - (decimal)ex1.ext_cantidad;
                                 db.HistorialAsignacion.Remove(ci.HistorialAsignacion.Where(x => x.Existencias.Id == ex.Id).FirstOrDefault());
@@ -232,7 +246,7 @@ namespace CasasRed_Nuevo3_.Controllers
                     else if (diferencia > 0)
                     {
                         decimal cantidadRestante = diferencia;
-                        List<Existencias> ex = db.Existencias.Select(x => x).Where(x => x.ext_art_id == casaInventario.ci_articulo_id).OrderByDescending(e => e.ext_fechaAgregado).ToList();
+                        List<Existencias> ex = db.Existencias.Select(x => x).Where(x => x.ext_art_id == casaInventario.ci_articulo_id && ubic == x.ext_ubicacion).OrderByDescending(e => e.ext_fechaAgregado).ToList();
                         foreach (Existencias item in ex)
                         {
                             if (cantidadRestante == 0)
@@ -309,6 +323,7 @@ namespace CasasRed_Nuevo3_.Controllers
             }
             else if (Session["Tipo"].ToString() == "Corretaje" || Session["Tipo"].ToString() == "Contabilidad" || Session["Tipo"].ToString() == "Habilitacion" || Session["Tipo"].ToString() == "Administrador")
             {
+                int ubicacion = 0;
                 CasaInventario casaInventario = db.CasaInventario.Find(id);
                 int corretaje = casaInventario.ci_corretaje_id;
                 CasaInventario ci = db.CasaInventario.AsNoTracking().Where(x => x.ci_Id == casaInventario.ci_Id).FirstOrDefault();
@@ -316,13 +331,17 @@ namespace CasasRed_Nuevo3_.Controllers
                 List<Existencias> le = new List<Existencias>();
                 foreach (HistorialAsignacion ha in ci.HistorialAsignacion)
                 {
+                    if (ubicacion == 0)
+                    {
+                        ubicacion = (int)ha.Existencias.ext_ubicacion;
+                    }
                     le.Add(ha.Existencias);
                 }
                 le.OrderByDescending(x => x.ext_fechaAgregado);
                 if (diferencia > 0)
                 {
                     decimal cantidadRestante = diferencia;
-                    List<Existencias> ex = db.Existencias.Select(x => x).Where(x => x.ext_art_id == casaInventario.ci_articulo_id).OrderByDescending(e => e.ext_fechaAgregado).ToList();
+                    List<Existencias> ex = db.Existencias.Select(x => x).Where(x => x.ext_art_id == casaInventario.ci_articulo_id && ubicacion == x.ext_ubicacion).OrderByDescending(e => e.ext_fechaAgregado).ToList();
                     foreach (Existencias item in ex)
                     {
                         if (cantidadRestante == 0)

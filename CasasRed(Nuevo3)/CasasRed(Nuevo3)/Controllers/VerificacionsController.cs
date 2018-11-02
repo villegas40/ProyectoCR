@@ -137,6 +137,9 @@ namespace CasasRed_Nuevo3_.Controllers
                 verificacion.Vfn_Tiempo_estimado = ((verificacion.Vfn_Tiempo_estimado == null) ? false : verificacion.Vfn_Tiempo_estimado);
                 verificacion.Vfn_Tiene_costo = ((verificacion.Vfn_Tiene_costo == null) ? false : verificacion.Vfn_Tiene_costo);
                 verificacion.Vfn_Visto_persona = ((verificacion.Vfn_Visto_persona == null) ? false : verificacion.Vfn_Visto_persona);
+                verificacion.Vfn_Trato_asesor = ((verificacion.Vfn_Trato_asesor == null) ? 0 : verificacion.Vfn_Trato_asesor);
+
+                verificacion.Vfn_FechaAlta = DateTime.Now;
 
                 db.Verificacion.Add(verificacion);
                 db.SaveChanges();
@@ -151,6 +154,20 @@ namespace CasasRed_Nuevo3_.Controllers
         // GET: Verificacions/Edit/5
         public ActionResult Edit(int? id)
         {
+            //Linq para mostrar asesor asignado
+            var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : null), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : null), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " ") }).ToList();
+
+            foreach (var item in busqueda)
+            {
+                if (item.vendenombre != null)
+                { 
+                    if (item.Id == id)
+                    {
+                        ViewBag.Vendedor += item.vendenombre + " " + item.vendeapp + " " + item.vendeapm + "," + " ";
+                    }
+                }
+            }
+
             //Selectlist calificacion vendedor
             var calificacion = new SelectList(new[]
             {
@@ -189,25 +206,45 @@ namespace CasasRed_Nuevo3_.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Vfn_Persona_fisica,Vfn_Visto_persona,Vfn_Tiempo_estimado,Vfn_Tiempo,Vfn_Tiene_costo,Vfn_Costo,Vfn_Trato_asesor,Vfn_Observaciones,Id_Cliente,Vfn_ProgresoForm,Id_Usuario")] Verificacion verificacion)
         {
+            int puntaje, vendedor_id;
             CalificacionVendedor calificacionVendedor = new CalificacionVendedor();
+            CalificacionVendedorsController calificacionVendedorsController;
+
+            //Vendedores
+            var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : null), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : null), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), casa = a.Cliente.Id_Corretaje }).ToList();
+           
             if (verificacion.Vfn_Persona_fisica == null) verificacion.Vfn_Persona_fisica = false;
             if (verificacion.Vfn_Visto_persona == null) verificacion.Vfn_Visto_persona = false;
             if (verificacion.Vfn_Tiempo_estimado == null) verificacion.Vfn_Tiempo_estimado = false;
             if (verificacion.Vfn_Tiene_costo == null) verificacion.Vfn_Tiene_costo = false;
+            //if (verificacion.Vfn_Trato_asesor == null) verificacion.Vfn_Trato_asesor = 0;
+
 
             if (ModelState.IsValid)
             {
                 db.Entry(verificacion).State = EntityState.Modified;
                 db.SaveChanges();
 
-                //Guardar la calificacion del vendedor asignado a cliente
-                if (verificacion.Cliente.Id_Vendedor.HasValue != false)
+                //var corretaje_id = from a in db.Verificacion where a.Id_Cliente == a.Cliente.Id select new {corretaje = a.Cliente.Id_Corretaje };
+                if (verificacion.Vfn_Trato_asesor.HasValue)
                 {
-                    calificacionVendedor.Id_Vendedor = verificacion.Cliente.Id_Vendedor;
-                    calificacionVendedor.DVndr_Puntaje = verificacion.Vfn_Trato_asesor;
-                    db.CalificacionVendedor.Add(calificacionVendedor);
-                    db.SaveChanges();
+                    puntaje = verificacion.Vfn_Trato_asesor.Value;
+
+                    //Seleccionar vendedores asignados al cliente 
+                    foreach (var item in busqueda)
+                    {
+                        if (item.vendenombre != null)
+                        {
+                            if (item.Id == verificacion.Id)
+                            {
+                                vendedor_id = item.idven.Value;
+                                calificacionVendedorsController = new CalificacionVendedorsController();
+                                calificacionVendedorsController.CalificacionVendedor(item.casa.Value, puntaje, vendedor_id);
+                            }
+                        }
+                    }
                 }
+
                 return RedirectToAction("Index");
             }
             ViewBag.Id_Cliente = new SelectList(db.Cliente, "Id", "Gral_Nombre", verificacion.Id_Cliente);
@@ -273,7 +310,10 @@ namespace CasasRed_Nuevo3_.Controllers
                 Vfn_Tiempo_estimado = false,
                 Vfn_Tiene_costo = false,
                 Id_Cliente = cliente_id,
-                Vfn_ProgresoForm = 0
+                Vfn_ProgresoForm = 0,
+                Vfn_Trato_asesor = 0,
+                Vfn_Costo = 0,
+                Vfn_FechaAlta = DateTime.Now,
             };
 
             CS.Verificacion.Add(verificacion_obj);
@@ -287,13 +327,16 @@ namespace CasasRed_Nuevo3_.Controllers
             if (filtro == "")
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Verificacion.Count() / registrosPagina);
-                var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Corretaje.Vendedor.Vndr_Nombre + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                //var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Corretaje.Vendedor.Vndr_Nombre + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else
             {
                 int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
-                var busqueda = (from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                //var busqueda = (from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

@@ -23,11 +23,17 @@
                     </td>
                     <td>
                         @Html.DisplayName(Model.Vndr_Apellidopa)
-                    </td> 
+                    </td>
+                    @if (Model.Vndr_Apellidoma == null)
+                    {
+                        <td>null</td>
+                    }
+                    else
+                    {
                     <td>
                         @Html.DisplayName(Model.Vndr_Apellidoma)
 
-                    </td>
+                    </td>}
                </tr>
             </tbody>
         </table>
