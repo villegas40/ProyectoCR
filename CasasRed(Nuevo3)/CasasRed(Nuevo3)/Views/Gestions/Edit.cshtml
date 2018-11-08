@@ -35,78 +35,13 @@
 
     <div class="container">
         <div class="row">
+            <!--Primera Columna-->
             <div class="col-sm">
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Escrituras, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Escrituras)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Escrituras, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck1", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck1" class="custom-control-input data" name="Gtn_Escrituras" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Escrituras.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck1">Escrituras</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Escrituras, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
+                <h5><b>Comprador</b></h5>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Planta_Cartografica, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Planta_Cartografica)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Planta_Cartografica, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck2", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck2" class="custom-control-input data" name="Gtn_Planta_Cartografica" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Planta_Cartografica.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck2">Planta Cartográfica</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Planta_Cartografica, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Predial, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Predial)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Predial, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck3", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck3" class="custom-control-input data" name="Gtn_Predial" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Predial.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck3">Predial</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Predial, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Recibo_Luz, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Recibo_Luz)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Recibo_Luz, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck4", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck4" class="custom-control-input data" name="Gtn_Recibo_Luz" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Recibo_Luz.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck4">Recibo de Luz</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Recibo_Luz, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Recibo_Agua, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Recibo_Agua)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Recibo_Agua, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck5", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck5" class="custom-control-input data" name="Gtn_Recibo_Agua" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Recibo_Agua.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck5">Recibo de Agua</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Recibo_Agua, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Acta_Nacimiento, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Acta_Nacimiento)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Acta_Nacimiento, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck6", @oninput = "this.value = this.checked" })*@
                             <input id="customCheck6" class="custom-control-input data" name="Gtn_Acta_Nacimiento" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Acta_Nacimiento.Value ? "checked=\"checked\"" : "") />
                             <label class="custom-control-label" for="customCheck6">Acta de Nacimiento</label>
                             @Html.ValidationMessageFor(model => model.Gtn_Acta_Nacimiento, "", new { @class = "text-danger" })
@@ -115,130 +50,120 @@
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_IFE_Copia, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_IFE_Copia)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_IFE_Copia, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck7", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck7" class="custom-control-input data" name="Gtn_IFE_Copia" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_IFE_Copia.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck7">Copia del IFE al 200%</label>
+                            <input id="customCheck27" class="custom-control-input data" name="Gtn_Acta_Nacim_Cony" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Acta_Nacim_Cony.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck27">Acta de Nacimiento Contyugue</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Acta_Nacim_Cony, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck28" class="custom-control-input data" name="Gtn_Acta_Matrimonio" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Acta_Matrimonio.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck28">Acta de Matrimonio</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Acta_Matrimonio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck288" class="custom-control-input data" name="Gtn_IFE_Copia" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Acta_Matrimonio.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck288">Copia del IFE al 200%</label>
                             @Html.ValidationMessageFor(model => model.Gtn_IFE_Copia, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Sol_Ret_Ifo, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Sol_Ret_Ifo)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Sol_Ret_Ifo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck8", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck8" class="custom-control-input data" name="Gtn_Sol_Ret_Ifo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Sol_Ret_Ifo.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck8">Solicitud de Retención de Info</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Sol_Ret_Ifo, "", new { @class = "text-danger" })
+                            <input id="customCheck29" class="custom-control-input data" name="Gtn_DatosGnrl_Comp" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_DatosGnrl_Comp.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck29">Datos Generales Completos</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_DatosGnrl_Comp, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Cert_Hip, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Cert_Hip)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Cert_Hip, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck9", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck9" class="custom-control-input data" name="Gtn_Cert_Hip" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Cert_Hip.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck9">Certificado de Hipoteca</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Cert_Hip, "", new { @class = "text-danger" })
+                            <input id="customCheck30" class="custom-control-input data" name="Gtn_Comp_Domicilio" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Comp_Domicilio.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck30">Comprobante de Domicilio</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Comp_Domicilio, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Cert_Fiscal, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Cert_Fiscal)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Cert_Fiscal, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck10", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck10" class="custom-control-input data" name="Gtn_Cert_Fiscal" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Cert_Fiscal.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck10">Certificado de Fiscal</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Cert_Fiscal, "", new { @class = "text-danger" })
+                            <input id="customCheck31" class="custom-control-input data" name="Gtn_Recibo_Nomina" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Recibo_Nomina.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck31">Recibo de Nomina</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Recibo_Nomina, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Sol_Estado, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Sol_Estado)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Sol_Estado, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck11", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck11" class="custom-control-input data" name="Gtn_Sol_Estado" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Sol_Estado.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck11">Sol Estado</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Sol_Estado, "", new { @class = "text-danger" })
+                            <input id="customCheck32" class="custom-control-input data" name="Gtn_RFC_Comprador" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_RFC_Comprador.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck32">RFC</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_RFC_Comprador, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck33" class="custom-control-input data" name="Gtn_CURP_Comprador" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_CURP_Comprador.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck33">CURP</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_CURP_Comprador, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Junta_URBI, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Junta_URBI)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Junta_URBI, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck12", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck12" class="custom-control-input data" name="Gtn_Junta_URBI" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Junta_URBI.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck12">Junta URBI</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Junta_URBI, "", new { @class = "text-danger" })
+                            <input id="customCheck34" class="custom-control-input data" name="Gtn_RFC_Conyugue" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_RFC_Conyugue.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck34">RFC Conyugue</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_RFC_Conyugue, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Agua_Pago_Inf, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Agua_Pago_Inf)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Agua_Pago_Inf, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck13", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck13" class="custom-control-input data" name="Gtn_Agua_Pago_Inf" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Agua_Pago_Inf.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck13">Agua Pago</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Agua_Pago_Inf, "", new { @class = "text-danger" })
+                            <input id="customCheck35" class="custom-control-input data" name="Gtn_CURP_Conyugue" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_CURP_Conyugue.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck35">CURP Conyugue</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_CURP_Conyugue, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck36" class="custom-control-input data" name="Gtn_Taller" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Taller.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck36">Taller "Saber para decidir"</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Taller, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Cert_Cartogr, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Cert_Cartogr)*@
-                            @Html.TextBoxFor(model => model.Gtn_Cert_Cartogr, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck14", @oninput = "this.value = this.checked" })
-                            <input id="customCheck14" class="custom-control-input data" name="Gtn_Cert_Cartogr" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Cert_Cartogr.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck14">Certificado Cartográfico</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Cert_Cartogr, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm">
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_No_Oficial, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_No_Oficial)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_No_Oficial, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck15", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck15" class="custom-control-input data" name="Gtn_No_Oficial" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_No_Oficial.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck15">No. Oficial</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_No_Oficial, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Avaluo, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Avaluo)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Avaluo, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck16", @oninput = "this.value = this.checked" })*@
                             <input id="customCheck16" class="custom-control-input data" name="Gtn_Avaluo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Avaluo.Value ? "checked=\"checked\"" : "") />
                             <label class="custom-control-label" for="customCheck16">Avalúo</label>
                             @Html.ValidationMessageFor(model => model.Gtn_Avaluo, "", new { @class = "text-danger" })
@@ -247,123 +172,19 @@
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_CT_Banco, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_CT_Banco)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_CT_Banco, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck17", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck17" class="custom-control-input data" name="Gtn_CT_Banco" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_CT_Banco.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck17">Ct. Banco</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_CT_Banco, "", new { @class = "text-danger" })
+                            <input id="customCheck37" class="custom-control-input data" name="Gtn_Inscp_INFONAVIT" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Inscp_INFONAVIT.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck37">Inscripción INFONAVIT</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Inscp_INFONAVIT, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
 
+                <!--Notaria-->
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Aviso_Suspension, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Aviso_Suspension)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Aviso_Suspension, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck18", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck18" class="custom-control-input data" name="Gtn_Aviso_Suspension" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Aviso_Suspension.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck18">Aviso Suspensión</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Aviso_Suspension, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Formato_Infonavit, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Formato_Infonavit)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Formato_Infonavit, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck19", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck19" class="custom-control-input data" name="Gtn_Formato_Infonavit" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Formato_Infonavit.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck19">Formato INFONAVIT</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Formato_Infonavit, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Fotos_Propiedad, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Fotos_Propiedad)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Fotos_Propiedad, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck20", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck20" class="custom-control-input data" name="Gtn_Fotos_Propiedad" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Fotos_Propiedad.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck20">Fotos de la Propiedad</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Fotos_Propiedad, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Evaluo_Contacto, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Evaluo_Contacto)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Evaluo_Contacto, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck21", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck21" class="custom-control-input data" name="Gtn_Evaluo_Contacto" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Evaluo_Contacto.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck21">Avalúo Contacto</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Evaluo_Contacto, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Planeacion_Fianza, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Planeacion_Fianza)*@
-                            @*@if (Model.Gtn_Evaluo_Contacto.Value)
-                                {
-                                    @Html.TextBoxFor(model => model.Gtn_Planeacion_Fianza, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck22", @oninput = "this.value = this.checked", @checked = "" })
-
-                                }
-                                else
-                                {
-                                    @Html.TextBoxFor(model => model.Gtn_Planeacion_Fianza, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck22", @oninput = "this.value = this.checked" })
-                                }*@
-                            <input id="customCheck22" class="custom-control-input data" name="Gtn_Planeacion_Fianza" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Planeacion_Fianza.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck22">Planeación Fianza</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Planeacion_Fianza, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Urbanizacion, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Urbanizacion)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Urbanizacion, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck23", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck23" class="custom-control-input data" name="Gtn_Urbanizacion" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Urbanizacion.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck23">Urbanización</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Urbanizacion, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Credito_INFONAVIT, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Credito_INFONAVIT)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Credito_INFONAVIT, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck24", @oninput = "this.value = this.checked" })*@
-                            <input id="customCheck24" class="custom-control-input data" name="Gtn_Credito_INFONAVIT" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Credito_INFONAVIT.Value ? "checked=\"checked\"" : "") />
-                            <label class="custom-control-label" for="customCheck24">Crédito INFONAVIT</label>
-                            @Html.ValidationMessageFor(model => model.Gtn_Credito_INFONAVIT, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Notaria, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Notaria)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Notaria, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck25", @oninput = "this.value = this.checked" })*@
                             <input id="customCheck25" class="custom-control-input data" name="Gtn_Notaria" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Notaria.Value ? "checked=\"checked\"" : "") />
                             <label class="custom-control-label" for="customCheck25">Notaría</label>
                             @Html.ValidationMessageFor(model => model.Gtn_Notaria, "", new { @class = "text-danger" })
@@ -372,11 +193,18 @@
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Gtn_Firma_Escrituras, htmlAttributes: new { @class = "control-label col-md-2" })*@
                     <div class="col-md-10">
                         <div class="custom-control custom-checkbox">
-                            @*@Html.EditorFor(model => model.Gtn_Firma_Escrituras)*@
-                            @*@Html.TextBoxFor(model => model.Gtn_Firma_Escrituras, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck26", @oninput = "this.value = this.checked" })*@
+                            <input id="customCheck38" class="custom-control-input data" name="Gtn_Aviso_Ret" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Aviso_Ret.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck38">Aviso de Retención</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Aviso_Ret, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
                             <input id="customCheck26" class="custom-control-input data" name="Gtn_Firma_Escrituras" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Firma_Escrituras.Value ? "checked=\"checked\"" : "") />
                             <label class="custom-control-label" for="customCheck26">Firma Escituras</label>
                             @Html.ValidationMessageFor(model => model.Gtn_Firma_Escrituras, "", new { @class = "text-danger" })
@@ -384,9 +212,340 @@
                     </div>
                 </div>
 
+                <!--Aqui termina Comprador-->
+            </div>
+
+            <!--VENDEDOR-->
+            <div class="col-sm">
+                <h5> <b>Vendedor</b> </h5>
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Hbt_Calibre_cableado, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    @*<label>Cliente Asignado</label>*@
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck39" class="custom-control-input data" name="Gtn_Acta_Nac_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Acta_Nac_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck39">Acta de Nacimiento</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Acta_Nac_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck40" class="custom-control-input data" name="Gtn_Acta_Nac_Cony_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Acta_Nac_Cony_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck40">Acta de Nacimiento Conyugue</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Acta_Nac_Cony_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck41" class="custom-control-input data" name="Gtn_Acta_Matrimonio_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Acta_Matrimonio_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck41">Acta de Matrimonio</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Acta_Matrimonio_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck42" class="custom-control-input data" name="Gtn_IFE_Copia_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_IFE_Copia_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck42">Copias del IFE</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_IFE_Copia_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck43" class="custom-control-input data" name="Gtn_RFC_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_RFC_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck43">RFC Vendedor</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_RFC_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck44" class="custom-control-input data" name="Gtn_CURP_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_CURP_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck44">CURP Vendedor</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_CURP_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck45" class="custom-control-input data" name="Gtn_RFC_Conyu_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_RFC_Conyu_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck45">RFC Conyugue</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_RFC_Conyu_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck46" class="custom-control-input data" name="Gtn_CURP_Conyu_Ven" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_CURP_Conyu_Ven.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck46">CURP Conyugue</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_CURP_Conyu_Ven, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck47" class="custom-control-input data" name="Gtn_CuentaBancaria" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_CuentaBancaria.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck47">Estado de Cuenta Bancario</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_CuentaBancaria, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck18" class="custom-control-input data" name="Gtn_Aviso_Suspension" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Aviso_Suspension.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck18">Aviso Suspensión</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Aviso_Suspension, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--Aqui termina vendedor-->
+            <!--Segunda Columna VIVIENDA-->
+            <div class="col-sm">
+                <h5><b>Vivienda</b> </h5>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck1" class="custom-control-input data" name="Gtn_Escrituras" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Escrituras.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck1">Escrituras</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Escrituras, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck9" class="custom-control-input data" name="Gtn_Cert_Hip" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Cert_Hip.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck9">Certificado de Hipotecario</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Cert_Hip, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            @Html.TextBoxFor(model => model.Gtn_Cert_Cartogr, new { @class = "custom-control-input", @type = "checkbox", @id = "customCheck14", @oninput = "this.value = this.checked" })
+                            <input id="customCheck14" class="custom-control-input data" name="Gtn_Cert_Cartogr" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Cert_Cartogr.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck14">Certificado Cartográfico</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Cert_Cartogr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck15" class="custom-control-input data" name="Gtn_No_Oficial" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_No_Oficial.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck15">No. Oficial</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_No_Oficial, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck3" class="custom-control-input data" name="Gtn_Predial" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Predial.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck3">Predial</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Predial, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck10" class="custom-control-input data" name="Gtn_Cert_Fiscal" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Cert_Fiscal.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck10">Certificado de Fiscal</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Cert_Fiscal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck22" class="custom-control-input data" name="Gtn_Planeacion_Fianza" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Planeacion_Fianza.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck22">Planeación y Fianzas</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Planeacion_Fianza, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck23" class="custom-control-input data" name="Gtn_Urbanizacion" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Urbanizacion.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck23">Urbanización</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Urbanizacion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck13" class="custom-control-input data" name="Gtn_Agua_Pago_Inf" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Agua_Pago_Inf.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck13">CESPT</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Agua_Pago_Inf, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck48" class="custom-control-input data" name="Gtn_Entrega_Vivienda" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Entrega_Vivienda.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck48">Entrega de Vivienda</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Entrega_Vivienda, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!--Aqui Termina vivienda-->
+            </div>
+
+            <!--Aqui inicia otros-->
+            <div class="col-sm">
+                <h5> <b>Otros</b> </h5>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck17" class="custom-control-input data" name="Gtn_CT_Banco" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_CT_Banco.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck17">Ct. Banco</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_CT_Banco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck19" class="custom-control-input data" name="Gtn_Formato_Infonavit" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Formato_Infonavit.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck19">Formato INFONAVIT</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Formato_Infonavit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck20" class="custom-control-input data" name="Gtn_Fotos_Propiedad" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Fotos_Propiedad.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck20">Fotos de la Propiedad</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Fotos_Propiedad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck21" class="custom-control-input data" name="Gtn_Evaluo_Contacto" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Evaluo_Contacto.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck21">Avalúo Contacto</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Evaluo_Contacto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck24" class="custom-control-input data" name="Gtn_Credito_INFONAVIT" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Credito_INFONAVIT.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck24">Crédito INFONAVIT</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Credito_INFONAVIT, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck244" class="custom-control-input data" name="Gtn_Planta_Cartografica" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Planta_Cartografica.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck244">Planta Cartográfica</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Planta_Cartografica, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck245" class="custom-control-input data" name="Gtn_Recibo_Luz" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Recibo_Luz.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck245">Recibo de Luz</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Recibo_Luz, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck246" class="custom-control-input data" name="Gtn_Recibo_Agua" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Recibo_Agua.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck246">Recibo de Luz</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Recibo_Agua, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck247" class="custom-control-input data" name="Gtn_Sol_Ret_Ifo" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Sol_Ret_Ifo.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck247">Solicitud de Retención de Información</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Sol_Ret_Ifo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck248" class="custom-control-input data" name="Gtn_Sol_Estado" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Sol_Estado.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck248">Solicitud de Estado</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Sol_Estado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="custom-control custom-checkbox">
+                            <input id="customCheck249" class="custom-control-input data" name="Gtn_Junta_URBI" type="checkbox" value="true" onchange="this.value = this.checked; resetCheckbox();" @(Model.Gtn_Junta_URBI.Value ? "checked=\"checked\"" : "") />
+                            <label class="custom-control-label" for="customCheck249">Junta URBI</label>
+                            @Html.ValidationMessageFor(model => model.Gtn_Junta_URBI, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Id_Cliente, new { htmlAttributes = new { @class = "form-control data", @type = "hidden" } })
                         @Html.ValidationMessageFor(model => model.Id_Cliente, "", new { @class = "text-danger" })
@@ -394,21 +553,19 @@
                 </div>
 
                 <div class="form-group">
-                    @*@Html.LabelFor(model => model.Hbt_Calibre_cableado, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    @*<label>Casa Asignado</label>*@
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control data", @type="hidden"} })
+                        @Html.EditorFor(model => model.Id_Corretaje, new { htmlAttributes = new { @class = "form-control data", @type = "hidden" } })
                         @Html.ValidationMessageFor(model => model.Id_Corretaje, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @*<input type="submit" value="Create" class="btn btn-default" />*@
-                        <p class="text-right"><button type="submit" class="btn btn-outline-danger">Guardar</button></p>
-                    </div>
-                </div>
             </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<input type="submit" value="Create" class="btn btn-default" />*@
+            <p class="text-right"><button type="submit" class="btn btn-outline-danger">Guardar</button></p>
         </div>
     </div>
 </div>

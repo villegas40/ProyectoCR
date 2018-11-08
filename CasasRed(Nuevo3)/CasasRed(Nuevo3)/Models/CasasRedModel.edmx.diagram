@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
 
-      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="46">
+      <Diagram DiagramId="d14e94e821024c05a3b3ce58161e434b" Name="Diagram1" ZoomLevel="59">
 
         <EntityTypeShape EntityType="CasasRedModel.Articulos" Width="1.5" PointX="14.25" PointY="16.5" />
         <EntityTypeShape EntityType="CasasRedModel.CalificacionVendedor" Width="1.5" PointX="13.5" PointY="21.25" />

@@ -289,18 +289,54 @@ namespace CasasRed_Nuevo3_.Controllers
             return "Esto es un string, repito, es un string...";
         }
 
-        public JsonResult BuscarHabilitacion(string filtro = "", int pagina =1, int registrosPagina = 15)
+        public JsonResult BuscarHabilitacion(string filtro = "", int pagina =1, int registrosPagina = 15, int mes = 0 , int ano = 0)
         {
-            if (filtro == "")
+            if (filtro == "" && mes == 0 && ano == 0)
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Habilitacion.Count() / registrosPagina);
-                var busqueda = (from a in db.Habilitacion select new { a.Id, fecha = (a.Id_Corretaje != null)? a.Corretaje.Crt_FechaAlta.ToString() : "--",direccion = (a.Id_Corretaje != null)? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null)? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat): "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null)? a.Corretaje.Id : 0 ,total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Habilitacion select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //solo filtro
+            else if (filtro != "" && mes == 0 && ano == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //solo mes sin año y sin filtro
+            else if (mes != 0 && filtro == "" && ano == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Habilitacion where a.Hbt_FechaAlta.Value.Month.Equals(mes) select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //solo ano sin mes y sin filtro
+            else if (ano != 0 && filtro == "" && mes == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Habilitacion where a.Hbt_FechaAlta.Value.Year.Equals(ano) select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+
+            //ano y filtro sin mes 
+            else if (ano != 0 && filtro != "" && mes == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Habilitacion where ((a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro)) && a.Hbt_FechaAlta.Value.Year.Equals(ano) select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //mes y filtro sin a;o
+            else if (filtro != "" && mes != 0 && ano == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Habilitacion where ((a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro)) && a.Hbt_FechaAlta.Value.Month.Equals(mes) select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
             else
             {
                 int totalPaginas = (int)Math.Ceiling((double)(from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select a).Count() / registrosPagina);
-                var busqueda = (from a in db.Habilitacion where (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro) select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Habilitacion where ((a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat).Contains(filtro) || a.Corretaje.Crt_Direccion.Contains(filtro)) && a.Hbt_FechaAlta.Value.Month.Equals(mes) && a.Hbt_FechaAlta.Value.Year.Equals(ano) select new { a.Id, fecha = (a.Id_Corretaje != null) ? a.Corretaje.Crt_FechaAlta.ToString() : "--", direccion = (a.Id_Corretaje != null) ? a.Corretaje.Crt_Direccion : "No asignada", vendedor = (a.Id_Corretaje != null) ? (a.Corretaje.Crt_Cliente_Nombre + " " + a.Corretaje.Crt_Cliente_ApPat + " " + a.Corretaje.Crt_Cliente_ApMat) : "No asingado", a.Hbt_ProgresoForm, corretaje = (a.Id_Corretaje != null) ? a.Corretaje.Id : 0, total = totalPaginas }).OrderBy(a => a.direccion).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

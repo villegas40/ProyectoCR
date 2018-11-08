@@ -19,5 +19,6 @@ namespace WebApiApp.Models
         public Nullable<System.DateTime> Rcd_FechaAlta { get; set; }
         public Nullable<int> Rcd_Id_Usuario { get; set; }
         public Nullable<int> Rcd_Id_Gestion { get; set; }
+        public Nullable<bool> Rcd_Enviado { get; set; }
     }
 }

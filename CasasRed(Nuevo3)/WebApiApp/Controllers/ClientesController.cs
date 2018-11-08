@@ -184,10 +184,36 @@ namespace WebApiApp.Controllers
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult DeleteCliente(int id)
         {
+            //Consulta para desactivar las casillas de gestion
+            var gestion = (from a in db.Gestion where id == a.Id_Cliente select a).FirstOrDefault();
+
             Cliente cliente = db.Cliente.Find(id);
+
             if (cliente == null)
             {
                 return NotFound();
+            }
+
+            //Actualizar Gestion
+            if (gestion != null)
+            {
+                gestion.Gtn_Acta_Nacimiento = false;
+                gestion.Gtn_Acta_Nacim_Cony = false;
+                gestion.Gtn_Acta_Matrimonio = false;
+                gestion.Gtn_DatosGnrl_Comp = false;
+                gestion.Gtn_Comp_Domicilio = false;
+                gestion.Gtn_Recibo_Nomina = false;
+                gestion.Gtn_RFC_Comprador = false;
+                gestion.Gtn_CURP_Comprador = false;
+                gestion.Gtn_RFC_Conyugue = false;
+                gestion.Gtn_CURP_Conyugue = false;
+                gestion.Gtn_Inscp_INFONAVIT = false;
+                gestion.Gtn_Taller = false;
+                gestion.Gtn_Avaluo = false;
+                gestion.Gtn_Notaria = false;
+                gestion.Gtn_Aviso_Ret = false;
+                gestion.Gtn_Firma_Escrituras = false;
+                db.SaveChanges();
             }
 
             //Actualizar el status de la casa

@@ -146,38 +146,74 @@ CREATE TABLE Cliente(
 --CASCADE si borra la casa
 CREATE TABLE Gestion(
 	Id INT IDENTITY(1,1) PRIMARY KEY,
-	Gtn_Escrituras BIT,
-	Gtn_Planta_Cartografica BIT,
-	Gtn_Predial BIT,
-	Gtn_Recibo_Luz BIT, 
-	Gtn_Recibo_Agua BIT,
+	/*COMPRADOR*/
 	Gtn_Acta_Nacimiento BIT,
+	Gtn_Acta_Nacim_Cony BIT, --Acta Nacimiento Conyugue
 	Gtn_IFE_Copia BIT,
-	Gtn_Sol_Ret_Ifo BIT, /*SOLICITUD DE RETENCION DE INFORMACION*/
+	Gtn_Acta_Matrimonio BIT, 
+	Gtn_DatosGnrl_Comp BIT, --Datos Generales Completos
+	Gtn_Comp_Domicilio BIT, --Comprobante de Domicilio
+	Gtn_Recibo_Nomina BIT,
+	Gtn_RFC_Comprador BIT,
+	Gtn_CURP_Comprador BIT,
+	Gtn_RFC_Conyugue BIT,
+	Gtn_CURP_Conyugue BIT,
+	Gtn_Taller BIT, --Nuevo Taller "Sber para decidir" 2/11/2018
+	Gtn_Avaluo BIT,
+	Gtn_Notaria BIT,
+	Gtn_Inscp_INFONAVIT BIT, -- Nuevo 2/11/2018
+	Gtn_Aviso_Ret BIT, --Gtm_Aviso_Susp BIT Se tiro y regreso como el ave fenix Gtm_Aviso_Susp -> Gtn_Aviso_RET
+	Gtn_Firma_Escrituras BIT,
+	
+
+	/*VENDEDOR*/
+	--Agregar acta de nacimiento
+	Gtn_Acta_Nac_Ven BIT,
+	--Acta del Conyugue
+	Gtn_Acta_Nac_Cony_Ven BIT,
+	--Acta de Matriomonio
+	Gtn_Acta_Matrimonio_Ven BIT,
+	--Copias del IFE
+	Gtn_IFE_Copia_Ven BIT,
+	--RFC
+	Gtn_RFC_Ven BIT,
+	--CURP
+	Gtn_CURP_Ven BIT,
+	--RFC CONYUGUE
+	Gtn_RFC_Conyu_Ven BIT,
+	--CURP CONYUGUE
+	Gtn_CURP_Conyu_Ven BIT,
+	Gtn_CuentaBancaria BIT, --Nuevo
+	Gtn_Aviso_Suspension BIT, /*ENTREGA AVISO DE SUSPENSION*/
+
+	/*VIVIENDA*/
+	Gtn_Escrituras BIT,
 	Gtn_Cert_Hip BIT, /*CERTIFICADO DE HIPOTECA*/
-	Gtn_Cert_Fiscal BIT, /*CERTIFICADO FISCAL*/
-	Gtn_Sol_Estado BIT, /*SOLICITUD DE ESTADO*/
-	Gtn_Junta_URBI BIT,
-	Gtn_Agua_Pago_Inf BIT,
 	Gtn_Cert_Cartogr BIT,
 	Gtn_No_Oficial BIT, /*INVESTIGAR*/
-	Gtn_Avaluo BIT,
-	Gtn_CT_Banco BIT, /*INVESTIGAR*/
-	Gtn_Aviso_Suspension BIT, /*ENTREGA AVISO DE SUSPENSION*/
-	Gtn_Formato_Infonavit BIT,
-	Gtn_Fotos_Propiedad BIT,
-	Gtn_Evaluo_Contacto BIT,
+	Gtn_Predial BIT,
+	Gtn_Cert_Fiscal BIT, /*CERTIFICADO FISCAL*/
 	Gtn_Planeacion_Fianza BIT,
 	Gtn_Urbanizacion BIT,
+	Gtn_Agua_Pago_Inf BIT, --CESPT
+	Gtn_Entrega_Vivienda BIT,
+
+	/*NO SE*/
+	Gtn_Sol_Ret_Ifo BIT, /*SOLICITUD DE RETENCION DE INFORMACION*/
+	Gtn_Sol_Estado BIT, /*SOLICITUD DE	 ESTADO*/
+	Gtn_Junta_URBI BIT, /**/
+	Gtn_CT_Banco BIT, /*INVESTIGAR*/
+	Gtn_Fotos_Propiedad BIT,
+	Gtn_Evaluo_Contacto BIT,
 	Gtn_Credito_INFONAVIT BIT,
-	Gtn_Notaria BIT,
-	Gtn_Firma_Escrituras BIT,
-	Gtn_CuentaBancaria BIT, --Nuevo 
-	Gtn_Taller BIT, --Nuevo
 	Gtn_ReciboActualizado BIT, -- Nuevo 29/10/18
+	Gtn_Formato_Infonavit BIT,
+
+	Gtn_Planta_Cartografica BIT, /*APARECE EN AVALUO*/
+	Gtn_Recibo_Luz BIT,  /*APARECE EN AVALUO*/
+	Gtn_Recibo_Agua BIT, /*APARECE EN AVAULO*/
+
 	Gtn_FechaAlta DATE DEFAULT GETDATE(),
-	--Gtn_Gastos MONEY,
-	Gtm_Aviso_Susp BIT,
 	Gtn_ProgresoForm INT,
 	Id_Corretaje int, -- Llave Foranea a corretaje
 	Id_Cliente int, -- Llave Foranea a Cliente1
@@ -533,6 +569,7 @@ CREATE TABLE Recordatorio(
 Rcd_Id INT IDENTITY(1,1) PRIMARY KEY,
 Rcd_Descripción VARCHAR(150),
 Rcd_FechaAlta DATE DEFAULT GETDATE(),
+Rcd_Enviado BIT,
 Rcd_Id_Usuario int,
 Rcd_Id_Gestion int,
 CONSTRAINT FK_RcdUsuario

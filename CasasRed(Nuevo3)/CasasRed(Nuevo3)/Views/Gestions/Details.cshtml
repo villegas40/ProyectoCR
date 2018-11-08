@@ -4,449 +4,821 @@
     ViewBag.Title = "Details";
 }
 
-<h2 style="margin-top:20px;">Detalles</h2>
+<h2 id="tituloH" style="margin-top:20px;">Detalles</h2>
 
-<div>
-        <h4>Gestión</h4>
-        <hr />
-        <table class="table table-bordered">
-            <tr>
-                <th>Escrituras</th>
-                <td>
-                    @if (Model.Gtn_Escrituras != null)
-                    {
-                        if ((bool)Model.Gtn_Escrituras)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
+<div id="cabeceroPrint">
+    <h4>Gestión</h4>
+</div>
+
+<hr />
+<div id="printZone">
+
+    <h5><b>Comprador</b></h5>
+    <table class="table table-bordered">
+        <tr>
+            <th>Acta de Nacimiento</th>
+            <td>
+                @if (Model.Gtn_Acta_Nacimiento != null)
+                {
+                    if ((bool)Model.Gtn_Acta_Nacimiento)
+                    {<span class="fas fa-check"></span>}
                     else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Planta Cartográfica</th>
-                <td>
-                    @if (Model.Gtn_Planta_Cartografica != null)
-                    {
-                        if ((bool)Model.Gtn_Planta_Cartografica)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Predial</th>
-                <td>
-                    @if (Model.Gtn_Predial != null)
-                    {
-                        if ((bool)Model.Gtn_Predial)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Recibo de Luz</th>
-                <td>
-                    @if (Model.Gtn_Recibo_Luz != null)
-                    {
-                        if ((bool)Model.Gtn_Recibo_Luz)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Recibo de Agua</th>
-                <td>
-                    @if (Model.Gtn_Recibo_Agua != null)
-                    {
-                        if ((bool)Model.Gtn_Recibo_Agua)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Acta de Nacimiento</th>
-                <td>
-                    @if (Model.Gtn_Acta_Nacimiento != null)
-                    {
-                        if ((bool)Model.Gtn_Acta_Nacimiento)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Copia de IFE</th>
-                <td>
-                    @if (Model.Gtn_IFE_Copia != null)
-                    {
-                        if ((bool)Model.Gtn_IFE_Copia)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Solicitud de Retención de Info</th>
-                <td>
-                    @if (Model.Gtn_Sol_Ret_Ifo != null)
-                    {
-                        if ((bool)Model.Gtn_Sol_Ret_Ifo)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Certificado de Hipoteca</th>
-                <td>
-                    @if (Model.Gtn_Cert_Hip != null)
-                    {
-                        if ((bool)Model.Gtn_Cert_Hip)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Certificado de Fiscal</th>
-                <td>
-                    @if (Model.Gtn_Cert_Fiscal != null)
-                    {
-                        if ((bool)Model.Gtn_Cert_Fiscal)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Sol Estado</th>
-                <td>
-                    @if (Model.Gtn_Sol_Estado != null)
-                    {
-                        if ((bool)Model.Gtn_Sol_Estado)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Junta URBI</th>
-                <td>
-                    @if (Model.Gtn_Junta_URBI != null)
-                    {
-                        if ((bool)Model.Gtn_Junta_URBI)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Agua Pago</th>
-                <td>
-                    @if (Model.Gtn_Agua_Pago_Inf != null)
-                    {
-                        if ((bool)Model.Gtn_Agua_Pago_Inf)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Certificado Cartográfico</th>
-                <td>
-                    @if (Model.Gtn_Cert_Cartogr != null)
-                    {
-                        if ((bool)Model.Gtn_Cert_Cartogr)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>No. Oficial</th>
-                <td>
-                    @if (Model.Gtn_No_Oficial != null)
-                    {
-                        if ((bool)Model.Gtn_No_Oficial)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Avalúo</th>
-                <td>
-                    @if (Model.Gtn_Avaluo != null)
-                    {
-                        if ((bool)Model.Gtn_Avaluo)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Ct. Banco</th>
-                <td>
-                    @if (Model.Gtn_CT_Banco != null)
-                    {
-                        if ((bool)Model.Gtn_CT_Banco)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Aviso Suspensión</th>
-                <td>
-                    @if (Model.Gtn_Aviso_Suspension != null)
-                    {
-                        if ((bool)Model.Gtn_Aviso_Suspension)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Formato INFONAVIT</th>
-                <td>
-                    @if (Model.Gtn_Formato_Infonavit != null)
-                    {
-                        if ((bool)Model.Gtn_Formato_Infonavit)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Fotos de la Propiedad</th>
-                <td>
-                    @if (Model.Gtn_Fotos_Propiedad != null)
-                    {
-                        if ((bool)Model.Gtn_Fotos_Propiedad)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Evalúo Contacto</th>
-                <td>
-                    @if (Model.Gtn_Evaluo_Contacto != null)
-                    {
-                        if ((bool)Model.Gtn_Evaluo_Contacto)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Planeación Fianza</th>
-                <td>
-                    @if (Model.Gtn_Planeacion_Fianza != null)
-                    {
-                        if ((bool)Model.Gtn_Planeacion_Fianza)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Urbanización</th>
-                <td>
-                    @if (Model.Gtn_Urbanizacion != null)
-                    {
-                        if ((bool)Model.Gtn_Urbanizacion)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Crédito INFONAVIT</th>
-                <td>
-                    @if (Model.Gtn_Credito_INFONAVIT != null)
-                    {
-                        if ((bool)Model.Gtn_Credito_INFONAVIT)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Notaría</th>
-                <td>
-                    @if (Model.Gtn_Notaria != null)
-                    {
-                        if ((bool)Model.Gtn_Notaria)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            <tr>
-                <th>Firma Escituras</th>
-                <td>
-                    @if (Model.Gtn_Firma_Escrituras != null)
-                    {
-                        if ((bool)Model.Gtn_Firma_Escrituras)
-                        {<span class="fas fa-check"></span>}
-                        else
-                        {<span class="fas fa-times"></span>}
-                    }
-                    else
-                    {
-                        <span class="fas fa-times"></span>
-                    }
-                </td>
-            </tr>
-            @*<tr>
-            <th>Gastos</th>
-            <td>@Html.DisplayFor(model => model.Gtn_Gastos)</td>
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
         </tr>
         <tr>
-            <th>Contaduria</th>
-            <td>@Html.DisplayFor(model => model.Contaduria.Id)</td>
-        </tr>*@
-            <tr>
-                <th>Estatus</th>
-                <td>@Html.DisplayFor(model => model.Corretaje.Crt_Status)</td>
-            </tr>
-        </table>
-    </div>
+            <th>Acta de Nacimiento Conyugue</th>
+            <td>
+                @if (Model.Gtn_Acta_Nacim_Cony != null)
+                {
+                    if ((bool)Model.Gtn_Acta_Nacim_Cony)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Acta de Matrimonio</th>
+            <td>
+                @if (Model.Gtn_Acta_Matrimonio != null)
+                {
+                    if ((bool)Model.Gtn_Acta_Matrimonio)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Copia de IFE al 200%</th>
+            <td>
+                @if (Model.Gtn_IFE_Copia != null)
+                {
+                    if ((bool)Model.Gtn_IFE_Copia)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Datos Generales Completos</th>
+            <td>
+                @if (Model.Gtn_DatosGnrl_Comp != null)
+                {
+                    if ((bool)Model.Gtn_DatosGnrl_Comp)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Comprobante de Domicilio</th>
+            <td>
+                @if (Model.Gtn_Comp_Domicilio != null)
+                {
+                    if ((bool)Model.Gtn_Comp_Domicilio)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Recibo de Nómina</th>
+            <td>
+                @if (Model.Gtn_Recibo_Nomina != null)
+                {
+                    if ((bool)Model.Gtn_Recibo_Nomina)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>RFC</th>
+            <td>
+                @if (Model.Gtn_RFC_Comprador != null)
+                {
+                    if ((bool)Model.Gtn_RFC_Comprador)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>CURP</th>
+            <td>
+                @if (Model.Gtn_CURP_Comprador != null)
+                {
+                    if ((bool)Model.Gtn_CURP_Comprador)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>RFC Conyugue</th>
+            <td>
+                @if (Model.Gtn_RFC_Conyugue != null)
+                {
+                    if ((bool)Model.Gtn_RFC_Conyugue)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>CURP Conyugue</th>
+            <td>
+                @if (Model.Gtn_CURP_Conyugue != null)
+                {
+                    if ((bool)Model.Gtn_CURP_Conyugue)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Taller "Saber para Decidir"</th>
+            <td>
+                @if (Model.Gtn_Taller != null)
+                {
+                    if ((bool)Model.Gtn_Taller)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Avalúo</th>
+            <td>
+                @if (Model.Gtn_Avaluo != null)
+                {
+                    if ((bool)Model.Gtn_Avaluo)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Inscripción para INFONAVIT</th>
+            <td>
+                @if (Model.Gtn_Inscp_INFONAVIT != null)
+                {
+                    if ((bool)Model.Gtn_Inscp_INFONAVIT)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Notaría</th>
+            <td>
+                @if (Model.Gtn_Notaria != null)
+                {
+                    if ((bool)Model.Gtn_Notaria)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Aviso de Retención</th>
+            <td>
+                @if (Model.Gtn_Aviso_Ret != null)
+                {
+                    if ((bool)Model.Gtn_Aviso_Ret)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Firma Escituras</th>
+            <td>
+                @if (Model.Gtn_Firma_Escrituras != null)
+                {
+                    if ((bool)Model.Gtn_Firma_Escrituras)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+    </table>
+
+    <!--TERMINA COMPRADOR-->
+
+
+
+    <h5><b>Vendedor</b></h5>
+    <table class="table table-bordered">
+        <tr>
+            <th>Acta de Nacimiento</th>
+            <td>
+                @if (Model.Gtn_Acta_Nac_Ven != null)
+                {
+                    if ((bool)Model.Gtn_Acta_Nac_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Acta de Nacimiento Conyugue</th>
+            <td>
+                @if (Model.Gtn_Acta_Nac_Cony_Ven != null)
+                {
+                    if ((bool)Model.Gtn_Acta_Nac_Cony_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Acta de Matrimonio</th>
+            <td>
+                @if (Model.Gtn_Acta_Matrimonio_Ven != null)
+                {
+                    if ((bool)Model.Gtn_Acta_Matrimonio_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Copias del IFE</th>
+            <td>
+                @if (Model.Gtn_IFE_Copia_Ven != null)
+                {
+                    if ((bool)Model.Gtn_IFE_Copia_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>RFC</th>
+            <td>
+                @if (Model.Gtn_RFC_Ven != null)
+                {
+                    if ((bool)Model.Gtn_RFC_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>CURP</th>
+            <td>
+                @if (Model.Gtn_CURP_Ven != null)
+                {
+                    if ((bool)Model.Gtn_CURP_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>RFC Conyugue</th>
+            <td>
+                @if (Model.Gtn_RFC_Conyu_Ven != null)
+                {
+                    if ((bool)Model.Gtn_RFC_Conyu_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>CURP Conyugue</th>
+            <td>
+                @if (Model.Gtn_CURP_Conyu_Ven != null)
+                {
+                    if ((bool)Model.Gtn_CURP_Conyu_Ven)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Cuenta Bancaria</th>
+            <td>
+                @if (Model.Gtn_CuentaBancaria != null)
+                {
+                    if ((bool)Model.Gtn_CuentaBancaria)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Aviso Suspensión</th>
+            <td>
+                @if (Model.Gtn_Aviso_Suspension != null)
+                {
+                    if ((bool)Model.Gtn_Aviso_Suspension)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+    </table>
+
+    <!--TERMINA VENDEDOR-->
+
+
+
+    <h5><b>Vivienda</b></h5>
+    <table class="table table-bordered">
+        <tr>
+            <th>Escrituras</th>
+            <td>
+                @if (Model.Gtn_Escrituras != null)
+                {
+                    if ((bool)Model.Gtn_Escrituras)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Certificado de Hipotecario</th>
+            <td>
+                @if (Model.Gtn_Cert_Hip != null)
+                {
+                    if ((bool)Model.Gtn_Cert_Hip)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Certificado Cartográfico</th>
+            <td>
+                @if (Model.Gtn_Cert_Cartogr != null)
+                {
+                    if ((bool)Model.Gtn_Cert_Cartogr)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>No. Oficial</th>
+            <td>
+                @if (Model.Gtn_No_Oficial != null)
+                {
+                    if ((bool)Model.Gtn_No_Oficial)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Predial</th>
+            <td>
+                @if (Model.Gtn_Predial != null)
+                {
+                    if ((bool)Model.Gtn_Predial)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Certificado de Fiscal</th>
+            <td>
+                @if (Model.Gtn_Cert_Fiscal != null)
+                {
+                    if ((bool)Model.Gtn_Cert_Fiscal)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Planeación y Finanza</th>
+            <td>
+                @if (Model.Gtn_Planeacion_Fianza != null)
+                {
+                    if ((bool)Model.Gtn_Planeacion_Fianza)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Junta de Urbanización</th>
+            <td>
+                @if (Model.Gtn_Urbanizacion != null)
+                {
+                    if ((bool)Model.Gtn_Urbanizacion)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>CESPT</th>
+            <td>
+                @if (Model.Gtn_Agua_Pago_Inf != null)
+                {
+                    if ((bool)Model.Gtn_Agua_Pago_Inf)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+    </table>
+
+
+    <!--TERMINA VIVIENDA-->
+
+
+    <h5><b>Otros</b></h5>
+    <table class="table table-bordered">
+
+        <tr>
+            <th>Planta Cartográfica</th>
+            <td>
+                @if (Model.Gtn_Planta_Cartografica != null)
+                {
+                    if ((bool)Model.Gtn_Planta_Cartografica)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <th>Recibo de Luz</th>
+            <td>
+                @if (Model.Gtn_Recibo_Luz != null)
+                {
+                    if ((bool)Model.Gtn_Recibo_Luz)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Recibo de Agua</th>
+            <td>
+                @if (Model.Gtn_Recibo_Agua != null)
+                {
+                    if ((bool)Model.Gtn_Recibo_Agua)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Solicitud de Retención de Info</th>
+            <td>
+                @if (Model.Gtn_Sol_Ret_Ifo != null)
+                {
+                    if ((bool)Model.Gtn_Sol_Ret_Ifo)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Sol Estado</th>
+            <td>
+                @if (Model.Gtn_Sol_Estado != null)
+                {
+                    if ((bool)Model.Gtn_Sol_Estado)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Junta URBI</th>
+            <td>
+                @if (Model.Gtn_Junta_URBI != null)
+                {
+                    if ((bool)Model.Gtn_Junta_URBI)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <th>Ct. Banco</th>
+            <td>
+                @if (Model.Gtn_CT_Banco != null)
+                {
+                    if ((bool)Model.Gtn_CT_Banco)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <th>Formato INFONAVIT</th>
+            <td>
+                @if (Model.Gtn_Formato_Infonavit != null)
+                {
+                    if ((bool)Model.Gtn_Formato_Infonavit)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Fotos de la Propiedad</th>
+            <td>
+                @if (Model.Gtn_Fotos_Propiedad != null)
+                {
+                    if ((bool)Model.Gtn_Fotos_Propiedad)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Evalúo Contacto</th>
+            <td>
+                @if (Model.Gtn_Evaluo_Contacto != null)
+                {
+                    if ((bool)Model.Gtn_Evaluo_Contacto)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Crédito INFONAVIT</th>
+            <td>
+                @if (Model.Gtn_Credito_INFONAVIT != null)
+                {
+                    if ((bool)Model.Gtn_Credito_INFONAVIT)
+                    {<span class="fas fa-check"></span>}
+                    else
+                    {<span class="fas fa-times"></span>}
+                }
+                else
+                {
+                    <span class="fas fa-times"></span>
+                }
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Estatus</th>
+            <td>@Html.DisplayFor(model => model.Corretaje.Crt_Status)</td>
+        </tr>
+    </table>
+</div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Regresar", "Index") |
+
+    <button id="print" class="btn btn-outline-primary" onclick="imprimirBusqueda(document.getElementById('cabeceroPrint'),document.getElementById('printZone'),document.getElementById('tituloH').textContent) "><i class="fas fa-print"></i> Imprimir</button>
 </p>
 
 @section Scripts {
     <script>
-        $(document.body).css('padding-top', '70px');
+                //$(document.body).css('padding-top', '70px');
     </script>
 }

@@ -322,9 +322,9 @@ namespace CasasRed_Nuevo3_.Controllers
             return "String si se pudo...";
         }
 
-        public JsonResult BuscarVerificaciones(string filtro = "", int pagina =1, int registrosPagina = 15)
+        public JsonResult BuscarVerificaciones(string filtro = "", int pagina =1, int registrosPagina = 15, int mes = 0 , int ano = 0)
         {
-            if (filtro == "")
+            if (filtro == "" && mes == 0 && ano == 0)
             {
                 int totalPaginas = (int)Math.Ceiling((double)db.Verificacion.Count() / registrosPagina);
                 //var busqueda = (from a in db.Verificacion select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Corretaje.Vendedor.Vndr_Nombre + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Corretaje.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
@@ -332,11 +332,47 @@ namespace CasasRed_Nuevo3_.Controllers
 
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
-            else
+            //solo filtro
+            else if (filtro != "" && mes == 0 && ano == 0)
             {
                 int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
                 //var busqueda = (from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), asesor = (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
-                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() where (a.Cliente.Gral_Nombre + " " + a.Cliente.Cyg_Apellidopa + " " + a.Cliente.Cyg_Apellidoma).Contains(filtro) || a.Cliente.Corretaje.Crt_Direccion.Contains(filtro) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //solo mes sin año y sin filtro
+            else if (mes != 0 && filtro == "" && ano == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() where a.Vfn_FechaAlta.Value.Month.Equals(mes) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //solo ano sin mes y sin filtro
+            else if (ano != 0 && filtro == "" && mes == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() where a.Vfn_FechaAlta.Value.Year.Equals(ano) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //ano y filtro sin mes 
+            else if (ano != 0 && filtro != "" && mes == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() where ((a.Cliente.Gral_Nombre + " " + a.Cliente.Cyg_Apellidopa + " " + a.Cliente.Cyg_Apellidoma).Contains(filtro) || a.Cliente.Corretaje.Crt_Direccion.Contains(filtro)) && a.Vfn_FechaAlta.Value.Year.Equals(ano) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //mes y filtro sin a;o
+            else if (filtro != "" && mes != 0 && ano == 0)
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() where ((a.Cliente.Gral_Nombre + " " + a.Cliente.Cyg_Apellidopa + " " + a.Cliente.Cyg_Apellidoma).Contains(filtro) || a.Cliente.Corretaje.Crt_Direccion.Contains(filtro)) && a.Vfn_FechaAlta.Value.Month.Equals(mes) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
+                return Json(busqueda, JsonRequestBehavior.AllowGet);
+            }
+            //all
+            else
+            {
+                int totalPaginas = (int)Math.Ceiling((double)(from a in db.Verificacion where (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma).Contains(filtro) || (a.Cliente.Vendedor.Vndr_Nombre + " " + a.Cliente.Vendedor.Vndr_Apellidopa + " " + a.Cliente.Vendedor.Vndr_Apellidoma).Contains(filtro) select a).Count() / registrosPagina);
+                var busqueda = (from a in db.Verificacion join v in db.VendedorAsig on a.Cliente.Id_Corretaje equals v.Id_Corretaje into c from algo in c.DefaultIfEmpty() join ve in db.Vendedor on algo.Id_Vendedor equals ve.Id into ce from algoo in ce.DefaultIfEmpty() where ((a.Cliente.Gral_Nombre + " " + a.Cliente.Cyg_Apellidopa + " " + a.Cliente.Cyg_Apellidoma).Contains(filtro) || a.Cliente.Corretaje.Crt_Direccion.Contains(filtro)) && a.Vfn_FechaAlta.Value.Month.Equals(mes) && a.Vfn_FechaAlta.Value.Year.Equals(ano) select new { a.Id, cliente = (a.Cliente.Gral_Nombre + " " + a.Cliente.Gral_Apellidopa + " " + a.Cliente.Gral_Apellidoma), idven = ((algo.Id_Vendedor != null) ? algo.Id_Vendedor : 0), vendenombre = ((algoo.Vndr_Nombre != null) ? algoo.Vndr_Nombre : "Sin asignar"), vendeapp = ((algoo.Vndr_Apellidopa != null) ? algoo.Vndr_Apellidopa : "Sin asignar"), vendeapm = ((algoo.Vndr_Apellidoma != null) ? algoo.Vndr_Apellidoma : " "), a.Vfn_ProgresoForm, total = totalPaginas }).OrderBy(a => a.cliente).Skip((pagina - 1) * registrosPagina).Take(registrosPagina).ToList();
                 return Json(busqueda, JsonRequestBehavior.AllowGet);
             }
         }

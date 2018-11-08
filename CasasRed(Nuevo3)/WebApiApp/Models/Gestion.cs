@@ -43,12 +43,31 @@ namespace WebApiApp.Models
         public Nullable<bool> Gtn_Firma_Escrituras { get; set; }
         public Nullable<bool> Gtn_CuentaBancaria { get; set; }
         public Nullable<bool> Gtn_Taller { get; set; }
-        public Nullable<bool> Gtm_Aviso_Susp { get; set; }
         public Nullable<int> Gtn_ProgresoForm { get; set; }
         public Nullable<int> Id_Corretaje { get; set; }
         public Nullable<int> Id_Cliente { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
         public Nullable<bool> Gtn_ReciboActualizado { get; set; }
         public Nullable<System.DateTime> Gtn_FechaAlta { get; set; }
+        public Nullable<bool> Gtn_Aviso_Ret { get; set; }
+        public Nullable<bool> Gtn_Acta_Nacim_Cony { get; set; }
+        public Nullable<bool> Gtn_Acta_Matrimonio { get; set; }
+        public Nullable<bool> Gtn_DatosGnrl_Comp { get; set; }
+        public Nullable<bool> Gtn_Comp_Domicilio { get; set; }
+        public Nullable<bool> Gtn_Recibo_Nomina { get; set; }
+        public Nullable<bool> Gtn_RFC_Comprador { get; set; }
+        public Nullable<bool> Gtn_CURP_Comprador { get; set; }
+        public Nullable<bool> Gtn_RFC_Conyugue { get; set; }
+        public Nullable<bool> Gtn_CURP_Conyugue { get; set; }
+        public Nullable<bool> Gtn_Inscp_INFONAVIT { get; set; }
+        public Nullable<bool> Gtn_Acta_Nac_Ven { get; set; }
+        public Nullable<bool> Gtn_Acta_Nac_Cony_Ven { get; set; }
+        public Nullable<bool> Gtn_Acta_Matrimonio_Ven { get; set; }
+        public Nullable<bool> Gtn_IFE_Copia_Ven { get; set; }
+        public Nullable<bool> Gtn_RFC_Ven { get; set; }
+        public Nullable<bool> Gtn_CURP_Ven { get; set; }
+        public Nullable<bool> Gtn_RFC_Conyu_Ven { get; set; }
+        public Nullable<bool> Gtn_CURP_Conyu_Ven { get; set; }
+        public Nullable<bool> Gtn_Entrega_Vivienda { get; set; }
     }
 }

@@ -401,7 +401,6 @@
     <Property Name="Gtn_Firma_Escrituras" Type="Boolean" />
     <Property Name="Gtn_CuentaBancaria" Type="Boolean" />
     <Property Name="Gtn_Taller" Type="Boolean" />
-    <Property Name="Gtm_Aviso_Susp" Type="Boolean" />
     <Property Name="Gtn_ProgresoForm" Type="Int32" />
     <Property Name="Id_Corretaje" Type="Int32" />
     <Property Name="Id_Cliente" Type="Int32" />
@@ -412,6 +411,26 @@
     <Property Name="Gtn_ReciboActualizado" Type="Boolean" />
     <Property Name="Gtn_FechaAlta" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Recordatorio" Relationship="CasasRedModel.FK_RcdGestion" FromRole="Gestion" ToRole="Recordatorio" />
+    <Property Name="Gtn_Aviso_Ret" Type="Boolean" />
+    <Property Name="Gtn_Acta_Nacim_Cony" Type="Boolean" />
+    <Property Name="Gtn_Acta_Matrimonio" Type="Boolean" />
+    <Property Name="Gtn_DatosGnrl_Comp" Type="Boolean" />
+    <Property Name="Gtn_Comp_Domicilio" Type="Boolean" />
+    <Property Name="Gtn_Recibo_Nomina" Type="Boolean" />
+    <Property Name="Gtn_RFC_Comprador" Type="Boolean" />
+    <Property Name="Gtn_CURP_Comprador" Type="Boolean" />
+    <Property Name="Gtn_RFC_Conyugue" Type="Boolean" />
+    <Property Name="Gtn_CURP_Conyugue" Type="Boolean" />
+    <Property Name="Gtn_Inscp_INFONAVIT" Type="Boolean" />
+    <Property Name="Gtn_Acta_Nac_Ven" Type="Boolean" />
+    <Property Name="Gtn_Acta_Nac_Cony_Ven" Type="Boolean" />
+    <Property Name="Gtn_Acta_Matrimonio_Ven" Type="Boolean" />
+    <Property Name="Gtn_IFE_Copia_Ven" Type="Boolean" />
+    <Property Name="Gtn_RFC_Ven" Type="Boolean" />
+    <Property Name="Gtn_CURP_Ven" Type="Boolean" />
+    <Property Name="Gtn_RFC_Conyu_Ven" Type="Boolean" />
+    <Property Name="Gtn_CURP_Conyu_Ven" Type="Boolean" />
+    <Property Name="Gtn_Entrega_Vivienda" Type="Boolean" />
   </EntityType>
   <EntityType Name="Habilitacion">
     <Key>
@@ -1122,6 +1141,7 @@
     <Property Name="Rcd_Id_Gestion" Type="Int32" />
     <NavigationProperty Name="Gestion" Relationship="CasasRedModel.FK_RcdGestion" FromRole="Recordatorio" ToRole="Gestion" />
     <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_RcdUsuario" FromRole="Recordatorio" ToRole="Usuario" />
+    <Property Name="Rcd_Enviado" Type="Boolean" />
   </EntityType>
   <Association Name="FK_RcdGestion">
     <End Type="CasasRedModel.Gestion" Role="Gestion" Multiplicity="0..1">

@@ -258,13 +258,32 @@
           <Property Name="Gtn_Firma_Escrituras" Type="bit" />
           <Property Name="Gtn_CuentaBancaria" Type="bit" />
           <Property Name="Gtn_Taller" Type="bit" />
-          <Property Name="Gtm_Aviso_Susp" Type="bit" />
           <Property Name="Gtn_ProgresoForm" Type="int" />
           <Property Name="Id_Corretaje" Type="int" />
           <Property Name="Id_Cliente" Type="int" />
           <Property Name="Id_Usuario" Type="int" />
           <Property Name="Gtn_ReciboActualizado" Type="bit" />
           <Property Name="Gtn_FechaAlta" Type="date" />
+          <Property Name="Gtn_Aviso_Ret" Type="bit" />
+          <Property Name="Gtn_Acta_Nacim_Cony" Type="bit" />
+          <Property Name="Gtn_Acta_Matrimonio" Type="bit" />
+          <Property Name="Gtn_DatosGnrl_Comp" Type="bit" />
+          <Property Name="Gtn_Comp_Domicilio" Type="bit" />
+          <Property Name="Gtn_Recibo_Nomina" Type="bit" />
+          <Property Name="Gtn_RFC_Comprador" Type="bit" />
+          <Property Name="Gtn_CURP_Comprador" Type="bit" />
+          <Property Name="Gtn_RFC_Conyugue" Type="bit" />
+          <Property Name="Gtn_CURP_Conyugue" Type="bit" />
+          <Property Name="Gtn_Inscp_INFONAVIT" Type="bit" />
+          <Property Name="Gtn_Acta_Nac_Ven" Type="bit" />
+          <Property Name="Gtn_Acta_Nac_Cony_Ven" Type="bit" />
+          <Property Name="Gtn_Acta_Matrimonio_Ven" Type="bit" />
+          <Property Name="Gtn_IFE_Copia_Ven" Type="bit" />
+          <Property Name="Gtn_RFC_Ven" Type="bit" />
+          <Property Name="Gtn_CURP_Ven" Type="bit" />
+          <Property Name="Gtn_RFC_Conyu_Ven" Type="bit" />
+          <Property Name="Gtn_CURP_Conyu_Ven" Type="bit" />
+          <Property Name="Gtn_Entrega_Vivienda" Type="bit" />
         </EntityType>
         <EntityType Name="Habilitacion">
           <Key>
@@ -333,6 +352,7 @@
           <Property Name="Rcd_FechaAlta" Type="date" />
           <Property Name="Rcd_Id_Usuario" Type="int" />
           <Property Name="Rcd_Id_Gestion" Type="int" />
+          <Property Name="Rcd_Enviado" Type="bit" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -1485,7 +1505,6 @@
           <Property Name="Gtn_Firma_Escrituras" Type="Boolean" />
           <Property Name="Gtn_CuentaBancaria" Type="Boolean" />
           <Property Name="Gtn_Taller" Type="Boolean" />
-          <Property Name="Gtm_Aviso_Susp" Type="Boolean" />
           <Property Name="Gtn_ProgresoForm" Type="Int32" />
           <Property Name="Id_Corretaje" Type="Int32" />
           <Property Name="Id_Cliente" Type="Int32" />
@@ -1496,6 +1515,26 @@
           <Property Name="Gtn_ReciboActualizado" Type="Boolean" />
           <Property Name="Gtn_FechaAlta" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Recordatorio" Relationship="CasasRedModel.FK_RcdGestion" FromRole="Gestion" ToRole="Recordatorio" />
+          <Property Name="Gtn_Aviso_Ret" Type="Boolean" />
+          <Property Name="Gtn_Acta_Nacim_Cony" Type="Boolean" />
+          <Property Name="Gtn_Acta_Matrimonio" Type="Boolean" />
+          <Property Name="Gtn_DatosGnrl_Comp" Type="Boolean" />
+          <Property Name="Gtn_Comp_Domicilio" Type="Boolean" />
+          <Property Name="Gtn_Recibo_Nomina" Type="Boolean" />
+          <Property Name="Gtn_RFC_Comprador" Type="Boolean" />
+          <Property Name="Gtn_CURP_Comprador" Type="Boolean" />
+          <Property Name="Gtn_RFC_Conyugue" Type="Boolean" />
+          <Property Name="Gtn_CURP_Conyugue" Type="Boolean" />
+          <Property Name="Gtn_Inscp_INFONAVIT" Type="Boolean" />
+          <Property Name="Gtn_Acta_Nac_Ven" Type="Boolean" />
+          <Property Name="Gtn_Acta_Nac_Cony_Ven" Type="Boolean" />
+          <Property Name="Gtn_Acta_Matrimonio_Ven" Type="Boolean" />
+          <Property Name="Gtn_IFE_Copia_Ven" Type="Boolean" />
+          <Property Name="Gtn_RFC_Ven" Type="Boolean" />
+          <Property Name="Gtn_CURP_Ven" Type="Boolean" />
+          <Property Name="Gtn_RFC_Conyu_Ven" Type="Boolean" />
+          <Property Name="Gtn_CURP_Conyu_Ven" Type="Boolean" />
+          <Property Name="Gtn_Entrega_Vivienda" Type="Boolean" />
         </EntityType>
         <EntityType Name="Habilitacion">
           <Key>
@@ -2206,6 +2245,7 @@
           <Property Name="Rcd_Id_Gestion" Type="Int32" />
           <NavigationProperty Name="Gestion" Relationship="CasasRedModel.FK_RcdGestion" FromRole="Recordatorio" ToRole="Gestion" />
           <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_RcdUsuario" FromRole="Recordatorio" ToRole="Usuario" />
+          <Property Name="Rcd_Enviado" Type="Boolean" />
         </EntityType>
         <Association Name="FK_RcdGestion">
           <End Type="CasasRedModel.Gestion" Role="Gestion" Multiplicity="0..1">
@@ -2406,13 +2446,32 @@
           <EntitySetMapping Name="Gestion">
             <EntityTypeMapping TypeName="CasasRedModel.Gestion">
               <MappingFragment StoreEntitySet="Gestion">
+                <ScalarProperty Name="Gtn_Entrega_Vivienda" ColumnName="Gtn_Entrega_Vivienda" />
+                <ScalarProperty Name="Gtn_CURP_Conyu_Ven" ColumnName="Gtn_CURP_Conyu_Ven" />
+                <ScalarProperty Name="Gtn_RFC_Conyu_Ven" ColumnName="Gtn_RFC_Conyu_Ven" />
+                <ScalarProperty Name="Gtn_CURP_Ven" ColumnName="Gtn_CURP_Ven" />
+                <ScalarProperty Name="Gtn_RFC_Ven" ColumnName="Gtn_RFC_Ven" />
+                <ScalarProperty Name="Gtn_IFE_Copia_Ven" ColumnName="Gtn_IFE_Copia_Ven" />
+                <ScalarProperty Name="Gtn_Acta_Matrimonio_Ven" ColumnName="Gtn_Acta_Matrimonio_Ven" />
+                <ScalarProperty Name="Gtn_Acta_Nac_Cony_Ven" ColumnName="Gtn_Acta_Nac_Cony_Ven" />
+                <ScalarProperty Name="Gtn_Acta_Nac_Ven" ColumnName="Gtn_Acta_Nac_Ven" />
+                <ScalarProperty Name="Gtn_Inscp_INFONAVIT" ColumnName="Gtn_Inscp_INFONAVIT" />
+                <ScalarProperty Name="Gtn_CURP_Conyugue" ColumnName="Gtn_CURP_Conyugue" />
+                <ScalarProperty Name="Gtn_RFC_Conyugue" ColumnName="Gtn_RFC_Conyugue" />
+                <ScalarProperty Name="Gtn_CURP_Comprador" ColumnName="Gtn_CURP_Comprador" />
+                <ScalarProperty Name="Gtn_RFC_Comprador" ColumnName="Gtn_RFC_Comprador" />
+                <ScalarProperty Name="Gtn_Recibo_Nomina" ColumnName="Gtn_Recibo_Nomina" />
+                <ScalarProperty Name="Gtn_Comp_Domicilio" ColumnName="Gtn_Comp_Domicilio" />
+                <ScalarProperty Name="Gtn_DatosGnrl_Comp" ColumnName="Gtn_DatosGnrl_Comp" />
+                <ScalarProperty Name="Gtn_Acta_Matrimonio" ColumnName="Gtn_Acta_Matrimonio" />
+                <ScalarProperty Name="Gtn_Acta_Nacim_Cony" ColumnName="Gtn_Acta_Nacim_Cony" />
+                <ScalarProperty Name="Gtn_Aviso_Ret" ColumnName="Gtn_Aviso_Ret" />
                 <ScalarProperty Name="Gtn_FechaAlta" ColumnName="Gtn_FechaAlta" />
                 <ScalarProperty Name="Gtn_ReciboActualizado" ColumnName="Gtn_ReciboActualizado" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
                 <ScalarProperty Name="Id_Corretaje" ColumnName="Id_Corretaje" />
                 <ScalarProperty Name="Gtn_ProgresoForm" ColumnName="Gtn_ProgresoForm" />
-                <ScalarProperty Name="Gtm_Aviso_Susp" ColumnName="Gtm_Aviso_Susp" />
                 <ScalarProperty Name="Gtn_Taller" ColumnName="Gtn_Taller" />
                 <ScalarProperty Name="Gtn_CuentaBancaria" ColumnName="Gtn_CuentaBancaria" />
                 <ScalarProperty Name="Gtn_Firma_Escrituras" ColumnName="Gtn_Firma_Escrituras" />
@@ -2650,6 +2709,7 @@
           <EntitySetMapping Name="Recordatorio">
             <EntityTypeMapping TypeName="CasasRedModel.Recordatorio">
               <MappingFragment StoreEntitySet="Recordatorio">
+                <ScalarProperty Name="Rcd_Enviado" ColumnName="Rcd_Enviado" />
                 <ScalarProperty Name="Rcd_Id_Gestion" ColumnName="Rcd_Id_Gestion" />
                 <ScalarProperty Name="Rcd_Id_Usuario" ColumnName="Rcd_Id_Usuario" />
                 <ScalarProperty Name="Rcd_FechaAlta" ColumnName="Rcd_FechaAlta" />
