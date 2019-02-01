@@ -348,11 +348,17 @@
             <PropertyRef Name="Rcd_Id" />
           </Key>
           <Property Name="Rcd_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Rcd_Descripción" Type="varchar" MaxLength="150" />
-          <Property Name="Rcd_FechaAlta" Type="date" />
+          <Property Name="Rcd_Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Rcd_Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="Rcd_Anio" Type="int" />
+          <Property Name="Rcd_Mes" Type="int" />
+          <Property Name="Rcd_Dia" Type="int" />
+          <Property Name="Rcd_Hora" Type="int" />
+          <Property Name="Rcd_Minuto" Type="int" />
+          <Property Name="Rcd_Enviado" Type="bit" />
           <Property Name="Rcd_Id_Usuario" Type="int" />
           <Property Name="Rcd_Id_Gestion" Type="int" />
-          <Property Name="Rcd_Enviado" Type="bit" />
+          <Property Name="Rcd_Listado" Type="bit" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -2167,11 +2173,17 @@
             <PropertyRef Name="Rcd_Id" />
           </Key>
           <Property Name="Rcd_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Rcd_Descripción" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Rcd_FechaAlta" Type="DateTime" Precision="0" />
           <Property Name="Rcd_Id_Usuario" Type="Int32" />
           <Property Name="Rcd_Id_Gestion" Type="Int32" />
           <Property Name="Rcd_Enviado" Type="Boolean" />
+          <Property Name="Rcd_Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rcd_Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Rcd_Anio" Type="Int32" />
+          <Property Name="Rcd_Mes" Type="Int32" />
+          <Property Name="Rcd_Dia" Type="Int32" />
+          <Property Name="Rcd_Hora" Type="Int32" />
+          <Property Name="Rcd_Minuto" Type="Int32" />
+          <Property Name="Rcd_Listado" Type="Boolean" />
         </EntityType>
         <Association Name="FK_RcdGestion">
           <End Type="CasasRedModel.Gestion" Role="Gestion" Multiplicity="0..1">
@@ -2635,11 +2647,17 @@
           <EntitySetMapping Name="Recordatorio">
             <EntityTypeMapping TypeName="CasasRedModel.Recordatorio">
               <MappingFragment StoreEntitySet="Recordatorio">
+                <ScalarProperty Name="Rcd_Listado" ColumnName="Rcd_Listado" />
+                <ScalarProperty Name="Rcd_Minuto" ColumnName="Rcd_Minuto" />
+                <ScalarProperty Name="Rcd_Hora" ColumnName="Rcd_Hora" />
+                <ScalarProperty Name="Rcd_Dia" ColumnName="Rcd_Dia" />
+                <ScalarProperty Name="Rcd_Mes" ColumnName="Rcd_Mes" />
+                <ScalarProperty Name="Rcd_Anio" ColumnName="Rcd_Anio" />
+                <ScalarProperty Name="Rcd_Descripcion" ColumnName="Rcd_Descripcion" />
+                <ScalarProperty Name="Rcd_Titulo" ColumnName="Rcd_Titulo" />
                 <ScalarProperty Name="Rcd_Enviado" ColumnName="Rcd_Enviado" />
                 <ScalarProperty Name="Rcd_Id_Gestion" ColumnName="Rcd_Id_Gestion" />
                 <ScalarProperty Name="Rcd_Id_Usuario" ColumnName="Rcd_Id_Usuario" />
-                <ScalarProperty Name="Rcd_FechaAlta" ColumnName="Rcd_FechaAlta" />
-                <ScalarProperty Name="Rcd_Descripción" ColumnName="Rcd_Descripción" />
                 <ScalarProperty Name="Rcd_Id" ColumnName="Rcd_Id" />
               </MappingFragment>
             </EntityTypeMapping>

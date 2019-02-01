@@ -1,0 +1,156 @@
+﻿@model CasasRed_Nuevo3_.Models.Recordatorio
+
+@{
+    ViewBag.Title = "Gestion > CrearRecordatorios";
+    int gestion = ViewBag.id;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nuevo Recordatorio</h2>
+
+<!--Aqui inicia el formulario-->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Título</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Rcd_Titulo, ViewData["Gestion"] as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Rcd_Titulo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Descripción</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Rcd_Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Rcd_Descripcion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Año</label>
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Rcd_Anio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Rcd_Anio, "", new { @class = "text-danger" })*@
+
+            <select class="year" name="Rcd_Anio" id="Rcd_Anio"></select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Mes</label>
+        <div class="col-md-10">
+            @*@Html.DropDownListFor(model => model.Rcd_Mes, ViewData["Mes"] as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Rcd_Mes, "", new { @class = "text-danger" })*@
+
+            <select class="month" name="Rcd_Mes" id="Rcd_Mes">
+                <option value=1 selected>Enero</option>
+                <option value=2>Febrero</option>
+                <option value=3>Marzo</option>
+                <option value=4>Abril</option>
+                <option value=5>Mayo</option>
+                <option value=6>Junio</option>
+                <option value=7>Julio</option>
+                <option value=8>Agosto</option>
+                <option value=9>Septiembre</option>
+                <option value=10>Octubre</option>
+                <option value=11>Noviembre</option>
+                <option value=12>Diciembre</option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Día</label>
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Rcd_Dia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Rcd_Dia, "", new { @class = "text-danger" })*@
+
+            <select class="day" name="Rcd_Dia" id="Rcd_Dia">
+                <option value=1 selected>1</option>
+                <option value=2>2</option>
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Hora</label>
+        <div class="col-md-10">
+            <!--Hora-->
+            @Html.DropDownListFor(model => model.Rcd_Hora, ViewData["Hora"] as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Rcd_Hora, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Minutos</label>
+        <div class="col-md-10">
+            <!--Minutos-->
+            @Html.DropDownListFor(model => model.Rcd_Minuto, ViewData["Minutos"] as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Rcd_Minuto, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" style="display:none;">Id Gestion</label>
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Rcd_Dia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Rcd_Dia, "", new { @class = "text-danger" }) style="display:none;"*@
+            <input class="form-control" name="Rcd_Id_Gestion" value="@gestion" style="display:none;" />
+        </div>
+    </div>
+
+    <hr />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="btn btn-success" /> | @Html.ActionLink("Regresar", "Recordatorios/" + @gestion, null, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        for (var i = 2018; i < 2050; i++) {
+            $('<option>').attr('value', i).text(i).appendTo('.year');
+        }
+
+        function monthChanged() {
+            var days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            var month = $('.month').val() - 1,
+                year = +$('.year').val();
+
+            // Check for leap year if Feb
+            if (month == 1 && new Date(year, month, 29).getMonth() == 1) days[1]++;
+
+            // Add/Remove options
+            if ($('.day option').length > days[month] + 1) {
+                // Remove
+                $('.day option').slice(days[month] + 1).remove();
+            } else if ($('.day option').length < days[month] + 1) {
+                // Add
+                for (var i = $('.day option').length; i <= days[month]; i++) {
+                    $('<option>').attr('value', i).text(i).appendTo('.day');
+                }
+            }
+        }
+
+        $(function () {
+            monthChanged(); // On document ready
+            $('.month').change(monthChanged); // On month change
+            $('.year').change(monthChanged); // On year change (for leap years)
+        });
+    </script>
+}

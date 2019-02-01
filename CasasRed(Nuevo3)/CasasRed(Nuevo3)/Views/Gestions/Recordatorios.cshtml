@@ -1,0 +1,50 @@
+﻿@model CasasRed_Nuevo3_.Models.Recordatorio
+
+@{
+    ViewBag.Title = "Gestión > Recordatorios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Recordatorios</h2>
+<center><h3>Lista de Recordatorios</h3></center>
+<br />
+
+<p>
+    @Html.ActionLink("Crear Recordatorio", "CrearRecordatorios", new { id = ViewBag.id })
+</p>
+
+<div class="container">
+    <table class="table table-bordered table-responsive-lg">
+        <thead>
+            <tr>
+                <td><b>No. Recordatorio</b></td>
+                <td><b>Casa</b></td>
+                <td><b>Titulo</b></td>
+                <td><b>Fecha</b></td>
+                <td><b>Hora</b></td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in ViewBag.Recordatorios)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Casa</td>
+                    <td>@item.Titulo</td>
+                    <td>@item.Anio/@item.Mes/@item.Dia</td>
+                    <td>@item.Hora:@item.Minuto</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+</div>

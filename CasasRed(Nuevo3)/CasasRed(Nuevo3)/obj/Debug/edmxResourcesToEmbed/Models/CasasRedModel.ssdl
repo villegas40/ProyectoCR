@@ -343,11 +343,17 @@
       <PropertyRef Name="Rcd_Id" />
     </Key>
     <Property Name="Rcd_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Rcd_Descripción" Type="varchar" MaxLength="150" />
-    <Property Name="Rcd_FechaAlta" Type="date" />
+    <Property Name="Rcd_Titulo" Type="varchar" MaxLength="50" />
+    <Property Name="Rcd_Descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="Rcd_Anio" Type="int" />
+    <Property Name="Rcd_Mes" Type="int" />
+    <Property Name="Rcd_Dia" Type="int" />
+    <Property Name="Rcd_Hora" Type="int" />
+    <Property Name="Rcd_Minuto" Type="int" />
+    <Property Name="Rcd_Enviado" Type="bit" />
     <Property Name="Rcd_Id_Usuario" Type="int" />
     <Property Name="Rcd_Id_Gestion" Type="int" />
-    <Property Name="Rcd_Enviado" Type="bit" />
+    <Property Name="Rcd_Listado" Type="bit" />
   </EntityType>
   <EntityType Name="TipoUsuario">
     <Key>

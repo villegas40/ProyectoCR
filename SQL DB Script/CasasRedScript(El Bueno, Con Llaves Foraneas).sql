@@ -4,8 +4,10 @@ CREATE DATABASE CasasRed;
 GO
 USE CasasRed;
 GO
-
-
+Select * From Recordatorio
+Update Recordatorio
+set Rcd_Listado = 0, Rcd_Enviado = 0
+Where Rcd_Id = 
 --También llevara el nombre del asesor de la venta
 CREATE TABLE Corretaje(
 	Id INT IDENTITY(1,1) PRIMARY KEY, --id de la casa
@@ -567,9 +569,16 @@ CONSTRAINT FK_VndAsigCasa_Id
 /*Nueva Tabla*/
 CREATE TABLE Recordatorio(
 Rcd_Id INT IDENTITY(1,1) PRIMARY KEY,
-Rcd_Descripción VARCHAR(150),
-Rcd_FechaAlta DATE DEFAULT GETDATE(),
+Rcd_Titulo VARCHAR(50), --NOTARIA
+Rcd_Descripcion VARCHAR(150), -- Recoger papel del notario
+--Rcd_FechaAlta DATE DEFAULT GETDATE(),
+Rcd_Anio int, -- Para el metodo
+Rcd_Mes int,
+Rcd_Dia int, 
+Rcd_Hora int,
+Rcd_Minuto int,
 Rcd_Enviado BIT,
+Rcd_Listado BIT,
 Rcd_Id_Usuario int,
 Rcd_Id_Gestion int,
 CONSTRAINT FK_RcdUsuario

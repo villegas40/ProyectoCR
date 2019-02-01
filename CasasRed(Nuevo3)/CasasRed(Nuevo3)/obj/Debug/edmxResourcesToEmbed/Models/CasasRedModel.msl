@@ -431,11 +431,17 @@
     <EntitySetMapping Name="Recordatorio">
       <EntityTypeMapping TypeName="CasasRedModel.Recordatorio">
         <MappingFragment StoreEntitySet="Recordatorio">
+          <ScalarProperty Name="Rcd_Listado" ColumnName="Rcd_Listado" />
+          <ScalarProperty Name="Rcd_Minuto" ColumnName="Rcd_Minuto" />
+          <ScalarProperty Name="Rcd_Hora" ColumnName="Rcd_Hora" />
+          <ScalarProperty Name="Rcd_Dia" ColumnName="Rcd_Dia" />
+          <ScalarProperty Name="Rcd_Mes" ColumnName="Rcd_Mes" />
+          <ScalarProperty Name="Rcd_Anio" ColumnName="Rcd_Anio" />
+          <ScalarProperty Name="Rcd_Descripcion" ColumnName="Rcd_Descripcion" />
+          <ScalarProperty Name="Rcd_Titulo" ColumnName="Rcd_Titulo" />
           <ScalarProperty Name="Rcd_Enviado" ColumnName="Rcd_Enviado" />
           <ScalarProperty Name="Rcd_Id_Gestion" ColumnName="Rcd_Id_Gestion" />
           <ScalarProperty Name="Rcd_Id_Usuario" ColumnName="Rcd_Id_Usuario" />
-          <ScalarProperty Name="Rcd_FechaAlta" ColumnName="Rcd_FechaAlta" />
-          <ScalarProperty Name="Rcd_Descripción" ColumnName="Rcd_Descripción" />
           <ScalarProperty Name="Rcd_Id" ColumnName="Rcd_Id" />
         </MappingFragment>
       </EntityTypeMapping>

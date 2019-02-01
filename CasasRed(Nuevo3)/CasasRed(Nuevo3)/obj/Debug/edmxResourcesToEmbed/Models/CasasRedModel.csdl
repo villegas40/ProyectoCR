@@ -1135,13 +1135,19 @@
       <PropertyRef Name="Rcd_Id" />
     </Key>
     <Property Name="Rcd_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Rcd_Descripción" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="Rcd_FechaAlta" Type="DateTime" Precision="0" />
     <Property Name="Rcd_Id_Usuario" Type="Int32" />
     <Property Name="Rcd_Id_Gestion" Type="Int32" />
     <NavigationProperty Name="Gestion" Relationship="CasasRedModel.FK_RcdGestion" FromRole="Recordatorio" ToRole="Gestion" />
     <NavigationProperty Name="Usuario" Relationship="CasasRedModel.FK_RcdUsuario" FromRole="Recordatorio" ToRole="Usuario" />
     <Property Name="Rcd_Enviado" Type="Boolean" />
+    <Property Name="Rcd_Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rcd_Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Rcd_Anio" Type="Int32" />
+    <Property Name="Rcd_Mes" Type="Int32" />
+    <Property Name="Rcd_Dia" Type="Int32" />
+    <Property Name="Rcd_Hora" Type="Int32" />
+    <Property Name="Rcd_Minuto" Type="Int32" />
+    <Property Name="Rcd_Listado" Type="Boolean" />
   </EntityType>
   <Association Name="FK_RcdGestion">
     <End Type="CasasRedModel.Gestion" Role="Gestion" Multiplicity="0..1">

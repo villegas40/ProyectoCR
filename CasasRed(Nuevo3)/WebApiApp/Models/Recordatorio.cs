@@ -15,10 +15,16 @@ namespace WebApiApp.Models
     public partial class Recordatorio
     {
         public int Rcd_Id { get; set; }
-        public string Rcd_Descripción { get; set; }
-        public Nullable<System.DateTime> Rcd_FechaAlta { get; set; }
         public Nullable<int> Rcd_Id_Usuario { get; set; }
         public Nullable<int> Rcd_Id_Gestion { get; set; }
         public Nullable<bool> Rcd_Enviado { get; set; }
+        public string Rcd_Titulo { get; set; }
+        public string Rcd_Descripcion { get; set; }
+        public Nullable<int> Rcd_Anio { get; set; }
+        public Nullable<int> Rcd_Mes { get; set; }
+        public Nullable<int> Rcd_Dia { get; set; }
+        public Nullable<int> Rcd_Hora { get; set; }
+        public Nullable<int> Rcd_Minuto { get; set; }
+        public Nullable<bool> Rcd_Listado { get; set; }
     }
 }
